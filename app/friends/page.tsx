@@ -9,8 +9,8 @@ export default function FriendsPage() {
   const { data: friendsData, isLoading: isFriendsLoading } = useFriends()
   const { data: requestsData, isLoading: isRequestsLoading } = useFriendRequests()
 
-  const friends = friendsData?.data || []
-  const requests = requestsData?.data || []
+  const friends = (friendsData?.data || []) as any[]
+  const requests = (requestsData?.data || []) as any[]
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-8">

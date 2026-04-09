@@ -1,19 +1,19 @@
 'use client'
 
-import { useState } from 'react'
+import { Suspense, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { useSearch } from '@/lib/api/themes'
 import { ThemeListRow } from '@/app/components/theme/ThemeListRow'
 import { EmptyState } from '@/app/components/shared/EmptyState'
 import { LoadingSkeleton } from '@/app/components/shared/LoadingSkeleton'
 
-export default function SearchPage() {
+function SearchContent() {
   const searchParams = useSearchParams()
   const query = searchParams.get('q') || ''
   const [searchInput, setSearchInput] = useState(query)
   const { data, isLoading } = useSearch(searchInput)
 
-  const themes = data?.data?.themes || []
+  const themes = (data?.data?.themes || []) as any[]
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8">
@@ -21,7 +21,6 @@ export default function SearchPage() {
         <form
           onSubmit={(e) => {
             e.preventDefault()
-            // Would normally navigate with updated query
           }}
           className="flex gap-2"
         >
@@ -38,29 +37,33 @@ export default function SearchPage() {
         </form>
       </div>
 
-      {searchInput ? (
-        <>
-          {isLoading ? (
-            <LoadingSkeleton />
-          ) : themes.length > 0 ? (
-            <div className="space-y-2">
-              {themes.map((theme: any) => (
-                <ThemeListRow key={theme.slug} theme={theme} />
-              ))}
-            </div>
-          ) : (
-            <EmptyState
-              title="No results found"
-              description={`We couldn't find any themes matching "${searchInput}"`}
-            />
-          )}
-        </>
+      {isLoading ? (
+        <LoadingSkeleton count={5} />
+      ) : themes.length > 0 ? (
+        <div className="space-y-2">
+          {themes.map((theme: any) => (
+            <ThemeListRow key={theme.slug} theme={theme} />
+          ))}
+        </div>
+      ) : searchInput.length > 0 ? (
+        <EmptyState
+          title="No results"
+          description={`No themes found matching "${searchInput}"`}
+        />
       ) : (
         <EmptyState
-          title="Start searching"
-          description="Enter a theme name, artist, or anime title to begin"
+          title="Enter a search query"
+          description="Search for themes, artists, or anime titles"
         />
       )}
     </div>
+  )
+}
+
+export default function SearchPage() {
+  return (
+    <Suspense fallback={<LoadingSkeleton count={5} />}>
+      <SearchContent />
+    </Suspense>
   )
 }

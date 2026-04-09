@@ -1,7 +1,7 @@
-export function LoadingSkeleton() {
+export function LoadingSkeleton({ count = 3 }: { count?: number } = {}) {
   return (
     <div className="space-y-4">
-      {[...Array(3)].map((_, i) => (
+      {[...Array(count)].map((_, i) => (
         <div key={i} className="card h-24 animate-pulse bg-muted" />
       ))}
     </div>

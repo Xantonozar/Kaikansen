@@ -3,6 +3,8 @@ import { connectDB } from '@/lib/db'
 import { User } from '@/lib/models'
 import { signAccessToken, signRefreshToken, verifyRefreshToken } from '@/lib/auth'
 
+export const dynamic = 'force-dynamic'
+
 export async function POST(request: NextRequest) {
   try {
     await connectDB()

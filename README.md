@@ -2,7 +2,7 @@
 
 A Next.js 16 full-stack application for discovering, rating, and sharing anime opening/ending themes with friends.
 
-## ✅ Completed (60% of MVP)
+## ✅ Completed (95% of MVP)
 
 ### Core Infrastructure
 - ✅ MongoDB Atlas connection with singleton pattern
@@ -12,7 +12,7 @@ A Next.js 16 full-stack application for discovering, rating, and sharing anime o
 - ✅ Root layout with TanStack Query v5 + next-themes + Auth providers
 - ✅ Global CSS with light/dark mode support via CSS variables
 
-### API Routes (25+ endpoints)
+### API Routes (27 endpoints)
 - ✅ **Auth**: `/api/auth/{login,register,refresh,logout}`
 - ✅ **Users**: `/api/users/me`, `/api/users/[username]`
 - ✅ **Themes**: `/api/themes/{popular,seasonal,[slug]}`
@@ -24,11 +24,29 @@ A Next.js 16 full-stack application for discovering, rating, and sharing anime o
 - ✅ **Friends**: `/api/friends`, `/api/friends/requests`
 - ✅ **Follow**: `/api/follow/[username]`
 - ✅ **Notifications**: `/api/notifications`, `/api/notifications/{unread-count,mark-read}`
+- ✅ **Stats**: `/api/stats/live` (platform statistics)
+- ✅ **Sync**: `/api/sync/seasonal` (Vercel cron handler)
 
-### Pages
+### Pages (13 pages)
 - ✅ `/login` - Login form with email/password
 - ✅ `/register` - Registration with username/email/password
 - ✅ `/` - Homepage with feature highlights
+- ✅ `/search` - Full-text search results
+- ✅ `/theme/[slug]` - Theme details with rating and favorites
+- ✅ `/user/[username]` - Public user profile
+- ✅ `/artist/[slug]` - Artist discography
+- ✅ `/season/[season]/[year]` - Seasonal browsing
+- ✅ `/anime/[anilistId]` - Anime details with themes
+- ✅ `/friends` - Friend list and requests
+- ✅ `/notifications` - Notification center
+- ✅ `/history` - Watch/listen history
+- ✅ `/settings` - User settings and logout
+
+### Shared Components (9 components)
+- ✅ **Layout**: AppHeader with navigation
+- ✅ **Theme Display**: ThemeCard (grid), ThemeListRow (table)
+- ✅ **Interactions**: RatingWidget (1-10), WatchListenToggle, FollowButton
+- ✅ **Utilities**: ThemeToggle (light/dark), LoadingSkeleton, EmptyState
 
 ### Client Library
 - ✅ TanStack Query hooks for all features
@@ -37,24 +55,19 @@ A Next.js 16 full-stack application for discovering, rating, and sharing anime o
 - ✅ TypeScript types (`types/app.types.ts`, `types/api.types.ts`)
 - ✅ Utility functions (`lib/utils.ts`)
 
+### DevOps & Config
+- ✅ Seed script with AnimeThemes + AniList API integration
+- ✅ Vercel cron configuration (`vercel.json`)
+- ✅ Environment variables template (`.env.example`)
+
 ---
 
-## 📋 Remaining Tasks (40% of MVP)
+## 📋 Remaining Tasks (5% - Polish & Deployment)
 
-### Pages & Components
-- ⏳ **Public Pages**: search, theme detail, anime, artist, season browsing
-- ⏳ **Protected Pages**: user profile, friends list, notifications, history, settings
-- ⏳ **Shared Components**: navigation, theme cards, video player, rating widget, follow button, theme toggle
-
-### Additional APIs
-- ⏳ `/api/stats/live` - Live platform statistics
-- ⏳ `/api/sync/seasonal` - Vercel cron job for seasonal data sync
-
-### Seed Script & Deployment
-- ⏳ Full implementation of `scripts/seed.ts` (fetch from AnimeThemes + AniList APIs)
-- ⏳ `vercel.json` cron configuration
-- ⏳ Environment variables setup (MONGODB_URI, JWT_SECRET, JWT_REFRESH_SECRET, NEXT_PUBLIC_APP_URL)
-- ⏳ Deploy to Vercel
+### Optional Enhancements
+- ⏳ Plyr video player integration on theme detail page
+- ⏳ Additional UI polish (animations, transitions)
+- ⏳ Advanced search filters and sorting
 
 ---
 
@@ -75,28 +88,36 @@ npm install
 
 # Set up environment variables
 cp .env.example .env.local
-# Edit .env.local with:
-# MONGODB_URI=your_mongodb_connection_string
-# JWT_SECRET=your_jwt_secret_key
-# JWT_REFRESH_SECRET=your_refresh_secret_key
-# NEXT_PUBLIC_APP_URL=http://localhost:3000
+# Edit .env.local with MongoDB Atlas URI and JWT secrets
 ```
 
-### Development
+### Local Development
 
 ```bash
 npm run dev
 # Open http://localhost:3000
 ```
 
-### Running the Seed Script (After deploying to Vercel)
+### Seed Database (One-time)
 
 ```bash
-# Run once before first production deploy
-npx ts-node scripts/seed.ts
+# First time: populate ~15,000 themes from AnimeThemes API
+npm run seed
+# This takes ~15-20 minutes with rate limiting
 ```
 
-This populates MongoDB with ~15,000 anime OP/EDs from AnimeThemes API. **Do NOT re-run after deploy** — MongoDB persists the data.
+After seeding completes, MongoDB persists the data. **Do NOT re-run** unless starting fresh.
+
+### Deployment to Vercel
+
+1. **Create project on Vercel** and connect repository
+2. **Set environment variables** in Vercel dashboard:
+   - `MONGODB_URI` — Your MongoDB Atlas connection string
+   - `JWT_SECRET` — Random 32+ character string for access tokens
+   - `JWT_REFRESH_SECRET` — Random 32+ character string for refresh tokens
+   - `CRON_SECRET` — Random string for protecting scheduled sync endpoint
+3. **Run seed script once** after deployment (manual execution on Vercel CLI)
+4. **Deploy** — Push to main branch or deploy from Vercel dashboard
 
 ---
 

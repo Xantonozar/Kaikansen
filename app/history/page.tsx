@@ -8,7 +8,7 @@ import { EmptyState } from '@/app/components/shared/EmptyState'
 export default function HistoryPage() {
   const { data, isLoading } = useHistory()
 
-  const history = data?.data || []
+  const history = (data?.data || []) as any[]
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-8">

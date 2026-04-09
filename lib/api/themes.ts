@@ -39,3 +39,23 @@ export function useSearch(query: string) {
     enabled: query.length > 0,
   })
 }
+
+export function getThemesBySeason(season: string, year: number) {
+  return {
+    queryKey: queryKeys.seasonal(),
+    queryFn: () =>
+      fetchWithAuth<Theme[]>(
+        `/api/themes/seasonal?season=${season}&year=${year}`
+      ),
+  }
+}
+
+export function getAnimeThemes(anilistId: number) {
+  return {
+    queryKey: [`anime-themes-${anilistId}`],
+    queryFn: () =>
+      fetchWithAuth<any>(
+        `/api/themes/anime/${anilistId}`
+      ),
+  }
+}

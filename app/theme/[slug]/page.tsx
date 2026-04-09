@@ -12,22 +12,20 @@ import { EmptyState } from '@/app/components/shared/EmptyState'
 import { useAuth } from '@/hooks/useAuth'
 import Link from 'next/link'
 
-export default function ThemePage({
-  params: { slug },
+export default async function ThemePage({
+  params,
 }: {
   params: Promise<{ slug: string }>
 }) {
-  const [resolvedSlug, setResolvedSlug] = useState<string | null>(null)
+  const { slug } = await params
 
-  // Resolve params asynchronously
-  if (!resolvedSlug) {
-    params.then(({ slug }) => setResolvedSlug(slug))
-    return <LoadingSkeleton />
-  }
+  return <ThemePageContent slug={slug} />
+}
 
+function ThemePageContent({ slug }: { slug: string }) {
   const { user } = useAuth()
-  const { data: themeData, isLoading } = useTheme(resolvedSlug)
-  const { data: ratingData } = useRating(user ? resolvedSlug : '')
+  const { data: themeData, isLoading } = useTheme(slug)
+  const { data: ratingData } = useRating(user ? slug : '')
   const { data: favData } = useFavorites()
   const { mutate: setRating, isPending: isRatingPending } = useSetRating()
   const { mutate: addFavorite, isPending: isAddingFavorite } = useAddFavorite()
@@ -36,7 +34,7 @@ export default function ThemePage({
 
   const theme = themeData?.data
   const userRating = ratingData?.data?.rating
-  const isFavorite = favData?.data?.some((fav: any) => fav.themeSlug === resolvedSlug)
+  const isFavorite = (favData?.data as any[])?.some((fav: any) => fav.themeSlug === slug)
 
   if (isLoading) return <LoadingSkeleton />
   if (!theme) return <EmptyState title="Theme not found" />
@@ -101,8 +99,8 @@ export default function ThemePage({
             <div className="mt-8 space-y-4 border-t border-border pt-6">
               <RatingWidget
                 currentRating={userRating}
-                onRate={(rating) => {
-                  setRating({ themeSlug: resolvedSlug, rating })
+                onRate={async (rating) => {
+                  setRating({ themeSlug: slug, rating })
                 }}
                 isLoading={isRatingPending}
               />
@@ -111,11 +109,11 @@ export default function ThemePage({
                 isFavorite={isFavorite}
                 onToggle={async () => {
                   if (isFavorite) {
-                    removeFavorite(resolvedSlug)
+                    removeFavorite(slug)
                   } else {
-                    addFavorite(resolvedSlug)
+                    addFavorite(slug)
                   }
-                  addToHistory(resolvedSlug)
+                  addToHistory(slug)
                 }}
                 isLoading={isAddingFavorite || isRemovingFavorite}
               />

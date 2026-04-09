@@ -8,29 +8,28 @@ import { EmptyState } from '@/app/components/shared/EmptyState'
 import { useAuth } from '@/hooks/useAuth'
 import { useState } from 'react'
 
-export default function UserProfilePage({
-  params: { username },
+export default async function UserProfilePage({
+  params,
 }: {
   params: Promise<{ username: string }>
 }) {
-  const [resolvedUsername, setResolvedUsername] = useState<string | null>(null)
+  const { username } = await params
 
-  if (!resolvedUsername) {
-    params.then(({ username }) => setResolvedUsername(username))
-    return <LoadingSkeleton />
-  }
+  return <UserProfileContent username={username} />
+}
 
+function UserProfileContent({ username }: { username: string }) {
   const { user: currentUser } = useAuth()
-  const { data: profileData, isLoading } = useUser(resolvedUsername)
-  const { mutate: follow, isPending: isFollowing } = useFollow(resolvedUsername)
-  const { mutate: unfollow, isPending: isUnfollowing } = useUnfollow(resolvedUsername)
+  const { data: profileData, isLoading } = useUser(username)
+  const { mutate: follow, isPending: isFollowing } = useFollow(username)
+  const { mutate: unfollow, isPending: isUnfollowing } = useUnfollow(username)
 
   const profile = profileData?.data
 
   if (isLoading) return <LoadingSkeleton />
   if (!profile) return <EmptyState title="User not found" />
 
-  const isOwnProfile = currentUser?.username === resolvedUsername
+  const isOwnProfile = currentUser?.username === username
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-8">
