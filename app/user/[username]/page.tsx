@@ -123,6 +123,17 @@ async function UserProfileContent({
             </div>
           </div>
         </div>
+
+        {/* Recent activity */}
+        <section className="mt-4">
+          <h2 className="text-lg font-display font-bold text-ktext-primary mb-3">Recent Activity</h2>
+          <div className="space-y-2">
+            {/* Placeholder for recent ratings - would come from user ratings API */}
+            <p className="text-sm text-ktext-tertiary text-center py-4">
+              No recent activity
+            </p>
+          </div>
+        </section>
       </main>
     </>
   )
