@@ -36,9 +36,11 @@ function loadProgress(): SeedProgress {
 function saveProgress(progress: SeedProgress): void {
   const progressPath = path.join(process.cwd(), 'scripts', 'seed-progress.json')
   try {
-    fs.writeFileSync(progressPath, JSON.stringify(progress, null, 2))
+    const json = JSON.stringify(progress, null, 2)
+    fs.writeFileSync(progressPath, json)
+    console.log(`  💾 Progress saved: Page ${progress.lastPage}, Processed ${progress.totalProcessed}, Failed ${progress.failedThemes}`)
   } catch (error) {
-    console.error(`Failed to save progress: ${error instanceof Error ? error.message : 'unknown'}`)
+    console.error(`💾 Failed to save progress: ${error instanceof Error ? error.message : 'unknown'}`)
   }
 }
 
@@ -70,12 +72,22 @@ async function fetchThemePage(page: number): Promise<any[]> {
   url.searchParams.set('page[number]', String(page))
   url.searchParams.set('include', 'animethemeentries.videos,song.artists,anime.images')
   
+  console.log(`  🔗 URL: ${url.toString().substring(0, 60)}...`)
+  
   const res = await fetch(url.toString(), {
     headers: { 'User-Agent': 'Kaikansen/1.0' }
   })
-  if (!res.ok) throw new Error(`AT API error: ${res.status}`)
+  
+  if (!res.ok) {
+    const errText = await res.text()
+    console.log(`  ❌ API Error ${res.status}: ${errText.substring(0, 200)}`)
+    throw new Error(`AT API error: ${res.status}`)
+  }
+  
   const data = await res.json()
-  return data.animethemes || []
+  const themes = data.animethemes || []
+  console.log(`  ✅ Got ${themes.length} themes from page ${page}`)
+  return themes
 }
 
 interface AniListEnrichment {
@@ -254,8 +266,16 @@ async function main() {
     process.exit(1)
   }
 
-  const progress = loadProgress()
-  console.log(`📋 Progress: Page ${progress.lastPage}, Processed: ${progress.totalProcessed}, Failed: ${progress.failedThemes}`)
+  let progress = loadProgress()
+  
+  // If progress is empty or invalid, start fresh
+  if (!progress || !progress.lastPage || progress.lastPage < 1) {
+    progress = { lastPage: 1, totalProcessed: 0, failedThemes: 0, lastUpdated: new Date().toISOString() }
+    console.log('🔄 Starting FRESH (no valid progress found)')
+    saveProgress(progress)
+  } else {
+    console.log(`📋 Resuming: Page ${progress.lastPage}, Processed: ${progress.totalProcessed}, Failed: ${progress.failedThemes}`)
+  }
   
   let totalPages: number
   try {
@@ -295,17 +315,20 @@ async function main() {
     let pageSuccessCount = 0
     let pageFailCount = 0
 
-    console.log(`\n📝 Processing ${themes.length} themes...`)
+    console.log(`\n📝 Processing ${themes.length} themes from page ${page}...`)
 
+    let themeIndex = 0
     for (const atTheme of themes) {
+      themeIndex++
       try {
         const theme = parseATTheme(atTheme)
         if (!theme) {
           pageFailCount++
+          console.log(`  ${themeIndex}. ❌ Parse failed`)
           continue
         }
         
-        console.log(`\n  🎵 Processing: ${theme.songTitle} (${theme.animeTitle}) [${theme.type}]`)
+        console.log(`  ${themeIndex}. 🎵 ${theme.songTitle} - ${theme.animeTitle} [${theme.type}]`)
 
         let enrichment: AniListEnrichment | null = null
         if (!theme.animeSeason) {
