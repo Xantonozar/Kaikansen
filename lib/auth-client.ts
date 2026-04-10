@@ -2,49 +2,69 @@
 
 import { TokenPayload } from './auth'
 
-let accessToken: string | null = null
+let _accessToken: string | null = null
 
 export function getAccessToken(): string | null {
-  return accessToken
+  return _accessToken
 }
 
 export function setAccessToken(token: string | null): void {
-  accessToken = token
+  _accessToken = token
 }
 
 export async function refreshAccessToken(): Promise<string | null> {
   try {
-    const response = await fetch('/api/auth/refresh', {
+    const res = await fetch('/api/auth/refresh', {
       method: 'POST',
       credentials: 'include',
     })
-
-    if (!response.ok) {
-      setAccessToken(null)
-      return null
-    }
-
-    const data = await response.json()
-    const newToken = data.data?.accessToken
-    if (newToken) {
-      setAccessToken(newToken)
-      return newToken
+    if (!res.ok) return null
+    const { data } = await res.json()
+    if (data?.accessToken) {
+      setAccessToken(data.accessToken)
+      return data.accessToken
     }
     return null
   } catch {
-    setAccessToken(null)
     return null
   }
 }
 
-export async function logout(): Promise<void> {
-  setAccessToken(null)
-  try {
-    await fetch('/api/auth/logout', {
-      method: 'POST',
-      credentials: 'include',
-    })
-  } catch {
-    // ignore
+export async function authFetch(url: string, options: RequestInit = {}): Promise<Response> {
+  const token = getAccessToken()
+  const headers = {
+    'Content-Type': 'application/json',
+    ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    ...options.headers,
   }
+
+  let res = await fetch(url, { ...options, headers })
+
+  if (res.status === 401) {
+    const newToken = await refreshAccessToken()
+    if (newToken) {
+      res = await fetch(url, {
+        ...options,
+        headers: { ...headers, Authorization: `Bearer ${newToken}` },
+      })
+    }
+  }
+
+  return res
+}
+
+export async function login(email: string, password: string) {
+  const res = await fetch('/api/auth/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, password }),
+  })
+  const data = await res.json()
+  if (data.success) setAccessToken(data.data.accessToken)
+  return data
+}
+
+export async function logout(): Promise<void> {
+  await fetch('/api/auth/logout', { method: 'POST', credentials: 'include' })
+  setAccessToken(null)
 }

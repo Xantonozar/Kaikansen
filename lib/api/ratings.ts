@@ -2,36 +2,26 @@
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { queryKeys } from '@/lib/queryKeys'
-import { fetchWithAuth } from '@/lib/api/client'
-import { Rating } from '@/types/app.types'
-import { ApiResponse } from '@/types/api.types'
+import { fetchWithAuth } from './client'
 
-export function useRating(themeSlug: string) {
+export function useMyRating(themeSlug: string) {
   return useQuery({
-    queryKey: queryKeys.myRating(themeSlug),
-    queryFn: () => fetchWithAuth<Rating>(`/api/ratings/${themeSlug}/mine`),
+    queryKey: queryKeys.ratings.mine(themeSlug),
+    queryFn: () => fetchWithAuth(`/api/ratings/${themeSlug}/mine`),
     enabled: !!themeSlug,
-  })
-}
-
-export function useRatings(page = 1) {
-  return useQuery({
-    queryKey: queryKeys.ratings(),
-    queryFn: () => fetchWithAuth<Rating[]>(`/api/ratings?page=${page}`),
   })
 }
 
 export function useSetRating() {
   const queryClient = useQueryClient()
   return useMutation({
-    mutationFn: (data: { themeSlug: string; rating: number }) =>
+    mutationFn: (data: { themeSlug: string; score: number; mode: 'watch' | 'listen' }) =>
       fetchWithAuth('/api/ratings', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       }),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: queryKeys.ratings() })
+      queryClient.invalidateQueries({ queryKey: ['ratings'] })
     },
   })
 }

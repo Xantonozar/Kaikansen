@@ -2,12 +2,13 @@
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { queryKeys } from '@/lib/queryKeys'
-import { fetchWithAuth } from '@/lib/api/client'
+import { fetchWithAuth } from './client'
 
-export function useFavorites(page = 1) {
+export function useFavorites(userId: string, page = 1) {
   return useQuery({
-    queryKey: queryKeys.favorites(),
+    queryKey: queryKeys.favorites.byUser(userId),
     queryFn: () => fetchWithAuth(`/api/favorites?page=${page}`),
+    enabled: !!userId,
   })
 }
 
@@ -17,11 +18,10 @@ export function useAddFavorite() {
     mutationFn: (themeSlug: string) =>
       fetchWithAuth('/api/favorites', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ themeSlug }),
       }),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: queryKeys.favorites() })
+    onSuccess: (_, themeSlug) => {
+      queryClient.invalidateQueries({ queryKey: ['favorites'] })
     },
   })
 }
@@ -32,11 +32,10 @@ export function useRemoveFavorite() {
     mutationFn: (themeSlug: string) =>
       fetchWithAuth('/api/favorites', {
         method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ themeSlug }),
       }),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: queryKeys.favorites() })
+      queryClient.invalidateQueries({ queryKey: ['favorites'] })
     },
   })
 }

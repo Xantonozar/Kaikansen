@@ -2,20 +2,22 @@
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { queryKeys } from '@/lib/queryKeys'
-import { fetchWithAuth } from '@/lib/api/client'
-import { Notification } from '@/types/app.types'
+import { fetchWithAuth } from './client'
 
-export function useNotifications(page = 1) {
+export function useNotifications(userId: string, page = 1) {
   return useQuery({
-    queryKey: queryKeys.notifications(),
-    queryFn: () => fetchWithAuth<Notification[]>(`/api/notifications?page=${page}`),
+    queryKey: queryKeys.notifications.list(userId),
+    queryFn: () => fetchWithAuth(`/api/notifications?page=${page}`),
+    enabled: !!userId,
+    refetchInterval: 60000,
   })
 }
 
-export function useUnreadNotificationCount() {
+export function useUnreadNotificationCount(userId: string) {
   return useQuery({
-    queryKey: queryKeys.notificationCount(),
-    queryFn: () => fetchWithAuth<{ count: number }>('/api/notifications/unread-count'),
+    queryKey: queryKeys.notifications.unreadCount(userId),
+    queryFn: () => fetchWithAuth('/api/notifications/unread-count'),
+    enabled: !!userId,
     refetchInterval: 60000,
   })
 }
@@ -25,13 +27,11 @@ export function useMarkAsRead() {
   return useMutation({
     mutationFn: (data: { notificationIds?: string[]; markAll?: boolean }) =>
       fetchWithAuth('/api/notifications/mark-read', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        method: 'PATCH',
         body: JSON.stringify(data),
       }),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: queryKeys.notifications() })
-      queryClient.invalidateQueries({ queryKey: queryKeys.notificationCount() })
+      queryClient.invalidateQueries({ queryKey: ['notifications'] })
     },
   })
 }

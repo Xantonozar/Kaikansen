@@ -1,12 +1,11 @@
 'use client'
 
 import { useParams } from 'next/navigation'
-import { useQuery } from '@tanstack/react-query'
 import { AppHeader } from '@/app/components/layout/AppHeader'
 import { ThemeCard } from '@/app/components/theme/ThemeCard'
 import { EmptyState } from '@/app/components/shared/EmptyState'
 import { LoadingSkeleton } from '@/app/components/shared/LoadingSkeleton'
-import { getThemesBySeason } from '@/lib/api/themes'
+import { useThemesSeasonal } from '@/lib/api/themes'
 
 const SEASONS = ['winter', 'spring', 'summer', 'fall']
 const CURRENT_YEAR = new Date().getFullYear()
@@ -14,17 +13,14 @@ const YEARS = Array.from({ length: 15 }, (_, i) => CURRENT_YEAR - i)
 
 export default function SeasonPage() {
   const params = useParams()
-  const season = (params.season as string)?.toLowerCase()
+  const season = (params.season as string)?.toUpperCase()
   const year = parseInt(params.year as string)
 
-  const isValidSeason = SEASONS.includes(season)
+  const isValidSeason = SEASONS.map(s => s.toUpperCase()).includes(season)
   const isValidYear = YEARS.includes(year)
 
-  const { data: response, isLoading } = useQuery({
-    ...getThemesBySeason(season, year),
-    enabled: isValidSeason && isValidYear,
-  }) as any
-  const themes = (response || []) as any[]
+  const { data, isLoading } = useThemesSeasonal(season.toLowerCase(), year, undefined, 1)
+  const themes = (data?.data ?? []) as any[]
 
   if (!isValidSeason || !isValidYear) {
     return (
@@ -55,11 +51,11 @@ export default function SeasonPage() {
     <>
       <AppHeader />
       <main className="p-4 max-w-6xl mx-auto">
-        <h1 className="text-3xl font-bold mb-8 capitalize">
-          {season} {year}
+        <h1 className="text-3xl font-display font-bold mb-8 capitalize">
+          {season?.toLowerCase()} {year}
         </h1>
 
-        {themes && themes.length > 0 ? (
+        {themes.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {themes.map((theme: any) => (
               <ThemeCard key={theme.slug} theme={theme} />
@@ -68,7 +64,7 @@ export default function SeasonPage() {
         ) : (
           <EmptyState
             title="No themes"
-            description={`No anime themes found for ${season} ${year}.`}
+            description={`No anime themes found for ${season?.toLowerCase()} ${year}.`}
           />
         )}
       </main>

@@ -2,22 +2,34 @@
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { queryKeys } from '@/lib/queryKeys'
-import { fetchWithAuth } from '@/lib/api/client'
+import { fetchWithAuth } from './client'
 
-export function useFollow(username: string) {
-  return useMutation({
-    mutationFn: () =>
-      fetchWithAuth(`/api/follow/${username}?action=follow`, {
-        method: 'POST',
-      }),
+export function useFollowStatus(username: string) {
+  return useQuery({
+    queryKey: queryKeys.follow.status(username),
+    queryFn: () => fetchWithAuth(`/api/follow/${username}`),
+    enabled: !!username,
   })
 }
 
-export function useUnfollow(username: string) {
+export function useFollow() {
+  const queryClient = useQueryClient()
   return useMutation({
-    mutationFn: () =>
-      fetchWithAuth(`/api/follow/${username}?action=unfollow`, {
-        method: 'POST',
-      }),
+    mutationFn: (username: string) =>
+      fetchWithAuth(`/api/follow/${username}`, { method: 'POST' }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['follow'] })
+    },
+  })
+}
+
+export function useUnfollow() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (username: string) =>
+      fetchWithAuth(`/api/follow/${username}`, { method: 'DELETE' }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['follow'] })
+    },
   })
 }

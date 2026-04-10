@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken'
+import bcrypt from 'bcryptjs'
 
 const JWT_SECRET = process.env.JWT_SECRET || ''
 const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET || ''
@@ -10,7 +11,6 @@ if (!JWT_SECRET || !JWT_REFRESH_SECRET) {
 export interface TokenPayload {
   userId: string
   email: string
-  username: string
 }
 
 export function signAccessToken(payload: TokenPayload): string {
@@ -38,3 +38,6 @@ export function verifyRefreshToken(token: string): TokenPayload | null {
     return null
   }
 }
+
+export const hashPassword = (pw: string) => bcrypt.hash(pw, 12)
+export const comparePassword = (pw: string, hash: string) => bcrypt.compare(pw, hash)

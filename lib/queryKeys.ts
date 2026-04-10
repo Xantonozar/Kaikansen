@@ -1,25 +1,43 @@
 export const queryKeys = {
-  all: ['query'] as const,
-  themes: () => [...queryKeys.all, 'themes'] as const,
-  theme: (slug: string) => [...queryKeys.themes(), slug] as const,
-  popular: () => [...queryKeys.themes(), 'popular'] as const,
-  seasonal: () => [...queryKeys.themes(), 'seasonal'] as const,
-  search: (q: string) => [...queryKeys.all, 'search', q] as const,
-  artists: () => [...queryKeys.all, 'artists'] as const,
-  artist: (slug: string) => [...queryKeys.artists(), slug] as const,
-  artistThemes: (slug: string) => [...queryKeys.artist(slug), 'themes'] as const,
-  ratings: () => [...queryKeys.all, 'ratings'] as const,
-  myRating: (slug: string) => [...queryKeys.ratings(), 'mine', slug] as const,
-  favorites: () => [...queryKeys.all, 'favorites'] as const,
-  friends: () => [...queryKeys.all, 'friends'] as const,
-  friendRequests: () => [...queryKeys.friends(), 'requests'] as const,
-  friendActivity: () => [...queryKeys.friends(), 'activity'] as const,
-  follow: (username: string) => [...queryKeys.all, 'follow', username] as const,
-  user: (username: string) => [...queryKeys.all, 'users', username] as const,
-  me: () => [...queryKeys.all, 'users', 'me'] as const,
-  notifications: () => [...queryKeys.all, 'notifications'] as const,
-  notificationCount: () => [...queryKeys.notifications(), 'count'] as const,
-  history: () => [...queryKeys.all, 'history'] as const,
-  stats: () => [...queryKeys.all, 'stats'] as const,
-  anime: (anilistId: number) => [...queryKeys.all, 'anime', anilistId] as const,
+  themes: {
+    popular: (type?: string) => ['themes', 'popular', type] as const,
+    seasonal: (season: string, year: number, type?: string) => ['themes', 'seasonal', season, year, type] as const,
+    bySlug: (slug: string) => ['themes', slug] as const,
+    byArtist: (slug: string) => ['themes', 'artist', slug] as const,
+  },
+  search: {
+    results: (q: string, by?: string, type?: string) => ['search', q, by, type] as const,
+  },
+  anime: {
+    byId: (id: number) => ['anime', id] as const,
+  },
+  artist: {
+    bySlug: (slug: string) => ['artist', slug] as const,
+  },
+  ratings: {
+    mine: (themeSlug: string) => ['ratings', 'mine', themeSlug] as const,
+  },
+  favorites: {
+    byUser: (userId: string) => ['favorites', userId] as const,
+  },
+  friends: {
+    list: (userId: string) => ['friends', userId] as const,
+    requests: (userId: string) => ['friends', 'requests', userId] as const,
+    activity: (userId: string) => ['friends', 'activity', userId] as const,
+  },
+  follow: {
+    status: (username: string) => ['follow', 'status', username] as const,
+    followers: (username: string) => ['follow', 'followers', username] as const,
+    following: (username: string) => ['follow', 'following', username] as const,
+  },
+  notifications: {
+    list: (userId: string) => ['notifications', userId] as const,
+    unreadCount: (userId: string) => ['notifications', 'count', userId] as const,
+  },
+  profile: {
+    byUsername: (username: string) => ['profile', username] as const,
+  },
+  stats: {
+    live: () => ['stats', 'live'] as const,
+  },
 }

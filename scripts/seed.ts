@@ -1,12 +1,18 @@
+import dotenv from 'dotenv'
+dotenv.config({ path: '.env.local' })
+
+// Debug: verify env is loaded
+console.log('ENV CHECK - MONGODB_URI:', process.env.MONGODB_URI ? 'loaded' : 'NOT loaded')
+
+import path from 'path'
+import fs from 'fs'
 import { connectDB } from '../lib/db'
 import { ThemeCache, ArtistCache } from '../lib/models'
-import fs from 'fs'
-import path from 'path'
 
-const ANIMETHEMES_API = 'https://api.animethemes.me'
+const BASE_URL = 'https://api.animethemes.moe'
 const ANILIST_API = 'https://graphql.anilist.co'
-const RATE_LIMIT_ANIMETHEMES = 700
-const RATE_LIMIT_ANILIST = 1000
+const DELAY_ANIMETHEMES = 700
+const DELAY_ANILIST = 1000
 
 interface SeedProgress {
   lastPage: number
@@ -15,31 +21,12 @@ interface SeedProgress {
   lastUpdated: string
 }
 
-interface ErrorLog {
-  startTime: string
-  endTime?: string
-  errors: Array<{
-    type: string
-    [key: string]: any
-  }>
-  warnings: Array<{
-    type: string
-    [key: string]: any
-  }>
-  summary: {
-    totalErrors: number
-    totalWarnings: number
-    status: string
-  }
-}
-
 function loadProgress(): SeedProgress {
   const progressPath = path.join(process.cwd(), 'scripts', 'seed-progress.json')
   if (fs.existsSync(progressPath)) {
     try {
       return JSON.parse(fs.readFileSync(progressPath, 'utf-8'))
-    } catch (error) {
-      console.warn(`⚠️  Failed to load progress file: ${error instanceof Error ? error.message : 'unknown error'}`)
+    } catch {
       return { lastPage: 1, totalProcessed: 0, failedThemes: 0, lastUpdated: new Date().toISOString() }
     }
   }
@@ -51,296 +38,306 @@ function saveProgress(progress: SeedProgress): void {
   try {
     fs.writeFileSync(progressPath, JSON.stringify(progress, null, 2))
   } catch (error) {
-    console.error(`❌ Failed to save progress: ${error instanceof Error ? error.message : 'unknown error'}`)
+    console.error(`Failed to save progress: ${error instanceof Error ? error.message : 'unknown'}`)
   }
 }
 
-async function sleep(ms: number): Promise<void> {
+function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms))
 }
 
-async function fetchThemesPage(page: number, retries = 3): Promise<any[]> {
-  const url = new URL(`${ANIMETHEMES_API}/api/v4/themes`)
-  url.searchParams.set('page[number]', page.toString())
+async function getTotalThemePages(): Promise<number> {
+  // Try to find total by checking a high page number
+  // The API doesn't return total count, so we estimate from last valid page
+  const url = new URL(`${BASE_URL}/animetheme`)
   url.searchParams.set('page[size]', '100')
-  url.searchParams.set('include', 'anime,songs.artists')
-  url.searchParams.set('fields[anime]', 'mal_id,anilist_id,name,year,season')
-  url.searchParams.set('fields[songs]', 'title')
-  url.searchParams.set('fields[artists]', 'name')
-
-  for (let attempt = 1; attempt <= retries; attempt++) {
-    try {
-      const res = await fetch(url.toString())
-      if (!res.ok) {
-        throw new Error(`HTTP ${res.status} ${res.statusText}`)
-      }
-
-      const data = await res.json()
-      if (!data.data) {
-        throw new Error('No data field in API response')
-      }
-      return data.data || []
-    } catch (error) {
-      const message = error instanceof Error ? error.message : 'unknown error'
-      if (attempt < retries) {
-        console.warn(`⚠️  Fetch attempt ${attempt}/${retries} failed for page ${page}: ${message}`)
-        await sleep(1000)
-      } else {
-        throw new Error(`Failed to fetch page ${page} after ${retries} attempts: ${message}`)
-      }
-    }
-  }
-  return []
+  url.searchParams.set('page[number]', '1')
+  
+  const res = await fetch(url.toString(), {
+    headers: { 'User-Agent': 'Kaikansen/1.0' }
+  })
+  if (!res.ok) throw new Error(`AT API error: ${res.status}`)
+  const data = await res.json()
+  const themes = data.animethemes || []
+  
+  // Estimate: API has around 150 pages based on docs
+  return 150
 }
 
-async function fetchAniListData(
-  title: string
-): Promise<{ description: string; coverImage: string }> {
+async function fetchThemePage(page: number): Promise<any[]> {
+  const url = new URL(`${BASE_URL}/animetheme`)
+  url.searchParams.set('page[size]', '100')
+  url.searchParams.set('page[number]', String(page))
+  url.searchParams.set('include', 'animethemeentries.videos,song.artists,anime.images')
+  
+  const res = await fetch(url.toString(), {
+    headers: { 'User-Agent': 'Kaikansen/1.0' }
+  })
+  if (!res.ok) throw new Error(`AT API error: ${res.status}`)
+  const data = await res.json()
+  return data.animethemes || []
+}
+
+interface AniListEnrichment {
+  anilistId: number | null
+  animeTitleEnglish: string | null
+  animeTitleAlternative: string[]
+  animeSeason: string | null
+  animeSeasonYear: number | null
+  animeCoverImage: string | null
+  genres: string[]
+}
+
+async function enrichFromAniList(malId: number): Promise<AniListEnrichment | null> {
   const query = `
-    query {
-      Media(search: "${title.replace(/"/g, '\\"')}", type: ANIME) {
-        description
-        coverImage { medium }
+    query GetByMalId($malId: Int) {
+      Media(idMal: $malId, type: ANIME) {
+        id
+        title { romaji english native }
+        season
+        seasonYear
+        genres
+        coverImage { large }
+        bannerImage
       }
     }
   `
-
   try {
     const res = await fetch(ANILIST_API, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ query }),
+      body: JSON.stringify({ query, variables: { malId } }),
     })
-
-    if (!res.ok) {
-      console.warn(`⚠️  AniList HTTP ${res.status} for "${title}"`)
-      return { description: '', coverImage: '' }
-    }
-
-    const data = await res.json()
-    if (data.errors) {
-      console.warn(`⚠️  AniList GraphQL error for "${title}": ${data.errors[0]?.message || 'unknown'}`)
-      return { description: '', coverImage: '' }
-    }
-
-    const media = data.data?.Media
-
+    const { data } = await res.json()
+    if (!data?.Media) return null
+    
+    const media = data.Media
     return {
-      description: media?.description || '',
-      coverImage: media?.coverImage?.medium || '',
+      anilistId: media.id,
+      animeTitleEnglish: media.title.english ?? null,
+      animeTitleAlternative: [media.title.native, media.title.romaji, ...(media.synonyms ?? [])].filter(Boolean),
+      animeSeason: media.season?.toUpperCase() ?? null,
+      animeSeasonYear: media.seasonYear ?? null,
+      animeCoverImage: media.coverImage?.large ?? null,
+      genres: media.genres ?? [],
     }
-  } catch (error) {
-    const message = error instanceof Error ? error.message : 'unknown error'
-    console.warn(`⚠️  AniList fetch failed for "${title}": ${message}`)
-    return { description: '', coverImage: '' }
+  } catch {
+    return null
   }
+}
+
+interface ParsedTheme {
+  slug: string
+  animethemesId: number
+  songTitle: string
+  artistName: string | null
+  allArtists: string[]
+  artistSlugs: string[]
+  artistRoles: string[]
+  anilistId: number | null
+  animeTitle: string
+  animeTitleEnglish: string | null
+  animeTitleAlternative: string[]
+  animeSeason: string | null
+  animeSeasonYear: number | null
+  animeCoverImage: string | null
+  animeGrillImage: string | null
+  type: 'OP' | 'ED'
+  sequence: number
+  episodesCovered: string | null
+  videoSources: Array<{ resolution: number; url: string; tags: string[] }>
+  videoUrl: string
+  videoResolution: number | null
+  syncedAt: Date
+}
+
+function parseATTheme(atTheme: any): ParsedTheme | null {
+  const anime = atTheme.anime
+  if (!anime) return null
+
+  const entry = atTheme.animethemeentries?.[0]
+  if (!entry) return null
+
+  const videos = entry.videos ?? []
+  const sortedVideos = [...videos].sort((a: any, b: any) => b.resolution - a.resolution)
+  if (sortedVideos.length === 0) return null
+
+  const artists = atTheme.song?.artists ?? []
+  const allArtists = artists.map((a: any) => a.name)
+  const artistSlugs = artists.map((a: any) => a.slug)
+  const artistRoles = artists.map((a: any) => a.as ?? 'performer')
+
+  const images = anime.images ?? []
+  const atCoverImage = images.find((i: any) => i.facet === 'Large Cover')?.link ?? images.find((i: any) => i.facet === 'Small Cover')?.link ?? null
+  const atGrillImage = images.find((i: any) => i.facet === 'Grill')?.link ?? null
+
+  const videoSources = sortedVideos.map((v: any) => ({
+    resolution: v.resolution,
+    url: v.link,
+    tags: [v.source, v.nc ? 'NC' : null].filter(Boolean) as string[],
+  }))
+
+  const animeName = anime.name ?? 'Unknown'
+  const animeSlug = anime.slug ?? animeName.toLowerCase().replace(/\s+/g, '-')
+  const themeType = atTheme.type?.toUpperCase() ?? 'OP'
+  const themeSequence = atTheme.sequence ?? 1
+
+  return {
+    slug: `${animeSlug}-${themeType.toLowerCase()}${themeSequence}`,
+    animethemesId: atTheme.id,
+    songTitle: atTheme.song?.title ?? 'Unknown',
+    artistName: artists[0]?.name ?? null,
+    allArtists,
+    artistSlugs,
+    artistRoles,
+    anilistId: anime.anilist_id ?? null,
+    animeTitle: animeName,
+    animeTitleEnglish: null,
+    animeTitleAlternative: [],
+    animeSeason: anime.season?.toUpperCase() ?? null,
+    animeSeasonYear: anime.year ?? null,
+    animeCoverImage: atCoverImage,
+    animeGrillImage: atGrillImage,
+    type: themeType as 'OP' | 'ED',
+    sequence: themeSequence,
+    episodesCovered: entry.episodes ?? null,
+    videoSources,
+    videoUrl: sortedVideos[0].link,
+    videoResolution: sortedVideos[0].resolution,
+    syncedAt: new Date(),
+  }
+}
+
+async function upsertTheme(theme: ParsedTheme): Promise<void> {
+  await ThemeCache.findOneAndUpdate(
+    { slug: theme.slug },
+    { $set: theme },
+    { upsert: true }
+  )
+}
+
+async function upsertArtist(artistName: string, artistSlug: string, animethemesId: number): Promise<void> {
+  await ArtistCache.findOneAndUpdate(
+    { slug: artistSlug },
+    {
+      $set: {
+        slug: artistSlug,
+        animethemesId,
+        name: artistName,
+        syncedAt: new Date(),
+      },
+    },
+    { upsert: true }
+  )
 }
 
 async function main() {
-  const errorLog: ErrorLog = {
-    startTime: new Date().toISOString(),
-    errors: [],
-    warnings: [],
-    summary: { totalErrors: 0, totalWarnings: 0, status: 'PENDING' },
-  }
+  console.log('🌱 Starting seed script...')
+  console.log('')
 
   try {
-    console.log('🌱 Starting seed script (TypeScript)...')
-    
-    try {
-      await connectDB()
-      console.log('✅ Connected to MongoDB')
-    } catch (error) {
-      const message = error instanceof Error ? error.message : 'unknown error'
-      console.error('❌ MongoDB connection failed:', message)
-      errorLog.errors.push({
-        type: 'MONGODB_CONNECTION',
-        message,
-        timestamp: new Date().toISOString(),
-      })
-      throw error
-    }
-
-    const progress = loadProgress()
-    console.log(`📋 Progress restored: Page ${progress.lastPage}, Processed: ${progress.totalProcessed}, Failed: ${progress.failedThemes}`)
-    console.log(`📊 Resuming from page ${progress.lastPage}`)
-    console.log(`⏱️  Processing started. This will take a while...`)
-    console.log('   AnimeThemes queries: 700ms delay')
-    console.log('   AniList queries: 1000ms delay')
-    console.log('')
-
-    let page = progress.lastPage
-    const maxPages = 150
-
-    while (page <= maxPages) {
-      console.log(`📄 Fetching page ${page}/${maxPages}...`)
-      
-      let themes: any[]
-      try {
-        await sleep(RATE_LIMIT_ANIMETHEMES)
-        themes = await fetchThemesPage(page)
-      } catch (error) {
-        const message = error instanceof Error ? error.message : 'unknown error'
-        console.error(`❌ Failed to fetch page ${page}: ${message}`)
-        errorLog.errors.push({
-          type: 'PAGE_FETCH',
-          page,
-          message,
-          timestamp: new Date().toISOString(),
-        })
-        break
-      }
-
-      if (!themes.length) {
-        console.log('✅ No more themes found, seeding complete!')
-        break
-      }
-
-      let pageSuccessCount = 0
-      let pageFailCount = 0
-
-      for (const theme of themes) {
-        try {
-          if (!theme.anime?.anilist_id) {
-            console.warn(`⚠️  Skipped theme ${theme.slug}: missing anilist_id`)
-            pageFailCount++
-            continue
-          }
-
-          if (!theme.slug) {
-            console.warn(`⚠️  Skipped theme: missing slug`)
-            pageFailCount++
-            continue
-          }
-
-          await sleep(RATE_LIMIT_ANILIST)
-          const anilistData = await fetchAniListData(theme.anime.name)
-
-          const songTitle = theme.songs?.[0]?.title || theme.name || ''
-          if (!songTitle) {
-            console.warn(`⚠️  Theme ${theme.slug}: missing song title`)
-          }
-
-          await ThemeCache.updateOne(
-            { slug: theme.slug },
-            {
-              $set: {
-                slug: theme.slug,
-                songTitle,
-                artistName: theme.songs?.[0]?.artists?.[0]?.name || '',
-                allArtists: theme.songs?.[0]?.artists?.map((a: any) => a.name) || [],
-                animeTitle: theme.anime.name,
-                animeTitleAlternative: '',
-                animeAniListId: theme.anime.anilist_id,
-                animeMalId: theme.anime.mal_id || 0,
-                type: theme.type || 'OP',
-                season: theme.anime.season || '',
-                year: theme.anime.year || new Date().getFullYear(),
-                coverImage: anilistData.coverImage,
-                description: anilistData.description,
-                updatedAt: new Date(),
-              },
-            },
-            { upsert: true }
-          )
-
-          // Upsert artist
-          if (theme.songs?.[0]?.artists?.[0]?.name) {
-            try {
-              await ArtistCache.updateOne(
-                { slug: theme.songs[0].artists[0].name.toLowerCase().replace(/\s+/g, '-') },
-                {
-                  $set: {
-                    slug: theme.songs[0].artists[0].name.toLowerCase().replace(/\s+/g, '-'),
-                    name: theme.songs[0].artists[0].name,
-                    updatedAt: new Date(),
-                  },
-                },
-                { upsert: true }
-              )
-            } catch (artistError) {
-              const message = artistError instanceof Error ? artistError.message : 'unknown error'
-              console.warn(`⚠️  Failed to upsert artist for theme ${theme.slug}: ${message}`)
-              errorLog.warnings.push({
-                type: 'ARTIST_UPSERT',
-                theme: theme.slug,
-                artist: theme.songs[0].artists[0].name,
-                message,
-                timestamp: new Date().toISOString(),
-              })
-            }
-          }
-
-          progress.totalProcessed++
-          pageSuccessCount++
-        } catch (err) {
-          pageFailCount++
-          progress.failedThemes++
-          const message = err instanceof Error ? err.message : 'unknown error'
-          console.error(`❌ Error processing theme ${theme.slug}: ${message}`)
-          errorLog.errors.push({
-            type: 'THEME_PROCESS',
-            theme: theme.slug,
-            anime: theme.anime?.name,
-            message,
-            timestamp: new Date().toISOString(),
-          })
-        }
-      }
-
-      progress.lastPage = page
-      progress.lastUpdated = new Date().toISOString()
-      saveProgress(progress)
-
-      console.log(`✅ Page ${page} processed: ${pageSuccessCount} themes, ${pageFailCount} failed. Total: ${progress.totalProcessed}`)
-      page++
-    }
-
-    console.log(`🎉 Seed complete!`)
-    console.log(`   Processed: ${progress.totalProcessed} themes`)
-    console.log(`   Failed: ${progress.failedThemes} themes`)
-
-    errorLog.endTime = new Date().toISOString()
-    errorLog.summary = {
-      totalErrors: errorLog.errors.length,
-      totalWarnings: errorLog.warnings.length,
-      status: 'SUCCESS',
-    }
-
-    try {
-      const successPath = path.join(process.cwd(), 'scripts', `seed-success-${Date.now()}.json`)
-      fs.writeFileSync(successPath, JSON.stringify(errorLog, null, 2))
-      console.log(`📋 Seed log saved to: ${successPath}`)
-    } catch (logError) {
-      console.warn(`⚠️  Failed to save seed log: ${logError instanceof Error ? logError.message : 'unknown error'}`)
-    }
+    await connectDB()
+    console.log('✅ Connected to MongoDB')
   } catch (error) {
-    const message = error instanceof Error ? error.message : 'unknown error'
-    console.error('❌ Seed error:', message)
-    if (error instanceof Error && error.stack) {
-      console.error('   Stack:', error.stack)
-    }
-    
-    errorLog.endTime = new Date().toISOString()
-    errorLog.errors.push({
-      type: 'CRITICAL',
-      message,
-      timestamp: new Date().toISOString(),
-    })
-    errorLog.summary = {
-      totalErrors: errorLog.errors.length,
-      totalWarnings: errorLog.warnings.length,
-      status: 'FAILED',
-    }
-
-    try {
-      const errorPath = path.join(process.cwd(), 'scripts', `seed-error-${Date.now()}.json`)
-      fs.writeFileSync(errorPath, JSON.stringify(errorLog, null, 2))
-      console.log(`📋 Error log saved to: ${errorPath}`)
-    } catch (logError) {
-      console.error(`Failed to save error log: ${logError instanceof Error ? logError.message : 'unknown error'}`)
-    }
-
+    console.error('❌ MongoDB connection failed:', error instanceof Error ? error.message : 'unknown')
     process.exit(1)
   }
+
+  const progress = loadProgress()
+  console.log(`📋 Progress: Page ${progress.lastPage}, Processed: ${progress.totalProcessed}, Failed: ${progress.failedThemes}`)
+  
+  let totalPages: number
+  try {
+    totalPages = await getTotalThemePages()
+    console.log(`📊 Total pages to process: ${totalPages}`)
+  } catch (error) {
+    console.error('❌ Failed to get total pages:', error instanceof Error ? error.message : 'unknown')
+    process.exit(1)
+  }
+
+  console.log(`⏱️  Delays: ${DELAY_ANIMETHEMES}ms (AnimeThemes), ${DELAY_ANILIST}ms (AniList)`)
+  console.log('')
+
+  let page = progress.lastPage
+
+  while (page <= totalPages) {
+    console.log(`📄 Fetching page ${page}/${totalPages}...`)
+
+    let themes: any[]
+    try {
+      await sleep(DELAY_ANIMETHEMES)
+      themes = await fetchThemePage(page)
+    } catch (error) {
+      console.error(`❌ Failed to fetch page ${page}: ${error instanceof Error ? error.message : 'unknown'}`)
+      break
+    }
+
+    if (themes.length === 0) {
+      console.log('✅ No more themes found')
+      break
+    }
+
+    let pageSuccessCount = 0
+    let pageFailCount = 0
+
+    for (const atTheme of themes) {
+      try {
+        const theme = parseATTheme(atTheme)
+        if (!theme) {
+          pageFailCount++
+          continue
+        }
+
+        let enrichment: AniListEnrichment | null = null
+        if (!theme.animeSeason) {
+          if (atTheme.anime?.mal_id) {
+            await sleep(DELAY_ANILIST)
+            enrichment = await enrichFromAniList(atTheme.anime.mal_id)
+          }
+        }
+
+        const finalTheme: ParsedTheme = {
+          ...theme,
+          anilistId: enrichment?.anilistId ?? theme.anilistId,
+          animeTitleEnglish: enrichment?.animeTitleEnglish ?? theme.animeTitleEnglish,
+          animeTitleAlternative: enrichment?.animeTitleAlternative ?? theme.animeTitleAlternative,
+          animeSeason: enrichment?.animeSeason ?? theme.animeSeason,
+          animeSeasonYear: enrichment?.animeSeasonYear ?? theme.animeSeasonYear,
+          animeCoverImage: enrichment?.animeCoverImage ?? theme.animeCoverImage,
+        }
+
+        await upsertTheme(finalTheme)
+
+        for (let i = 0; i < theme.allArtists.length; i++) {
+          const artistName = theme.allArtists[i]
+          const artistSlug = theme.artistSlugs[i] ?? artistName.toLowerCase().replace(/\s+/g, '-')
+          await upsertArtist(artistName, artistSlug, theme.animethemesId)
+        }
+
+        progress.totalProcessed++
+        pageSuccessCount++
+      } catch (err) {
+        pageFailCount++
+        progress.failedThemes++
+        console.error(`❌ Error processing theme ${atTheme.slug}: ${err instanceof Error ? err.message : 'unknown'}`)
+      }
+    }
+
+    progress.lastPage = page
+    progress.lastUpdated = new Date().toISOString()
+    saveProgress(progress)
+
+    console.log(`✅ Page ${page}: ${pageSuccessCount} success, ${pageFailCount} failed. Total: ${progress.totalProcessed}`)
+    page++
+  }
+
+  console.log('')
+  console.log('🎉 Seed complete!')
+  console.log(`   Processed: ${progress.totalProcessed} themes`)
+  console.log(`   Failed: ${progress.failedThemes} themes`)
 }
+
+main().catch((error) => {
+  console.error('❌ Seed failed:', error instanceof Error ? error.message : 'unknown')
+  process.exit(1)
+})
