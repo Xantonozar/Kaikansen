@@ -16,10 +16,13 @@ interface ThemeListRowProps {
     totalRatings: number
     allArtists?: string[]
   }
+  friendUsername?: string
+  friendScore?: number
+  qualityBadges?: string[]
   userRating?: number
 }
 
-export function ThemeListRow({ theme, userRating }: ThemeListRowProps) {
+export function ThemeListRow({ theme, friendUsername, friendScore, qualityBadges, userRating }: ThemeListRowProps) {
   const coverImage = theme.animeCoverImage || '/placeholder.svg'
   const displayTitle = theme.animeTitle || 'Unknown'
   const displaySong = theme.songTitle || 'Unknown Theme'
@@ -34,6 +37,7 @@ export function ThemeListRow({ theme, userRating }: ThemeListRowProps) {
         shadow-card interactive cursor-pointer
         transition-all duration-200 hover:shadow-card-hover hover:border-border-default
       ">
+        {/* Cover image — square */}
         <div className="w-16 h-16 flex-shrink-0 rounded-[12px] overflow-hidden bg-bg-elevated">
           <img 
             src={coverImage} 
@@ -42,7 +46,9 @@ export function ThemeListRow({ theme, userRating }: ThemeListRowProps) {
           />
         </div>
         
+        {/* Text content */}
         <div className="flex-1 min-w-0 space-y-0.5">
+          {/* OP/ED badge */}
           <div className="flex items-center gap-1.5 mb-1">
             <span className={cn(
               'text-[10px] font-mono font-bold px-1.5 py-0.5 rounded-full',
@@ -50,8 +56,14 @@ export function ThemeListRow({ theme, userRating }: ThemeListRowProps) {
                 ? 'bg-accent-container text-accent'
                 : 'bg-accent-ed-container text-accent-ed'
             )}>
-              {theme.type}{theme.sequence && theme.sequence > 1 ? theme.sequence : ''}
+              {theme.type}{theme.sequence && theme.sequence > 1 ? `0${theme.sequence}` : '01'}
             </span>
+            {/* Quality badges */}
+            {qualityBadges?.map(badge => (
+              <span key={badge} className="text-[10px] font-mono px-1.5 py-0.5 rounded-full bg-bg-elevated text-ktext-tertiary border border-border-subtle">
+                {badge}
+              </span>
+            ))}
           </div>
           
           <p className="text-sm font-body font-semibold text-ktext-primary truncate">{displaySong}</p>
@@ -59,7 +71,15 @@ export function ThemeListRow({ theme, userRating }: ThemeListRowProps) {
             {displayArtist} · {displayTitle}
           </p>
           
-          {!userRating && (
+          {/* For friends activity: username + score */}
+          {friendUsername && (
+            <p className="text-xs font-body text-accent truncate">
+              @{friendUsername} rated {friendScore}/10
+            </p>
+          )}
+          
+          {/* Duration + rating */}
+          {!friendUsername && !userRating && (
             <div className="flex items-center gap-2 pt-0.5">
               <Star className="w-3 h-3 text-yellow-500 fill-yellow-500" />
               <span className="text-xs font-mono font-bold text-ktext-secondary">
@@ -70,6 +90,7 @@ export function ThemeListRow({ theme, userRating }: ThemeListRowProps) {
           )}
         </div>
         
+        {/* Right: play button or favorite */}
         <button className="w-9 h-9 rounded-full bg-accent-container flex items-center justify-center flex-shrink-0 interactive">
           <Play className="w-4 h-4 text-accent" />
         </button>
