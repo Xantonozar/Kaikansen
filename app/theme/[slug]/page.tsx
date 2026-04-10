@@ -1,17 +1,18 @@
 'use client'
 
 import { useState } from 'react'
-import { useTheme } from '@/lib/api/themes'
-import { useMyRating, useSetRating } from '@/lib/api/ratings'
-import { useAddFavorite, useRemoveFavorite } from '@/lib/api/favorites'
-import { useAddToHistory } from '@/lib/api/history'
-import { RatingWidget } from '@/app/components/shared/RatingWidget'
-import { WatchListenToggle } from '@/app/components/shared/WatchListenToggle'
+import Link from 'next/link'
+import { Eye, Headphones, Star, Share2, Plus, AlertCircle, Music, ArrowLeft } from 'lucide-react'
+import { VideoPlayer } from '@/app/components/theme/VideoPlayer'
+import { WatchListenToggle } from '@/app/components/theme/WatchListenToggle'
+import { RatingWidget } from '@/app/components/theme/RatingWidget'
 import { LoadingSkeleton } from '@/app/components/shared/LoadingSkeleton'
 import { EmptyState } from '@/app/components/shared/EmptyState'
 import { useAuth } from '@/providers/AuthProvider'
-import Link from 'next/link'
-import { cn, getScoreColor } from '@/lib/utils'
+import { useTheme } from '@/lib/api/themes'
+import { useMyRating, useSetRating } from '@/lib/api/ratings'
+import { useAddToHistory } from '@/lib/api/history'
+import { getScoreColor, formatCount } from '@/lib/utils'
 
 export default function ThemePage({
   params,
@@ -32,11 +33,11 @@ async function ThemePageContent({
   const { data: themeData, isLoading } = useTheme(slug)
   const { data: ratingData } = useMyRating(user ? slug : '')
   const { mutate: setRating, isPending: isRatingPending } = useSetRating()
-  const { mutate: addFavorite } = useAddFavorite()
-  const { mutate: removeFavorite } = useRemoveFavorite()
   const { mutate: addToHistory } = useAddToHistory()
-
+  
   const [mode, setMode] = useState<'watch' | 'listen'>('watch')
+  const [showConfirm, setShowConfirm] = useState(false)
+  const [selectedRating, setSelectedRating] = useState<number | null>(null)
 
   const theme = themeData?.data as any
   const userRating = (ratingData?.data as any)?.score
@@ -45,115 +46,152 @@ async function ThemePageContent({
   if (!theme) return <EmptyState title="Theme not found" />
 
   const handleRate = (score: number) => {
-    if (!user) return
-    setRating({ themeSlug: slug, score, mode })
+    setSelectedRating(score)
+    setShowConfirm(true)
   }
 
-  const handleToggleFavorite = () => {
+  const handleConfirmRating = () => {
+    if (!user || !selectedRating) return
+    setRating({ themeSlug: slug, score: selectedRating, mode }, {
+      onSuccess: () => {
+        setShowConfirm(false)
+        setSelectedRating(null)
+      }
+    })
+  }
+
+  const handleWatchListen = () => {
     if (!user) return
     addToHistory({ themeSlug: slug, mode })
   }
 
   return (
-    <div className="min-h-screen bg-bg-base">
-      <div className="mx-auto max-w-4xl px-4 py-8">
-        <div className="space-y-6">
-          {theme.animeCoverImage && (
-            <div className="aspect-video relative rounded-[20px] overflow-hidden">
-              <img
-                src={theme.animeCoverImage}
-                alt={theme.animeTitle}
-                className="w-full h-full object-cover"
-              />
-            </div>
-          )}
+    <div className="pb-8">
+      {/* Video player — full width */}
+      <VideoPlayer
+        videoSources={theme.videoSources || []}
+        poster={theme.animeCoverImage}
+        mode={mode}
+      />
 
-          <div>
-            <div className="flex items-center gap-2 mb-2">
-              <span className={`
-                text-[10px] font-mono font-bold px-2 py-0.5 rounded-full
-                ${theme.type === 'OP' ? 'bg-accent-container text-accent' : 'bg-accent-ed-container text-accent-ed'}
-              `}>
-                {theme.type}{theme.sequence}
+      <div className="px-4 mt-4">
+        {/* Watch/Listen toggle */}
+        {user && (
+          <div className="flex gap-2 mb-4">
+            <WatchListenToggle mode={mode} onModeChange={setMode} />
+          </div>
+        )}
+
+        {/* Song info */}
+        <div className="flex items-start justify-between gap-2">
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-2 mb-1">
+              <span className="text-xs font-body font-semibold text-ktext-tertiary uppercase tracking-wide">
+                {theme.type === 'OP' ? 'Opening' : 'Ending'} Theme {theme.sequence > 1 ? `0${theme.sequence}` : '01'}
+                {theme.animeSeasonYear && ` · ${theme.animeSeasonYear}`}
               </span>
-              {theme.animeSeason && (
-                <span className="text-xs text-ktext-tertiary">
-                  {theme.animeSeason} {theme.animeSeasonYear}
-                </span>
-              )}
             </div>
-            <h1 className="text-2xl font-display font-bold text-ktext-primary">
+            <h1 className="text-2xl font-display font-bold text-ktext-primary leading-tight">
               {theme.songTitle}
             </h1>
-            <p className="text-sm text-ktext-secondary">{theme.animeTitle}</p>
+            <p className="text-sm font-body text-accent font-semibold mt-1">
+              {theme.artistName}
+            </p>
+            <Link 
+              href={`/anime/${theme.anilistId || ''}`}
+              className="text-xs font-body text-ktext-tertiary mt-0.5 hover:text-accent transition-colors"
+            >
+              ∞ {theme.animeTitle}
+            </Link>
           </div>
+          <button className="w-9 h-9 rounded-full bg-bg-elevated border border-border-default flex items-center justify-center interactive flex-shrink-0">
+            <Share2 className="w-4 h-4 text-ktext-secondary" />
+          </button>
+        </div>
 
-          <div className="flex gap-2">
-            {theme.videoSources?.map((source: any, i: number) => (
-              <a
-                key={i}
-                href={source.url}
-                className="px-3 py-1.5 text-sm rounded-full bg-bg-elevated border border-border-default text-ktext-secondary hover:text-ktext-primary"
-                target="_blank"
-                rel="noopener noreferrer"
+        {/* Community stats */}
+        <div className="flex gap-3 mt-4">
+          <div className="flex-1 bg-bg-elevated rounded-[16px] p-3 text-center">
+            <p className="text-xl font-mono font-bold" style={{ color: getScoreColor(Math.round(theme.avgRating || 0)) }}>
+              {theme.avgRating?.toFixed(1) ?? '—'}
+            </p>
+            <p className="text-[10px] font-body text-ktext-tertiary tracking-wide">AVG RATING</p>
+          </div>
+          <div className="flex-1 bg-bg-elevated rounded-[16px] p-3 text-center">
+            <p className="text-xl font-mono font-bold text-ktext-primary">{formatCount(theme.totalRatings || 0)}</p>
+            <p className="text-[10px] font-body text-ktext-tertiary tracking-wide">RATINGS</p>
+          </div>
+          <div className="flex-1 bg-bg-elevated rounded-[16px] p-3 text-center">
+            <p className="text-xl font-mono font-bold text-ktext-primary">{formatCount(theme.totalWatches || 0)}</p>
+            <p className="text-[10px] font-body text-ktext-tertiary tracking-wide">
+              {mode === 'watch' ? 'WATCHES' : 'LISTENS'}
+            </p>
+          </div>
+        </div>
+
+        {/* Rating widget */}
+        {user && (
+          <div className="mt-4 bg-bg-surface rounded-[20px] border border-border-subtle p-4 shadow-card">
+            <RatingWidget
+              currentRating={userRating}
+              onRate={handleRate}
+              isLoading={isRatingPending}
+            />
+            {showConfirm && selectedRating && (
+              <button
+                onClick={handleConfirmRating}
+                className="w-full h-12 bg-accent text-white rounded-full font-body font-semibold interactive mt-4"
               >
-                {source.resolution}p
-              </a>
-            ))}
+                Confirm Rating
+              </button>
+            )}
           </div>
+        )}
 
-          {theme.allArtists && theme.allArtists.length > 0 && (
-            <div>
-              <p className="text-xs font-body font-semibold text-ktext-tertiary uppercase tracking-wide mb-2">Artists</p>
-              <div className="flex flex-wrap gap-2">
-                {theme.allArtists.map((artist: string, i: number) => (
-                  <Link
-                    key={i}
-                    href={`/artist/${theme.artistSlugs?.[i] ?? artist.toLowerCase().replace(/\s+/g, '-')}`}
-                    className="text-sm text-accent hover:underline"
+        {/* Artists/Credits */}
+        {theme.allArtists && theme.allArtists.length > 0 && (
+          <div className="mt-4 space-y-2">
+            <h3 className="text-sm font-body font-semibold text-ktext-secondary uppercase tracking-wide">Artists</h3>
+            {theme.allArtists.map((artist: string, i: number) => (
+              <div key={i} className="flex items-center gap-3 bg-bg-surface rounded-[12px] p-3 border border-border-subtle">
+                <div className="w-8 h-8 rounded-full bg-accent-container flex items-center justify-center">
+                  <Music className="w-3.5 h-3.5 text-accent" />
+                </div>
+                <div>
+                  <p className="text-[10px] font-body text-ktext-tertiary uppercase tracking-wide">
+                    {theme.artistRoles?.[i] || 'Artist'}
+                  </p>
+                  <Link 
+                    href={`/artist/${theme.artistSlugs?.[i] || artist.toLowerCase().replace(/\s+/g, '-')}`}
+                    className="text-sm font-body font-semibold text-ktext-primary hover:text-accent"
                   >
                     {artist}
                   </Link>
-                ))}
+                </div>
               </div>
-            </div>
-          )}
-
-          <div className="flex gap-3">
-            <div className="flex-1 bg-bg-elevated rounded-[16px] p-3 text-center">
-              <p className="text-xl font-mono font-bold" style={{ color: getScoreColor(Math.round(theme.avgRating)) }}>
-                {theme.avgRating?.toFixed(1) ?? '—'}
-              </p>
-              <p className="text-[10px] font-body text-ktext-tertiary tracking-wide">AVG RATING</p>
-            </div>
-            <div className="flex-1 bg-bg-elevated rounded-[16px] p-3 text-center">
-              <p className="text-xl font-mono font-bold text-ktext-primary">{theme.totalRatings ?? 0}</p>
-              <p className="text-[10px] font-body text-ktext-tertiary tracking-wide">RATINGS</p>
-            </div>
-            <div className="flex-1 bg-bg-elevated rounded-[16px] p-3 text-center">
-              <p className="text-xl font-mono font-bold text-ktext-primary">{theme.totalWatches ?? 0}</p>
-              <p className="text-[10px] font-body text-ktext-tertiary tracking-wide">WATCHES</p>
-            </div>
+            ))}
           </div>
+        )}
 
+        {/* Quick actions */}
+        <div className="mt-4 space-y-1">
+          <button className="w-full flex items-center gap-3 p-4 rounded-[12px] interactive text-ktext-secondary hover:text-ktext-primary transition-colors bg-bg-surface">
+            <Plus className="w-5 h-5" />
+            <span className="text-sm font-body font-medium">Add to Library</span>
+          </button>
           {user && (
-            <div className="bg-bg-surface rounded-[20px] border border-border-subtle p-4 shadow-card space-y-4">
-              <WatchListenToggle mode={mode} onModeChange={setMode} />
-              
-              <RatingWidget
-                currentRating={userRating}
-                onRate={handleRate}
-                isLoading={isRatingPending}
-              />
-
-              <button
-                onClick={handleToggleFavorite}
-                className="w-full h-12 rounded-full bg-accent text-white font-body font-semibold"
-              >
-                Add to History
-              </button>
-            </div>
+            <button 
+              onClick={handleWatchListen}
+              className="w-full flex items-center gap-3 p-4 rounded-[12px] interactive text-ktext-secondary hover:text-ktext-primary transition-colors bg-bg-surface"
+            >
+              <Eye className="w-5 h-5" />
+              <span className="text-sm font-body font-medium">Mark as {mode === 'watch' ? 'Watched' : 'Listened'}</span>
+            </button>
           )}
+          <button className="w-full flex items-center gap-3 p-4 rounded-[12px] interactive text-ktext-secondary hover:text-ktext-primary transition-colors bg-bg-surface">
+            <AlertCircle className="w-5 h-5" />
+            <span className="text-sm font-body font-medium">Report Issues</span>
+          </button>
         </div>
       </div>
     </div>
