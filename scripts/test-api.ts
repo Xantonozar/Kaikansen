@@ -77,7 +77,7 @@ async function testFetchPage1() {
       )
       console.log('   ✅ SAVED to MongoDB!')
     } catch (err) {
-      console.log('   ❌ Save failed:', err.message)
+      console.log('   ❌ Save failed:', err instanceof Error ? err.message : err)
     }
   }
   
