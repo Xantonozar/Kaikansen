@@ -209,26 +209,37 @@ function parseATTheme(atTheme: any): ParsedTheme | null {
 }
 
 async function upsertTheme(theme: ParsedTheme): Promise<void> {
-  await ThemeCache.findOneAndUpdate(
-    { slug: theme.slug },
-    { $set: theme },
-    { upsert: true }
-  )
+  try {
+    const result = await ThemeCache.findOneAndUpdate(
+      { slug: theme.slug },
+      { $set: theme },
+      { upsert: true }
+    )
+    console.log(`  ✅ Saved: ${theme.songTitle} (${theme.animeTitle}) [${theme.type}]`)
+  } catch (err) {
+    console.log(`  ❌ Failed: ${theme.songTitle} - ${err instanceof Error ? err.message : 'unknown'}`)
+    throw err
+  }
 }
 
 async function upsertArtist(artistName: string, artistSlug: string, animethemesId: number): Promise<void> {
-  await ArtistCache.findOneAndUpdate(
-    { slug: artistSlug },
-    {
-      $set: {
-        slug: artistSlug,
-        animethemesId,
-        name: artistName,
-        syncedAt: new Date(),
+  try {
+    await ArtistCache.findOneAndUpdate(
+      { slug: artistSlug },
+      {
+        $set: {
+          slug: artistSlug,
+          animethemesId,
+          name: artistName,
+          syncedAt: new Date(),
+        },
       },
-    },
-    { upsert: true }
-  )
+      { upsert: true }
+    )
+    console.log(`    🎤 Artist: ${artistName}`)
+  } catch (err) {
+    console.log(`    ❌ Artist failed: ${artistName}`)
+  }
 }
 
 async function main() {
@@ -260,25 +271,31 @@ async function main() {
 
   let page = progress.lastPage
 
+  let totalProcessedInThisRun = 0
+
   while (page <= totalPages) {
-    console.log(`📄 Fetching page ${page}/${totalPages}...`)
+    console.log(`\n${'='.repeat(60)}`)
+    console.log(`📄 PAGE ${page}/${totalPages} - Fetching from AnimeThemes API...`)
 
     let themes: any[]
     try {
       await sleep(DELAY_ANIMETHEMES)
       themes = await fetchThemePage(page)
+      console.log(`  📥 Got ${themes.length} themes from API`)
     } catch (error) {
       console.error(`❌ Failed to fetch page ${page}: ${error instanceof Error ? error.message : 'unknown'}`)
       break
     }
 
     if (themes.length === 0) {
-      console.log('✅ No more themes found')
+      console.log('✅ No more themes found - SEED COMPLETE!')
       break
     }
 
     let pageSuccessCount = 0
     let pageFailCount = 0
+
+    console.log(`\n📝 Processing ${themes.length} themes...`)
 
     for (const atTheme of themes) {
       try {
@@ -287,6 +304,8 @@ async function main() {
           pageFailCount++
           continue
         }
+        
+        console.log(`\n  🎵 Processing: ${theme.songTitle} (${theme.animeTitle}) [${theme.type}]`)
 
         let enrichment: AniListEnrichment | null = null
         if (!theme.animeSeason) {
@@ -327,14 +346,22 @@ async function main() {
     progress.lastUpdated = new Date().toISOString()
     saveProgress(progress)
 
-    console.log(`✅ Page ${page}: ${pageSuccessCount} success, ${pageFailCount} failed. Total: ${progress.totalProcessed}`)
+    console.log(`\n${'='.repeat(60)}`)
+    console.log(`📊 PAGE ${page} COMPLETE: ${pageSuccessCount} ✅ saved, ${pageFailCount} ❌ failed`)
+    console.log(`   Total processed so far: ${progress.totalProcessed}`)
+    console.log(`${'='.repeat(60)}\n`)
+    
+    progress.lastPage = page
+    progress.lastUpdated = new Date().toISOString()
+    saveProgress(progress)
+
     page++
   }
 
   console.log('')
-  console.log('🎉 Seed complete!')
-  console.log(`   Processed: ${progress.totalProcessed} themes`)
-  console.log(`   Failed: ${progress.failedThemes} themes`)
+  console.log('🎉🎉🎉 SEED COMPLETE! 🎉🎉🎉')
+  console.log(`   ✅ Total saved: ${progress.totalProcessed} themes`)
+  console.log(`   ❌ Total failed: ${progress.failedThemes} themes`)
 }
 
 main().catch((error) => {
