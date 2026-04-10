@@ -16,7 +16,7 @@ export function BottomNav() {
   const pathname = usePathname()
 
   return (
-    <nav className="flex md:hidden fixed bottom-0 left-0 right-0 z-40 bg-bg-surface border-t border-border-subtle h-16 pb-[env(safe-area-inset-bottom)]">
+    <nav className="flex md:hidden fixed bottom-0 left-0 right-0 z-40 bg-bg-surface border-t border-border-subtle h-16 pb-[env(safe-area-inset-bottom)] w-full">
       {navItems.map((item) => {
         const isActive = pathname === item.path || (item.path !== '/' && pathname.startsWith(item.path))
         return (

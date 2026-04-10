@@ -56,7 +56,7 @@ export default async function Home() {
   ])
 
   return (
-    <div className="min-h-screen bg-bg-base flex">
+    <div className="min-h-screen bg-bg-base flex w-full">
       <nav className="hidden md:flex flex-col fixed left-0 top-0 bottom-0 w-20 lg:w-60 bg-bg-surface border-r border-border-subtle z-40 py-4">
         <div className="flex items-center gap-3 px-4 mb-8">
           <span className="text-accent text-2xl">≋</span>
@@ -64,15 +64,17 @@ export default async function Home() {
         </div>
       </nav>
       
-      <main className="flex-1 min-w-0 pb-20 md:pb-0 md:pl-20 lg:pl-60 px-4 md:px-6 lg:px-8">
+      <main className="flex-1 min-w-0 pb-20 md:pb-0 md:pl-20 lg:pl-60 w-full">
         <AppHeader />
         
-        <HomeClient 
-          popularThemes={popularThemes}
-          featuredThemes={featuredThemes}
-          currentSeason={{ season: label, year }}
-          stats={stats}
-        />
+        <div className="px-4 md:px-6 lg:px-8">
+          <HomeClient 
+            popularThemes={popularThemes}
+            featuredThemes={featuredThemes}
+            currentSeason={{ season: label, year }}
+            stats={stats}
+          />
+        </div>
       </main>
       
       <BottomNav />
