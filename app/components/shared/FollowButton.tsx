@@ -1,37 +1,58 @@
 'use client'
 
-import { UserPlus, UserCheck } from 'lucide-react'
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { UserPlus, UserCheck, Loader2 } from 'lucide-react'
+import { useAuth } from '@/providers/AuthProvider'
 
 interface FollowButtonProps {
-  isFollowing?: boolean
-  onToggle: () => Promise<void>
-  isLoading?: boolean
+  username: string
 }
 
-export function FollowButton({
-  isFollowing,
-  onToggle,
-  isLoading,
-}: FollowButtonProps) {
+export function FollowButton({ username }: FollowButtonProps) {
+  const router = useRouter()
+  const { user } = useAuth()
+  const [isLoading, setIsLoading] = useState(false)
+  const [isFollowing, setIsFollowing] = useState(false)
+
+  const handleToggle = async () => {
+    if (!user) {
+      router.push('/login')
+      return
+    }
+
+    setIsLoading(true)
+    try {
+      const method = isFollowing ? 'DELETE' : 'POST'
+      const res = await fetch(`/api/follow/${username}`, { method })
+      const json = await res.json()
+      if (json.success) {
+        setIsFollowing(!isFollowing)
+      }
+    } catch (err) {
+      console.error('Follow error:', err)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   return (
     <button
-      onClick={onToggle}
+      onClick={handleToggle}
       disabled={isLoading}
-      className={`flex items-center gap-2 rounded-lg px-4 py-2 font-medium transition-colors ${
-        isFollowing
-          ? 'bg-primary text-primary-foreground hover:bg-primary/90'
-          : 'bg-muted text-muted-foreground hover:bg-primary hover:text-primary-foreground'
-      }`}
+      className="px-8 h-11 bg-accent text-white rounded-full font-body font-semibold interactive hover:bg-accent-hover disabled:opacity-50 flex items-center gap-2"
     >
-      {isFollowing ? (
+      {isLoading ? (
+        <Loader2 className="w-4 h-4 animate-spin" />
+      ) : isFollowing ? (
         <>
-          <UserCheck className="h-4 w-4" />
+          <UserCheck className="w-4 h-4" />
           Following
         </>
       ) : (
         <>
-          <UserPlus className="h-4 w-4" />
-          Follow
+          <UserPlus className="w-4 h-4" />
+          Follow Artist
         </>
       )}
     </button>
