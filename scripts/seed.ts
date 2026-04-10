@@ -293,7 +293,8 @@ async function main() {
 
   let totalProcessedInThisRun = 0
 
-  while (page <= totalPages) {
+  // No page limit - full seed
+while (page <= totalPages) {
     console.log(`\n${'='.repeat(60)}`)
     console.log(`📄 PAGE ${page}/${totalPages} - Fetching from AnimeThemes API...`)
 
