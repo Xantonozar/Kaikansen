@@ -102,11 +102,43 @@
 }
 
 @layer utilities {
-  .font-display { font-family: 'Outfit', system-ui, sans-serif; }
-  .font-body { font-family: 'Inter', system-ui, sans-serif; }
-  .font-mono { font-family: 'JetBrains Mono', monospace; }
+  .font-display { 
+    font-family: var(--font-outfit, 'Outfit', system-ui, sans-serif); 
+  }
+  .font-body { 
+    font-family: var(--font-inter, 'Inter', system-ui, sans-serif); 
+  }
+  .font-mono { 
+    font-family: var(--font-jetbrains, 'JetBrains Mono', monospace); 
+  }
   
   .text-balance { text-wrap: balance; }
+  
+  .text-bg-base { color: var(--bg-base); }
+  .text-bg-surface { color: var(--bg-surface); }
+  .text-bg-elevated { color: var(--bg-elevated); }
+  .text-bg-overlay { color: var(--bg-overlay); }
+  .bg-bg-base { background-color: var(--bg-base); }
+  .bg-bg-surface { background-color: var(--bg-surface); }
+  .bg-bg-elevated { background-color: var(--bg-elevated); }
+  .bg-bg-overlay { background-color: var(--bg-overlay); }
+  .bg-bg-header { background-color: var(--bg-header); }
+  
+  .text-accent { color: var(--accent); }
+  .text-accent-mint { color: var(--accent-mint); }
+  .text-accent-ed { color: var(--accent-ed); }
+  .text-ktext-primary { color: var(--text-primary); }
+  .text-ktext-secondary { color: var(--text-secondary); }
+  .text-ktext-tertiary { color: var(--text-tertiary); }
+  .bg-accent { background-color: var(--accent); }
+  .bg-accent-mint { background-color: var(--accent-mint); }
+  .bg-accent-container { background-color: var(--accent-container); }
+  .bg-accent-ed-container { background-color: var(--accent-ed-container); }
+  
+  .border-border-subtle { border-color: var(--border-subtle); }
+  .border-border-default { border-color: var(--border-default); }
+  .border-border-strong { border-color: var(--border-strong); }
+  .border-border-accent { border-color: var(--border-accent); }
 }
 
 .interactive {

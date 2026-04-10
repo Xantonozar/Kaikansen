@@ -1,67 +1,100 @@
-export default function Home() {
+import { connectDB } from '@/lib/db'
+import { ThemeCache } from '@/lib/models'
+import { AppHeader } from '@/app/components/layout/AppHeader'
+import { BottomNav } from '@/app/components/layout/BottomNav'
+import { FeaturedCard } from '@/app/components/home/FeaturedCard'
+import { ThemeListRow } from '@/app/components/theme/ThemeListRow'
+
+async function getFeaturedThemes() {
+  await connectDB()
+  const now = new Date()
+  const month = now.getMonth()
+  const year = now.getFullYear()
+  
+  let season: string
+  if (month < 3) season = 'WINTER'
+  else if (month < 5) season = 'SPRING'
+  else if (month < 8) season = 'SUMMER'
+  else season = 'FALL'
+  
+  return ThemeCache.find({
+    animeSeason: season,
+    animeSeasonYear: year,
+  })
+    .sort({ avgRating: -1, totalRatings: -1 })
+    .limit(10)
+    .lean()
+}
+
+async function getPopularThemes() {
+  await connectDB()
+  return ThemeCache.find({})
+    .sort({ avgRating: -1, totalRatings: -1 })
+    .limit(20)
+    .lean()
+}
+
+export default async function Home() {
+  const [featuredThemes, popularThemes] = await Promise.all([
+    getFeaturedThemes(),
+    getPopularThemes(),
+  ])
+  
+  const now = new Date()
+  const month = now.getMonth()
+  const year = now.getFullYear()
+  let seasonLabel = ''
+  if (month < 3) seasonLabel = 'Winter'
+  else if (month < 5) seasonLabel = 'Spring'
+  else if (month < 8) seasonLabel = 'Summer'
+  else seasonLabel = 'Fall'
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-muted">
-      <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="text-center">
-          <h1 className="text-5xl font-bold tracking-tight sm:text-6xl">
-            Kaikansen
-          </h1>
-          <p className="mt-6 text-xl text-muted-foreground">
-            Discover, rate, and share your favorite anime opening and ending themes
-          </p>
-
-          <div className="mt-10 flex justify-center gap-4">
-            <a
-              href="/login"
-              className="btn btn-primary"
-            >
-              Sign In
-            </a>
-            <a
-              href="/register"
-              className="btn btn-outline"
-            >
-              Create Account
-            </a>
-          </div>
+    <div className="min-h-screen bg-bg-base flex">
+      <nav className="hidden md:flex flex-col fixed left-0 top-0 bottom-0 w-20 lg:w-60 bg-bg-surface border-r border-border-subtle z-40 py-4">
+        <div className="flex items-center gap-3 px-4 mb-8">
+          <span className="text-accent text-2xl">≋</span>
+          <span className="hidden lg:block font-display font-bold text-lg text-ktext-primary">Kaikansen</span>
         </div>
-
-        <div className="mt-16 grid gap-8 md:grid-cols-3">
-          <div className="card p-6 text-center">
-            <div className="text-3xl">🎵</div>
-            <h3 className="mt-2 font-semibold">Explore Themes</h3>
-            <p className="mt-2 text-sm text-muted-foreground">
-              Browse thousands of anime OP/ED themes from AnimeThemes
-            </p>
-          </div>
-
-          <div className="card p-6 text-center">
-            <div className="text-3xl">⭐</div>
-            <h3 className="mt-2 font-semibold">Rate & Review</h3>
-            <p className="mt-2 text-sm text-muted-foreground">
-              Share your thoughts with 1-10 ratings and join the community
-            </p>
-          </div>
-
-          <div className="card p-6 text-center">
-            <div className="text-3xl">👥</div>
-            <h3 className="mt-2 font-semibold">Connect</h3>
-            <p className="mt-2 text-sm text-muted-foreground">
-              Follow friends and discover new themes from their activity
-            </p>
-          </div>
+      </nav>
+      
+      <main className="flex-1 min-w-0 pb-20 md:pb-0 md:pl-20 lg:pl-60 px-4 md:px-6 lg:px-8">
+        <AppHeader />
+        
+        <div className="max-w-2xl mx-auto md:max-w-7xl space-y-6 pt-4">
+          <section>
+            <div className="flex items-center justify-between mb-3">
+              <div>
+                <p className="text-xs font-body font-semibold text-accent uppercase tracking-wide">Current Season</p>
+                <h2 className="text-2xl font-display font-bold text-ktext-primary">{seasonLabel} {year}</h2>
+              </div>
+              <a href={`/season/${seasonLabel.toLowerCase()}/${year}`} className="text-sm font-body text-accent font-semibold interactive">
+                View All
+              </a>
+            </div>
+            
+            <div className="flex gap-3 overflow-x-auto scrollbar-hide -mx-4 px-4 pb-2">
+              {featuredThemes.map((theme: any) => (
+                <FeaturedCard key={theme.slug} theme={theme} />
+              ))}
+            </div>
+          </section>
+          
+          <section>
+            <div className="flex items-center justify-between mb-3">
+              <h2 className="text-lg font-display font-bold text-ktext-primary">🔥 Popular Themes</h2>
+            </div>
+            
+            <div className="space-y-2">
+              {popularThemes.slice(0, 10).map((theme: any) => (
+                <ThemeListRow key={theme.slug} theme={theme} />
+              ))}
+            </div>
+          </section>
         </div>
-
-        <div className="mt-16 rounded-lg border border-border bg-card p-8 text-center">
-          <h2 className="text-2xl font-bold">Ready to dive in?</h2>
-          <p className="mt-2 text-muted-foreground">
-            Join thousands of anime fans rating OP/ED themes
-          </p>
-          <a href="/register" className="btn btn-primary mt-4">
-            Get Started
-          </a>
-        </div>
-      </div>
+      </main>
+      
+      <BottomNav />
     </div>
   )
 }
