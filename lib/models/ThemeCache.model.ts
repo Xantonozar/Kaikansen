@@ -2,11 +2,11 @@ import mongoose from 'mongoose'
 
 const themeCacheSchema = new mongoose.Schema({
   // === PRIMARY ===
-  slug: { type: String, required: true, unique: true, index: true },
+  slug: { type: String, required: true, index: true },
   animethemesId: { type: Number, required: true, unique: true, index: true },
   
   // === ANIME IDENTIFIER (for anime-level queries) ===
-  animeSlug: { type: String, default: null, index: true },
+  animeSlug: { type: String, index: true },
   animeBannerImage: { type: String, default: null },
   
   // === SONG ===

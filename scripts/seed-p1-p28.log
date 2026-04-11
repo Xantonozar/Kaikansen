@@ -659,3 +659,53 @@
 [2026-04-11 16:09:41] [p1-p28]   │  📺 Format : TV
 [2026-04-11 16:09:41] [p1-p28]   │  📅 Season : FALL 2009
 [2026-04-11 16:09:41] [p1-p28]   │  🗂  Series : —
+[2026-04-11 16:09:43] [p1-p28]   │  ✅ [AniList:by_id] → 11eyes
+[2026-04-11 16:09:43] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:none
+[2026-04-11 16:09:43] [p1-p28]   │  📝 JP      : 11eyes
+[2026-04-11 16:09:43] [p1-p28]   │  📝 EN      : 11eyes
+[2026-04-11 16:09:43] [p1-p28]   │  📝 Romaji  : 11eyes
+[2026-04-11 16:09:43] [p1-p28]   │  📝 Native  : イレブンアイズ
+[2026-04-11 16:09:43] [p1-p28]   │  📝 Alt     : 3 titles
+[2026-04-11 16:09:43] [p1-p28]   │  🆔 MAL:6682  AniList:6682  Kitsu:—
+[2026-04-11 16:09:43] [p1-p28]   │  🎬 Themes  : 2
+[2026-04-11 16:09:43] [p1-p28]   │    [OP1] "Arrival of Tears" — Ayane
+[2026-04-11 16:09:43] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:09:43] [p1-p28]   │    [ED1] "Sequentia" — Asriel
+[2026-04-11 16:09:43] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:09:43] [p1-p28]   │  ❌ Unexpected: Plan executor error during findAndModify :: caused by :: E11000 duplicate key error collection: test.themecaches index: slug_1 dup key: { slug: null }
+[2026-04-11 16:09:43] [p1-p28]   └─ ❌  running total → processed:1  failed:19
+[2026-04-11 16:09:43] [p1-p28] 
+  ┌─ [8/2800] 🎌 12_sai_chicchana_mune_no_tokimeki
+[2026-04-11 16:09:45] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:09:45] [p1-p28]   │  📺 Format : TV
+[2026-04-11 16:09:45] [p1-p28]   │  📅 Season : SPRING 2016
+[2026-04-11 16:09:45] [p1-p28]   │  🗂  Series : 12-sai.: Chicchana Mune no Tokimeki
+[2026-04-11 16:09:46] [p1-p28]   │  ✅ [AniList:by_id] → 12-sai.: Chiccha na Mune no Tokimeki
+[2026-04-11 16:09:49] [p1-p28]   │  ⚠️  [Kitsu:by_malid] no results
+[2026-04-11 16:09:50] [p1-p28]   │  ✅ [Kitsu:by_title] → 12-sai.: Chicchana Mune no Tokimeki
+[2026-04-11 16:09:50] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:by_title
+[2026-04-11 16:09:50] [p1-p28]   │  📝 JP      : 12-sai.: Chicchana Mune no Tokimeki
+[2026-04-11 16:09:50] [p1-p28]   │  📝 EN      : 12-sai.: Chicchana Mune no Tokimeki
+[2026-04-11 16:09:50] [p1-p28]   │  📝 Romaji  : 12-sai.: Chiccha na Mune no Tokimeki
+[2026-04-11 16:09:50] [p1-p28]   │  📝 Native  : 12歳。～ちっちゃなムネのトキメキ～
+[2026-04-11 16:09:50] [p1-p28]   │  📝 Alt     : 5 titles
+[2026-04-11 16:09:50] [p1-p28]   │  🆔 MAL:32601  AniList:21609  Kitsu:11782
+[2026-04-11 16:09:50] [p1-p28]   │  🎬 Themes  : 2
+[2026-04-11 16:09:50] [p1-p28]   │    [OP1] "Sweet Sensation" — Rie Murakawa
+[2026-04-11 16:09:50] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:09:50] [p1-p28]   │    [ED1] "Cotona MODE" — AOP
+[2026-04-11 16:09:50] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:09:50] [p1-p28]   │  ❌ Unexpected: Cast to [string] failed for value "[\n' +
+  '  {\n' +
+  '    id: 507,\n' +
+  "    name: '12-sai.: Chicchana Mune no Tokimeki',\n" +
+  "    slug: '12_sai_chicchana_mune_no_tokimeki'\n" +
+  '  }\n' +
+  ']" (type string) at path "animeSeries.0" because of "CastError"
+[2026-04-11 16:09:50] [p1-p28]   └─ ❌  running total → processed:1  failed:20
+[2026-04-11 16:09:50] [p1-p28] 
+  ┌─ [9/2800] 🎌 12_sai_chicchana_mune_no_tokimeki_2nd_season
+[2026-04-11 16:09:52] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:09:52] [p1-p28]   │  📺 Format : TV
+[2026-04-11 16:09:52] [p1-p28]   │  📅 Season : FALL 2016
+[2026-04-11 16:09:52] [p1-p28]   │  🗂  Series : 12-sai.: Chicchana Mune no Tokimeki

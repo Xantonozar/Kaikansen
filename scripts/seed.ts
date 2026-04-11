@@ -641,9 +641,10 @@ function parseATResponse(atData: any, level: 'full' | 'basic' | 'bare'): ParsedA
       firstOverlap === 'Over'       ? 'Plays over episode' :
       firstOverlap === 'Transition' ? 'Transition overlap' : null
 
+    const animeSlug = atData.slug ?? `anime-${t.id}`
     return {
       animethemesThemeId: t.id,
-      slug              : `${atData.slug}-${type.toLowerCase()}${sequence}`,
+      slug              : `${animeSlug}-${type.toLowerCase()}${sequence}`,
       type,
       sequence,
       songTitle  : t.song?.title ?? 'Unknown',
