@@ -9,7 +9,6 @@ const searchSchema = z.object({
   q: z.string().min(1).max(100),
   page: z.string().optional().transform((v) => Math.max(1, parseInt(v || '1'))),
   limit: z.string().optional().transform((v) => Math.min(50, parseInt(v || '20'))),
-  by: z.string().optional(),
 })
 
 export async function GET(request: NextRequest) {
@@ -21,8 +20,8 @@ export async function GET(request: NextRequest) {
       q: url.searchParams.get('q'),
       page: url.searchParams.get('page'),
       limit: url.searchParams.get('limit'),
-      by: url.searchParams.get('by'),
     })
+    const by = url.searchParams.get('by')
 
     const skip = (params.page - 1) * params.limit
     const searchTerm = params.q.trim()
@@ -37,11 +36,11 @@ export async function GET(request: NextRequest) {
     let themeQuery: Record<string, unknown> = {}
     let artistQuery: Record<string, unknown> = {}
 
-    if (params.by === 'anime') {
+    if (by === 'anime') {
       themeQuery = buildRegexQuery(['animeTitle', 'animeTitleEnglish', 'animeTitleAlternative'], searchTerm)
-    } else if (params.by === 'song') {
+    } else if (by === 'song') {
       themeQuery = buildRegexQuery(['songTitle'], searchTerm)
-    } else if (params.by === 'singer') {
+    } else if (by === 'singer') {
       themeQuery = buildRegexQuery(['artistName', 'allArtists'], searchTerm)
     } else {
       themeQuery = buildRegexQuery(themeFields, searchTerm)
@@ -64,8 +63,8 @@ export async function GET(request: NextRequest) {
         },
         meta: {
           page: params.page,
-          total: params.by === 'artist' ? artistCount : themeCount,
-          hasMore: skip + params.limit < (params.by === 'artist' ? artistCount : themeCount),
+          total: by === 'artist' ? artistCount : themeCount,
+          hasMore: skip + params.limit < (by === 'artist' ? artistCount : themeCount),
           query: params.q,
         },
       },

@@ -42,3 +42,515 @@
 [2026-04-11 19:52:48] 📥 Building anime cache...
 [2026-04-11 19:52:51]    Page 1: added 100 (total: 100)
 [2026-04-11 19:52:53]    Page 2: added 100 (total: 200)
+[2026-04-11 19:52:56]    Page 3: added 100 (total: 298)
+[2026-04-11 19:52:58]    Page 4: added 100 (total: 397)
+[2026-04-11 19:53:00]    Page 5: added 100 (total: 496)
+[2026-04-11 19:53:00]       💾 Saved checkpoint at page 5
+[2026-04-11 19:53:02]    Page 6: added 100 (total: 595)
+[2026-04-11 19:53:05]    Page 7: added 100 (total: 693)
+[2026-04-11 19:53:07]    Page 8: added 100 (total: 791)
+[2026-04-11 19:53:09]    Page 9: added 100 (total: 888)
+[2026-04-11 19:53:12]    Page 10: added 100 (total: 987)
+[2026-04-11 19:53:12]       💾 Saved checkpoint at page 10
+[2026-04-11 19:53:15]    Page 11: added 100 (total: 1087)
+[2026-04-11 19:53:17]    Page 12: added 100 (total: 1187)
+[2026-04-11 19:53:19]    Page 13: added 100 (total: 1286)
+[2026-04-11 19:53:22]    Page 14: added 100 (total: 1386)
+[2026-04-11 19:53:24]    Page 15: added 100 (total: 1485)
+[2026-04-11 19:53:24]       💾 Saved checkpoint at page 15
+[2026-04-11 19:53:26]    Page 16: added 100 (total: 1585)
+[2026-04-11 19:53:28]    Page 17: added 100 (total: 1685)
+[2026-04-11 19:53:30]    Page 18: added 100 (total: 1784)
+[2026-04-11 19:53:33]    Page 19: added 100 (total: 1884)
+[2026-04-11 19:53:35]    Page 20: added 100 (total: 1984)
+[2026-04-11 19:53:35]       💾 Saved checkpoint at page 20
+[2026-04-11 19:53:37]    Page 21: added 100 (total: 2084)
+[2026-04-11 19:53:40]    Page 22: added 100 (total: 2184)
+[2026-04-11 19:53:42]    Page 23: added 100 (total: 2283)
+[2026-04-11 19:53:44]    Page 24: added 100 (total: 2383)
+[2026-04-11 19:53:46]    Page 25: added 100 (total: 2482)
+[2026-04-11 19:53:46]       💾 Saved checkpoint at page 25
+[2026-04-11 19:55:01] 📁 Cache file exists: true
+[2026-04-11 19:55:02]    Size: 191898 bytes
+════════════════════════════════════════════════════════════
+[2026-04-11 19:55:02] 🎵 ANIMETHEMES SEED
+[2026-04-11 19:55:02]    Total: 198
+[2026-04-11 19:55:02]    Processed: 0
+[2026-04-11 19:55:02]    Skipped: 0
+[2026-04-11 19:55:02]    Failed: 0
+════════════════════════════════════════════════════════════
+[2026-04-11 19:55:03] ✅ Connected to database
+[2026-04-11 19:55:03]    ✅ Loaded from file: 2482 anime
+[2026-04-11 19:55:03] 
+[1/198] Neon Genesis Evangelion → "A Cruel Angel's Thesis" (OP)
+[2026-04-11 19:55:03]    📍 Found: Neon Genesis Evangelion (neon_genesis_evangelion)
+[2026-04-11 19:55:07]    ⚠️  Theme not found: "A Cruel Angel's Thesis" (OP)
+[2026-04-11 19:55:07]    Available: OP1: Zankoku na Tenshi no Thesis, ED1: Fly Me to the Moon, ED2: Fly Me to the Moon (Rei #5 Version), ED3: Fly Me to the Moon (Rei #6 Version), ED4: Fly Me to the Moon -4 Beat Version-, ED5: Fly Me to the Moon (Aya Bossa Techno Version), ED6: Fly Me to the Moon (Yoko Takahashi Acid Bossa Version), ED7: Fly Me to the Moon (Yoko Takahashi Version), ED8: Fly Me to the Moon -4 Beat Version (Off-Vocal)-, ED9: Fly Me to the Moon (Off-Vocal Version), ED10: Fly Me to the Moon (Aki Jungle Version), ED11: Fly Me to the Moon -B22 (A-Type)-, ED12: Fly Me to the Moon (Rei #23 Version), ED13: Fly Me to the Moon (Rei #25 Version), ED14: Fly Me to the Moon (Rei #26 Version)
+[2026-04-11 19:55:07] 
+[2/198] Fullmetal Alchemist: Brotherhood → "Again" (OP)
+[2026-04-11 19:55:07]    📍 Found: Fullmetal Alchemist (fullmetal_alchemist)
+[2026-04-11 19:55:10]    ⚠️  Theme not found: "Again" (OP)
+[2026-04-11 19:55:10]    Available: OP1: Melissa, OP2: READY STEADY GO, OP3: UNDO, OP4: Rewrite, ED1: Kesenai Tsumi, ED2: Tobira no Mukou e, ED3: Motherland, ED4: I Will
+[2026-04-11 19:55:10] 
+[3/198] Tokyo Ghoul → "Unravel" (OP)
+[2026-04-11 19:55:10]    📍 Found: K (k)
+[2026-04-11 19:55:13]    ⚠️  Theme not found: "Unravel" (OP)
+[2026-04-11 19:55:13]    Available: OP1: KINGS, ED1: Tsumetai Heya, Hitori, ED2: Circle of Friends, ED3: To be with U!
+[2026-04-11 19:55:13] 
+[4/198] Jujutsu Kaisen → "Kaikai Kitan" (OP)
+[2026-04-11 19:55:13]    📍 Found: Jujutsu Kaisen (jujutsu_kaisen)
+[2026-04-11 19:55:16]    ⏭️  Already exists: "Kaikai Kitan"
+[2026-04-11 19:55:16] 
+[5/198] Attack on Titan → "Guren no Yumiya" (OP)
+[2026-04-11 19:55:16]    📍 Found: K (k)
+[2026-04-11 19:55:18]    ⚠️  Theme not found: "Guren no Yumiya" (OP)
+[2026-04-11 19:55:18]    Available: OP1: KINGS, ED1: Tsumetai Heya, Hitori, ED2: Circle of Friends, ED3: To be with U!
+[2026-04-11 19:55:18] 
+[6/198] Oshi no Ko → "Idol" (OP)
+[2026-04-11 19:55:18]    📍 Found: K (k)
+[2026-04-11 19:55:21]    ⚠️  Theme not found: "Idol" (OP)
+[2026-04-11 19:55:21]    Available: OP1: KINGS, ED1: Tsumetai Heya, Hitori, ED2: Circle of Friends, ED3: To be with U!
+[2026-04-11 19:55:21] 
+[7/198] Cowboy Bebop → "Tank!" (OP)
+[2026-04-11 19:55:21]    📍 Found: Cowboy Bebop (cowboy_bebop)
+[2026-04-11 19:55:24]    ⏭️  Already exists: "Tank!"
+[2026-04-11 19:55:24] 
+[8/198] Naruto Shippuden → "Silhouette" (OP)
+[2026-04-11 19:55:24]    📍 Found: Naruto (naruto)
+[2026-04-11 19:55:26]    ⚠️  Theme not found: "Silhouette" (OP)
+[2026-04-11 19:55:26]    Available: OP1: R★O★C★K★S, OP2: Haruka Kanata, OP3: Kanashimi wo Yasashisa ni, OP4: GO!!!, OP5: Seishun Kyosokyoku, OP6: No Boy, No Cry, OP7: Namikaze Satellite, OP8: Re:member, OP9: YURA YURA, ED1: Wind, ED2: Harmonia, ED3: Viva Rock ~Japanese Side~, ED4: ALIVE, ED5: Ima made Nando mo, ED6: Ryusei, ED7: Mountain A Go Go Too, ED8: Hajimete Kimi to Shabetta, ED9: Nakushita Kotoba, ED10: Speed, ED11: Soba ni Iru Kara, ED12: Parade, ED13: Yellow Moon, ED14: Pinocchio, ED15: Scenario, ED7: LIFE GOES ON
+[2026-04-11 19:55:26] 
+[9/198] Bakemonogatari → "Kimi no Shiranai Monogatari" (ED)
+[2026-04-11 19:55:26]    📍 Found: Bakemonogatari (bakemonogatari)
+[2026-04-11 19:55:29]    ⏭️  Already exists: "Kimi no Shiranai Monogatari"
+[2026-04-11 19:57:04] 📁 Cache file exists: true
+[2026-04-11 19:57:04]    Size: 191898 bytes
+════════════════════════════════════════════════════════════
+[2026-04-11 19:57:04] 🎵 ANIMETHEMES SEED
+[2026-04-11 19:57:04]    Total: 198
+[2026-04-11 19:57:04]    Processed: 0
+[2026-04-11 19:57:04]    Skipped: 3
+[2026-04-11 19:57:04]    Failed: 6
+════════════════════════════════════════════════════════════
+[2026-04-11 19:57:05] ✅ Connected to database
+[2026-04-11 19:57:05]    ✅ Loaded from file: 2482 anime
+[2026-04-11 19:57:05] 
+[10/198] Kekkai Sensen → "Sugar Song to Bitter Step" (ED)
+[2026-04-11 19:57:05]    📍 Found: Kekkai Sensen (kekkai_sensen)
+[2026-04-11 19:57:08]    ⏭️  Already exists: "Sugar Song to Bitter Step"
+[2026-04-11 19:57:08] 
+[11/198] Demon Slayer → "Gurenge" (OP)
+[2026-04-11 19:57:08]    📍 Found: Kimetsu no Yaiba (kimetsu_no_yaiba)
+[2026-04-11 19:57:12]    ⏭️  Already exists: "Gurenge"
+[2026-04-11 19:57:12] 
+[12/198] Steins;Gate → "Hacking to the Gate" (OP)
+[2026-04-11 19:57:12]    ⚠️  Not found: Steins;Gate
+[2026-04-11 19:57:12]    ❌ Anime not found: Steins;Gate
+[2026-04-11 19:57:12] 
+[13/198] Code Geass → "Colors" (OP)
+[2026-04-11 19:57:12]    📍 Found: Code Geass: Boukoku no Akito 1 - Yokuryuu wa Maiorita (code_geass_boukoku_no_akito_1_yokuryuu_wa_maiorita)
+[2026-04-11 19:57:14]    ⚠️  Theme not found: "Colors" (OP)
+[2026-04-11 19:57:14]    Available: ED1: More Than Words
+[2026-04-11 19:57:14] 
+[14/198] Your Lie in April → "Hikaru Nara" (OP)
+[2026-04-11 19:57:14]    ⚠️  Not found: Your Lie in April
+[2026-04-11 19:57:14]    ❌ Anime not found: Your Lie in April
+[2026-04-11 19:57:14] 
+[15/198] One Piece → "We Are!" (OP)
+[2026-04-11 19:57:14]    📍 Found: One Piece (one_piece)
+[2026-04-11 19:57:18] 
+[16/198] Hunter x Hunter (2011) → "Departure!" (OP)
+[2026-04-11 19:57:18]    📍 Found: Hunter x Hunter (hunter_x_hunter_2011)
+[2026-04-11 19:57:21]    ⏭️  Already exists: "departure!"
+[2026-04-11 20:02:19] 📁 Cache file exists: true
+[2026-04-11 20:02:19]    Size: 191898 bytes
+════════════════════════════════════════════════════════════
+[2026-04-11 20:02:19] 🎵 ANIMETHEMES SEED
+[2026-04-11 20:02:19]    Total: 198
+[2026-04-11 20:02:19]    Processed: 1
+[2026-04-11 20:02:19]    Skipped: 6
+[2026-04-11 20:02:19]    Failed: 12
+════════════════════════════════════════════════════════════
+[2026-04-11 20:02:21] ✅ Connected to database
+[2026-04-11 20:02:21]    ✅ Loaded from file: 2482 anime
+[2026-04-11 20:02:21] 
+[17/198] Blue微 → "Ao no Sumika" (OP)
+[2026-04-11 20:02:21]    ⚠️  Not found: Blue微
+[2026-04-11 20:02:21]    ❌ Anime not found: Blue微
+[2026-04-11 20:02:21] 
+[18/198] Chainsaw Man → "Kick Back" (OP)
+[2026-04-11 20:02:21]    ⚠️  Not found: Chainsaw Man
+[2026-04-11 20:02:21]    ❌ Anime not found: Chainsaw Man
+[2026-04-11 20:02:21] 
+[19/198] Vinland Saga → "MUKANJYO" (OP)
+[2026-04-11 20:02:21]    ⚠️  Not found: Vinland Saga
+[2026-04-11 20:02:21]    ❌ Anime not found: Vinland Saga
+[2026-04-11 20:02:21] 
+[20/198] Cyberpunk: Edgerunners → "This Fffire" (OP)
+[2026-04-11 20:02:21]    📍 Found: K (k)
+[2026-04-11 20:02:24]    ⚠️  Theme not found: "This Fffire" (OP)
+[2026-04-11 20:02:24]    Available: OP1: KINGS, ED1: Tsumetai Heya, Hitori, ED2: Circle of Friends, ED3: To be with U!
+[2026-04-11 20:02:24] 
+[21/198] Death Note → "The World" (OP)
+[2026-04-11 20:02:24]    📍 Found: Death Note (death_note)
+[2026-04-11 20:02:27]    ⏭️  Already exists: "THE WORLD"
+[2026-04-11 20:02:27] 
+[22/198] Mob Psycho 100 → "99" (OP)
+[2026-04-11 20:02:27]    📍 Found: Mob Psycho 100 (mob_psycho_100)
+[2026-04-11 20:02:30] 
+[23/198] Parasyte -the maxim- → "Let Me Hear" (OP)
+[2026-04-11 20:02:30]    ⚠️  Not found: Parasyte -the maxim-
+[2026-04-11 20:02:30]    ❌ Anime not found: Parasyte -the maxim-
+[2026-04-11 20:02:30] 
+[24/198] Sword Art Online → "Crossing Field" (OP)
+[2026-04-11 20:02:30]    ⚠️  Not found: Sword Art Online
+[2026-04-11 20:02:30]    ❌ Anime not found: Sword Art Online
+[2026-04-11 20:02:30] 
+[25/198] No Game No Life → "This Game" (OP)
+[2026-04-11 20:02:30]    📍 Found: No Game No Life (no_game_no_life)
+[2026-04-11 20:02:33] 
+[26/198] Noragami → "Goya no Machiawase" (OP)
+[2026-04-11 20:02:33]    📍 Found: Noragami (noragami)
+[2026-04-11 20:02:36] 
+[27/198] My Hero Academia → "The Day" (OP)
+[2026-04-11 20:02:36]    📍 Found: Boku no Hero Academia (boku_no_hero_academia)
+[2026-04-11 20:02:38]    ⏭️  Already exists: "The Day"
+[2026-04-11 20:02:38] 
+[28/198] Bleach → "Asterisk" (OP)
+[2026-04-11 20:02:38]    📍 Found: Bleach (bleach)
+[2026-04-11 20:02:42]    ⏭️  Already exists: "*~Asterisk"
+[2026-04-11 20:02:42] 
+[29/198] Black Clover → "Black Rover" (OP)
+[2026-04-11 20:02:42]    📍 Found: Black Clover (TV) (black_clover_tv)
+[2026-04-11 20:02:45]    ⏭️  Already exists: "Black Rover"
+[2026-04-11 20:02:45] 
+[30/198] Frieren: Beyond Journey's End → "Yuusha" (OP)
+[2026-04-11 20:02:45]    ⚠️  Not found: Frieren: Beyond Journey's End
+[2026-04-11 20:02:45]    ❌ Anime not found: Frieren: Beyond Journey's End
+[2026-04-11 20:02:45] 
+[31/198] Violet Evergarden → "Sincerely" (OP)
+[2026-04-11 20:02:45]    ⚠️  Not found: Violet Evergarden
+[2026-04-11 20:02:45]    ❌ Anime not found: Violet Evergarden
+[2026-04-11 20:02:45] 
+[32/198] Erased → "Re:Re:" (OP)
+[2026-04-11 20:02:45]    ⚠️  Not found: Erased
+[2026-04-11 20:02:45]    ❌ Anime not found: Erased
+[2026-04-11 20:02:45] 
+[33/198] Fate/Zero → "Oath Sign" (OP)
+[2026-04-11 20:02:45]    📍 Found: Fate/Zero (fatezero)
+[2026-04-11 20:02:47]    ⏭️  Already exists: "oath sign"
+[2026-04-11 20:02:47] 
+[34/198] Psycho-Pass → "Abnormalize" (OP)
+[2026-04-11 20:02:47]    📍 Found: Psycho-Pass 3 (psycho_pass_3)
+[2026-04-11 20:02:50]    ⚠️  Theme not found: "Abnormalize" (OP)
+[2026-04-11 20:02:50]    Available: OP1: Q-vism, ED1: bullet
+[2026-04-11 20:02:50] 
+[35/198] Dr. Stone → "Good Morning World!" (OP)
+[2026-04-11 20:02:50]    ⚠️  Not found: Dr. Stone
+[2026-04-11 20:02:50]    ❌ Anime not found: Dr. Stone
+[2026-04-11 20:02:50] 
+[36/198] Fire Force → "Inferno" (OP)
+[2026-04-11 20:02:50]    ⚠️  Not found: Fire Force
+[2026-04-11 20:02:50]    ❌ Anime not found: Fire Force
+[2026-04-11 20:02:50] 
+[37/198] Kill la Kill → "Sirius" (OP)
+[2026-04-11 20:02:50]    📍 Found: Kill la Kill (kill_la_kill)
+[2026-04-11 20:02:53]    ⏭️  Already exists: "Sirius"
+[2026-04-11 20:02:53] 
+[38/198] Samurai Champloo → "Battlecry" (OP)
+[2026-04-11 20:02:53]    📍 Found: Samurai Champloo (samurai_champloo)
+[2026-04-11 20:02:56] 
+[39/198] Haikyu!! → "Imagination" (OP)
+[2026-04-11 20:02:56]    📍 Found: Haikyuu!! (haikyuu)
+[2026-04-11 20:02:59]    ⏭️  Already exists: "Imagination"
+[2026-04-11 20:02:59] 
+[40/198] Dororo → "Kaen" (OP)
+[2026-04-11 20:02:59]    📍 Found: Dororo (dororo)
+[2026-04-11 20:03:02]    ⏭️  Already exists: "Kaen"
+[2026-04-11 20:03:02] 
+[41/198] Soul Eater → "Resonance" (OP)
+[2026-04-11 20:03:02]    ⚠️  Not found: Soul Eater
+[2026-04-11 20:03:02]    ❌ Anime not found: Soul Eater
+[2026-04-11 20:03:02] 
+[42/198] Gurren Lagann → "Sorairo Days" (OP)
+[2026-04-11 20:03:02]    ⚠️  Not found: Gurren Lagann
+[2026-04-11 20:03:02]    ❌ Anime not found: Gurren Lagann
+[2026-04-11 20:03:02] 
+[43/198] Re:Zero → "Redo" (OP)
+[2026-04-11 20:03:02]    ⚠️  Not found: Re:Zero
+[2026-04-11 20:03:02]    ❌ Anime not found: Re:Zero
+[2026-04-11 20:03:02] 
+[44/198] One Punch Man → "The Hero!" (OP)
+[2026-04-11 20:03:02]    📍 Found: One Punch Man (one_punch_man)
+[2026-04-11 20:03:06] 
+[45/198] Mushoku Tensei → "Tabibito no Uta" (OP)
+[2026-04-11 20:03:06]    📍 Found: Mushoku Tensei: Isekai Ittara Honki Dasu (mushoku_tensei_isekai_ittara_honki_dasu)
+[2026-04-11 20:03:08] 
+[46/198] Great Teacher Onizuka → "Driver's High" (OP)
+[2026-04-11 20:03:08]    📍 Found: Great Teacher Onizuka (great_teacher_onizuka)
+[2026-04-11 20:03:11]    ⚠️  Theme not found: "Driver's High" (OP)
+[2026-04-11 20:03:11]    Available: OP1: Driver's High, OP2: Hitori no Yoru, ED1: Last Piece, ED2: Shizuku, ED3: CHERISHED MEMORIES
+[2026-04-11 20:03:11] 
+[47/198] Trigun → "H.T." (OP)
+[2026-04-11 20:03:11]    ⚠️  Not found: Trigun
+[2026-04-11 20:03:11]    ❌ Anime not found: Trigun
+[2026-04-11 20:03:11] 
+[48/198] Serial Experiments Lain → "Duvet" (OP)
+[2026-04-11 20:03:11]    ⚠️  Not found: Serial Experiments Lain
+[2026-04-11 20:03:11]    ❌ Anime not found: Serial Experiments Lain
+[2026-04-11 20:03:11] 
+[49/198] Eighty-Six → "Kyokaisen" (OP)
+[2026-04-11 20:03:11]    ⚠️  Not found: Eighty-Six
+[2026-04-11 20:03:11]    ❌ Anime not found: Eighty-Six
+[2026-04-11 20:03:11] 
+[50/198] Spy x Family → "Mixed Nuts" (OP)
+[2026-04-11 20:03:11]    ⚠️  Not found: Spy x Family
+[2026-04-11 20:03:11]    ❌ Anime not found: Spy x Family
+[2026-04-11 20:03:11] 
+[51/198] Akaame ga Kill! → "Skyreach" (OP)
+[2026-04-11 20:03:11]    📍 Found: K (k)
+[2026-04-11 20:03:14]    ⚠️  Theme not found: "Skyreach" (OP)
+[2026-04-11 20:03:14]    Available: OP1: KINGS, ED1: Tsumetai Heya, Hitori, ED2: Circle of Friends, ED3: To be with U!
+[2026-04-11 20:03:14] 
+[52/198] Deadman Wonderland → "One Reason" (OP)
+[2026-04-11 20:03:14]    📍 Found: Deadman Wonderland (deadman_wonderland)
+[2026-04-11 20:03:17]    ⏭️  Already exists: "One Reason"
+[2026-04-11 20:03:17] 
+[53/198] Mirai Nikki → "Kuusou Mesorogiwi" (OP)
+[2026-04-11 20:03:17]    📍 Found: Mirai Nikki (mirai_nikki)
+[2026-04-11 20:03:19] 
+[54/198] Darker than Black → "Howling" (OP)
+[2026-04-11 20:03:19]    📍 Found: Darker than Black: Kuro no Keiyakusha (darker_than_black_kuro_no_keiyakusha)
+[2026-04-11 20:03:22]    ⏭️  Already exists: "Howling"
+[2026-04-11 20:03:22] 
+[55/198] Hellsing Ultimate → "Gradus Vita" (OP)
+[2026-04-11 20:03:22]    📍 Found: Hells (hells)
+[2026-04-11 20:03:25]    ⚠️  Theme not found: "Gradus Vita" (OP)
+[2026-04-11 20:03:25]    Available: ED1: BREATHE AGAIN
+[2026-04-11 20:03:25] 
+[56/198] JoJo's Bizarre Adventure → "Bloody Stream" (OP)
+[2026-04-11 20:03:25]    ⚠️  Not found: JoJo's Bizarre Adventure
+[2026-04-11 20:03:25]    ❌ Anime not found: JoJo's Bizarre Adventure
+[2026-04-11 20:03:25] 
+[57/198] Durarara!! → "Uraomote Fortune" (OP)
+[2026-04-11 20:03:25]    📍 Found: Durarara!! (durarara)
+[2026-04-11 20:03:27]    ⚠️  Theme not found: "Uraomote Fortune" (OP)
+[2026-04-11 20:03:27]    Available: OP1: Uragiri no Yuuyake, OP2: Complication, ED1: Trust Me, ED2: Butterfly
+[2026-04-11 20:03:27] 
+[58/198] Gintama → "Pray" (OP)
+[2026-04-11 20:03:27]    📍 Found: Gintama (gintama)
+[2026-04-11 20:03:31]    ⏭️  Already exists: "Pray"
+[2026-04-11 20:03:31] 
+[59/198] D.Gray-man → "Innocent Sorrow" (OP)
+[2026-04-11 20:03:31]    ⚠️  Not found: D.Gray-man
+[2026-04-11 20:03:31]    ❌ Anime not found: D.Gray-man
+[2026-04-11 20:03:31] 
+[60/198] Blue Exorcist → "Core Pride" (OP)
+[2026-04-11 20:03:31]    ⚠️  Not found: Blue Exorcist
+[2026-04-11 20:03:31]    ❌ Anime not found: Blue Exorcist
+[2026-04-11 20:03:31] 
+[61/198] Tokyo Revengers → "Cry Baby" (OP)
+[2026-04-11 20:03:31]    📍 Found: K (k)
+[2026-04-11 20:03:33]    ⚠️  Theme not found: "Cry Baby" (OP)
+[2026-04-11 20:03:33]    Available: OP1: KINGS, ED1: Tsumetai Heya, Hitori, ED2: Circle of Friends, ED3: To be with U!
+[2026-04-11 20:03:33] 
+[62/198] Bleach → "Ranbu no Melody" (OP)
+[2026-04-11 20:03:33]    📍 Found: Bleach (bleach)
+[2026-04-11 20:03:37]    ⏭️  Already exists: "Ranbu no Melody"
+[2026-04-11 20:03:37] 
+[63/198] Naruto Shippuden → "Sign" (OP)
+[2026-04-11 20:03:37]    📍 Found: Naruto (naruto)
+[2026-04-11 20:03:39]    ⚠️  Theme not found: "Sign" (OP)
+[2026-04-11 20:03:39]    Available: OP1: R★O★C★K★S, OP2: Haruka Kanata, OP3: Kanashimi wo Yasashisa ni, OP4: GO!!!, OP5: Seishun Kyosokyoku, OP6: No Boy, No Cry, OP7: Namikaze Satellite, OP8: Re:member, OP9: YURA YURA, ED1: Wind, ED2: Harmonia, ED3: Viva Rock ~Japanese Side~, ED4: ALIVE, ED5: Ima made Nando mo, ED6: Ryusei, ED7: Mountain A Go Go Too, ED8: Hajimete Kimi to Shabetta, ED9: Nakushita Kotoba, ED10: Speed, ED11: Soba ni Iru Kara, ED12: Parade, ED13: Yellow Moon, ED14: Pinocchio, ED15: Scenario, ED7: LIFE GOES ON
+[2026-04-11 20:03:39] 
+[64/198] Attack on Titan → "Shinzou wo Sasageyo!" (OP)
+[2026-04-11 20:03:39]    📍 Found: K (k)
+[2026-04-11 20:03:42]    ⚠️  Theme not found: "Shinzou wo Sasageyo!" (OP)
+[2026-04-11 20:03:42]    Available: OP1: KINGS, ED1: Tsumetai Heya, Hitori, ED2: Circle of Friends, ED3: To be with U!
+[2026-04-11 20:03:42] 
+[65/198] Fairy Tail → "Snow Fairy" (OP)
+[2026-04-11 20:03:42]    📍 Found: Fairy Tail (fairy_tail_2014)
+[2026-04-11 20:03:45]    ⚠️  Theme not found: "Snow Fairy" (OP)
+[2026-04-11 20:05:59] 📁 Cache file exists: true
+[2026-04-11 20:05:59]    Size: 191898 bytes
+════════════════════════════════════════════════════════════
+[2026-04-11 20:05:59] 🎵 ANIMETHEMES SEED
+[2026-04-11 20:05:59]    Total: 198
+[2026-04-11 20:05:59]    Processed: 8
+[2026-04-11 20:05:59]    Skipped: 18
+[2026-04-11 20:05:59]    Failed: 43
+════════════════════════════════════════════════════════════
+[2026-04-11 20:06:00] ✅ Connected to database
+[2026-04-11 20:06:00]    ✅ Loaded from file: 2482 anime
+[2026-04-11 20:06:00] 
+[29/198] Black Clover → "Black Rover" (OP)
+[2026-04-11 20:06:00]    📍 Found: Black Clover (TV) (black_clover_tv)
+[2026-04-11 20:06:03]    ⏭️  Already exists: "Black Rover"
+[2026-04-11 20:06:03] 
+[30/198] Frieren: Beyond Journey's End → "Yuusha" (OP)
+[2026-04-11 20:06:03]    ⚠️  Not found: Frieren: Beyond Journey's End
+[2026-04-11 20:06:03]    ❌ Anime not found: Frieren: Beyond Journey's End
+[2026-04-11 20:06:03] 
+[31/198] Violet Evergarden → "Sincerely" (OP)
+[2026-04-11 20:06:03]    ⚠️  Not found: Violet Evergarden
+[2026-04-11 20:06:03]    ❌ Anime not found: Violet Evergarden
+[2026-04-11 20:06:03] 
+[32/198] Erased → "Re:Re:" (OP)
+[2026-04-11 20:06:03]    ⚠️  Not found: Erased
+[2026-04-11 20:06:03]    ❌ Anime not found: Erased
+[2026-04-11 20:06:03] 
+[33/198] Fate/Zero → "Oath Sign" (OP)
+[2026-04-11 20:06:03]    📍 Found: Fate/Zero (fatezero)
+[2026-04-11 20:06:06]    ⏭️  Already exists: "oath sign"
+[2026-04-11 20:06:06] 
+[34/198] Psycho-Pass → "Abnormalize" (OP)
+[2026-04-11 20:06:06]    📍 Found: Psycho-Pass 3 (psycho_pass_3)
+[2026-04-11 20:06:09]    ⚠️  Theme not found: "Abnormalize" (OP)
+[2026-04-11 20:06:09]    Available: OP1: Q-vism, ED1: bullet
+[2026-04-11 20:06:09] 
+[35/198] Dr. Stone → "Good Morning World!" (OP)
+[2026-04-11 20:06:09]    ⚠️  Not found: Dr. Stone
+[2026-04-11 20:06:09]    ❌ Anime not found: Dr. Stone
+[2026-04-11 20:06:09] 
+[36/198] Fire Force → "Inferno" (OP)
+[2026-04-11 20:06:09]    ⚠️  Not found: Fire Force
+[2026-04-11 20:06:09]    ❌ Anime not found: Fire Force
+[2026-04-11 20:06:09] 
+[37/198] Kill la Kill → "Sirius" (OP)
+[2026-04-11 20:06:09]    📍 Found: Kill la Kill (kill_la_kill)
+[2026-04-11 20:06:11]    ⏭️  Already exists: "Sirius"
+[2026-04-11 20:06:11] 
+[38/198] Samurai Champloo → "Battlecry" (OP)
+[2026-04-11 20:06:11]    📍 Found: Samurai Champloo (samurai_champloo)
+[2026-04-11 20:06:14]    ⏭️  Already exists: "Battlecry"
+[2026-04-11 20:06:14] 
+[39/198] Haikyu!! → "Imagination" (OP)
+[2026-04-11 20:06:14]    📍 Found: Haikyuu!! (haikyuu)
+[2026-04-11 20:06:16]    ⏭️  Already exists: "Imagination"
+[2026-04-11 20:06:16] 
+[40/198] Dororo → "Kaen" (OP)
+[2026-04-11 20:06:16]    📍 Found: Dororo (dororo)
+[2026-04-11 20:06:19]    ⏭️  Already exists: "Kaen"
+[2026-04-11 20:06:19] 
+[41/198] Soul Eater → "Resonance" (OP)
+[2026-04-11 20:06:19]    ⚠️  Not found: Soul Eater
+[2026-04-11 20:06:19]    ❌ Anime not found: Soul Eater
+[2026-04-11 20:06:19] 
+[42/198] Gurren Lagann → "Sorairo Days" (OP)
+[2026-04-11 20:06:19]    ⚠️  Not found: Gurren Lagann
+[2026-04-11 20:06:19]    ❌ Anime not found: Gurren Lagann
+[2026-04-11 20:06:19] 
+[43/198] Re:Zero → "Redo" (OP)
+[2026-04-11 20:06:19]    ⚠️  Not found: Re:Zero
+[2026-04-11 20:06:19]    ❌ Anime not found: Re:Zero
+[2026-04-11 20:06:19] 
+[44/198] One Punch Man → "The Hero!" (OP)
+[2026-04-11 20:06:19]    📍 Found: One Punch Man (one_punch_man)
+[2026-04-11 20:06:22]    ⏭️  Already exists: "THE HERO !! ~Okoreru Kobushi ni Hi wo Tsukero~"
+[2026-04-11 20:06:22] 
+[45/198] Mushoku Tensei → "Tabibito no Uta" (OP)
+[2026-04-11 20:06:22]    📍 Found: Mushoku Tensei: Isekai Ittara Honki Dasu (mushoku_tensei_isekai_ittara_honki_dasu)
+[2026-04-11 20:06:25]    ⏭️  Already exists: "Tabibito no Uta"
+[2026-04-11 20:06:25] 
+[46/198] Great Teacher Onizuka → "Driver's High" (OP)
+[2026-04-11 20:06:25]    📍 Found: Great Teacher Onizuka (great_teacher_onizuka)
+[2026-04-11 20:06:29]    ⚠️  Theme not found: "Driver's High" (OP)
+[2026-04-11 20:06:29]    Available: OP1: Driver's High, OP2: Hitori no Yoru, ED1: Last Piece, ED2: Shizuku, ED3: CHERISHED MEMORIES
+[2026-04-11 20:06:29] 
+[47/198] Trigun → "H.T." (OP)
+[2026-04-11 20:06:29]    ⚠️  Not found: Trigun
+[2026-04-11 20:06:29]    ❌ Anime not found: Trigun
+[2026-04-11 20:06:29] 
+[48/198] Serial Experiments Lain → "Duvet" (OP)
+[2026-04-11 20:06:29]    ⚠️  Not found: Serial Experiments Lain
+[2026-04-11 20:06:29]    ❌ Anime not found: Serial Experiments Lain
+[2026-04-11 20:06:29] 
+[49/198] Eighty-Six → "Kyokaisen" (OP)
+[2026-04-11 20:06:29]    ⚠️  Not found: Eighty-Six
+[2026-04-11 20:06:29]    ❌ Anime not found: Eighty-Six
+[2026-04-11 20:06:29] 
+[50/198] Spy x Family → "Mixed Nuts" (OP)
+[2026-04-11 20:06:29]    ⚠️  Not found: Spy x Family
+[2026-04-11 20:06:29]    ❌ Anime not found: Spy x Family
+[2026-04-11 20:06:29] 
+[51/198] Akaame ga Kill! → "Skyreach" (OP)
+[2026-04-11 20:06:29]    📍 Found: K (k)
+[2026-04-11 20:06:32]    ⚠️  Theme not found: "Skyreach" (OP)
+[2026-04-11 20:06:32]    Available: OP1: KINGS, ED1: Tsumetai Heya, Hitori, ED2: Circle of Friends, ED3: To be with U!
+[2026-04-11 20:06:32] 
+[52/198] Deadman Wonderland → "One Reason" (OP)
+[2026-04-11 20:06:32]    📍 Found: Deadman Wonderland (deadman_wonderland)
+[2026-04-11 20:06:34]    ⏭️  Already exists: "One Reason"
+[2026-04-11 20:06:34] 
+[53/198] Mirai Nikki → "Kuusou Mesorogiwi" (OP)
+[2026-04-11 20:06:34]    📍 Found: Mirai Nikki (mirai_nikki)
+[2026-04-11 20:06:37]    ⏭️  Already exists: "Kuusou Mesorogiwi"
+[2026-04-11 20:06:37] 
+[54/198] Darker than Black → "Howling" (OP)
+[2026-04-11 20:06:37]    📍 Found: Darker than Black: Kuro no Keiyakusha (darker_than_black_kuro_no_keiyakusha)
+[2026-04-11 20:06:40]    ⏭️  Already exists: "Howling"
+[2026-04-11 20:06:40] 
+[55/198] Hellsing Ultimate → "Gradus Vita" (OP)
+[2026-04-11 20:06:40]    📍 Found: Hells (hells)
+[2026-04-11 20:06:42]    ⚠️  Theme not found: "Gradus Vita" (OP)
+[2026-04-11 20:06:42]    Available: ED1: BREATHE AGAIN
+[2026-04-11 20:06:42] 
+[56/198] JoJo's Bizarre Adventure → "Bloody Stream" (OP)
+[2026-04-11 20:06:42]    ⚠️  Not found: JoJo's Bizarre Adventure
+[2026-04-11 20:06:42]    ❌ Anime not found: JoJo's Bizarre Adventure
+[2026-04-11 20:06:42] 
+[57/198] Durarara!! → "Uraomote Fortune" (OP)
+[2026-04-11 20:06:42]    📍 Found: Durarara!! (durarara)
+[2026-04-11 20:06:45]    ⚠️  Theme not found: "Uraomote Fortune" (OP)
+[2026-04-11 20:06:45]    Available: OP1: Uragiri no Yuuyake, OP2: Complication, ED1: Trust Me, ED2: Butterfly
+[2026-04-11 20:06:45] 
+[58/198] Gintama → "Pray" (OP)
+[2026-04-11 20:06:45]    📍 Found: Gintama (gintama)
+[2026-04-11 20:06:48]    ⏭️  Already exists: "Pray"
+[2026-04-11 20:06:48] 
+[59/198] D.Gray-man → "Innocent Sorrow" (OP)
+[2026-04-11 20:06:48]    ⚠️  Not found: D.Gray-man
+[2026-04-11 20:06:48]    ❌ Anime not found: D.Gray-man
+[2026-04-11 20:06:48] 
+[60/198] Blue Exorcist → "Core Pride" (OP)
+[2026-04-11 20:06:48]    ⚠️  Not found: Blue Exorcist
+[2026-04-11 20:06:48]    ❌ Anime not found: Blue Exorcist
+[2026-04-11 20:06:48] 
+[61/198] Tokyo Revengers → "Cry Baby" (OP)
+[2026-04-11 20:06:48]    📍 Found: K (k)
+[2026-04-11 20:06:50]    ⚠️  Theme not found: "Cry Baby" (OP)
+[2026-04-11 20:06:50]    Available: OP1: KINGS, ED1: Tsumetai Heya, Hitori, ED2: Circle of Friends, ED3: To be with U!
+[2026-04-11 20:06:50] 
+[62/198] Bleach → "Ranbu no Melody" (OP)
+[2026-04-11 20:06:50]    📍 Found: Bleach (bleach)
+[2026-04-11 20:06:53]    ⏭️  Already exists: "Ranbu no Melody"
+[2026-04-11 20:06:53] 
+[63/198] Naruto Shippuden → "Sign" (OP)
+[2026-04-11 20:06:53]    📍 Found: Naruto (naruto)
+[2026-04-11 20:06:56]    ⚠️  Theme not found: "Sign" (OP)
+[2026-04-11 20:06:56]    Available: OP1: R★O★C★K★S, OP2: Haruka Kanata, OP3: Kanashimi wo Yasashisa ni, OP4: GO!!!, OP5: Seishun Kyosokyoku, OP6: No Boy, No Cry, OP7: Namikaze Satellite, OP8: Re:member, OP9: YURA YURA, ED1: Wind, ED2: Harmonia, ED3: Viva Rock ~Japanese Side~, ED4: ALIVE, ED5: Ima made Nando mo, ED6: Ryusei, ED7: Mountain A Go Go Too, ED8: Hajimete Kimi to Shabetta, ED9: Nakushita Kotoba, ED10: Speed, ED11: Soba ni Iru Kara, ED12: Parade, ED13: Yellow Moon, ED14: Pinocchio, ED15: Scenario, ED7: LIFE GOES ON
+[2026-04-11 20:06:56] 
+[64/198] Attack on Titan → "Shinzou wo Sasageyo!" (OP)
+[2026-04-11 20:06:56]    📍 Found: K (k)
+[2026-04-11 20:06:58]    ⚠️  Theme not found: "Shinzou wo Sasageyo!" (OP)
+[2026-04-11 20:06:58]    Available: OP1: KINGS, ED1: Tsumetai Heya, Hitori, ED2: Circle of Friends, ED3: To be with U!
+[2026-04-11 20:06:58] 
+[65/198] Fairy Tail → "Snow Fairy" (OP)
+[2026-04-11 20:06:58]    📍 Found: Fairy Tail (fairy_tail_2014)
+[2026-04-11 20:07:01]    ⚠️  Theme not found: "Snow Fairy" (OP)
+[2026-04-11 20:07:01]    Available: OP1: MASAYUME CHASING, OP2: STRIKE BACK, OP3: Mysterious Magic, OP4: BREAK OUT, OP5: Yume-iro Graffiti, OP6: NEVER-END TALE, OP7: Believe In Myself, OP8: Ashita wo Orase, ED1: Kimi to Kare to Boku to Kanojo to, ED2: Kokoro no Kagi, ED3: Kimi no Mirai, ED4: Don't let me down, ED5: Never ever, ED6: FOREVER HERE, ED7: Azayaka na Tabiji, ED8: Landscape
+[2026-04-11 20:07:01] 
+[66/198] Domestic Girlfriend → "Kawaki wo Ameku" (OP)
+[2026-04-11 20:07:01]    ⚠️  Not found: Domestic Girlfriend
+[2026-04-11 20:07:01]    ❌ Anime not found: Domestic Girlfriend
+[2026-04-11 20:07:01] 
+[67/198] Elfen Lied → "Lilium" (OP)
+[2026-04-11 20:07:01]    📍 Found: Elfen Lied (elfen_lied)
+[2026-04-11 20:07:03]    ⏭️  Already exists: "Lilium"
+[2026-04-11 20:07:03] 
+[68/198] Guilty Crown → "My Dearest" (OP)
+[2026-04-11 20:07:03]    📍 Found: Guilty Crown (guilty_crown)
+[2026-04-11 20:07:06]    ⏭️  Already exists: "My Dearest"
+[2026-04-11 20:07:06] 
+[69/198] Angel Beats! → "My Soul, Your Beats!" (OP)
+[2026-04-11 20:07:06]    📍 Found: Angel Beats! (angel_beats)
