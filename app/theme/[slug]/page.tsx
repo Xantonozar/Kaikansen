@@ -14,22 +14,12 @@ import { useMyRating, useSetRating } from '@/lib/api/ratings'
 import { useAddToHistory } from '@/lib/api/history'
 import { getScoreColor, formatCount } from '@/lib/utils'
 
-export default function ThemePage({
-  params,
-}: {
-  params: Promise<{ slug: string }>
-}) {
-  return <ThemePageContent params={params} />
+interface ThemePageContentProps {
+  slug: string
 }
 
-async function ThemePageContent({
-  params,
-}: {
-  params: Promise<{ slug: string }>
-}) {
-  const { slug } = await params
+export function ThemePageContent({ slug }: ThemePageContentProps) {
   const { user } = useAuth()
-  
   const { data: themeData, isLoading } = useTheme(slug)
   const { data: ratingData } = useMyRating(user ? slug : '')
   const { mutate: setRating, isPending: isRatingPending } = useSetRating()
@@ -205,4 +195,13 @@ async function ThemePageContent({
       </div>
     </div>
   )
+}
+
+export default async function ThemePage({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
+  const { slug } = await params
+  return <ThemePageContent slug={slug} />
 }
