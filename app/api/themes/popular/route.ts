@@ -16,7 +16,7 @@ export async function GET(request: NextRequest) {
 
     const [themes, total] = await Promise.all([
       ThemeCache.find({})
-        .sort({ createdAt: -1 })
+        .sort({ avgRating: -1, totalRatings: -1 })
         .skip(skip)
         .limit(limit)
         .lean(),

@@ -11,6 +11,7 @@ export async function GET(request: NextRequest) {
     const url = new URL(request.url)
     const season = url.searchParams.get('season')
     const year = url.searchParams.get('year')
+    const type = url.searchParams.get('type')
     const page = Math.max(1, parseInt(url.searchParams.get('page') || '1'))
     const limit = 50
 
@@ -21,15 +22,18 @@ export async function GET(request: NextRequest) {
       )
     }
 
+    const query: Record<string, unknown> = { animeSeason: season.toUpperCase(), animeSeasonYear: parseInt(year) }
+    if (type) query.type = type
+
     const skip = (page - 1) * limit
 
     const [themes, total] = await Promise.all([
-      ThemeCache.find({ season, year: parseInt(year) })
+      ThemeCache.find(query)
         .sort({ type: 1, sequence: 1 })
         .skip(skip)
         .limit(limit)
         .lean(),
-      ThemeCache.countDocuments({ season, year: parseInt(year) }),
+      ThemeCache.countDocuments(query),
     ])
 
     return NextResponse.json(

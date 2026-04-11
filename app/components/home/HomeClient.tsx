@@ -1,12 +1,11 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
-import { useQuery } from '@tanstack/react-query'
+import { useInfiniteQuery } from '@tanstack/react-query'
 import { ThemeFeaturedCard } from '@/app/components/theme/ThemeFeaturedCard'
 import { ThemeListRow } from '@/app/components/theme/ThemeListRow'
 import { useAuth } from '@/providers/AuthProvider'
-import { queryKeys } from '@/lib/queryKeys'
 
 interface Theme {
   slug: string
@@ -31,30 +30,74 @@ interface HomeClientProps {
 export function HomeClient({ popularThemes, featuredThemes, currentSeason, stats }: HomeClientProps) {
   const { user } = useAuth()
   const [typeFilter, setTypeFilter] = useState<'OP' | 'ED' | null>(null)
+  const loadMoreRef = useRef<HTMLDivElement>(null)
 
+  const {
+    data: paginatedData,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery({
+    queryKey: ['popular-themes', typeFilter],
+    queryFn: async ({ pageParam = 1 }) => {
+      const res = await fetch(`/api/themes/popular?page=${pageParam}`)
+      const json = await res.json()
+      return json.success ? json : { success: false, data: [], meta: { hasMore: false } }
+    },
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, pages) => {
+      if (lastPage.meta?.hasMore) return pages.length + 1
+      return undefined
+    },
+    initialData: {
+      pages: [{ data: popularThemes, meta: { hasMore: true, page: 1, total: popularThemes.length } }],
+      pageParams: [1],
+    },
+  })
+
+  const allThemes = paginatedData.pages.flatMap((page: any) => page.data || [])
   const filteredThemes = typeFilter 
-    ? popularThemes.filter(t => t.type === typeFilter)
-    : popularThemes
+    ? allThemes.filter(t => t.type === typeFilter)
+    : allThemes
 
-  const { data: friendActivity } = useQuery({
-    queryKey: queryKeys.friends.activity(user?.id || ''),
-    queryFn: async () => {
-      const res = await fetch('/api/friends/activity')
+  const featuredOPs = featuredThemes.filter(t => t.type === 'OP').slice(0, 10)
+  const featuredEDs = featuredThemes.filter(t => t.type === 'ED').slice(0, 10)
+
+  useEffect(() => {
+    if (!loadMoreRef.current || !hasNextPage) return
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !isFetchingNextPage) {
+          fetchNextPage()
+        }
+      },
+      { threshold: 0.1 }
+    )
+    observer.observe(loadMoreRef.current)
+    return () => observer.disconnect()
+  }, [hasNextPage, isFetchingNextPage, fetchNextPage])
+
+  const { data: friendActivity } = useInfiniteQuery({
+    queryKey: ['friends-activity', user?.id],
+    queryFn: async ({ pageParam = 1 }) => {
+      const res = await fetch(`/api/friends/activity?page=${pageParam}`)
       const json = await res.json()
       return json.success ? json.data : []
     },
+    initialPageParam: 1,
+    getNextPageParam: () => undefined,
     enabled: !!user,
   })
 
   return (
     <div className="max-w-2xl mx-auto md:max-w-7xl space-y-6 pt-4">
-      {/* Section: Featured (current season) */}
+      {/* Section: Current Season Openings */}
       <section>
         <div className="flex items-center justify-between mb-3">
           <div>
             <p className="text-xs font-body font-semibold text-accent uppercase tracking-wide">Current Season</p>
             <h2 className="text-2xl font-display font-bold text-ktext-primary">
-              {currentSeason.season} {currentSeason.year}
+              {currentSeason.season} {currentSeason.year} Openings
             </h2>
           </div>
           <Link 
@@ -65,15 +108,33 @@ export function HomeClient({ popularThemes, featuredThemes, currentSeason, stats
           </Link>
         </div>
         
-        <div className="flex gap-3 overflow-x-auto scrollbar-hide -mx-4 px-4 pb-2">
-          {featuredThemes.slice(0, 10).map((theme) => (
-            <ThemeFeaturedCard key={theme.slug} theme={theme} />
-          ))}
-        </div>
+        {featuredOPs.length > 0 ? (
+          <div className="flex gap-3 overflow-x-auto scrollbar-hide -mx-4 px-4 pb-2">
+            {featuredOPs.map((theme) => (
+              <ThemeFeaturedCard key={theme.slug} theme={theme} />
+            ))}
+          </div>
+        ) : (
+          <p className="text-sm text-ktext-tertiary">No opening themes for current season</p>
+        )}
       </section>
 
+      {/* Section: Current Season Endings */}
+      {featuredEDs.length > 0 && (
+        <section>
+          <h2 className="text-lg font-display font-bold text-ktext-primary mb-3">
+            {currentSeason.season} {currentSeason.year} Endings
+          </h2>
+          <div className="flex gap-3 overflow-x-auto scrollbar-hide -mx-4 px-4 pb-2">
+            {featuredEDs.map((theme) => (
+              <ThemeFeaturedCard key={theme.slug} theme={theme} />
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* Section: Friends Activity (logged in + has friends) */}
-      {user && friendActivity && friendActivity.length > 0 && (
+      {user && friendActivity && (
         <section>
           <div className="flex items-center justify-between mb-3">
             <h2 className="text-lg font-display font-bold text-ktext-primary">👥 Friends Activity</h2>
@@ -82,7 +143,7 @@ export function HomeClient({ popularThemes, featuredThemes, currentSeason, stats
             </Link>
           </div>
           <div className="space-y-2">
-            {friendActivity.slice(0, 5).map((activity: any, idx: number) => (
+            {friendActivity.pages.flatMap((page: any) => page.slice(0, 5)).map((activity: any, idx: number) => (
               <ThemeListRow 
                 key={`${activity.username}-${activity.themeSlug}-${idx}`}
                 theme={{
@@ -125,38 +186,14 @@ export function HomeClient({ popularThemes, featuredThemes, currentSeason, stats
         </div>
         
         <div className="space-y-2">
-          {filteredThemes.slice(0, 10).map((theme) => (
+          {filteredThemes.map((theme) => (
             <ThemeListRow key={theme.slug} theme={theme} />
           ))}
-        </div>
-      </section>
-
-      {/* Live Stats Footer */}
-      <section className="flex gap-3 pt-4 border-t border-border-subtle">
-        <div className="flex-1 bg-bg-surface rounded-[16px] p-4 border border-border-subtle">
-          <p className="text-xs font-body font-semibold text-ktext-tertiary uppercase tracking-wide">
-            Active Users
-          </p>
-          <p className="text-2xl font-mono font-bold text-accent mt-1">
-            {stats.activeUsers}
-          </p>
-        </div>
-        <div className="flex-1 bg-bg-surface rounded-[16px] p-4 border border-border-subtle">
-          <p className="text-xs font-body font-semibold text-ktext-tertiary uppercase tracking-wide">
-            Listening Now
-          </p>
-          <p className="text-2xl font-mono font-bold text-accent mt-1">
-            {stats.listeningNow}
-          </p>
-          {stats.avatars && stats.avatars.length > 0 && (
-            <div className="flex -space-x-2 mt-2">
-              {stats.avatars.slice(0, 5).map((url, i) => (
-                <div key={i} className="w-6 h-6 rounded-full overflow-hidden border-2 border-bg-surface">
-                  <img src={url} alt="" className="w-full h-full object-cover" />
-                </div>
-              ))}
-            </div>
-          )}
+          <div ref={loadMoreRef} className="py-4 text-center">
+            {isFetchingNextPage && (
+              <p className="text-sm text-ktext-tertiary">Loading more...</p>
+            )}
+          </div>
         </div>
       </section>
     </div>
