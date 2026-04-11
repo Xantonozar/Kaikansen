@@ -4,11 +4,11 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { queryKeys } from '@/lib/queryKeys'
 import { fetchWithAuth } from './client'
 
-export function useMyRating(themeSlug: string) {
+export function useMyRating(themeSlug: string, options?: { enabled?: boolean }) {
   return useQuery({
     queryKey: queryKeys.ratings.mine(themeSlug),
     queryFn: () => fetchWithAuth(`/api/ratings/${themeSlug}/mine`),
-    enabled: !!themeSlug,
+    enabled: options?.enabled !== false && !!themeSlug,
   })
 }
 

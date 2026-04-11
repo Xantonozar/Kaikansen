@@ -21,7 +21,7 @@ interface ThemePageContentProps {
 export function ThemePageContent({ slug }: ThemePageContentProps) {
   const { user } = useAuth()
   const { data: themeData, isLoading } = useTheme(slug)
-  const { data: ratingData } = useMyRating(user ? slug : '')
+  const { data: ratingData } = useMyRating(slug, { enabled: !!user })
   const { mutate: setRating, isPending: isRatingPending } = useSetRating()
   const { mutate: addToHistory } = useAddToHistory()
   
