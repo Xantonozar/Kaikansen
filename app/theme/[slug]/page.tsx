@@ -20,8 +20,8 @@ interface ThemePageContentProps {
 
 export function ThemePageContent({ slug }: ThemePageContentProps) {
   const { user } = useAuth()
-  const { data: themeData, isLoading } = useTheme(slug)
-  const { data: ratingData } = useMyRating(slug, { enabled: !!user })
+  const { data: themeData, isLoading, error: themeError } = useTheme(slug)
+  const { data: ratingData } = user ? useMyRating(slug) : { data: undefined }
   const { mutate: setRating, isPending: isRatingPending } = useSetRating()
   const { mutate: addToHistory } = useAddToHistory()
   
@@ -33,7 +33,7 @@ export function ThemePageContent({ slug }: ThemePageContentProps) {
   const userRating = (ratingData?.data as any)?.score
 
   if (isLoading) return <LoadingSkeleton />
-  if (!theme) return <EmptyState title="Theme not found" />
+  if (themeError || !theme) return <EmptyState title="Theme not found" />
 
   const videoSources = theme.entries?.flatMap((e: any) => 
     e.videos?.map((v: any) => ({
@@ -71,9 +71,6 @@ export function ThemePageContent({ slug }: ThemePageContentProps) {
 
   const handleModeChange = (newMode: 'watch' | 'listen') => {
     setMode(newMode)
-    if (user) {
-      addToHistory({ themeSlug: slug, mode: newMode })
-    }
   }
 
   const finalVideoSources = videoSources.length > 0 ? videoSources : fallbackVideoSources
