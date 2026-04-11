@@ -209,3 +209,43 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Plyr Video Player Custom Styles */
+.plyr--video .plyr__control.plyr__tab-focus,
+.plyr--video .plyr__control:hover,
+.plyr--video .plyr__control.plyr__tab-focus {
+  background: var(--accent);
+}
+
+.plyr--video .plyr__control:hover {
+  background: var(--accent-hover);
+}
+
+.plyr--full-ui input[type="range"] {
+  color: var(--accent-mint);
+}
+
+.plyr__control--overlaid {
+  background: rgba(0, 0, 0, 0.6) !important;
+}
+
+.plyr__control--overlaid:hover {
+  background: rgba(0, 0, 0, 0.8) !important;
+}
+
+.plyr--full-ui .plyr__progress input[type="range"]::-webkit-slider-thumb {
+  background: var(--accent-mint) !important;
+}
+
+.plyr--full-ui .plyr__volume input[type="range"]::-webkit-slider-thumb {
+  background: var(--accent-mint) !important;
+}
+
+.plyr__menu__container .plyr__menu__item:hover,
+.plyr__menu__container .plyr__menu__item[aria-checked="true"] {
+  background: var(--accent);
+}
+
+.plyr__control.plyr__tab-focus {
+  box-shadow: 0 0 0 2px var(--accent-mint) !important;
+}
