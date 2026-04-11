@@ -23,7 +23,6 @@ const animeCacheSchema = new mongoose.Schema(
   { timestamps: true }
 )
 
-animeCacheSchema.index({ anilistId: 1 })
 animeCacheSchema.index({ malId: 1 })
 
 export default mongoose.models.AnimeCache || mongoose.model('AnimeCache', animeCacheSchema)
