@@ -69,6 +69,13 @@ export function ThemePageContent({ slug }: ThemePageContentProps) {
     addToHistory({ themeSlug: slug, mode })
   }
 
+  const handleModeChange = (newMode: 'watch' | 'listen') => {
+    setMode(newMode)
+    if (user) {
+      addToHistory({ themeSlug: slug, mode: newMode })
+    }
+  }
+
   const finalVideoSources = videoSources.length > 0 ? videoSources : fallbackVideoSources
 
   const typeLabel = theme.type === 'OP' ? 'Opening Theme' : 'Ending Theme'
@@ -88,7 +95,7 @@ export function ThemePageContent({ slug }: ThemePageContentProps) {
 
       {/* Watch/Listen toggle */}
       <div className="flex gap-2 mt-4 px-4">
-        {user && <WatchListenToggle mode={mode} onModeChange={setMode} />}
+        <WatchListenToggle mode={mode} onModeChange={handleModeChange} />
       </div>
 
       {/* Song info */}
