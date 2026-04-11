@@ -20,7 +20,7 @@ interface ThemePageContentProps {
 
 export function ThemePageContent({ slug }: ThemePageContentProps) {
   const { user } = useAuth()
-  const { data: themeData, isLoading, error: themeError } = useTheme(slug)
+  const { data: themeData, isLoading, error } = useTheme(slug)
   const { data: ratingData } = user ? useMyRating(slug) : { data: undefined }
   const { mutate: setRating, isPending: isRatingPending } = useSetRating()
   const { mutate: addToHistory } = useAddToHistory()
@@ -33,7 +33,7 @@ export function ThemePageContent({ slug }: ThemePageContentProps) {
   const userRating = (ratingData?.data as any)?.score
 
   if (isLoading) return <LoadingSkeleton />
-  if (themeError || !theme) return <EmptyState title="Theme not found" />
+  if (error || !theme) return <EmptyState title="Theme not found" />
 
   const videoSources = theme.entries?.flatMap((e: any) => 
     e.videos?.map((v: any) => ({
@@ -48,6 +48,8 @@ export function ThemePageContent({ slug }: ThemePageContentProps) {
     url: theme.videoUrl,
     tags: []
   }] : []
+
+  const finalVideoSources = videoSources.length > 0 ? videoSources : fallbackVideoSources
 
   const handleRate = (score: number) => {
     setSelectedRating(score)
@@ -73,15 +75,13 @@ export function ThemePageContent({ slug }: ThemePageContentProps) {
     setMode(newMode)
   }
 
-  const finalVideoSources = videoSources.length > 0 ? videoSources : fallbackVideoSources
-
   const typeLabel = theme.type === 'OP' ? 'Opening Theme' : 'Ending Theme'
   const sequenceLabel = theme.sequence > 1 ? `0${theme.sequence}` : '01'
   const seasonLabel = theme.animeSeason ? theme.animeSeason.toLowerCase() : ''
 
   return (
     <div className="pb-8">
-      {/* Video player — full width, no horizontal padding */}
+      {/* Video player — full width */}
       <div className="-mx-4 md:-mx-6">
         <VideoPlayer
           videoSources={finalVideoSources}
