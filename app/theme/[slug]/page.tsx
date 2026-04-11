@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { Eye, Headphones, Star, Share2, Plus, AlertCircle, Music, ArrowLeft } from 'lucide-react'
+import { Eye, Share2, Plus, AlertCircle, Music } from 'lucide-react'
 import { VideoPlayer } from '@/app/components/theme/VideoPlayer'
 import { WatchListenToggle } from '@/app/components/theme/WatchListenToggle'
 import { RatingWidget } from '@/app/components/theme/RatingWidget'
@@ -45,6 +45,20 @@ async function ThemePageContent({
   if (isLoading) return <LoadingSkeleton />
   if (!theme) return <EmptyState title="Theme not found" />
 
+  const videoSources = theme.entries?.flatMap((e: any) => 
+    e.videos?.map((v: any) => ({
+      resolution: v.resolution,
+      url: v.url,
+      tags: [v.source, v.nc ? 'NC' : null, v.lyrics ? 'Lyrics' : null].filter(Boolean)
+    })) || []
+  ) || []
+
+  const fallbackVideoSources = theme.videoUrl ? [{
+    resolution: theme.videoResolution || 1080,
+    url: theme.videoUrl,
+    tags: []
+  }] : []
+
   const handleRate = (score: number) => {
     setSelectedRating(score)
     setShowConfirm(true)
@@ -65,24 +79,23 @@ async function ThemePageContent({
     addToHistory({ themeSlug: slug, mode })
   }
 
+  const finalVideoSources = videoSources.length > 0 ? videoSources : fallbackVideoSources
+
   return (
     <div className="pb-8">
-      {/* Video player — full width */}
       <VideoPlayer
-        videoSources={theme.videoSources || []}
+        videoSources={finalVideoSources}
         poster={theme.animeCoverImage}
         mode={mode}
       />
 
       <div className="px-4 mt-4">
-        {/* Watch/Listen toggle */}
         {user && (
           <div className="flex gap-2 mb-4">
             <WatchListenToggle mode={mode} onModeChange={setMode} />
           </div>
         )}
 
-        {/* Song info */}
         <div className="flex items-start justify-between gap-2">
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 mb-1">
@@ -109,7 +122,6 @@ async function ThemePageContent({
           </button>
         </div>
 
-        {/* Community stats */}
         <div className="flex gap-3 mt-4">
           <div className="flex-1 bg-bg-elevated rounded-[16px] p-3 text-center">
             <p className="text-xl font-mono font-bold" style={{ color: getScoreColor(Math.round(theme.avgRating || 0)) }}>
@@ -129,7 +141,6 @@ async function ThemePageContent({
           </div>
         </div>
 
-        {/* Rating widget */}
         {user && (
           <div className="mt-4 bg-bg-surface rounded-[20px] border border-border-subtle p-4 shadow-card">
             <RatingWidget
@@ -148,7 +159,6 @@ async function ThemePageContent({
           </div>
         )}
 
-        {/* Artists/Credits */}
         {theme.allArtists && theme.allArtists.length > 0 && (
           <div className="mt-4 space-y-2">
             <h3 className="text-sm font-body font-semibold text-ktext-secondary uppercase tracking-wide">Artists</h3>
@@ -173,7 +183,6 @@ async function ThemePageContent({
           </div>
         )}
 
-        {/* Quick actions */}
         <div className="mt-4 space-y-1">
           <button className="w-full flex items-center gap-3 p-4 rounded-[12px] interactive text-ktext-secondary hover:text-ktext-primary transition-colors bg-bg-surface">
             <Plus className="w-5 h-5" />
