@@ -32,13 +32,16 @@ export function AppHeader() {
         <Link href="/search" className="interactive rounded-full p-2">
           <Search className="w-5 h-5" />
         </Link>
-        <div className="w-9 h-9 rounded-full overflow-hidden border-2 border-accent-mint bg-bg-elevated">
+        <Link 
+          href={user ? "/user/me" : "/login"} 
+          className="w-9 h-9 rounded-full overflow-hidden border-2 border-accent-mint bg-bg-elevated"
+        >
           {user?.avatar ? (
             <img src={user.avatar} alt="Avatar" className="w-full h-full object-cover" />
           ) : (
             <div className="w-full h-full bg-bg-elevated" />
           )}
-        </div>
+        </Link>
       </div>
     </header>
   )

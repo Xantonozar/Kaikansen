@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Home, Search, Bell, User } from 'lucide-react'
+import { useAuth } from '@/hooks/useAuth'
 import { cn } from '@/lib/utils'
 
 const navItems: Array<{ path: string; label: string; Icon: any; badge?: number }> = [
@@ -14,15 +15,19 @@ const navItems: Array<{ path: string; label: string; Icon: any; badge?: number }
 
 export function BottomNav() {
   const pathname = usePathname()
+  const { user } = useAuth()
 
   return (
     <nav className="flex md:hidden fixed bottom-0 left-0 right-0 z-40 bg-bg-surface border-t border-border-subtle h-16 pb-[env(safe-area-inset-bottom)] w-full">
       {navItems.map((item) => {
         const isActive = pathname === item.path || (item.path !== '/' && pathname.startsWith(item.path))
+        
+        const href = item.path === '/user/me' && !user ? '/login' : item.path
+        
         return (
           <Link
             key={item.path}
-            href={item.path}
+            href={href}
             className={cn(
               'flex-1 flex flex-col items-center justify-center gap-1 relative interactive',
               isActive ? 'text-accent' : 'text-ktext-tertiary'
