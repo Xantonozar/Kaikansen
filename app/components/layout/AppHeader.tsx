@@ -1,7 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import { Menu, Search } from 'lucide-react'
+import { usePathname, useRouter } from 'next/navigation'
+import { Menu, Search, ArrowLeft } from 'lucide-react'
 import { useAuth } from '@/hooks/useAuth'
 import { useThemeMode } from '@/hooks/useTheme'
 import { cn } from '@/lib/utils'
@@ -9,6 +10,12 @@ import { cn } from '@/lib/utils'
 export function AppHeader() {
   const { user } = useAuth()
   const { isDark } = useThemeMode()
+  const pathname = usePathname()
+  const router = useRouter()
+  
+  const isHomePage = pathname === '/'
+  const isSearchPage = pathname === '/search'
+  const showBackButton = !isHomePage
 
   return (
     <header className={cn(
@@ -17,9 +24,18 @@ export function AppHeader() {
         ? "bg-bg-header rounded-b-[24px] shadow-md" 
         : "bg-bg-surface"
     )}>
-      <button className="interactive rounded-full p-2">
-        <Menu className="w-5 h-5 text-ktext-secondary" />
-      </button>
+      {showBackButton ? (
+        <button 
+          onClick={() => router.back()} 
+          className="interactive rounded-full p-2"
+        >
+          <ArrowLeft className="w-5 h-5 text-ktext-secondary" />
+        </button>
+      ) : (
+        <button className="interactive rounded-full p-2">
+          <Menu className="w-5 h-5 text-ktext-secondary" />
+        </button>
+      )}
 
       <div className="flex items-center gap-2">
         <Link href="/" className="flex items-center gap-2 interactive rounded-full px-2 py-1">
@@ -29,9 +45,11 @@ export function AppHeader() {
       </div>
 
       <div className="flex items-center gap-2">
-        <Link href="/search" className="interactive rounded-full p-2">
-          <Search className="w-5 h-5" />
-        </Link>
+        {!isSearchPage && (
+          <Link href="/search" className="interactive rounded-full p-2">
+            <Search className="w-5 h-5" />
+          </Link>
+        )}
         <Link 
           href={user ? "/user/me" : "/login"} 
           className="w-9 h-9 rounded-full overflow-hidden border-2 border-accent-mint bg-bg-elevated"
