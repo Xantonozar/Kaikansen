@@ -10,6 +10,7 @@ interface ThemeFeaturedCardProps {
     songTitle: string
     artistName?: string | null
     animeTitle: string
+    animeTitleEnglish?: string | null
     animeCoverImage: string | null
     animeGrillImage?: string | null
     type: 'OP' | 'ED'
@@ -25,7 +26,7 @@ export function ThemeFeaturedCard({ theme }: ThemeFeaturedCardProps) {
   const [isLoading, setIsLoading] = useState(true)
   
   const fallbackImage = theme.animeCoverImage || theme.animeGrillImage || '/placeholder.svg'
-  const displayTitle = theme.animeTitle || 'Unknown'
+  const displayTitle = theme.animeTitleEnglish || theme.animeTitle || 'Unknown'
   const displayArtist = theme.artistName || theme.songTitle || 'Unknown'
 
   useEffect(() => {

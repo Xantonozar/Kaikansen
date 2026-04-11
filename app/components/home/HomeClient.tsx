@@ -12,6 +12,7 @@ interface Theme {
   songTitle: string
   artistName?: string | null
   animeTitle: string
+  animeTitleEnglish?: string | null
   animeCoverImage: string | null
   animeGrillImage?: string | null
   type: 'OP' | 'ED'

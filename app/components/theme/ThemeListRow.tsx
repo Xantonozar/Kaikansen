@@ -9,6 +9,7 @@ interface ThemeListRowProps {
     slug: string
     songTitle: string
     animeTitle: string
+    animeTitleEnglish?: string | null
     animeCoverImage: string | null
     type: 'OP' | 'ED'
     sequence?: number
@@ -24,7 +25,7 @@ interface ThemeListRowProps {
 
 export function ThemeListRow({ theme, friendUsername, friendScore, qualityBadges, userRating }: ThemeListRowProps) {
   const coverImage = theme.animeCoverImage || '/placeholder.svg'
-  const displayTitle = theme.animeTitle || 'Unknown'
+  const displayTitle = theme.animeTitleEnglish || theme.animeTitle || 'Unknown'
   const displaySong = theme.songTitle || 'Unknown Theme'
   const displayArtist = theme.allArtists?.[0] || 'Unknown Artist'
   
