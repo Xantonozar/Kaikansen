@@ -98,3 +98,592 @@
 [2026-04-11 17:19:14] [y2020]    ⏭️ New: 0 | Skipped: 16 | Failed: 0
 [2026-04-11 17:19:14] [y2020] 
 🎌 [17/212] baki_2nd_season
+══════════════════════════════════════════════════════════════════════
+[2026-04-11 20:52:39] [y2020] 🌱 SEEDING ANIME FROM YEAR: 2020
+[2026-04-11 20:52:39] [y2020]    Mode: Normal
+══════════════════════════════════════════════════════════════════════
+[2026-04-11 20:52:40] [y2020] ✅ Connected to database
+═════════════════════════════════════════════════════════════════
+[2026-04-11 20:52:40] [y2020] 🚀 Phase 1: Collecting anime list
+═════════════════════════════════════════════════════════════════
+[2026-04-11 20:52:40] [y2020] ✅ Already collected 212 anime — skipping
+═════════════════════════════════════════════════════════════════
+[2026-04-11 20:52:40] [y2020] 🚀 Phase 2: Processing anime
+═════════════════════════════════════════════════════════════════
+[2026-04-11 20:52:40] [y2020] 📊 Total anime: 212
+[2026-04-11 20:52:40] [y2020]    Already done: 0
+[2026-04-11 20:52:40] [y2020]    Previously skipped: 16
+[2026-04-11 20:52:40] [y2020]    Previously failed: 0
+[2026-04-11 20:52:40] [y2020]    Now processing: 196
+─────────────────────────────────────────────────────────────────
+[2026-04-11 20:52:40] [y2020] 
+🎌 [1/196] baki_2nd_season
+[2026-04-11 20:52:42] [y2020]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 20:52:43] [y2020]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 20:52:43] [y2020]    📝 Baki 2nd Season | Baki: The Great Raitai Tournament Saga | SPRING 2020
+[2026-04-11 20:52:43] [y2020]    🆔 MAL: 39555 | AniList: 108522
+[2026-04-11 20:52:43] [y2020]    🎬 Found 2 theme(s):
+[2026-04-11 20:52:43] [y2020]       OP1: "Jounetsu wa Oboeteiru" — GRANRODEO (1 videos)
+[2026-04-11 20:52:43] [y2020]       ED1: "DEAD STROKE" — — (1 videos)
+[2026-04-11 20:52:43] [y2020]    ⏭️  Theme already in DB: "Jounetsu wa Oboeteiru" (OP1) [id:9632]
+[2026-04-11 20:52:44] [y2020]    ⏭️  Theme already in DB: "DEAD STROKE" (ED1) [id:9633]
+[2026-04-11 20:52:44] [y2020]    🎤 Artist: GRANRODEO (1 themes)
+[2026-04-11 20:52:44] [y2020]    ✅ New: 1 | Skipped: 16 | Failed: 0
+[2026-04-11 20:52:44] [y2020] 
+🎌 [2/196] bakugan_armored_alliance
+[2026-04-11 20:52:45] [y2020]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 20:52:47] [y2020]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 20:52:47] [y2020]    📝 Bakugan: Armored Alliance | Bakugan Armored Alliance | SPRING 2020
+[2026-04-11 20:52:47] [y2020]    🆔 MAL: 41405 | AniList: 116415
+[2026-04-11 20:52:47] [y2020]    🎬 Found 4 theme(s):
+[2026-04-11 20:52:47] [y2020]       OP1: "PLANET HERO" — Rie Takahashi (1 videos)
+[2026-04-11 20:52:47] [y2020]       ED1: "Go! Bakugan Blow!" — — (1 videos)
+[2026-04-11 20:52:47] [y2020]       ED2: "Higher and Higher" — Serena Kouzuki (1 videos)
+[2026-04-11 20:52:47] [y2020]       ED3: "DAN!GAN! Dreamer" — Serena Kouzuki (1 videos)
+[2026-04-11 20:52:47] [y2020]    ⏭️  Theme already in DB: "PLANET HERO" (OP1) [id:9634]
+[2026-04-11 20:52:47] [y2020]    ⏭️  Theme already in DB: "Go! Bakugan Blow!" (ED1) [id:9635]
+[2026-04-11 20:52:47] [y2020]    ⏭️  Theme already in DB: "Higher and Higher" (ED2) [id:9636]
+[2026-04-11 20:52:47] [y2020]    ⏭️  Theme already in DB: "DAN!GAN! Dreamer" (ED3) [id:11259]
+[2026-04-11 20:52:47] [y2020]    🎤 Artist: Rie Takahashi (1 themes)
+[2026-04-11 20:52:47] [y2020]    🎤 Artist: Serena Kouzuki (2 themes)
+[2026-04-11 20:52:47] [y2020]    ✅ New: 2 | Skipped: 16 | Failed: 0
+[2026-04-11 20:52:47] [y2020] 
+🎌 [3/196] bang_dream_3rd_season
+[2026-04-11 20:52:49] [y2020]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 20:52:51] [y2020]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 20:52:51] [y2020]    📝 BanG Dream! 3rd Season | BanG Dream! 3rd Season | WINTER 2020
+[2026-04-11 20:52:51] [y2020]    🆔 MAL: 37870 | AniList: 101634
+[2026-04-11 20:52:51] [y2020]    🎬 Found 4 theme(s):
+[2026-04-11 20:52:51] [y2020]       OP1: "Initial" — Poppin'Party (1 videos)
+[2026-04-11 20:52:51] [y2020]       ED1: "Yume wo Uchinuku Shunkan ni!" — Poppin'Party (1 videos)
+[2026-04-11 20:52:51] [y2020]       ED2: "FIRE BIRD" — Roselia (1 videos)
+[2026-04-11 20:52:51] [y2020]       ED3: "Yume wo Uchinuku Shunkan ni!" — Poppin'Party, Roselia, RAISE A SUILEN (1 videos)
+[2026-04-11 20:52:51] [y2020]    ⏭️  Theme already in DB: "Initial" (OP1) [id:9964]
+[2026-04-11 20:52:51] [y2020]    ⏭️  Theme already in DB: "Yume wo Uchinuku Shunkan ni!" (ED1) [id:9965]
+[2026-04-11 20:52:51] [y2020]    ⏭️  Theme already in DB: "FIRE BIRD" (ED2) [id:9966]
+[2026-04-11 20:52:51] [y2020]    ⏭️  Theme already in DB: "Yume wo Uchinuku Shunkan ni!" (ED3) [id:9967]
+[2026-04-11 20:52:51] [y2020]    🎤 Artist: Poppin'Party (3 themes)
+[2026-04-11 20:52:51] [y2020]    🎤 Artist: Roselia (2 themes)
+[2026-04-11 20:52:51] [y2020]    🎤 Artist: RAISE A SUILEN (1 themes)
+[2026-04-11 20:52:51] [y2020]    ✅ New: 3 | Skipped: 16 | Failed: 0
+[2026-04-11 20:52:51] [y2020] 
+🎌 [4/196] bang_dream_garupapico_oomori
+[2026-04-11 20:52:53] [y2020]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 20:52:54] [y2020]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 20:52:54] [y2020]    📝 BanG Dream! Garupa☆Pico: Oomori | BanG Dream! Girls Band Party!☆PICO～OHMORI～ | SPRING 2020
+[2026-04-11 20:52:54] [y2020]    🆔 MAL: 40854 | AniList: 113906
+[2026-04-11 20:52:54] [y2020]    🎬 Found 1 theme(s):
+[2026-04-11 20:52:54] [y2020]       ED1: "Oomori Icchou! Garupa☆Pico" — Ayane Sakura, Miku Itou, Aimi, Aina Aiba, Ami Maeshima (1 videos)
+[2026-04-11 20:52:54] [y2020]    ⏭️  Theme already in DB: "Oomori Icchou! Garupa☆Pico" (ED1) [id:9637]
+[2026-04-11 20:52:54] [y2020]    🎤 Artist: Ayane Sakura (1 themes)
+[2026-04-11 20:52:54] [y2020]    🎤 Artist: Miku Itou (1 themes)
+[2026-04-11 20:52:54] [y2020]    🎤 Artist: Aimi (1 themes)
+[2026-04-11 20:52:55] [y2020]    🎤 Artist: Aina Aiba (1 themes)
+[2026-04-11 20:52:55] [y2020]    🎤 Artist: Ami Maeshima (1 themes)
+[2026-04-11 20:52:55] [y2020]    ✅ New: 4 | Skipped: 16 | Failed: 0
+[2026-04-11 20:52:55] [y2020] 
+🎌 [5/196] bem_movie_become_human
+[2026-04-11 20:52:56] [y2020]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 20:52:58] [y2020]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 20:52:58] [y2020]    📝 Bem Movie: Become Human | BEM: Become Human | FALL 2020
+[2026-04-11 20:52:58] [y2020]    🆔 MAL: 42129 | AniList: 119258
+[2026-04-11 20:52:58] [y2020]    🎬 Found 1 theme(s):
+[2026-04-11 20:52:58] [y2020]       ED1: "unforever" — Rib (1 videos)
+[2026-04-11 20:52:58] [y2020]    ⏭️  Theme already in DB: "unforever" (ED1) [id:9414]
+[2026-04-11 20:52:58] [y2020]    🎤 Artist: Rib (1 themes)
+[2026-04-11 20:52:58] [y2020]    ✅ New: 5 | Skipped: 16 | Failed: 0
+[2026-04-11 20:52:58] [y2020] 
+🎌 [6/196] beyblade_burst_super_king
+[2026-04-11 20:53:00] [y2020]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 20:53:01] [y2020]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 20:53:01] [y2020]    📝 Beyblade Burst Super King | Beyblade Burst Surge  | SPRING 2020
+[2026-04-11 20:53:01] [y2020]    🆔 MAL: 41439 | AniList: 116786
+[2026-04-11 20:53:01] [y2020]    🎬 Found 2 theme(s):
+[2026-04-11 20:53:01] [y2020]       OP1: "Sparking Revolution" — — (1 videos)
+[2026-04-11 20:53:01] [y2020]       ED1: "Sparking Revolution (Instrumental)" — — (1 videos)
+[2026-04-11 20:53:01] [y2020]    ⏭️  Theme already in DB: "Sparking Revolution" (OP1) [id:9638]
+[2026-04-11 20:53:01] [y2020]    ⏭️  Theme already in DB: "Sparking Revolution (Instrumental)" (ED1) [id:9639]
+[2026-04-11 20:53:01] [y2020]    ✅ New: 6 | Skipped: 16 | Failed: 0
+[2026-04-11 20:53:01] [y2020] 
+🎌 [7/196] bna
+[2026-04-11 20:53:03] [y2020]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 20:53:04] [y2020]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 20:53:04] [y2020]    📝 BNA | BNA | SPRING 2020
+[2026-04-11 20:53:04] [y2020]    🆔 MAL: 40060 | AniList: 110354
+[2026-04-11 20:53:04] [y2020]    🎬 Found 2 theme(s):
+[2026-04-11 20:53:04] [y2020]       OP1: "Ready to" — Sumire Morohoshi (2 videos)
+[2026-04-11 20:53:04] [y2020]       ED1: "NIGHT RUNNING" — AAAMYYY (3 videos)
+[2026-04-11 20:53:04] [y2020]    ⏭️  Theme already in DB: "Ready to" (OP1) [id:9640]
+[2026-04-11 20:53:04] [y2020]    ⏭️  Theme already in DB: "NIGHT RUNNING" (ED1) [id:9641]
+[2026-04-11 20:53:04] [y2020]    🎤 Artist: Sumire Morohoshi (1 themes)
+[2026-04-11 20:53:04] [y2020]    🎤 Artist: AAAMYYY (1 themes)
+[2026-04-11 20:53:04] [y2020]    ✅ New: 7 | Skipped: 16 | Failed: 0
+[2026-04-11 20:53:04] [y2020] 
+🎌 [8/196] boku_no_tonari_ni_ankoku_hakaishin_ga_imasu
+[2026-04-11 20:53:06] [y2020]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 20:53:08] [y2020]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 20:53:08] [y2020]    📝 Boku no Tonari ni Ankoku Hakaishin ga Imasu. | A Destructive God Sits Next to Me | WINTER 2020
+[2026-04-11 20:53:08] [y2020]    🆔 MAL: 38302 | AniList: 104936
+[2026-04-11 20:53:08] [y2020]    🎬 Found 2 theme(s):
+[2026-04-11 20:53:08] [y2020]       OP1: "Take mo' Chance" — all at once (1 videos)
+[2026-04-11 20:53:08] [y2020]       ED1: "FREEDOM de Muda ni Muteki!!" — AOP (1 videos)
+[2026-04-11 20:53:08] [y2020]    ⏭️  Theme already in DB: "Take mo' Chance" (OP1) [id:9968]
+[2026-04-11 20:53:08] [y2020]    ⏭️  Theme already in DB: "FREEDOM de Muda ni Muteki!!" (ED1) [id:9969]
+[2026-04-11 20:53:08] [y2020]    🎤 Artist: all at once (1 themes)
+[2026-04-11 20:53:08] [y2020]    🎤 Artist: AOP (1 themes)
+[2026-04-11 20:53:08] [y2020]    ✅ New: 8 | Skipped: 16 | Failed: 0
+[2026-04-11 20:53:08] [y2020] 
+🎌 [9/196] bungou_to_alchemist_shinpan_no_haguruma
+[2026-04-11 20:53:10] [y2020]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 20:53:12] [y2020]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 20:53:12] [y2020]    📝 Bungou to Alchemist: Shinpan no Haguruma | Bungo and Alchemist -Gears of Judgement- | SPRING 2020
+[2026-04-11 20:53:12] [y2020]    🆔 MAL: 40934 | AniList: 114411
+[2026-04-11 20:53:12] [y2020]    🎬 Found 2 theme(s):
+[2026-04-11 20:53:12] [y2020]       OP1: "Good-bye" — Urashimasakatasen (2 videos)
+[2026-04-11 20:53:12] [y2020]       ED1: "Yabunonaka no Synthesis" — Yoshino Nanjou (1 videos)
+[2026-04-11 20:53:12] [y2020]    ⏭️  Theme already in DB: "Good-bye" (OP1) [id:9642]
+[2026-04-11 20:53:12] [y2020]    ⏭️  Theme already in DB: "Yabunonaka no Synthesis" (ED1) [id:9643]
+[2026-04-11 20:53:12] [y2020]    🎤 Artist: Urashimasakatasen (1 themes)
+[2026-04-11 20:53:12] [y2020]    🎤 Artist: Yoshino Nanjou (1 themes)
+[2026-04-11 20:53:12] [y2020]    ✅ New: 9 | Skipped: 16 | Failed: 0
+[2026-04-11 20:53:12] [y2020] 
+🎌 [10/196] burn_the_witch
+[2026-04-11 20:53:14] [y2020]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 20:53:16] [y2020]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 20:53:16] [y2020]    📝 Burn the Witch | BURN THE WITCH | FALL 2020
+[2026-04-11 20:53:16] [y2020]    🆔 MAL: 41468 | AniList: 116673
+[2026-04-11 20:53:16] [y2020]    🎬 Found 1 theme(s):
+[2026-04-11 20:53:16] [y2020]       ED1: "Blowing" — — (2 videos)
+[2026-04-11 20:53:16] [y2020]    ⏭️  Theme already in DB: "Blowing" (ED1) [id:9415]
+[2026-04-11 20:53:16] [y2020]    ✅ New: 10 | Skipped: 16 | Failed: 0
+[2026-04-11 20:53:16] [y2020] 
+🎌 [11/196] cardfight_vanguard_gaiden_if
+[2026-04-11 20:53:17] [y2020]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 20:53:19] [y2020]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 20:53:19] [y2020]    📝 Cardfight!! Vanguard Gaiden: If | Cardfight!! Vanguard Extra Story -if- | SPRING 2020
+[2026-04-11 20:53:19] [y2020]    🆔 MAL: 41283 | AniList: 115656
+[2026-04-11 20:53:19] [y2020]    🎬 Found 3 theme(s):
+[2026-04-11 20:53:19] [y2020]       OP1: "What-if Wonderland!!" — — (1 videos)
+[2026-04-11 20:53:19] [y2020]       ED1: "Gonna be right" — — (1 videos)
+[2026-04-11 20:53:19] [y2020]       ED2: "Horizontal Oath" — Rondo (1 videos)
+[2026-04-11 20:53:19] [y2020]    ⏭️  Theme already in DB: "What-if Wonderland!!" (OP1) [id:9644]
+[2026-04-11 20:53:19] [y2020]    ⏭️  Theme already in DB: "Gonna be right" (ED1) [id:9645]
+[2026-04-11 20:53:19] [y2020]    ⏭️  Theme already in DB: "Horizontal Oath" (ED2) [id:9646]
+[2026-04-11 20:53:19] [y2020]    🎤 Artist: Rondo (1 themes)
+[2026-04-11 20:53:19] [y2020]    ✅ New: 11 | Skipped: 16 | Failed: 0
+[2026-04-11 20:53:19] [y2020] 
+🎌 [12/196] cinderella_girls_gekijou_extra_stage
+[2026-04-11 20:53:21] [y2020]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 20:53:25] [y2020]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 20:53:25] [y2020]    📝 Cinderella Girls Gekijou: Extra Stage | Cinderella Girls Gekijou: Extra Stage | SPRING 2020
+[2026-04-11 20:53:25] [y2020]    🆔 MAL: 41299 | AniList: 115519
+[2026-04-11 20:53:25] [y2020]    🎬 Found 16 theme(s):
+[2026-04-11 20:53:25] [y2020]       ED1: "Sing the Prologue♪" — Yuka Ootsubo, Hina Tachibana, Saya Aizawa (1 videos)
+[2026-04-11 20:53:25] [y2020]       ED2: "Haru Koi Frame" — — (1 videos)
+[2026-04-11 20:53:25] [y2020]       ED3: "Watashi-iro no Prelude" — — (1 videos)
+[2026-04-11 20:53:25] [y2020]       ED4: "Sekai Metsubou or KISS" — — (1 videos)
+[2026-04-11 20:53:25] [y2020]       ED5: "Diamond Attention" — Teru Ikuta, Larissa Tago Takeda (1 videos)
+[2026-04-11 20:53:25] [y2020]       ED6: "Oyamatope♪" — — (1 videos)
+[2026-04-11 20:53:25] [y2020]       ED7: "Dangan Survival" — — (1 videos)
+[2026-04-11 20:53:25] [y2020]       ED8: "Shinobi 4.0 Ninja no Susume" — Masumi Tazawa (1 videos)
+[2026-04-11 20:53:25] [y2020]       ED9: "Kimi no Stage Ishou, Hontou wa..." — Hana Tamegai (1 videos)
+[2026-04-11 20:53:25] [y2020]       ED10: "Priceless Donuts Cyu♡" — — (1 videos)
+[2026-04-11 20:53:25] [y2020]       ED11: "Omoide ja Nai Kyou wo" — Larissa Tago Takeda (1 videos)
+[2026-04-11 20:53:25] [y2020]       ED12: "Hatsuyume wo Anata to" — — (1 videos)
+[2026-04-11 20:53:25] [y2020]       ED13: "Life is HaRMONY" — Mao Ichimichi, Rei Matsuzaki, Maki Kawase (1 videos)
+[2026-04-11 20:53:25] [y2020]       ED14: "Milky Mode" — Yuri Noguchi (1 videos)
+[2026-04-11 20:53:25] [y2020]       ED15: "Utakata no Aeon" — — (1 videos)
+[2026-04-11 20:53:25] [y2020]       ED16: "Mangan Jouju♪ Miko no Kamidanomi!" — Hiyori Nitta (1 videos)
+[2026-04-11 20:53:25] [y2020]    ⏭️  Theme already in DB: "Sing the Prologue♪" (ED1) [id:9647]
+[2026-04-11 20:53:25] [y2020]    ⏭️  Theme already in DB: "Haru Koi Frame" (ED2) [id:9648]
+[2026-04-11 20:53:25] [y2020]    ⏭️  Theme already in DB: "Watashi-iro no Prelude" (ED3) [id:9649]
+[2026-04-11 20:53:25] [y2020]    ⏭️  Theme already in DB: "Sekai Metsubou or KISS" (ED4) [id:9650]
+[2026-04-11 20:53:26] [y2020]    ⏭️  Theme already in DB: "Diamond Attention" (ED5) [id:9651]
+[2026-04-11 20:53:26] [y2020]    ⏭️  Theme already in DB: "Oyamatope♪" (ED6) [id:9652]
+[2026-04-11 20:53:26] [y2020]    ⏭️  Theme already in DB: "Dangan Survival" (ED7) [id:9653]
+[2026-04-11 20:53:26] [y2020]    ⏭️  Theme already in DB: "Shinobi 4.0 Ninja no Susume" (ED8) [id:9654]
+[2026-04-11 20:53:26] [y2020]    ⏭️  Theme already in DB: "Kimi no Stage Ishou, Hontou wa..." (ED9) [id:9655]
+[2026-04-11 20:53:26] [y2020]    ⏭️  Theme already in DB: "Priceless Donuts Cyu♡" (ED10) [id:9656]
+[2026-04-11 20:53:26] [y2020]    ⏭️  Theme already in DB: "Omoide ja Nai Kyou wo" (ED11) [id:9657]
+[2026-04-11 20:53:26] [y2020]    ⏭️  Theme already in DB: "Hatsuyume wo Anata to" (ED12) [id:9658]
+[2026-04-11 20:53:26] [y2020]    ⏭️  Theme already in DB: "Life is HaRMONY" (ED13) [id:9659]
+[2026-04-11 20:53:26] [y2020]    ⏭️  Theme already in DB: "Milky Mode" (ED14) [id:9660]
+[2026-04-11 20:53:26] [y2020]    ⏭️  Theme already in DB: "Utakata no Aeon" (ED15) [id:10150]
+[2026-04-11 20:53:26] [y2020]    ⏭️  Theme already in DB: "Mangan Jouju♪ Miko no Kamidanomi!" (ED16) [id:10151]
+[2026-04-11 20:53:26] [y2020]    🎤 Artist: Yuka Ootsubo (1 themes)
+[2026-04-11 20:53:26] [y2020]    🎤 Artist: Hina Tachibana (1 themes)
+[2026-04-11 20:53:26] [y2020]    🎤 Artist: Saya Aizawa (1 themes)
+[2026-04-11 20:53:26] [y2020]    🎤 Artist: Teru Ikuta (1 themes)
+[2026-04-11 20:53:26] [y2020]    🎤 Artist: Larissa Tago Takeda (2 themes)
+[2026-04-11 20:53:27] [y2020]    🎤 Artist: Masumi Tazawa (1 themes)
+[2026-04-11 20:53:27] [y2020]    🎤 Artist: Hana Tamegai (1 themes)
+[2026-04-11 20:53:27] [y2020]    🎤 Artist: Mao Ichimichi (1 themes)
+[2026-04-11 20:53:27] [y2020]    🎤 Artist: Rei Matsuzaki (1 themes)
+[2026-04-11 20:53:27] [y2020]    🎤 Artist: Maki Kawase (1 themes)
+[2026-04-11 20:53:27] [y2020]    🎤 Artist: Yuri Noguchi (1 themes)
+[2026-04-11 20:53:27] [y2020]    🎤 Artist: Hiyori Nitta (1 themes)
+[2026-04-11 20:53:27] [y2020]    ✅ New: 12 | Skipped: 16 | Failed: 0
+[2026-04-11 20:53:27] [y2020] 
+🎌 [13/196] d4dj_first_mix
+[2026-04-11 20:53:29] [y2020]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 20:53:31] [y2020]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 20:53:31] [y2020]    📝 D4DJ First Mix | D4DJ First Mix | FALL 2020
+[2026-04-11 20:53:31] [y2020]    🆔 MAL: 39681 | AniList: 115069
+[2026-04-11 20:53:31] [y2020]    🎬 Found 3 theme(s):
+[2026-04-11 20:53:31] [y2020]       OP1: "Guru Guru DJ TURN!!" — Risa Tsumugi (1 videos)
+[2026-04-11 20:53:31] [y2020]       ED1: "WOW WAR TONIGHT ~Toki ni wa Okose yo Movement~" — Nana Mizuki (1 videos)
+[2026-04-11 20:53:31] [y2020]       ED2: "Happy Music♪" — — (1 videos)
+[2026-04-11 20:53:31] [y2020]    ⏭️  Theme already in DB: "Guru Guru DJ TURN!!" (OP1) [id:9416]
+[2026-04-11 20:53:31] [y2020]    ⏭️  Theme already in DB: "WOW WAR TONIGHT ~Toki ni wa Okose yo Movement~" (ED1) [id:9417]
+[2026-04-11 20:53:31] [y2020]    ⏭️  Theme already in DB: "Happy Music♪" (ED2) [id:9418]
+[2026-04-11 20:53:31] [y2020]    🎤 Artist: Risa Tsumugi (1 themes)
+[2026-04-11 20:53:31] [y2020]    🎤 Artist: Nana Mizuki (1 themes)
+[2026-04-11 20:53:31] [y2020]    ✅ New: 13 | Skipped: 16 | Failed: 0
+[2026-04-11 20:53:31] [y2020] 
+🎌 [14/196] darwins_game
+[2026-04-11 20:53:34] [y2020]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 20:53:35] [y2020]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 20:53:35] [y2020]    📝 Darwin's Game | Darwin's Game | WINTER 2020
+[2026-04-11 20:53:35] [y2020]    🆔 MAL: 38656 | AniList: 105190
+[2026-04-11 20:53:35] [y2020]    🎬 Found 2 theme(s):
+[2026-04-11 20:53:35] [y2020]       OP1: "CHAIN" — ASCA (2 videos)
+[2026-04-11 20:53:35] [y2020]       ED1: "Alive" — Mashiro Ayano (2 videos)
+[2026-04-11 20:53:35] [y2020]    ⏭️  Theme already in DB: "CHAIN" (OP1) [id:9970]
+[2026-04-11 20:53:35] [y2020]    ⏭️  Theme already in DB: "Alive" (ED1) [id:9971]
+[2026-04-11 20:53:35] [y2020]    🎤 Artist: ASCA (1 themes)
+[2026-04-11 20:53:35] [y2020]    🎤 Artist: Mashiro Ayano (1 themes)
+[2026-04-11 20:53:35] [y2020]    ✅ New: 14 | Skipped: 16 | Failed: 0
+[2026-04-11 20:53:35] [y2020] 
+🎌 [15/196] deca_dence
+[2026-04-11 20:53:37] [y2020]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 20:53:38] [y2020]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 20:53:38] [y2020]    📝 Deca-Dence | DECA-DENCE | SUMMER 2020
+[2026-04-11 20:53:38] [y2020]    🆔 MAL: 40056 | AniList: 110353
+[2026-04-11 20:53:38] [y2020]    🎬 Found 2 theme(s):
+[2026-04-11 20:53:38] [y2020]       OP1: "Theater of Life" — Konomi Suzuki (2 videos)
+[2026-04-11 20:53:38] [y2020]       ED1: "Kioku no Hakobune" — Kashitarou Itou (2 videos)
+[2026-04-11 20:53:38] [y2020]    ⏭️  Theme already in DB: "Theater of Life" (OP1) [id:9566]
+[2026-04-11 20:53:38] [y2020]    ⏭️  Theme already in DB: "Kioku no Hakobune" (ED1) [id:9567]
+[2026-04-11 20:53:38] [y2020]    🎤 Artist: Konomi Suzuki (1 themes)
+[2026-04-11 20:53:39] [y2020]    🎤 Artist: Kashitarou Itou (1 themes)
+[2026-04-11 20:53:39] [y2020]    ✅ New: 15 | Skipped: 16 | Failed: 0
+[2026-04-11 20:53:39] [y2020] 
+🎌 [16/196] digimon_adventure_2020
+[2026-04-11 20:53:40] [y2020]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 20:53:42] [y2020]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 20:53:42] [y2020]    📝 Digimon Adventure: | Digimon Adventure: | SPRING 2020
+[2026-04-11 20:53:42] [y2020]    🆔 MAL: 41074 | AniList: 114811
+[2026-04-11 20:53:42] [y2020]    🎬 Found 6 theme(s):
+[2026-04-11 20:53:42] [y2020]       OP1: "Mikakunin Hikousen" — — (1 videos)
+[2026-04-11 20:53:42] [y2020]       ED1: "Kuyashisa wa Tane" — Chiai Fujikawa (1 videos)
+[2026-04-11 20:53:42] [y2020]       ED2: "Q?" — Reol (1 videos)
+[2026-04-11 20:53:42] [y2020]       ED3: "Mind game" — — (1 videos)
+[2026-04-11 20:53:42] [y2020]       ED4: "Overseas Highway" — Wolpis Carter (1 videos)
+[2026-04-11 20:53:42] [y2020]       ED5: "Dreamers" — ATEEZ (1 videos)
+[2026-04-11 20:53:42] [y2020]    ⏭️  Theme already in DB: "Mikakunin Hikousen" (OP1) [id:9661]
+[2026-04-11 20:53:42] [y2020]    ⏭️  Theme already in DB: "Kuyashisa wa Tane" (ED1) [id:9662]
+[2026-04-11 20:53:42] [y2020]    ⏭️  Theme already in DB: "Q?" (ED2) [id:9663]
+[2026-04-11 20:53:42] [y2020]    ⏭️  Theme already in DB: "Mind game" (ED3) [id:9664]
+[2026-04-11 20:53:42] [y2020]    ⏭️  Theme already in DB: "Overseas Highway" (ED4) [id:9665]
+[2026-04-11 20:53:42] [y2020]    ⏭️  Theme already in DB: "Dreamers" (ED5) [id:10363]
+[2026-04-11 20:53:42] [y2020]    🎤 Artist: Chiai Fujikawa (1 themes)
+[2026-04-11 20:53:42] [y2020]    🎤 Artist: Reol (1 themes)
+[2026-04-11 20:53:42] [y2020]    🎤 Artist: Wolpis Carter (1 themes)
+[2026-04-11 20:53:42] [y2020]    🎤 Artist: ATEEZ (1 themes)
+[2026-04-11 20:53:42] [y2020]    ✅ New: 16 | Skipped: 16 | Failed: 0
+[2026-04-11 20:53:42] [y2020] 
+🎌 [17/196] dogeza_de_tanondemita
+[2026-04-11 20:53:44] [y2020]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 20:53:45] [y2020]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 20:53:45] [y2020]    📝 Dogeza de Tanondemita | <DOGEZA>I Tried Asking While Kowtowing. | FALL 2020
+[2026-04-11 20:53:45] [y2020]    🆔 MAL: 42571 | AniList: 122137
+[2026-04-11 20:53:45] [y2020]    🎬 Found 1 theme(s):
+[2026-04-11 20:53:45] [y2020]       ED1: "DOGEZA! Do get that!" — Tomokazu Sugita, Yui Ogura, Saika Kitamori (2 videos)
+[2026-04-11 20:53:45] [y2020]    ⏭️  Theme already in DB: "DOGEZA! Do get that!" (ED1) [id:9419]
+[2026-04-11 20:53:45] [y2020]    🎤 Artist: Tomokazu Sugita (1 themes)
+[2026-04-11 20:53:45] [y2020]    🎤 Artist: Yui Ogura (1 themes)
+[2026-04-11 20:53:45] [y2020]    🎤 Artist: Saika Kitamori (1 themes)
+[2026-04-11 20:53:45] [y2020]    ✅ New: 17 | Skipped: 16 | Failed: 0
+[2026-04-11 20:53:45] [y2020] 
+🎌 [18/196] dokyuu_hentai_hxeros
+[2026-04-11 20:53:47] [y2020]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 20:53:49] [y2020]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 20:53:49] [y2020]    📝 Dokyuu Hentai HxEros | SUPER HXEROS | SUMMER 2020
+[2026-04-11 20:53:49] [y2020]    🆔 MAL: 40623 | AniList: 112818
+[2026-04-11 20:53:49] [y2020]    🎬 Found 2 theme(s):
+[2026-04-11 20:53:49] [y2020]       OP1: "Wake Up Hx ERO! feat. Retto Enjou" — Yoshitsugu Matsuoka, HXEROS SYNDROMES (2 videos)
+[2026-04-11 20:53:49] [y2020]       ED1: "lost emotion" — Ai Kakuma (2 videos)
+[2026-04-11 20:53:49] [y2020]    ⏭️  Theme already in DB: "Wake Up Hx ERO! feat. Retto Enjou" (OP1) [id:9568]
+[2026-04-11 20:53:49] [y2020]    ⏭️  Theme already in DB: "lost emotion" (ED1) [id:9569]
+[2026-04-11 20:53:49] [y2020]    🎤 Artist: Yoshitsugu Matsuoka (1 themes)
+[2026-04-11 20:53:49] [y2020]    🎤 Artist: HXEROS SYNDROMES (1 themes)
+[2026-04-11 20:53:49] [y2020]    🎤 Artist: Ai Kakuma (1 themes)
+[2026-04-11 20:53:49] [y2020]    ✅ New: 18 | Skipped: 16 | Failed: 0
+[2026-04-11 20:53:49] [y2020] 
+🎌 [19/196] dorohedoro
+[2026-04-11 20:53:51] [y2020]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 20:53:52] [y2020]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 20:53:52] [y2020]    📝 Dorohedoro | Dorohedoro | WINTER 2020
+[2026-04-11 20:53:52] [y2020]    🆔 MAL: 38668 | AniList: 105228
+[2026-04-11 20:53:52] [y2020]    🎬 Found 7 theme(s):
+[2026-04-11 20:53:52] [y2020]       OP1: "Welcome to Chaos" — (K)NoW_NAME (2 videos)
+[2026-04-11 20:53:52] [y2020]       ED1: "Who am I?" — (K)NoW_NAME (4 videos)
+[2026-04-11 20:53:52] [y2020]       ED2: "Night SURFING" — (K)NoW_NAME (2 videos)
+[2026-04-11 20:53:52] [y2020]       ED3: "D.D.D.D." — (K)NoW_NAME (2 videos)
+[2026-04-11 20:53:52] [y2020]       ED4: "Strange Meat Pie" — (K)NoW_NAME (2 videos)
+[2026-04-11 20:53:52] [y2020]       ED5: "SECONDs FLY" — (K)NoW_NAME (2 videos)
+[2026-04-11 20:53:52] [y2020]       ED6: "404" — (K)NoW_NAME (2 videos)
+[2026-04-11 20:53:52] [y2020]    ⏭️  Theme already in DB: "Welcome to Chaos" (OP1) [id:9972]
+[2026-04-11 20:53:52] [y2020]    ⏭️  Theme already in DB: "Who am I?" (ED1) [id:9973]
+[2026-04-11 20:53:52] [y2020]    ⏭️  Theme already in DB: "Night SURFING" (ED2) [id:9974]
+[2026-04-11 20:53:52] [y2020]    ⏭️  Theme already in DB: "D.D.D.D." (ED3) [id:9975]
+[2026-04-11 20:53:52] [y2020]    ⏭️  Theme already in DB: "Strange Meat Pie" (ED4) [id:9976]
+[2026-04-11 20:53:52] [y2020]    ⏭️  Theme already in DB: "SECONDs FLY" (ED5) [id:9977]
+[2026-04-11 20:53:52] [y2020]    ⏭️  Theme already in DB: "404" (ED6) [id:9978]
+[2026-04-11 20:53:52] [y2020]    🎤 Artist: (K)NoW_NAME (7 themes)
+[2026-04-11 20:53:52] [y2020]    ✅ New: 19 | Skipped: 16 | Failed: 0
+[2026-04-11 20:53:52] [y2020] 
+🎌 [20/196] dragon_quest_dai_no_daibouken_2020
+[2026-04-11 20:53:54] [y2020]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 20:53:56] [y2020]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 20:53:56] [y2020]    📝 Dragon Quest: Dai no Daibouken | Dragon Quest: The Adventure of Dai | FALL 2020
+[2026-04-11 20:53:56] [y2020]    🆔 MAL: 40906 | AniList: 114099
+[2026-04-11 20:53:56] [y2020]    🎬 Found 6 theme(s):
+[2026-04-11 20:53:56] [y2020]       OP1: "Ikiru wo Suru" — Macaroni Enpitsu (4 videos)
+[2026-04-11 20:53:56] [y2020]       ED1: "mother" — Macaroni Enpitsu (2 videos)
+[2026-04-11 20:53:56] [y2020]       ED2: "Akashi" — XIIX (2 videos)
+[2026-04-11 20:53:56] [y2020]       OP2: "Bravest" — Taichi Mukai (1 videos)
+[2026-04-11 20:53:56] [y2020]       ED3: "Namae" — Humbreaders (1 videos)
+[2026-04-11 20:53:56] [y2020]       ED4: "Tobu Tori wa" — Mitei no Hanashi (1 videos)
+[2026-04-11 20:53:56] [y2020]    ⏭️  Theme already in DB: "Ikiru wo Suru" (OP1) [id:9420]
+[2026-04-11 20:53:56] [y2020]    ⏭️  Theme already in DB: "mother" (ED1) [id:9421]
+[2026-04-11 20:53:56] [y2020]    ⏭️  Theme already in DB: "Akashi" (ED2) [id:10116]
+[2026-04-11 20:53:56] [y2020]    ⏭️  Theme already in DB: "Bravest" (OP2) [id:10752]
+[2026-04-11 20:53:56] [y2020]    ⏭️  Theme already in DB: "Namae" (ED3) [id:10753]
+[2026-04-11 20:53:56] [y2020]    ⏭️  Theme already in DB: "Tobu Tori wa" (ED4) [id:11482]
+[2026-04-11 20:53:56] [y2020]    🎤 Artist: Macaroni Enpitsu (2 themes)
+[2026-04-11 20:53:56] [y2020]    🎤 Artist: XIIX (1 themes)
+[2026-04-11 20:53:56] [y2020]    🎤 Artist: Taichi Mukai (1 themes)
+[2026-04-11 20:53:56] [y2020]    🎤 Artist: Humbreaders (1 themes)
+[2026-04-11 20:53:56] [y2020]    🎤 Artist: Mitei no Hanashi (1 themes)
+[2026-04-11 20:53:56] [y2020]    ✅ New: 20 | Skipped: 16 | Failed: 0
+[2026-04-11 20:53:56] [y2020] 
+🎌 [21/196] dungeon_ni_deai_wo_motomeru_no_wa_machigatteiru_darou_ka_ii_ova
+[2026-04-11 20:53:58] [y2020]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 20:53:59] [y2020]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 20:53:59] [y2020]    📝 Dungeon ni Deai wo Motomeru no wa Machigatteiru Darou ka II OVA | Is It Wrong to Try to Pick Up Girls in a Dungeon? II: Is It Wrong to Go Searching for Herbs on a Deserted Island? | WINTER 2020
+[2026-04-11 20:53:59] [y2020]    🆔 MAL: 40453 | AniList: 112125
+[2026-04-11 20:53:59] [y2020]    🎬 Found 1 theme(s):
+[2026-04-11 20:53:59] [y2020]       ED1: "Tropical☆Vacation" — Saori Oonishi (1 videos)
+[2026-04-11 20:53:59] [y2020]    ⏭️  Theme already in DB: "Tropical☆Vacation" (ED1) [id:9979]
+[2026-04-11 20:53:59] [y2020]    🎤 Artist: Saori Oonishi (1 themes)
+[2026-04-11 20:53:59] [y2020]    ✅ New: 21 | Skipped: 16 | Failed: 0
+[2026-04-11 20:53:59] [y2020] 
+🎌 [22/196] dungeon_ni_deai_wo_motomeru_no_wa_machigatteiru_darou_ka_iii
+[2026-04-11 20:54:01] [y2020]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 20:54:03] [y2020]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 20:54:03] [y2020]    📝 Dungeon ni Deai wo Motomeru no wa Machigatteiru Darou ka III | Is It Wrong to Try to Pick Up Girls in a Dungeon? III | FALL 2020
+[2026-04-11 20:54:03] [y2020]    🆔 MAL: 40454 | AniList: 112124
+[2026-04-11 20:54:03] [y2020]    🎬 Found 2 theme(s):
+[2026-04-11 20:54:03] [y2020]       OP1: "over and over" — Yuka Iguchi (2 videos)
+[2026-04-11 20:54:03] [y2020]       ED1: "Evergreen" — sajou no hana (2 videos)
+[2026-04-11 20:54:03] [y2020]    ⏭️  Theme already in DB: "over and over" (OP1) [id:9422]
+[2026-04-11 20:54:03] [y2020]    ⏭️  Theme already in DB: "Evergreen" (ED1) [id:9423]
+[2026-04-11 20:54:03] [y2020]    🎤 Artist: Yuka Iguchi (1 themes)
+[2026-04-11 20:54:03] [y2020]    🎤 Artist: sajou no hana (1 themes)
+[2026-04-11 20:54:03] [y2020]    ✅ New: 22 | Skipped: 16 | Failed: 0
+[2026-04-11 20:54:03] [y2020] 
+🎌 [23/196] eizouken_ni_wa_te_wo_dasu_na
+[2026-04-11 20:54:05] [y2020]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 20:54:06] [y2020]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 20:54:06] [y2020]    📝 Eizouken ni wa Te wo Dasu na! | Keep Your Hands Off Eizouken! | WINTER 2020
+[2026-04-11 20:54:06] [y2020]    🆔 MAL: 39792 | AniList: 109298
+[2026-04-11 20:54:06] [y2020]    🎬 Found 2 theme(s):
+[2026-04-11 20:54:06] [y2020]       OP1: "Easy Breezy" — — (2 videos)
+[2026-04-11 20:54:06] [y2020]       ED1: "Namae no Nai Ao" — — (2 videos)
+[2026-04-11 20:54:06] [y2020]    ⏭️  Theme already in DB: "Easy Breezy" (OP1) [id:9980]
+[2026-04-11 20:54:06] [y2020]    ⏭️  Theme already in DB: "Namae no Nai Ao" (ED1) [id:9981]
+[2026-04-11 20:54:06] [y2020]    ✅ New: 23 | Skipped: 16 | Failed: 0
+[2026-04-11 20:54:06] [y2020] 
+🎌 [24/196] enen_no_shouboutai_ni_no_shou
+[2026-04-11 20:54:08] [y2020]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 20:54:10] [y2020]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 20:54:10] [y2020]    📝 Enen no Shouboutai: Ni no Shou | Fire Force Season 2 | SUMMER 2020
+[2026-04-11 20:54:10] [y2020]    🆔 MAL: 40956 | AniList: 114236
+[2026-04-11 20:54:10] [y2020]    🎬 Found 5 theme(s):
+[2026-04-11 20:54:10] [y2020]       OP1: "SPARK-AGAIN" — Aimer (2 videos)
+[2026-04-11 20:54:10] [y2020]       OP2: "Torch of Liberty" — KANA-BOON (2 videos)
+[2026-04-11 20:54:10] [y2020]       ED1: "ID" — Cider Girl (2 videos)
+[2026-04-11 20:54:10] [y2020]       ED2: "Desire" — PELICAN FANCLUB (2 videos)
+[2026-04-11 20:54:10] [y2020]       ED3: "Inferno" — — (1 videos)
+[2026-04-11 20:54:10] [y2020]    ⏭️  Theme already in DB: "SPARK-AGAIN" (OP1) [id:9570]
+[2026-04-11 20:54:10] [y2020]    ⏭️  Theme already in DB: "Torch of Liberty" (OP2) [id:9571]
+[2026-04-11 20:54:10] [y2020]    ⏭️  Theme already in DB: "ID" (ED1) [id:9572]
+[2026-04-11 20:54:10] [y2020]    ⏭️  Theme already in DB: "Desire" (ED2) [id:9573]
+[2026-04-11 20:54:10] [y2020]    ⏭️  Theme already in DB: "Inferno" (ED3) [id:9574]
+[2026-04-11 20:54:10] [y2020]    🎤 Artist: Aimer (1 themes)
+[2026-04-11 20:54:10] [y2020]    🎤 Artist: KANA-BOON (1 themes)
+[2026-04-11 20:54:10] [y2020]    🎤 Artist: Cider Girl (1 themes)
+[2026-04-11 20:54:10] [y2020]    🎤 Artist: PELICAN FANCLUB (1 themes)
+[2026-04-11 20:54:10] [y2020]    ✅ New: 24 | Skipped: 16 | Failed: 0
+[2026-04-11 20:54:10] [y2020] 
+🎌 [25/196] fruits_basket_2nd_season
+[2026-04-11 20:54:12] [y2020]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 20:54:13] [y2020]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 20:54:13] [y2020]    📝 Fruits Basket 2nd Season | Fruits Basket Season 2 | SPRING 2020
+[2026-04-11 20:54:13] [y2020]    🆔 MAL: 40417 | AniList: 111762
+[2026-04-11 20:54:13] [y2020]    🎬 Found 5 theme(s):
+[2026-04-11 20:54:13] [y2020]       OP1: "Prism" — AmPm, Miyuna (3 videos)
+[2026-04-11 20:54:13] [y2020]       OP2: "HOME" — Asako Toki (2 videos)
+[2026-04-11 20:54:13] [y2020]       ED1: "ad meliora" — THE CHARM PARK (2 videos)
+[2026-04-11 20:54:13] [y2020]       ED2: "Haseru Mirai" — — (1 videos)
+[2026-04-11 20:54:13] [y2020]       ED3: "Eden" — MONKEY MAJIK (2 videos)
+[2026-04-11 20:54:13] [y2020]    ⏭️  Theme already in DB: "Prism" (OP1) [id:9666]
+[2026-04-11 20:54:13] [y2020]    ⏭️  Theme already in DB: "HOME" (OP2) [id:9667]
+[2026-04-11 20:54:13] [y2020]    ⏭️  Theme already in DB: "ad meliora" (ED1) [id:9668]
+[2026-04-11 20:54:13] [y2020]    ⏭️  Theme already in DB: "Haseru Mirai" (ED2) [id:9669]
+[2026-04-11 20:54:14] [y2020]    ⏭️  Theme already in DB: "Eden" (ED3) [id:9670]
+[2026-04-11 20:54:14] [y2020]    🎤 Artist: AmPm (1 themes)
+[2026-04-11 20:54:14] [y2020]    🎤 Artist: Miyuna (1 themes)
+[2026-04-11 20:54:14] [y2020]    🎤 Artist: Asako Toki (1 themes)
+[2026-04-11 20:54:14] [y2020]    🎤 Artist: THE CHARM PARK (1 themes)
+[2026-04-11 20:54:14] [y2020]    🎤 Artist: MONKEY MAJIK (1 themes)
+[2026-04-11 20:54:14] [y2020]    ✅ New: 25 | Skipped: 16 | Failed: 0
+[2026-04-11 20:54:14] [y2020] 
+🎌 [26/196] fugou_keiji_balanceunlimited
+[2026-04-11 20:54:15] [y2020]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 20:54:17] [y2020]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 20:54:17] [y2020]    📝 Fugou Keiji: Balance:Unlimited | The Millionaire Detective - Balance: UNLIMITED | SPRING 2020
+[2026-04-11 20:54:17] [y2020]    🆔 MAL: 41120 | AniList: 114888
+[2026-04-11 20:54:17] [y2020]    🎬 Found 2 theme(s):
+[2026-04-11 20:54:17] [y2020]       OP1: "NAVIGATOR" — — (3 videos)
+[2026-04-11 20:54:17] [y2020]       ED1: "Welcome My Friend" — OKAMOTO'S (2 videos)
+[2026-04-11 20:54:17] [y2020]    ⏭️  Theme already in DB: "NAVIGATOR" (OP1) [id:9671]
+[2026-04-11 20:54:17] [y2020]    ⏭️  Theme already in DB: "Welcome My Friend" (ED1) [id:9672]
+[2026-04-11 20:54:17] [y2020]    🎤 Artist: OKAMOTO'S (1 themes)
+[2026-04-11 20:54:17] [y2020]    ✅ New: 26 | Skipped: 16 | Failed: 0
+[2026-04-11 20:54:17] [y2020] 
+🎌 [27/196] gal_to_kyouryuu
+[2026-04-11 20:54:19] [y2020]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 20:54:20] [y2020]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 20:54:20] [y2020]    📝 Gal to Kyouryuu | Gal & Dino | SPRING 2020
+[2026-04-11 20:54:20] [y2020]    🆔 MAL: 40358 | AniList: 111323
+[2026-04-11 20:54:20] [y2020]    🎬 Found 2 theme(s):
+[2026-04-11 20:54:20] [y2020]       OP1: "Kyouryuu Agemizawa☆" — Yuuko Natsuyoshi, Miyuri Shimabukuro (2 videos)
+[2026-04-11 20:54:20] [y2020]       ED1: "Peaceful Days" — — (2 videos)
+[2026-04-11 20:54:20] [y2020]    ⏭️  Theme already in DB: "Kyouryuu Agemizawa☆" (OP1) [id:9673]
+[2026-04-11 20:54:20] [y2020]    ⏭️  Theme already in DB: "Peaceful Days" (ED1) [id:9674]
+[2026-04-11 20:54:20] [y2020]    🎤 Artist: Yuuko Natsuyoshi (1 themes)
+[2026-04-11 20:54:20] [y2020]    🎤 Artist: Miyuri Shimabukuro (1 themes)
+[2026-04-11 20:54:20] [y2020]    ✅ New: 27 | Skipped: 16 | Failed: 0
+[2026-04-11 20:54:20] [y2020] 
+🎌 [28/196] ghost_in_the_shell_sac_2045
+[2026-04-11 20:54:22] [y2020]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 20:54:24] [y2020]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 20:54:24] [y2020]    📝 Ghost in the Shell: SAC_2045 | Ghost in the Shell: SAC_2045 | SPRING 2020
+[2026-04-11 20:54:24] [y2020]    🆔 MAL: 38799 | AniList: 106154
+[2026-04-11 20:54:24] [y2020]    🎬 Found 2 theme(s):
+[2026-04-11 20:54:24] [y2020]       OP1: "Fly with me" — millennium parade (2 videos)
+[2026-04-11 20:54:24] [y2020]       ED1: "sustain++;" — Mili (2 videos)
+[2026-04-11 20:54:24] [y2020]    ⏭️  Theme already in DB: "Fly with me" (OP1) [id:9675]
+[2026-04-11 20:54:24] [y2020]    ⏭️  Theme already in DB: "sustain++;" (ED1) [id:9676]
+[2026-04-11 20:54:24] [y2020]    🎤 Artist: millennium parade (1 themes)
+[2026-04-11 20:54:24] [y2020]    🎤 Artist: Mili (1 themes)
+[2026-04-11 20:54:24] [y2020]    ✅ New: 28 | Skipped: 16 | Failed: 0
+[2026-04-11 20:54:24] [y2020] 
+🎌 [29/196] gibiate
+[2026-04-11 20:54:25] [y2020]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 20:54:27] [y2020]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 20:54:27] [y2020]    📝 Gibiate | GIBIATE | SUMMER 2020
+[2026-04-11 20:54:27] [y2020]    🆔 MAL: 40074 | AniList: 110446
+[2026-04-11 20:54:27] [y2020]    🎬 Found 2 theme(s):
+[2026-04-11 20:54:27] [y2020]       OP1: "GIBIATE" — — (1 videos)
+[2026-04-11 20:54:27] [y2020]       ED1: "ENDLESS ~Toki wo Koete~" — Maki Ohguro (1 videos)
+[2026-04-11 20:54:27] [y2020]    ⏭️  Theme already in DB: "GIBIATE" (OP1) [id:9575]
+[2026-04-11 20:54:27] [y2020]    ⏭️  Theme already in DB: "ENDLESS ~Toki wo Koete~" (ED1) [id:9576]
+[2026-04-11 20:54:27] [y2020]    🎤 Artist: Maki Ohguro (1 themes)
+[2026-04-11 20:54:27] [y2020]    ✅ New: 29 | Skipped: 16 | Failed: 0
+[2026-04-11 20:54:27] [y2020] 
+🎌 [30/196] girls_und_panzer_taiyaki_war
+[2026-04-11 20:54:29] [y2020]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 20:54:30] [y2020]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 20:54:30] [y2020]    📝 Girls und Panzer: Taiyaki War! | Girls und Panzer: Taiyaki War! | WINTER 2020
+[2026-04-11 20:54:30] [y2020]    🆔 MAL: 40656 | AniList: 114052
+[2026-04-11 20:54:30] [y2020]    🎬 Found 1 theme(s):
+[2026-04-11 20:54:30] [y2020]       ED1: "Enter Enter MISSION! Saishuushou ver." — Ankou Team (1 videos)
+[2026-04-11 20:54:30] [y2020]    ⏭️  Theme already in DB: "Enter Enter MISSION! Saishuushou ver." (ED1) [id:9982]
+[2026-04-11 20:54:30] [y2020]    🎤 Artist: Ankou Team (1 themes)
+[2026-04-11 20:54:30] [y2020]    ✅ New: 30 | Skipped: 16 | Failed: 0
+[2026-04-11 20:54:30] [y2020] 
+🎌 [31/196] gleipnir
+[2026-04-11 20:54:32] [y2020]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 20:54:33] [y2020]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 20:54:33] [y2020]    📝 Gleipnir | Gleipnir | SPRING 2020
+[2026-04-11 20:54:33] [y2020]    🆔 MAL: 39463 | AniList: 108241
+[2026-04-11 20:54:33] [y2020]    🎬 Found 2 theme(s):
+[2026-04-11 20:54:33] [y2020]       OP1: "Altern-ate-" — — (2 videos)
+[2026-04-11 20:54:33] [y2020]       ED1: "Ame to Taieki to Nioi" — Mili (1 videos)
+[2026-04-11 20:54:34] [y2020]    ⏭️  Theme already in DB: "Altern-ate-" (OP1) [id:9677]
+[2026-04-11 20:54:34] [y2020]    ⏭️  Theme already in DB: "Ame to Taieki to Nioi" (ED1) [id:9678]
+[2026-04-11 20:54:34] [y2020]    🎤 Artist: Mili (1 themes)
+[2026-04-11 20:54:34] [y2020]    ✅ New: 31 | Skipped: 16 | Failed: 0
+[2026-04-11 20:54:34] [y2020] 
+🎌 [32/196] goblin_slayer_goblins_crown
+[2026-04-11 20:54:35] [y2020]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 20:54:37] [y2020]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 20:54:37] [y2020]    📝 Goblin Slayer: Goblin's Crown | GOBLIN SLAYER -GOBLIN’S CROWN- | WINTER 2020
+[2026-04-11 20:54:37] [y2020]    🆔 MAL: 39576 | AniList: 108623
+[2026-04-11 20:54:37] [y2020]    🎬 Found 1 theme(s):
+[2026-04-11 20:54:37] [y2020]       ED1: "Static" — Mili (1 videos)
+[2026-04-11 20:54:37] [y2020]    ⏭️  Theme already in DB: "Static" (ED1) [id:9983]
+[2026-04-11 20:54:37] [y2020]    🎤 Artist: Mili (1 themes)
+[2026-04-11 20:54:37] [y2020]    ✅ New: 32 | Skipped: 16 | Failed: 0
+[2026-04-11 20:54:37] [y2020] 
+🎌 [33/196] gochuumon_wa_usagi_desu_ka_bloom
+[2026-04-11 20:54:38] [y2020]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 20:54:40] [y2020]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 20:54:40] [y2020]    📝 Gochuumon wa Usagi Desu ka? Bloom | Is the Order a Rabbit? BLOOM | FALL 2020
+[2026-04-11 20:54:40] [y2020]    🆔 MAL: 38337 | AniList: 104198
+[2026-04-11 20:54:40] [y2020]    🎬 Found 3 theme(s):
+[2026-04-11 20:54:40] [y2020]       OP1: "Tenkuu Cafeteria" — Ayane Sakura, Inori Minase, Maaya Uchida, Risa Taneda, Satomi Satou (2 videos)
+[2026-04-11 20:54:40] [y2020]       ED1: "Nakayoshi! ○! Nakayoshi!" — Inori Minase, Rie Murakawa, Sora Tokui (11 videos)
+[2026-04-11 20:54:40] [y2020]       ED2: "Yume < Utsutsu → Happy Time" — Ayane Sakura, Inori Minase, Maaya Uchida, Risa Taneda, Satomi Satou (1 videos)
+[2026-04-11 20:54:40] [y2020]    ⏭️  Theme already in DB: "Tenkuu Cafeteria" (OP1) [id:9424]
+[2026-04-11 20:54:40] [y2020]    ⏭️  Theme already in DB: "Nakayoshi! ○! Nakayoshi!" (ED1) [id:9425]
+[2026-04-11 20:54:40] [y2020]    ⏭️  Theme already in DB: "Yume < Utsutsu → Happy Time" (ED2) [id:9426]
+[2026-04-11 20:54:40] [y2020]    🎤 Artist: Ayane Sakura (2 themes)
+[2026-04-11 20:54:40] [y2020]    🎤 Artist: Inori Minase (3 themes)
+[2026-04-11 20:54:40] [y2020]    🎤 Artist: Maaya Uchida (2 themes)
+[2026-04-11 20:54:40] [y2020]    🎤 Artist: Risa Taneda (2 themes)
+[2026-04-11 20:54:40] [y2020]    🎤 Artist: Satomi Satou (2 themes)
+[2026-04-11 20:54:40] [y2020]    🎤 Artist: Rie Murakawa (1 themes)
+[2026-04-11 20:54:40] [y2020]    🎤 Artist: Sora Tokui (1 themes)
+[2026-04-11 20:54:40] [y2020]    ✅ New: 33 | Skipped: 16 | Failed: 0
+[2026-04-11 20:54:40] [y2020] 
+🎌 [34/196] golden_kamuy_3rd_season
+[2026-04-11 20:54:42] [y2020]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 20:54:43] [y2020]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 20:54:43] [y2020]    📝 Golden Kamuy 3rd Season | Golden Kamuy Season 3 | FALL 2020
+[2026-04-11 20:54:43] [y2020]    🆔 MAL: 40059 | AniList: 110355
+[2026-04-11 20:54:43] [y2020]    🎬 Found 2 theme(s):
+[2026-04-11 20:54:43] [y2020]       OP1: "Grey" — — (2 videos)
+[2026-04-11 20:54:43] [y2020]       ED1: "Yuusetsu" — THE SIXTH LIE (2 videos)
+[2026-04-11 20:54:44] [y2020]    ⏭️  Theme already in DB: "Grey" (OP1) [id:9427]
+[2026-04-11 20:54:44] [y2020]    ⏭️  Theme already in DB: "Yuusetsu" (ED1) [id:9428]
+[2026-04-11 20:54:44] [y2020]    🎤 Artist: THE SIXTH LIE (1 themes)
+[2026-04-11 20:54:44] [y2020]    ✅ New: 34 | Skipped: 16 | Failed: 0
+[2026-04-11 20:54:44] [y2020] 
+🎌 [35/196] granblue_fantasy_the_animation_season_2_djeeta_hen
+[2026-04-11 20:54:45] [y2020]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 20:54:47] [y2020]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 20:54:47] [y2020]    📝 Granblue Fantasy The Animation Season 2: Djeeta-hen | Granblue Fantasy: The Animation Season 2 Specials | WINTER 2020
+[2026-04-11 20:54:47] [y2020]    🆔 MAL: 40873 | AniList: 116968
+[2026-04-11 20:54:47] [y2020]    🎬 Found 2 theme(s):
+[2026-04-11 20:54:47] [y2020]       OP1: "Stay With Me" — — (1 videos)
+[2026-04-11 20:54:47] [y2020]       ED1: "Ao" — — (1 videos)
+[2026-04-11 20:54:47] [y2020]    ⏭️  Theme already in DB: "Stay With Me" (OP1) [id:9984]
+[2026-04-11 20:54:47] [y2020]    ⏭️  Theme already in DB: "Ao" (ED1) [id:9985]
+[2026-04-11 20:54:47] [y2020]    ✅ New: 35 | Skipped: 16 | Failed: 0
+[2026-04-11 20:54:47] [y2020] 
+🎌 [36/196] great_pretender
+[2026-04-11 20:54:48] [y2020]    📡 Got anime info from AnimeThemes (full mode)
