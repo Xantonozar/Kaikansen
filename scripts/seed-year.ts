@@ -738,7 +738,7 @@ async function upsertAnime(anime: ParsedAnime): Promise<void> {
     // Check if this specific theme already exists in DB
     const existing = await ThemeCache.findOne({ animethemesId: theme.animethemesThemeId })
     if (existing) {
-      log(`   ⏭️  Theme already in DB: "${theme.songTitle}" (${theme.type}${theme.sequence})`)
+      log(`   ⏭️  Theme already in DB: "${theme.songTitle}" (${theme.type}${theme.sequence}) [id:${theme.animethemesThemeId}]`)
       continue
     }
     

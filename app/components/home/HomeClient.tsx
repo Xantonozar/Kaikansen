@@ -23,11 +23,12 @@ interface Theme {
 interface HomeClientProps {
   popularThemes: Theme[]
   featuredThemes: Theme[]
+  topSeasonalThemes: Theme[]
   currentSeason: { season: string; year: number }
   stats: { activeUsers: number; listeningNow: number; avatars: string[] }
 }
 
-export function HomeClient({ popularThemes, featuredThemes, currentSeason, stats }: HomeClientProps) {
+export function HomeClient({ popularThemes, featuredThemes, topSeasonalThemes, currentSeason, stats }: HomeClientProps) {
   const { user } = useAuth()
   const [typeFilter, setTypeFilter] = useState<'OP' | 'ED' | null>(null)
   const loadMoreRef = useRef<HTMLDivElement>(null)
@@ -136,28 +137,26 @@ export function HomeClient({ popularThemes, featuredThemes, currentSeason, stats
         </section>
       )}
 
-      {/* Section: Current Season Endings */}
-      {featuredEDs.length > 0 && (
+      {/* Section: Top Rated Spring 2026 Themes */}
+      {topSeasonalThemes.length > 0 && (
         <section>
-          <h2 className="text-lg font-display font-bold text-ktext-primary mb-3">
-            {currentSeason.season} {currentSeason.year} Endings
-          </h2>
-          <div className="flex gap-3 overflow-x-auto scrollbar-hide -mx-4 px-4 pb-2">
-            {featuredEDs.map((theme) => (
-              <ThemeFeaturedCard key={theme.slug} theme={theme} />
-            ))}
+          <div className="flex items-center justify-between mb-3">
+            <div>
+              <p className="text-xs font-body font-semibold text-accent uppercase tracking-wide">Top Rated</p>
+              <h2 className="text-2xl font-display font-bold text-ktext-primary">
+                {currentSeason.season} {currentSeason.year} Themes
+              </h2>
+            </div>
+            <Link 
+              href={`/season/${currentSeason.season.toLowerCase()}/${currentSeason.year}`}
+              className="text-sm font-body text-accent font-semibold interactive"
+            >
+              View All
+            </Link>
           </div>
-        </section>
-      )}
-
-      {/* Section: Current Season Endings */}
-      {featuredEDs.length > 0 && (
-        <section>
-          <h2 className="text-lg font-display font-bold text-ktext-primary mb-3">
-            {currentSeason.season} {currentSeason.year} Endings
-          </h2>
+          
           <div className="flex gap-3 overflow-x-auto scrollbar-hide -mx-4 px-4 pb-2">
-            {featuredEDs.map((theme) => (
+            {topSeasonalThemes.map((theme) => (
               <ThemeFeaturedCard key={theme.slug} theme={theme} />
             ))}
           </div>

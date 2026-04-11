@@ -12,8 +12,9 @@ export async function GET(request: NextRequest) {
     const season = url.searchParams.get('season')
     const year = url.searchParams.get('year')
     const type = url.searchParams.get('type')
+    const sortBy = url.searchParams.get('sortBy') || 'type'
     const page = Math.max(1, parseInt(url.searchParams.get('page') || '1'))
-    const limit = 50
+    const limit = Math.min(50, parseInt(url.searchParams.get('limit') || '50'))
 
     if (!season || !year) {
       return NextResponse.json(
@@ -27,9 +28,18 @@ export async function GET(request: NextRequest) {
 
     const skip = (page - 1) * limit
 
+    let sortOption: Record<string, 1 | -1>
+    if (sortBy === 'rating') {
+      sortOption = { avgRating: -1, totalRatings: -1 }
+    } else if (sortBy === 'popular') {
+      sortOption = { totalRatings: -1, avgRating: -1 }
+    } else {
+      sortOption = { type: 1, sequence: 1 }
+    }
+
     const [themes, total] = await Promise.all([
       ThemeCache.find(query)
-        .sort({ type: 1, sequence: 1 })
+        .sort(sortOption)
         .skip(skip)
         .limit(limit)
         .lean(),

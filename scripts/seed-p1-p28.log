@@ -905,3 +905,564 @@
 [2026-04-11 16:13:53] [p1-p28]   └─ ❌  running total → processed:1  failed:27
 [2026-04-11 16:13:53] [p1-p28] 
   ┌─ [8/2799] 🎌 12_sai_chicchana_mune_no_tokimeki_2nd_season
+══════════════════════════════════════════════════════════════════════
+[2026-04-11 16:15:45] [p1-p28] 🌱 ANIME SEED SCRIPT STARTED
+[2026-04-11 16:15:45] [p1-p28]    Run tag    : p1-p28
+[2026-04-11 16:15:45] [p1-p28]    Pages      : 1 → 28
+[2026-04-11 16:15:45] [p1-p28]    Page size  : 100
+[2026-04-11 16:15:45] [p1-p28]    Mode       : NORMAL
+[2026-04-11 16:15:45] [p1-p28]    Files:
+[2026-04-11 16:15:45] [p1-p28]      Slugs    → /root/kaikansen/scripts/slugs-p1-p28.json
+[2026-04-11 16:15:45] [p1-p28]      Progress → /root/kaikansen/scripts/progress-p1-p28.json
+[2026-04-11 16:15:45] [p1-p28]      Log      → /root/kaikansen/scripts/seed-p1-p28.log
+[2026-04-11 16:15:45] [p1-p28]    Delays: AT=700ms  AniList=1000ms  Kitsu=1000ms
+══════════════════════════════════════════════════════════════════════
+[2026-04-11 16:15:46] [p1-p28] ✅ Connected to MongoDB
+═════════════════════════════════════════════════════════════════
+[2026-04-11 16:15:46] [p1-p28] 🚀 PHASE: 1 — Collecting Slugs
+═════════════════════════════════════════════════════════════════
+[2026-04-11 16:15:46] [p1-p28] ✅ Slug file exists — 2800 slugs already collected
+[2026-04-11 16:15:46] [p1-p28]    Skipping collection phase
+═════════════════════════════════════════════════════════════════
+[2026-04-11 16:15:46] [p1-p28] 🚀 PHASE: 2 — Processing Slugs
+═════════════════════════════════════════════════════════════════
+[2026-04-11 16:15:46] [p1-p28] 📊 Stats for run [p1-p28]
+[2026-04-11 16:15:46] [p1-p28]    Total slugs      : 2800
+[2026-04-11 16:15:46] [p1-p28]    Already processed: 1
+[2026-04-11 16:15:46] [p1-p28]    Previously failed: 27
+[2026-04-11 16:15:46] [p1-p28]    Pending now      : 2799
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:15:46] [p1-p28] 
+  ┌─ [1/2799] 🎌 hackliminality
+[2026-04-11 16:15:48] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:15:48] [p1-p28]   │  📺 Format : OVA
+[2026-04-11 16:15:48] [p1-p28]   │  📅 Season : SPRING 2002
+[2026-04-11 16:15:48] [p1-p28]   │  🗂  Series : —
+[2026-04-11 16:15:50] [p1-p28]   │  ✅ [AniList:by_id] → .hack//Liminality
+[2026-04-11 16:15:50] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:none
+[2026-04-11 16:15:50] [p1-p28]   │  📝 JP      : .hack//Liminality
+[2026-04-11 16:15:50] [p1-p28]   │  📝 EN      : .hack//Liminality
+[2026-04-11 16:15:50] [p1-p28]   │  📝 Romaji  : .hack//Liminality
+[2026-04-11 16:15:50] [p1-p28]   │  📝 Native  : .hack//Liminality
+[2026-04-11 16:15:50] [p1-p28]   │  📝 Alt     : 2 titles
+[2026-04-11 16:15:50] [p1-p28]   │  🆔 MAL:299  AniList:299  Kitsu:—
+[2026-04-11 16:15:50] [p1-p28]   │  🎬 Themes  : 4
+[2026-04-11 16:15:50] [p1-p28]   │    [OP1] "Edge" — See-Saw
+[2026-04-11 16:15:50] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:15:50] [p1-p28]   │    [OP2] "Senyaichiya" — See-Saw
+[2026-04-11 16:15:50] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:15:50] [p1-p28]   │    [OP3] "Kimi ga Ita Monogatari" — See-Saw
+[2026-04-11 16:15:50] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:15:50] [p1-p28]   │    [OP4] "Kioku" — See-Saw
+[2026-04-11 16:15:50] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:15:50] [p1-p28]   │  ❌ Unexpected: Plan executor error during findAndModify :: caused by :: E11000 duplicate key error collection: test.themecaches index: slug_1 dup key: { slug: null }
+[2026-04-11 16:15:50] [p1-p28]   └─ ❌  running total → processed:1  failed:28
+[2026-04-11 16:15:50] [p1-p28] 
+  ┌─ [2/2799] 🎌 hackroots
+[2026-04-11 16:15:52] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:15:52] [p1-p28]   │  📺 Format : TV
+[2026-04-11 16:15:52] [p1-p28]   │  📅 Season : SPRING 2006
+[2026-04-11 16:15:52] [p1-p28]   │  🗂  Series : —
+[2026-04-11 16:15:53] [p1-p28]   │  ✅ [AniList:by_id] → .hack//Roots
+[2026-04-11 16:15:53] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:none
+[2026-04-11 16:15:53] [p1-p28]   │  📝 JP      : .hack//roots
+[2026-04-11 16:15:53] [p1-p28]   │  📝 EN      : .hack//Roots
+[2026-04-11 16:15:53] [p1-p28]   │  📝 Romaji  : .hack//Roots
+[2026-04-11 16:15:53] [p1-p28]   │  📝 Native  : .hack//Roots
+[2026-04-11 16:15:53] [p1-p28]   │  📝 Alt     : 2 titles
+[2026-04-11 16:15:53] [p1-p28]   │  🆔 MAL:873  AniList:873  Kitsu:—
+[2026-04-11 16:15:53] [p1-p28]   │  🎬 Themes  : 2
+[2026-04-11 16:15:53] [p1-p28]   │    [OP1] "Silly-go-Round" — Yuuka Nanri
+[2026-04-11 16:15:53] [p1-p28]   │        entries:1  videos:2  audio:✅
+[2026-04-11 16:15:53] [p1-p28]   │    [ED1] "Boukoku Kakusei - Catharsis" — ALI PROJECT
+[2026-04-11 16:15:53] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:15:53] [p1-p28]   │  ❌ Unexpected: Plan executor error during findAndModify :: caused by :: E11000 duplicate key error collection: test.themecaches index: slug_1 dup key: { slug: null }
+[2026-04-11 16:15:53] [p1-p28]   └─ ❌  running total → processed:1  failed:29
+[2026-04-11 16:15:53] [p1-p28] 
+  ┌─ [3/2799] 🎌 hacksign
+[2026-04-11 16:15:55] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:15:55] [p1-p28]   │  📺 Format : TV
+[2026-04-11 16:15:55] [p1-p28]   │  📅 Season : SPRING 2002
+[2026-04-11 16:15:55] [p1-p28]   │  🗂  Series : —
+[2026-04-11 16:15:56] [p1-p28]   │  ✅ [AniList:by_id] → .hack//SIGN
+[2026-04-11 16:15:56] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:none
+[2026-04-11 16:15:56] [p1-p28]   │  📝 JP      : .hack//Sign
+[2026-04-11 16:15:56] [p1-p28]   │  📝 EN      : .hack//SIGN
+[2026-04-11 16:15:56] [p1-p28]   │  📝 Romaji  : .hack//SIGN
+[2026-04-11 16:15:56] [p1-p28]   │  📝 Native  : .hack//SIGN
+[2026-04-11 16:15:56] [p1-p28]   │  📝 Alt     : 1 titles
+[2026-04-11 16:15:56] [p1-p28]   │  🆔 MAL:48  AniList:48  Kitsu:—
+[2026-04-11 16:15:56] [p1-p28]   │  🎬 Themes  : 2
+[2026-04-11 16:15:56] [p1-p28]   │    [OP1] "Obsession" — See-Saw
+[2026-04-11 16:15:56] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:15:56] [p1-p28]   │    [ED1] "Yasashii Yoake" — See-Saw
+[2026-04-11 16:15:56] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:15:56] [p1-p28]   │  ❌ Unexpected: Plan executor error during findAndModify :: caused by :: E11000 duplicate key error collection: test.themecaches index: slug_1 dup key: { slug: null }
+[2026-04-11 16:15:56] [p1-p28]   └─ ❌  running total → processed:1  failed:30
+[2026-04-11 16:15:56] [p1-p28] 
+  ┌─ [4/2799] 🎌 hacktasogare_no_udewa_densetsu
+[2026-04-11 16:15:58] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:15:58] [p1-p28]   │  📺 Format : TV
+[2026-04-11 16:15:58] [p1-p28]   │  📅 Season : WINTER 2003
+[2026-04-11 16:15:58] [p1-p28]   │  🗂  Series : —
+[2026-04-11 16:15:59] [p1-p28]   │  ✅ [AniList:by_id] → .hack//Tasogare no Udewa Densetsu
+[2026-04-11 16:15:59] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:none
+[2026-04-11 16:15:59] [p1-p28]   │  📝 JP      : .hack//Tasogare no Udewa Densetsu
+[2026-04-11 16:15:59] [p1-p28]   │  📝 EN      : .hack//Legend Of The Twilight
+[2026-04-11 16:15:59] [p1-p28]   │  📝 Romaji  : .hack//Tasogare no Udewa Densetsu
+[2026-04-11 16:15:59] [p1-p28]   │  📝 Native  : .hack//黄昏の腕輪伝説
+[2026-04-11 16:15:59] [p1-p28]   │  📝 Alt     : 7 titles
+[2026-04-11 16:15:59] [p1-p28]   │  🆔 MAL:298  AniList:298  Kitsu:—
+[2026-04-11 16:15:59] [p1-p28]   │  🎬 Themes  : 2
+[2026-04-11 16:15:59] [p1-p28]   │    [OP1] "New World" — ROUND TABLE feat. Nino
+[2026-04-11 16:15:59] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:15:59] [p1-p28]   │    [ED1] "Emerald Green" — See-Saw
+[2026-04-11 16:15:59] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:15:59] [p1-p28]   │  ❌ Unexpected: Plan executor error during findAndModify :: caused by :: E11000 duplicate key error collection: test.themecaches index: slug_1 dup key: { slug: null }
+[2026-04-11 16:15:59] [p1-p28]   └─ ❌  running total → processed:1  failed:31
+[2026-04-11 16:15:59] [p1-p28] 
+  ┌─ [5/2799] 🎌 100_man_no_inochi_no_ue_ni_ore_wa_tatteiru
+[2026-04-11 16:16:01] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:16:01] [p1-p28]   │  📺 Format : TV
+[2026-04-11 16:16:01] [p1-p28]   │  📅 Season : FALL 2020
+[2026-04-11 16:16:01] [p1-p28]   │  🗂  Series : —
+[2026-04-11 16:16:03] [p1-p28]   │  ✅ [AniList:by_id] → 100-man no Inochi no Ue ni Ore wa Tatteiru
+[2026-04-11 16:16:03] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:none
+[2026-04-11 16:16:03] [p1-p28]   │  📝 JP      : 100-man no Inochi no Ue ni Ore wa Tatteiru
+[2026-04-11 16:16:03] [p1-p28]   │  📝 EN      : I'm Standing on a Million Lives
+[2026-04-11 16:16:03] [p1-p28]   │  📝 Romaji  : 100-man no Inochi no Ue ni Ore wa Tatteiru
+[2026-04-11 16:16:03] [p1-p28]   │  📝 Native  : 100万の命の上に俺は立っている
+[2026-04-11 16:16:03] [p1-p28]   │  📝 Alt     : 5 titles
+[2026-04-11 16:16:03] [p1-p28]   │  🆔 MAL:41380  AniList:116242  Kitsu:—
+[2026-04-11 16:16:03] [p1-p28]   │  🎬 Themes  : 3
+[2026-04-11 16:16:03] [p1-p28]   │    [OP1] "Anti world" — Kanako Takatsuki
+[2026-04-11 16:16:03] [p1-p28]   │        entries:1  videos:2  audio:✅
+[2026-04-11 16:16:03] [p1-p28]   │    [OP2] "Dear My MAJIHA Sisters" — Kanako Takatsuki, Ai Furihata
+[2026-04-11 16:16:03] [p1-p28]   │        entries:1  videos:2  audio:✅
+[2026-04-11 16:16:03] [p1-p28]   │    [ED1] "Carpe Diem" — Liyuu
+[2026-04-11 16:16:03] [p1-p28]   │        entries:4  videos:8  audio:✅
+[2026-04-11 16:16:03] [p1-p28]   │  ❌ Unexpected: Plan executor error during findAndModify :: caused by :: E11000 duplicate key error collection: test.themecaches index: slug_1 dup key: { slug: null }
+[2026-04-11 16:16:03] [p1-p28]   └─ ❌  running total → processed:1  failed:32
+[2026-04-11 16:16:03] [p1-p28] 
+  ┌─ [6/2799] 🎌 11eyes
+[2026-04-11 16:16:04] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:16:04] [p1-p28]   │  📺 Format : TV
+[2026-04-11 16:16:04] [p1-p28]   │  📅 Season : FALL 2009
+[2026-04-11 16:16:04] [p1-p28]   │  🗂  Series : —
+[2026-04-11 16:16:06] [p1-p28]   │  ✅ [AniList:by_id] → 11eyes
+[2026-04-11 16:16:06] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:none
+[2026-04-11 16:16:06] [p1-p28]   │  📝 JP      : 11eyes
+[2026-04-11 16:16:06] [p1-p28]   │  📝 EN      : 11eyes
+[2026-04-11 16:16:06] [p1-p28]   │  📝 Romaji  : 11eyes
+[2026-04-11 16:16:06] [p1-p28]   │  📝 Native  : イレブンアイズ
+[2026-04-11 16:16:06] [p1-p28]   │  📝 Alt     : 3 titles
+[2026-04-11 16:16:06] [p1-p28]   │  🆔 MAL:6682  AniList:6682  Kitsu:—
+[2026-04-11 16:16:06] [p1-p28]   │  🎬 Themes  : 2
+[2026-04-11 16:16:06] [p1-p28]   │    [OP1] "Arrival of Tears" — Ayane
+[2026-04-11 16:16:06] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:16:06] [p1-p28]   │    [ED1] "Sequentia" — Asriel
+[2026-04-11 16:16:06] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:16:06] [p1-p28]   │  ❌ Unexpected: Plan executor error during findAndModify :: caused by :: E11000 duplicate key error collection: test.themecaches index: slug_1 dup key: { slug: null }
+[2026-04-11 16:16:06] [p1-p28]   └─ ❌  running total → processed:1  failed:33
+[2026-04-11 16:16:06] [p1-p28] 
+  ┌─ [7/2799] 🎌 12_sai_chicchana_mune_no_tokimeki
+[2026-04-11 16:16:08] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:16:08] [p1-p28]   │  📺 Format : TV
+[2026-04-11 16:16:08] [p1-p28]   │  📅 Season : SPRING 2016
+[2026-04-11 16:16:08] [p1-p28]   │  🗂  Series : —
+[2026-04-11 16:16:09] [p1-p28]   │  ✅ [AniList:by_id] → 12-sai.: Chiccha na Mune no Tokimeki
+[2026-04-11 16:16:11] [p1-p28]   │  ⚠️  [Kitsu:by_malid] no results
+[2026-04-11 16:16:12] [p1-p28]   │  ✅ [Kitsu:by_title] → 12-sai.: Chicchana Mune no Tokimeki
+[2026-04-11 16:16:12] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:by_title
+[2026-04-11 16:16:12] [p1-p28]   │  📝 JP      : 12-sai.: Chicchana Mune no Tokimeki
+[2026-04-11 16:16:12] [p1-p28]   │  📝 EN      : 12-sai.: Chicchana Mune no Tokimeki
+[2026-04-11 16:16:12] [p1-p28]   │  📝 Romaji  : 12-sai.: Chiccha na Mune no Tokimeki
+[2026-04-11 16:16:12] [p1-p28]   │  📝 Native  : 12歳。～ちっちゃなムネのトキメキ～
+[2026-04-11 16:16:12] [p1-p28]   │  📝 Alt     : 5 titles
+[2026-04-11 16:16:12] [p1-p28]   │  🆔 MAL:32601  AniList:21609  Kitsu:11782
+[2026-04-11 16:16:12] [p1-p28]   │  🎬 Themes  : 2
+[2026-04-11 16:16:12] [p1-p28]   │    [OP1] "Sweet Sensation" — Rie Murakawa
+[2026-04-11 16:16:12] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:16:12] [p1-p28]   │    [ED1] "Cotona MODE" — AOP
+[2026-04-11 16:16:12] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:16:12] [p1-p28]   │  ❌ Unexpected: Plan executor error during findAndModify :: caused by :: E11000 duplicate key error collection: test.themecaches index: slug_1 dup key: { slug: null }
+[2026-04-11 16:16:12] [p1-p28]   └─ ❌  running total → processed:1  failed:34
+[2026-04-11 16:16:12] [p1-p28] 
+  ┌─ [8/2799] 🎌 12_sai_chicchana_mune_no_tokimeki_2nd_season
+[2026-04-11 16:16:14] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:16:14] [p1-p28]   │  📺 Format : TV
+[2026-04-11 16:16:14] [p1-p28]   │  📅 Season : FALL 2016
+[2026-04-11 16:16:14] [p1-p28]   │  🗂  Series : —
+[2026-04-11 16:16:16] [p1-p28]   │  ✅ [AniList:by_id] → 12-sai.: Chiccha na Mune no Tokimeki 2
+[2026-04-11 16:16:17] [p1-p28]   │  ⚠️  [Kitsu:by_malid] no results
+[2026-04-11 16:16:19] [p1-p28]   │  ✅ [Kitsu:by_title] → 12-sai.: Chicchana Mune no Tokimeki 2nd Season
+[2026-04-11 16:16:19] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:by_title
+[2026-04-11 16:16:19] [p1-p28]   │  📝 JP      : 12-sai.: Chicchana Mune no Tokimeki 2nd Season
+[2026-04-11 16:16:19] [p1-p28]   │  📝 EN      : 12-sai.: Chicchana Mune no Tokimeki 2nd Season
+[2026-04-11 16:16:19] [p1-p28]   │  📝 Romaji  : 12-sai.: Chiccha na Mune no Tokimeki 2
+[2026-04-11 16:16:19] [p1-p28]   │  📝 Native  : 12歳。～ちっちゃなムネのトキメキ～ 2
+[2026-04-11 16:16:19] [p1-p28]   │  📝 Alt     : 6 titles
+[2026-04-11 16:16:19] [p1-p28]   │  🆔 MAL:33419  AniList:21839  Kitsu:12270
+[2026-04-11 16:16:19] [p1-p28]   │  🎬 Themes  : 2
+[2026-04-11 16:16:19] [p1-p28]   │    [OP1] "Ano ne, Kimi dake ni" — AOP
+[2026-04-11 16:16:19] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:16:19] [p1-p28]   │    [ED1] "Yuuki no Tsubasa" — Machico
+[2026-04-11 16:16:19] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:16:19] [p1-p28]   │  ❌ Unexpected: Plan executor error during findAndModify :: caused by :: E11000 duplicate key error collection: test.themecaches index: slug_1 dup key: { slug: null }
+[2026-04-11 16:16:19] [p1-p28]   └─ ❌  running total → processed:1  failed:35
+[2026-04-11 16:16:19] [p1-p28] 
+  ┌─ [9/2799] 🎌 18if
+[2026-04-11 16:16:21] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:16:21] [p1-p28]   │  📺 Format : TV
+[2026-04-11 16:16:21] [p1-p28]   │  📅 Season : SUMMER 2017
+[2026-04-11 16:16:21] [p1-p28]   │  🗂  Series : —
+[2026-04-11 16:16:22] [p1-p28]   │  ✅ [AniList:by_id] → 18if
+[2026-04-11 16:16:24] [p1-p28]   │  ⚠️  [Kitsu:by_malid] no results
+[2026-04-11 16:16:25] [p1-p28]   │  ✅ [Kitsu:by_title] → 18if
+[2026-04-11 16:16:25] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:by_title
+[2026-04-11 16:16:25] [p1-p28]   │  📝 JP      : 18if
+[2026-04-11 16:16:25] [p1-p28]   │  📝 EN      : 18if
+[2026-04-11 16:16:25] [p1-p28]   │  📝 Romaji  : 18if
+[2026-04-11 16:16:25] [p1-p28]   │  📝 Native  : 18if
+[2026-04-11 16:16:25] [p1-p28]   │  📝 Alt     : 2 titles
+[2026-04-11 16:16:25] [p1-p28]   │  🆔 MAL:35248  AniList:98512  Kitsu:13281
+[2026-04-11 16:16:25] [p1-p28]   │  🎬 Themes  : 14
+[2026-04-11 16:16:25] [p1-p28]   │    [OP1] "Red Doors feat. Yoshikazu Mera" — TeddyLoid
+[2026-04-11 16:16:25] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:16:25] [p1-p28]   │    [ED1] "Wonderland" — —
+[2026-04-11 16:16:25] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:16:25] [p1-p28]   │    [ED2] "Break The Doors feat. Aina The End (BiSH)" — TeddyLoid, AiNA THE END
+[2026-04-11 16:16:25] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:16:25] [p1-p28]   │    [ED3] "Yume Koibana" — —
+[2026-04-11 16:16:25] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:16:25] [p1-p28]   │    [ED4] "ANGELNOIR" — —
+[2026-04-11 16:16:25] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:16:25] [p1-p28]   │    [ED5] "Plumeria" — —
+[2026-04-11 16:16:25] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:16:25] [p1-p28]   │    [ED6] "Yukue Shirezu" — —
+[2026-04-11 16:16:25] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:16:25] [p1-p28]   │    [ED7] "too late" — Inori Minase
+[2026-04-11 16:16:25] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:16:25] [p1-p28]   │    [ED8] "Sora no Oto" — —
+[2026-04-11 16:16:25] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:16:25] [p1-p28]   │    [ED9] "Tsubasa" — —
+[2026-04-11 16:16:25] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:16:25] [p1-p28]   │    [ED10] "Factor Word" — —
+[2026-04-11 16:16:25] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:16:25] [p1-p28]   │    [ED11] "Salvation" — TeddyLoid
+[2026-04-11 16:16:25] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:16:25] [p1-p28]   │    [ED12] "Hakuchou wa Nemuru feat. Yoshikazu Mera" — TeddyLoid
+[2026-04-11 16:16:25] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:16:25] [p1-p28]   │    [ED13] "if" — Nobunaga Shimazaki
+[2026-04-11 16:16:25] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:16:25] [p1-p28]   │  ❌ Unexpected: Plan executor error during findAndModify :: caused by :: E11000 duplicate key error collection: test.themecaches index: slug_1 dup key: { slug: null }
+[2026-04-11 16:16:25] [p1-p28]   └─ ❌  running total → processed:1  failed:36
+[2026-04-11 16:16:25] [p1-p28] 
+  ┌─ [10/2799] 🎌 243_seiin_koukou_danshi_volley_bu
+[2026-04-11 16:16:27] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:16:27] [p1-p28]   │  📺 Format : TV
+[2026-04-11 16:16:27] [p1-p28]   │  📅 Season : WINTER 2021
+[2026-04-11 16:16:27] [p1-p28]   │  🗂  Series : —
+[2026-04-11 16:16:29] [p1-p28]   │  ✅ [AniList:by_id] → 2.43: Seiin Koukou Danshi Volley-bu
+[2026-04-11 16:16:29] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:none
+[2026-04-11 16:16:29] [p1-p28]   │  📝 JP      : 2.43: Seiin Koukou Danshi Volley-bu
+[2026-04-11 16:16:29] [p1-p28]   │  📝 EN      : 2.43: Seiin High School Boys Volleyball Team
+[2026-04-11 16:16:29] [p1-p28]   │  📝 Romaji  : 2.43: Seiin Koukou Danshi Volley-bu
+[2026-04-11 16:16:29] [p1-p28]   │  📝 Native  : 2.43 清陰高校男子バレー部
+[2026-04-11 16:16:29] [p1-p28]   │  📝 Alt     : 4 titles
+[2026-04-11 16:16:29] [p1-p28]   │  🆔 MAL:40679  AniList:113231  Kitsu:—
+[2026-04-11 16:16:29] [p1-p28]   │  🎬 Themes  : 2
+[2026-04-11 16:16:29] [p1-p28]   │    [OP1] "Mahi" — yama
+[2026-04-11 16:16:29] [p1-p28]   │        entries:1  videos:2  audio:✅
+[2026-04-11 16:16:29] [p1-p28]   │    [ED1] "Undulation" — Soushi Sakiyama
+[2026-04-11 16:16:29] [p1-p28]   │        entries:1  videos:2  audio:✅
+[2026-04-11 16:16:29] [p1-p28]   │  ❌ Unexpected: Plan executor error during findAndModify :: caused by :: E11000 duplicate key error collection: test.themecaches index: slug_1 dup key: { slug: null }
+[2026-04-11 16:16:29] [p1-p28]   └─ ❌  running total → processed:1  failed:37
+[2026-04-11 16:16:29] [p1-p28] 
+  ┌─ [11/2799] 🎌 227
+[2026-04-11 16:16:31] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:16:31] [p1-p28]   │  📺 Format : TV
+[2026-04-11 16:16:31] [p1-p28]   │  📅 Season : WINTER 2020
+[2026-04-11 16:16:31] [p1-p28]   │  🗂  Series : —
+[2026-04-11 16:16:32] [p1-p28]   │  ✅ [AniList:by_id] → 22/7
+[2026-04-11 16:16:32] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:none
+[2026-04-11 16:16:32] [p1-p28]   │  📝 JP      : 22/7
+[2026-04-11 16:16:32] [p1-p28]   │  📝 EN      : 22/7 (nanabun no nijyuuni)
+[2026-04-11 16:16:32] [p1-p28]   │  📝 Romaji  : 22/7
+[2026-04-11 16:16:32] [p1-p28]   │  📝 Native  : 22/7 （ナナブンノニジュウニ）
+[2026-04-11 16:16:32] [p1-p28]   │  📝 Alt     : 4 titles
+[2026-04-11 16:16:32] [p1-p28]   │  🆔 MAL:40148  AniList:99807  Kitsu:—
+[2026-04-11 16:16:32] [p1-p28]   │  🎬 Themes  : 10
+[2026-04-11 16:16:32] [p1-p28]   │    [OP1] "Muzui" — 22/7
+[2026-04-11 16:16:32] [p1-p28]   │        entries:1  videos:2  audio:✅
+[2026-04-11 16:16:32] [p1-p28]   │    [ED1] "Sora no Emerald" — 22/7
+[2026-04-11 16:16:32] [p1-p28]   │        entries:1  videos:2  audio:✅
+[2026-04-11 16:16:32] [p1-p28]   │    [ED2] "One of them" — —
+[2026-04-11 16:16:32] [p1-p28]   │        entries:1  videos:2  audio:✅
+[2026-04-11 16:16:32] [p1-p28]   │    [ED3] "Ikiru Koto ni Naru ni Naritai" — Sally Amaki
+[2026-04-11 16:16:32] [p1-p28]   │        entries:1  videos:2  audio:✅
+[2026-04-11 16:16:32] [p1-p28]   │    [ED4] "Yume no Fune" — —
+[2026-04-11 16:16:32] [p1-p28]   │        entries:1  videos:2  audio:✅
+[2026-04-11 16:16:32] [p1-p28]   │    [ED5] "Yuutousei ja Tsumaranai" — —
+[2026-04-11 16:16:32] [p1-p28]   │        entries:1  videos:2  audio:✅
+[2026-04-11 16:16:32] [p1-p28]   │    [ED6] "Jinsei wa Waltz" — —
+[2026-04-11 16:16:32] [p1-p28]   │        entries:1  videos:2  audio:✅
+[2026-04-11 16:16:32] [p1-p28]   │    [ED7] "Kanjou Muyouron" — —
+[2026-04-11 16:16:32] [p1-p28]   │        entries:1  videos:2  audio:✅
+[2026-04-11 16:16:32] [p1-p28]   │    [ED8] "Moonlight" — —
+[2026-04-11 16:16:32] [p1-p28]   │        entries:1  videos:2  audio:✅
+[2026-04-11 16:16:32] [p1-p28]   │    [ED9] "Kodoku wa Kirai ja Nai" — —
+[2026-04-11 16:16:32] [p1-p28]   │        entries:1  videos:2  audio:✅
+[2026-04-11 16:16:32] [p1-p28]   │  ❌ Unexpected: Plan executor error during findAndModify :: caused by :: E11000 duplicate key error collection: test.themecaches index: slug_1 dup key: { slug: null }
+[2026-04-11 16:16:32] [p1-p28]   └─ ❌  running total → processed:1  failed:38
+[2026-04-11 16:16:32] [p1-p28] 
+  ┌─ [12/2799] 🎌 227_83
+[2026-04-11 16:16:34] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:16:34] [p1-p28]   │  📺 Format : Special
+[2026-04-11 16:16:34] [p1-p28]   │  📅 Season : SUMMER 2020
+[2026-04-11 16:16:34] [p1-p28]   │  🗂  Series : —
+[2026-04-11 16:16:35] [p1-p28]   │  ✅ [AniList:by_id] → 22/7: 8+3=?
+[2026-04-11 16:16:37] [p1-p28]   │  ⚠️  [Kitsu:by_malid] no results
+[2026-04-11 16:16:38] [p1-p28]   │  ✅ [Kitsu:by_title] → 22/7: 8＋3=?
+[2026-04-11 16:16:38] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:by_title
+[2026-04-11 16:16:38] [p1-p28]   │  📝 JP      : 22/7: 8＋3=?
+[2026-04-11 16:16:38] [p1-p28]   │  📝 EN      : 22/7: 8＋3=?
+[2026-04-11 16:16:38] [p1-p28]   │  📝 Romaji  : 22/7: 8+3=?
+[2026-04-11 16:16:38] [p1-p28]   │  📝 Native  : 22/7: 8＋3＝？
+[2026-04-11 16:16:38] [p1-p28]   │  📝 Alt     : 8 titles
+[2026-04-11 16:16:38] [p1-p28]   │  🆔 MAL:40924  AniList:114249  Kitsu:43285
+[2026-04-11 16:16:38] [p1-p28]   │  🎬 Themes  : 2
+[2026-04-11 16:16:38] [p1-p28]   │    [OP1] "Muzui" — —
+[2026-04-11 16:16:38] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:16:38] [p1-p28]   │    [ED1] "Kamisama ni Yubi wo Sasareta Bokutachi" — —
+[2026-04-11 16:16:38] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:16:39] [p1-p28]   │  ❌ Unexpected: Plan executor error during findAndModify :: caused by :: E11000 duplicate key error collection: test.themecaches index: slug_1 dup key: { slug: null }
+[2026-04-11 16:16:39] [p1-p28]   └─ ❌  running total → processed:1  failed:39
+[2026-04-11 16:16:39] [p1-p28] 
+  ┌─ [13/2799] 🎌 25_sai_no_joshikousei
+[2026-04-11 16:16:40] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:16:40] [p1-p28]   │  📺 Format : TV Short
+[2026-04-11 16:16:40] [p1-p28]   │  📅 Season : WINTER 2018
+[2026-04-11 16:16:40] [p1-p28]   │  🗂  Series : —
+[2026-04-11 16:16:42] [p1-p28]   │  ✅ [AniList:by_id] → 25-sai no Joshikousei
+[2026-04-11 16:16:42] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:none
+[2026-04-11 16:16:42] [p1-p28]   │  📝 JP      : 25-sai no Joshikousei
+[2026-04-11 16:16:42] [p1-p28]   │  📝 EN      : 25-Year-Old High School Girl, I Wouldn't Do This with a Kid
+[2026-04-11 16:16:42] [p1-p28]   │  📝 Romaji  : 25-sai no Joshikousei
+[2026-04-11 16:16:42] [p1-p28]   │  📝 Native  : 25歳の女子高生
+[2026-04-11 16:16:42] [p1-p28]   │  📝 Alt     : 6 titles
+[2026-04-11 16:16:42] [p1-p28]   │  🆔 MAL:36840  AniList:100635  Kitsu:—
+[2026-04-11 16:16:42] [p1-p28]   │  🎬 Themes  : 1
+[2026-04-11 16:16:42] [p1-p28]   │    [ED1] "Reunion" — —
+[2026-04-11 16:16:42] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:16:42] [p1-p28]   │  ❌ Unexpected: Plan executor error during findAndModify :: caused by :: E11000 duplicate key error collection: test.themecaches index: slug_1 dup key: { slug: null }
+[2026-04-11 16:16:42] [p1-p28]   └─ ❌  running total → processed:1  failed:40
+[2026-04-11 16:16:42] [p1-p28] 
+  ┌─ [14/2799] 🎌 3_choume_no_tama_uchi_no_tama_shirimasen_ka
+[2026-04-11 16:16:43] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:16:43] [p1-p28]   │  📺 Format : TV
+[2026-04-11 16:16:43] [p1-p28]   │  📅 Season : FALL 1988
+[2026-04-11 16:16:43] [p1-p28]   │  🗂  Series : —
+[2026-04-11 16:16:45] [p1-p28]   │  ✅ [AniList:by_id] → 3 Choume no Tama: Uchi no Tama Shirimasenka? 2
+[2026-04-11 16:16:45] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:none
+[2026-04-11 16:16:45] [p1-p28]   │  📝 JP      : 3 Choume no Tama: Uchi no Tama Shirimasen ka?
+[2026-04-11 16:16:45] [p1-p28]   │  📝 EN      : TAMA of the 3rd District -Have You Seen My TAMA?
+[2026-04-11 16:16:45] [p1-p28]   │  📝 Romaji  : 3 Choume no Tama: Uchi no Tama Shirimasenka? 2
+[2026-04-11 16:16:45] [p1-p28]   │  📝 Native  : 3丁目のタマ　うちのタマ知りませんか? 第2期
+[2026-04-11 16:16:45] [p1-p28]   │  📝 Alt     : 8 titles
+[2026-04-11 16:16:45] [p1-p28]   │  🆔 MAL:2467  AniList:2467  Kitsu:—
+[2026-04-11 16:16:45] [p1-p28]   │  🎬 Themes  : 2
+[2026-04-11 16:16:45] [p1-p28]   │    [OP1] "Genki da Shite yo" — —
+[2026-04-11 16:16:45] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:16:45] [p1-p28]   │    [ED1] "Mitsu Ami Hippatte" — —
+[2026-04-11 16:16:45] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:16:45] [p1-p28]   │  ❌ Unexpected: Plan executor error during findAndModify :: caused by :: E11000 duplicate key error collection: test.themecaches index: slug_1 dup key: { slug: null }
+[2026-04-11 16:16:45] [p1-p28]   └─ ❌  running total → processed:1  failed:41
+[2026-04-11 16:16:45] [p1-p28] 
+  ┌─ [15/2799] 🎌 3_gatsu_no_lion
+[2026-04-11 16:16:47] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:16:47] [p1-p28]   │  📺 Format : TV
+[2026-04-11 16:16:47] [p1-p28]   │  📅 Season : FALL 2016
+[2026-04-11 16:16:47] [p1-p28]   │  🗂  Series : —
+[2026-04-11 16:16:48] [p1-p28]   │  ✅ [AniList:by_id] → 3-gatsu no Lion
+[2026-04-11 16:16:48] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:none
+[2026-04-11 16:16:48] [p1-p28]   │  📝 JP      : 3-gatsu no Lion
+[2026-04-11 16:16:48] [p1-p28]   │  📝 EN      : March comes in like a lion
+[2026-04-11 16:16:48] [p1-p28]   │  📝 Romaji  : 3-gatsu no Lion
+[2026-04-11 16:16:48] [p1-p28]   │  📝 Native  : ３月のライオン
+[2026-04-11 16:16:48] [p1-p28]   │  📝 Alt     : 8 titles
+[2026-04-11 16:16:48] [p1-p28]   │  🆔 MAL:31646  AniList:21366  Kitsu:—
+[2026-04-11 16:16:48] [p1-p28]   │  🎬 Themes  : 5
+[2026-04-11 16:16:48] [p1-p28]   │    [OP1] "Answer" — BUMP OF CHICKEN
+[2026-04-11 16:16:48] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:16:48] [p1-p28]   │    [OP2] "Sayonara Bystander" — YUKI
+[2026-04-11 16:16:48] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:16:48] [p1-p28]   │    [ED1] "Fighter" — BUMP OF CHICKEN
+[2026-04-11 16:16:48] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:16:48] [p1-p28]   │    [ED2] "Nyaa Shougi Ondo" — Ai Kayano, Kana Hanazawa, Misaki Kuno
+[2026-04-11 16:16:48] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:16:48] [p1-p28]   │    [ED3] "orion" — Kenshi Yonezu
+[2026-04-11 16:16:48] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:16:48] [p1-p28]   │  ❌ Unexpected: Plan executor error during findAndModify :: caused by :: E11000 duplicate key error collection: test.themecaches index: slug_1 dup key: { slug: null }
+[2026-04-11 16:16:48] [p1-p28]   └─ ❌  running total → processed:1  failed:42
+[2026-04-11 16:16:48] [p1-p28] 
+  ┌─ [16/2799] 🎌 3_gatsu_no_lion_2nd_season
+[2026-04-11 16:16:50] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:16:50] [p1-p28]   │  📺 Format : TV
+[2026-04-11 16:16:50] [p1-p28]   │  📅 Season : FALL 2017
+[2026-04-11 16:16:50] [p1-p28]   │  🗂  Series : —
+[2026-04-11 16:16:51] [p1-p28]   │  ✅ [AniList:by_id] → 3-gatsu no Lion 2nd Season
+[2026-04-11 16:16:51] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:none
+[2026-04-11 16:16:51] [p1-p28]   │  📝 JP      : 3-gatsu no Lion 2nd Season
+[2026-04-11 16:16:51] [p1-p28]   │  📝 EN      : March comes in like a lion Season 2
+[2026-04-11 16:16:51] [p1-p28]   │  📝 Romaji  : 3-gatsu no Lion 2nd Season
+[2026-04-11 16:16:51] [p1-p28]   │  📝 Native  : ３月のライオン 第2シリーズ
+[2026-04-11 16:16:51] [p1-p28]   │  📝 Alt     : 8 titles
+[2026-04-11 16:16:51] [p1-p28]   │  🆔 MAL:35180  AniList:98478  Kitsu:—
+[2026-04-11 16:16:51] [p1-p28]   │  🎬 Themes  : 4
+[2026-04-11 16:16:51] [p1-p28]   │    [OP1] "Flag wo Tatero" — YUKI
+[2026-04-11 16:16:51] [p1-p28]   │        entries:1  videos:2  audio:✅
+[2026-04-11 16:16:51] [p1-p28]   │    [OP2] "Haru ga Kite Bokura" — UNISON SQUARE GARDEN
+[2026-04-11 16:16:51] [p1-p28]   │        entries:1  videos:3  audio:✅
+[2026-04-11 16:16:51] [p1-p28]   │    [ED1] "Kafune" — Brian the Sun
+[2026-04-11 16:16:51] [p1-p28]   │        entries:1  videos:2  audio:✅
+[2026-04-11 16:16:51] [p1-p28]   │    [ED2] "I AM STANDING" — RUANN
+[2026-04-11 16:16:51] [p1-p28]   │        entries:1  videos:2  audio:✅
+[2026-04-11 16:16:51] [p1-p28]   │  ❌ Unexpected: Plan executor error during findAndModify :: caused by :: E11000 duplicate key error collection: test.themecaches index: slug_1 dup key: { slug: null }
+[2026-04-11 16:16:51] [p1-p28]   └─ ❌  running total → processed:1  failed:43
+[2026-04-11 16:16:51] [p1-p28] 
+  ┌─ [17/2799] 🎌 30_sai_no_hoken_taiiku
+[2026-04-11 16:16:53] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:16:53] [p1-p28]   │  📺 Format : TV Short
+[2026-04-11 16:16:53] [p1-p28]   │  📅 Season : SPRING 2011
+[2026-04-11 16:16:53] [p1-p28]   │  🗂  Series : —
+[2026-04-11 16:16:54] [p1-p28]   │  ✅ [AniList:by_id] → 30-sai no Hoken Taiiku
+[2026-04-11 16:16:54] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:none
+[2026-04-11 16:16:54] [p1-p28]   │  📝 JP      : 30-sai no Hoken Taiiku
+[2026-04-11 16:16:54] [p1-p28]   │  📝 EN      : A Thirty-Year Old's Health and Physical Education
+[2026-04-11 16:16:54] [p1-p28]   │  📝 Romaji  : 30-sai no Hoken Taiiku
+[2026-04-11 16:16:54] [p1-p28]   │  📝 Native  : 30歳の保健体育
+[2026-04-11 16:16:54] [p1-p28]   │  📝 Alt     : 4 titles
+[2026-04-11 16:16:54] [p1-p28]   │  🆔 MAL:9624  AniList:9624  Kitsu:—
+[2026-04-11 16:16:54] [p1-p28]   │  🎬 Themes  : 2
+[2026-04-11 16:16:54] [p1-p28]   │    [OP1] "Koi no Doutei" — —
+[2026-04-11 16:16:54] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:16:54] [p1-p28]   │    [ED1] "learn together" — AiRI
+[2026-04-11 16:16:54] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:16:54] [p1-p28]   │  ❌ Unexpected: Plan executor error during findAndModify :: caused by :: E11000 duplicate key error collection: test.themecaches index: slug_1 dup key: { slug: null }
+[2026-04-11 16:16:54] [p1-p28]   └─ ❌  running total → processed:1  failed:44
+[2026-04-11 16:16:54] [p1-p28] 
+  ┌─ [18/2799] 🎌 3d_kanojo_real_girl
+[2026-04-11 16:16:56] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:16:56] [p1-p28]   │  📺 Format : TV
+[2026-04-11 16:16:56] [p1-p28]   │  📅 Season : SPRING 2018
+[2026-04-11 16:16:56] [p1-p28]   │  🗂  Series : —
+[2026-04-11 16:16:57] [p1-p28]   │  ✅ [AniList:by_id] → 3D Kanojo: Real Girl
+[2026-04-11 16:16:57] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:none
+[2026-04-11 16:16:57] [p1-p28]   │  📝 JP      : 3D Kanojo: Real Girl
+[2026-04-11 16:16:57] [p1-p28]   │  📝 EN      : Real Girl
+[2026-04-11 16:16:57] [p1-p28]   │  📝 Romaji  : 3D Kanojo: Real Girl
+[2026-04-11 16:16:57] [p1-p28]   │  📝 Native  : 3D彼女 リアルガール
+[2026-04-11 16:16:57] [p1-p28]   │  📝 Alt     : 5 titles
+[2026-04-11 16:16:57] [p1-p28]   │  🆔 MAL:36793  AniList:100526  Kitsu:—
+[2026-04-11 16:16:57] [p1-p28]   │  🎬 Themes  : 2
+[2026-04-11 16:16:57] [p1-p28]   │    [OP1] "Daiji na Koto" — —
+[2026-04-11 16:16:57] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:16:57] [p1-p28]   │    [ED1] "HiDE the BLUE" — BiSH
+[2026-04-11 16:16:57] [p1-p28]   │        entries:1  videos:2  audio:✅
+[2026-04-11 16:16:57] [p1-p28]   │  ❌ Unexpected: Plan executor error during findAndModify :: caused by :: E11000 duplicate key error collection: test.themecaches index: slug_1 dup key: { slug: null }
+[2026-04-11 16:16:57] [p1-p28]   └─ ❌  running total → processed:1  failed:45
+[2026-04-11 16:16:57] [p1-p28] 
+  ┌─ [19/2799] 🎌 3d_kanojo_real_girl_2nd_season
+[2026-04-11 16:16:59] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:16:59] [p1-p28]   │  📺 Format : TV
+[2026-04-11 16:16:59] [p1-p28]   │  📅 Season : WINTER 2019
+[2026-04-11 16:16:59] [p1-p28]   │  🗂  Series : —
+[2026-04-11 16:17:00] [p1-p28]   │  ✅ [AniList:by_id] → 3D Kanojo: Real Girl 2
+[2026-04-11 16:17:00] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:none
+[2026-04-11 16:17:00] [p1-p28]   │  📝 JP      : 3D Kanojo: Real Girl 2nd Season
+[2026-04-11 16:17:00] [p1-p28]   │  📝 EN      : Real Girl 2
+[2026-04-11 16:17:00] [p1-p28]   │  📝 Romaji  : 3D Kanojo: Real Girl 2
+[2026-04-11 16:17:00] [p1-p28]   │  📝 Native  : 3D彼女 リアルガール 2
+[2026-04-11 16:17:00] [p1-p28]   │  📝 Alt     : 3 titles
+[2026-04-11 16:17:00] [p1-p28]   │  🆔 MAL:37956  AniList:102882  Kitsu:—
+[2026-04-11 16:17:00] [p1-p28]   │  🎬 Themes  : 3
+[2026-04-11 16:17:00] [p1-p28]   │    [OP1] "Futari nara" — BiSH
+[2026-04-11 16:17:00] [p1-p28]   │        entries:1  videos:2  audio:✅
+[2026-04-11 16:17:00] [p1-p28]   │    [ED1] "Hagan" — Fujifabric
+[2026-04-11 16:17:00] [p1-p28]   │        entries:2  videos:4  audio:✅
+[2026-04-11 16:17:00] [p1-p28]   │    [ED2] "Daiji na Koto" — —
+[2026-04-11 16:17:00] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:17:00] [p1-p28]   │  ❌ Unexpected: Plan executor error during findAndModify :: caused by :: E11000 duplicate key error collection: test.themecaches index: slug_1 dup key: { slug: null }
+[2026-04-11 16:17:00] [p1-p28]   └─ ❌  running total → processed:1  failed:46
+[2026-04-11 16:17:00] [p1-p28] 
+  ┌─ [20/2799] 🎌 7_seeds
+[2026-04-11 16:17:02] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:17:02] [p1-p28]   │  📺 Format : ONA
+[2026-04-11 16:17:02] [p1-p28]   │  📅 Season : SPRING 2019
+[2026-04-11 16:17:02] [p1-p28]   │  🗂  Series : —
+[2026-04-11 16:17:04] [p1-p28]   │  ✅ [AniList:by_id] → 7SEEDS
+[2026-04-11 16:17:04] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:none
+[2026-04-11 16:17:04] [p1-p28]   │  📝 JP      : 7 Seeds
+[2026-04-11 16:17:04] [p1-p28]   │  📝 EN      : 7SEEDS
+[2026-04-11 16:17:04] [p1-p28]   │  📝 Romaji  : 7SEEDS
+[2026-04-11 16:17:04] [p1-p28]   │  📝 Native  : 7SEEDS
+[2026-04-11 16:17:04] [p1-p28]   │  📝 Alt     : 4 titles
+[2026-04-11 16:17:04] [p1-p28]   │  🆔 MAL:38735  AniList:105807  Kitsu:—
+[2026-04-11 16:17:04] [p1-p28]   │  🎬 Themes  : 2
+[2026-04-11 16:17:04] [p1-p28]   │    [OP1] "Ark" — —
+[2026-04-11 16:17:04] [p1-p28]   │        entries:1  videos:2  audio:✅
+[2026-04-11 16:17:04] [p1-p28]   │    [ED1] "WISH" — —
+[2026-04-11 16:17:04] [p1-p28]   │        entries:1  videos:2  audio:✅
+[2026-04-11 16:17:04] [p1-p28]   │  ❌ Unexpected: Plan executor error during findAndModify :: caused by :: E11000 duplicate key error collection: test.themecaches index: slug_1 dup key: { slug: null }
+[2026-04-11 16:17:04] [p1-p28]   └─ ❌  running total → processed:1  failed:47
+[2026-04-11 16:17:04] [p1-p28] 
+  ┌─ [21/2799] 🎌 7_seeds_2nd_season
+[2026-04-11 16:17:06] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:17:06] [p1-p28]   │  📺 Format : ONA
+[2026-04-11 16:17:06] [p1-p28]   │  📅 Season : WINTER 2020
+[2026-04-11 16:17:06] [p1-p28]   │  🗂  Series : —
+[2026-04-11 16:17:07] [p1-p28]   │  ✅ [AniList:by_id] → 7SEEDS 2
+[2026-04-11 16:17:07] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:none
+[2026-04-11 16:17:07] [p1-p28]   │  📝 JP      : 7 Seeds 2nd Season
+[2026-04-11 16:17:07] [p1-p28]   │  📝 EN      : 7SEEDS Part 2
+[2026-04-11 16:17:07] [p1-p28]   │  📝 Romaji  : 7SEEDS 2
+[2026-04-11 16:17:07] [p1-p28]   │  📝 Native  : 7SEEDS 2
+[2026-04-11 16:17:07] [p1-p28]   │  📝 Alt     : 4 titles
+[2026-04-11 16:17:07] [p1-p28]   │  🆔 MAL:40602  AniList:112686  Kitsu:—
+[2026-04-11 16:17:07] [p1-p28]   │  🎬 Themes  : 3
+[2026-04-11 16:17:07] [p1-p28]   │    [OP1] "From The Seeds" — —
+[2026-04-11 16:17:07] [p1-p28]   │        entries:1  videos:2  audio:✅
+[2026-04-11 16:17:07] [p1-p28]   │    [ED1] "Synchro" — Cider Girl
+[2026-04-11 16:17:07] [p1-p28]   │        entries:1  videos:2  audio:✅
+[2026-04-11 16:17:07] [p1-p28]   │    [ED2] "Ikite Yuku" — —
+[2026-04-11 16:17:07] [p1-p28]   │        entries:1  videos:2  audio:✅
+[2026-04-11 16:17:07] [p1-p28]   │  ❌ Unexpected: Plan executor error during findAndModify :: caused by :: E11000 duplicate key error collection: test.themecaches index: slug_1 dup key: { slug: null }
+[2026-04-11 16:17:07] [p1-p28]   └─ ❌  running total → processed:1  failed:48
+[2026-04-11 16:17:07] [p1-p28] 
+  ┌─ [22/2799] 🎌 91_days
+[2026-04-11 16:17:09] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:17:09] [p1-p28]   │  📺 Format : TV
+[2026-04-11 16:17:09] [p1-p28]   │  📅 Season : SUMMER 2016
+[2026-04-11 16:17:09] [p1-p28]   │  🗂  Series : —
+[2026-04-11 16:17:11] [p1-p28]   │  ✅ [AniList:by_id] → 91Days
+[2026-04-11 16:17:11] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:none
+[2026-04-11 16:17:11] [p1-p28]   │  📝 JP      : 91 Days
+[2026-04-11 16:17:11] [p1-p28]   │  📝 EN      : 91 Days
+[2026-04-11 16:17:11] [p1-p28]   │  📝 Romaji  : 91Days
+[2026-04-11 16:17:11] [p1-p28]   │  📝 Native  : 91Days
+[2026-04-11 16:17:11] [p1-p28]   │  📝 Alt     : 2 titles
+[2026-04-11 16:17:11] [p1-p28]   │  🆔 MAL:32998  AniList:21711  Kitsu:—
+[2026-04-11 16:17:11] [p1-p28]   │  🎬 Themes  : 2
+[2026-04-11 16:17:11] [p1-p28]   │    [OP1] "Signal" — TK from Ling tosite sigure
+[2026-04-11 16:17:11] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:17:11] [p1-p28]   │    [ED1] "Rain or Shine" — ELISA
+[2026-04-11 16:17:11] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:17:11] [p1-p28]   │  ❌ Unexpected: Plan executor error during findAndModify :: caused by :: E11000 duplicate key error collection: test.themecaches index: slug_1 dup key: { slug: null }
+[2026-04-11 16:17:11] [p1-p28]   └─ ❌  running total → processed:1  failed:49
+[2026-04-11 16:17:11] [p1-p28] 
+  ┌─ [23/2799] 🎌 a_channel
+[2026-04-11 16:17:13] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:17:13] [p1-p28]   │  📺 Format : TV
+[2026-04-11 16:17:13] [p1-p28]   │  📅 Season : SPRING 2011
+[2026-04-11 16:17:13] [p1-p28]   │  🗂  Series : —

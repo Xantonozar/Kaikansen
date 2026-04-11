@@ -1,0 +1,89 @@
+══════════════════════════════════════════════════════════════════════
+[2026-04-11 16:49:02] [p1-p1] 🌱 ANIME SEED SCRIPT
+[2026-04-11 16:49:02] [p1-p1]    Pages: 1 → 1
+[2026-04-11 16:49:02] [p1-p1]    Mode: Normal
+══════════════════════════════════════════════════════════════════════
+[2026-04-11 16:49:04] [p1-p1] ✅ Connected to database
+═════════════════════════════════════════════════════════════════
+[2026-04-11 16:49:04] [p1-p1] 🚀 Phase 1: Collecting anime list
+═════════════════════════════════════════════════════════════════
+[2026-04-11 16:49:04] [p1-p1] 📥 Starting from page 1 to 1...
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:49:04] [p1-p1] 📄 Page 1/1 [1 of 1]
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:49:07] [p1-p1] ✅ Page 1/1: got 100 anime (total: 100)
+═════════════════════════════════════════════════════════════════
+[2026-04-11 16:49:07] [p1-p1] ✅ Collection complete: 100 anime collected
+═════════════════════════════════════════════════════════════════
+═════════════════════════════════════════════════════════════════
+[2026-04-11 16:49:07] [p1-p1] 🚀 Phase 2: Processing anime
+═════════════════════════════════════════════════════════════════
+[2026-04-11 16:49:07] [p1-p1] 📊 Total anime: 100
+[2026-04-11 16:49:07] [p1-p1]    Already done: 0
+[2026-04-11 16:49:07] [p1-p1]    Previously failed: 0
+[2026-04-11 16:49:07] [p1-p1]    Now processing: 100
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:49:07] [p1-p1] 
+🎌 [1/100] hackliminality
+[2026-04-11 16:49:08] [p1-p1]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 16:49:10] [p1-p1]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 16:49:10] [p1-p1]    📝 .hack//Liminality | .hack//Liminality | SUMMER 2002
+[2026-04-11 16:49:10] [p1-p1]    🆔 MAL: 299 | AniList: 299
+[2026-04-11 16:49:10] [p1-p1]    🎬 Found 4 theme(s):
+[2026-04-11 16:49:10] [p1-p1]       OP1: "Edge" — See-Saw (1 videos)
+[2026-04-11 16:49:10] [p1-p1]       OP2: "Senyaichiya" — See-Saw (1 videos)
+[2026-04-11 16:49:10] [p1-p1]       OP3: "Kimi ga Ita Monogatari" — See-Saw (1 videos)
+[2026-04-11 16:49:10] [p1-p1]       OP4: "Kioku" — See-Saw (1 videos)
+[2026-04-11 16:49:10] [p1-p1]    💾 Saved: "Edge" (OP1)
+[2026-04-11 16:49:10] [p1-p1]    💾 Saved: "Senyaichiya" (OP2)
+══════════════════════════════════════════════════════════════════════
+[2026-04-11 17:40:00] [p1-p1] 🌱 ANIME SEED SCRIPT
+[2026-04-11 17:40:00] [p1-p1]    Pages: 1 → 1
+[2026-04-11 17:40:00] [p1-p1]    Mode: Normal
+══════════════════════════════════════════════════════════════════════
+[2026-04-11 17:40:01] [p1-p1] ✅ Connected to database
+═════════════════════════════════════════════════════════════════
+[2026-04-11 17:40:01] [p1-p1] 🚀 Phase 1: Collecting anime list
+═════════════════════════════════════════════════════════════════
+[2026-04-11 17:40:01] [p1-p1] ✅ Already collected 100 anime — skipping
+═════════════════════════════════════════════════════════════════
+[2026-04-11 17:40:01] [p1-p1] 🚀 Phase 2: Processing anime
+═════════════════════════════════════════════════════════════════
+[2026-04-11 17:40:01] [p1-p1] 📊 Total anime: 100
+[2026-04-11 17:40:01] [p1-p1]    Already done: 0
+[2026-04-11 17:40:01] [p1-p1]    Previously failed: 0
+[2026-04-11 17:40:01] [p1-p1]    Now processing: 100
+─────────────────────────────────────────────────────────────────
+[2026-04-11 17:40:01] [p1-p1] 
+🎌 [1/100] hackliminality
+[2026-04-11 17:40:03] [p1-p1]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:40:05] [p1-p1]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:40:05] [p1-p1]    📝 .hack//Liminality | .hack//Liminality | SUMMER 2002
+[2026-04-11 17:40:05] [p1-p1]    🆔 MAL: 299 | AniList: 299
+[2026-04-11 17:40:05] [p1-p1]    🎬 Found 4 theme(s):
+[2026-04-11 17:40:05] [p1-p1]       OP1: "Edge" — See-Saw (1 videos)
+[2026-04-11 17:40:05] [p1-p1]       OP2: "Senyaichiya" — See-Saw (1 videos)
+[2026-04-11 17:40:05] [p1-p1]       OP3: "Kimi ga Ita Monogatari" — See-Saw (1 videos)
+[2026-04-11 17:40:05] [p1-p1]       OP4: "Kioku" — See-Saw (1 videos)
+[2026-04-11 17:40:05] [p1-p1]    ⏭️  Theme already in DB: "Edge" (OP1)
+[2026-04-11 17:40:05] [p1-p1]    ⏭️  Theme already in DB: "Senyaichiya" (OP2)
+[2026-04-11 17:40:05] [p1-p1]    ⏭️  Theme already in DB: "Kimi ga Ita Monogatari" (OP3)
+[2026-04-11 17:40:05] [p1-p1]    ⏭️  Theme already in DB: "Kioku" (OP4)
+[2026-04-11 17:40:06] [p1-p1]    🎤 Artist: See-Saw (4 themes)
+[2026-04-11 17:40:06] [p1-p1]    ✅ Total: 1 done, 0 failed
+[2026-04-11 17:40:06] [p1-p1] 
+🎌 [2/100] hackroots
+[2026-04-11 17:40:08] [p1-p1]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:40:09] [p1-p1]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:40:09] [p1-p1]    📝 .hack//roots | .hack//Roots | SPRING 2006
+[2026-04-11 17:40:09] [p1-p1]    🆔 MAL: 873 | AniList: 873
+[2026-04-11 17:40:09] [p1-p1]    🎬 Found 2 theme(s):
+[2026-04-11 17:40:09] [p1-p1]       OP1: "Silly-go-Round" — Yuuka Nanri (2 videos)
+[2026-04-11 17:40:09] [p1-p1]       ED1: "Boukoku Kakusei - Catharsis" — ALI PROJECT (1 videos)
+[2026-04-11 17:40:09] [p1-p1]    ⏭️  Theme already in DB: "Silly-go-Round" (OP1)
+[2026-04-11 17:40:09] [p1-p1]    ⏭️  Theme already in DB: "Boukoku Kakusei - Catharsis" (ED1)
+[2026-04-11 17:40:09] [p1-p1]    🎤 Artist: Yuuka Nanri (1 themes)
+[2026-04-11 17:40:10] [p1-p1]    🎤 Artist: ALI PROJECT (1 themes)
+[2026-04-11 17:40:10] [p1-p1]    ✅ Total: 2 done, 0 failed
+[2026-04-11 17:40:10] [p1-p1] 
+🎌 [3/100] hacksign

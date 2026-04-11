@@ -1,0 +1,1333 @@
+══════════════════════════════════════════════════════════════════════
+[2026-04-11 17:26:49] [y2026] 🌱 SEEDING ANIME FROM YEAR: 2026
+[2026-04-11 17:26:49] [y2026]    Mode: Normal
+══════════════════════════════════════════════════════════════════════
+[2026-04-11 17:26:50] [y2026] ✅ Connected to database
+═════════════════════════════════════════════════════════════════
+[2026-04-11 17:26:50] [y2026] 🚀 Phase 1: Collecting anime list
+═════════════════════════════════════════════════════════════════
+[2026-04-11 17:26:50] [y2026] 📥 Collecting anime from year 2026...
+─────────────────────────────────────────────────────────────────
+[2026-04-11 17:26:50] [y2026] 📄 Page 1/1
+─────────────────────────────────────────────────────────────────
+[2026-04-11 17:26:53] [y2026] ✅ Page 1: got 80 anime (total: 80)
+[2026-04-11 17:26:53] [y2026] 📌 Reached last page — stopping collection
+═════════════════════════════════════════════════════════════════
+[2026-04-11 17:26:53] [y2026] ✅ Collection complete: 80 anime from 2026
+═════════════════════════════════════════════════════════════════
+═════════════════════════════════════════════════════════════════
+[2026-04-11 17:26:53] [y2026] 🚀 Phase 2: Processing anime
+═════════════════════════════════════════════════════════════════
+[2026-04-11 17:26:53] [y2026] 📊 Total anime: 80
+[2026-04-11 17:26:53] [y2026]    Already done: 0
+[2026-04-11 17:26:53] [y2026]    Previously skipped: 0
+[2026-04-11 17:26:53] [y2026]    Previously failed: 0
+[2026-04-11 17:26:53] [y2026]    Now processing: 80
+─────────────────────────────────────────────────────────────────
+[2026-04-11 17:26:53] [y2026] 
+🎌 [1/80] fatestrange_fake
+[2026-04-11 17:26:56] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:26:57] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:26:57] [y2026]    📝 Fate/strange Fake | Fate/strange Fake | WINTER 2026
+[2026-04-11 17:26:57] [y2026]    🆔 MAL: 55830 | AniList: 166617
+[2026-04-11 17:26:57] [y2026]    🎬 Found 3 theme(s):
+[2026-04-11 17:26:57] [y2026]       ED1: "FAKEit" — SawanoHiroyuki[nZk], Laco (1 videos)
+[2026-04-11 17:26:57] [y2026]       OP1: "PROVANT" — SawanoHiroyuki[nZk], Jean-Ken Johnny, TAKUMA (2 videos)
+[2026-04-11 17:26:57] [y2026]       ED1: "Senzaiteki na Ai" — 13.3g (2 videos)
+[2026-04-11 17:26:58] [y2026]    💾 Saved: "FAKEit" (ED1)
+[2026-04-11 17:26:58] [y2026]    💾 Saved: "PROVANT" (OP1)
+[2026-04-11 17:26:58] [y2026]    ❌ Error: Plan executor error during findAndModify :: caused by :: E11000 duplicate key error collection: test.themecaches index: slug_1 dup key: { slug: "fatestrange_fake-ed1" }
+[2026-04-11 17:26:58] [y2026]    ❌ New: 0 | Skipped: 0 | Failed: 1
+[2026-04-11 17:26:58] [y2026] 
+🎌 [2/80] tamonkun_ima_docchi
+[2026-04-11 17:27:00] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:27:02] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:27:02] [y2026]    📝 Tamon-kun Ima Docchi!? | Tamon's B-Side | WINTER 2026
+[2026-04-11 17:27:02] [y2026]    🆔 MAL: 59047 | AniList: 178005
+[2026-04-11 17:27:02] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:27:02] [y2026]       OP1: "Sweet Magic" — F/ACE (1 videos)
+[2026-04-11 17:27:02] [y2026]       ED1: "Hana to Yume" — F/ACE (1 videos)
+[2026-04-11 17:27:02] [y2026]    💾 Saved: "Sweet Magic" (OP1)
+[2026-04-11 17:27:02] [y2026]    💾 Saved: "Hana to Yume" (ED1)
+[2026-04-11 17:27:02] [y2026]    🎤 Artist: F/ACE (2 themes)
+[2026-04-11 17:27:02] [y2026]    ✅ New: 1 | Skipped: 0 | Failed: 1
+[2026-04-11 17:27:02] [y2026] 
+🎌 [3/80] yuusha_party_wo_oidasareta_kiyou_binbou
+[2026-04-11 17:27:06] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:27:07] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:27:07] [y2026]    📝 Yuusha Party wo Oidasareta Kiyou Binbou | Jack-of-All-Trades, Party of None | WINTER 2026
+[2026-04-11 17:27:07] [y2026]    🆔 MAL: 61128 | AniList: 187264
+[2026-04-11 17:27:07] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:27:07] [y2026]       OP1: "Shirube" — Towa Tokoyami (1 videos)
+[2026-04-11 17:27:07] [y2026]       ED1: "sukuu" — Nowlu (1 videos)
+[2026-04-11 17:27:08] [y2026]    💾 Saved: "Shirube" (OP1)
+[2026-04-11 17:27:08] [y2026]    💾 Saved: "sukuu" (ED1)
+[2026-04-11 17:27:08] [y2026]    🎤 Artist: Towa Tokoyami (1 themes)
+[2026-04-11 17:27:08] [y2026]    🎤 Artist: Nowlu (1 themes)
+[2026-04-11 17:27:08] [y2026]    ✅ New: 2 | Skipped: 0 | Failed: 1
+[2026-04-11 17:27:08] [y2026] 
+🎌 [4/80] golden_kamuy_saishuushou
+[2026-04-11 17:27:11] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:27:13] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:27:13] [y2026]    📝 Golden Kamuy: Saishuushou | Golden Kamuy Final Season | WINTER 2026
+[2026-04-11 17:27:13] [y2026]    🆔 MAL: 55772 | AniList: 166521
+[2026-04-11 17:27:13] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:27:13] [y2026]       OP1: "Ougon no Kanata" — ALI, Awich (1 videos)
+[2026-04-11 17:27:13] [y2026]       ED1: "The Ballad" — Ken Yokoyama (1 videos)
+[2026-04-11 17:27:13] [y2026]    💾 Saved: "Ougon no Kanata" (OP1)
+[2026-04-11 17:27:13] [y2026]    💾 Saved: "The Ballad" (ED1)
+[2026-04-11 17:27:13] [y2026]    🎤 Artist: ALI (1 themes)
+[2026-04-11 17:27:13] [y2026]    🎤 Artist: Awich (1 themes)
+[2026-04-11 17:27:13] [y2026]    🎤 Artist: Ken Yokoyama (1 themes)
+[2026-04-11 17:27:13] [y2026]    ✅ New: 3 | Skipped: 0 | Failed: 1
+[2026-04-11 17:27:13] [y2026] 
+🎌 [5/80] goumon_baitokun_no_nichijou
+[2026-04-11 17:27:16] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:27:17] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:27:17] [y2026]    📝 Goumon Baito-kun no Nichijou | The Daily Life of a Part-time Torturer | WINTER 2026
+[2026-04-11 17:27:17] [y2026]    🆔 MAL: 61886 | AniList: 197731
+[2026-04-11 17:27:17] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:27:17] [y2026]       OP1: "GO GO PARADISE!!" — GRANRODEO (1 videos)
+[2026-04-11 17:27:17] [y2026]       ED1: "Ashita Tenki ni Naare" — Takuma Terashima (1 videos)
+[2026-04-11 17:27:17] [y2026]    💾 Saved: "GO GO PARADISE!!" (OP1)
+[2026-04-11 17:27:17] [y2026]    💾 Saved: "Ashita Tenki ni Naare" (ED1)
+[2026-04-11 17:27:17] [y2026]    🎤 Artist: GRANRODEO (1 themes)
+[2026-04-11 17:27:17] [y2026]    🎤 Artist: Takuma Terashima (1 themes)
+[2026-04-11 17:27:17] [y2026]    ✅ New: 4 | Skipped: 0 | Failed: 1
+[2026-04-11 17:27:17] [y2026] 
+🎌 [6/80] hanazakari_no_kimitachi_e
+[2026-04-11 17:27:21] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:27:23] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:27:23] [y2026]    📝 Hanazakari no Kimitachi e | Hana-Kimi | WINTER 2026
+[2026-04-11 17:27:23] [y2026]    🆔 MAL: 58861 | AniList: 177580
+[2026-04-11 17:27:23] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:27:23] [y2026]       OP1: "Adrena" — YOASOBI (1 videos)
+[2026-04-11 17:27:23] [y2026]       ED1: "BABY" — YOASOBI (1 videos)
+[2026-04-11 17:27:23] [y2026]    💾 Saved: "Adrena" (OP1)
+[2026-04-11 17:27:23] [y2026]    💾 Saved: "BABY" (ED1)
+[2026-04-11 17:27:23] [y2026]    🎤 Artist: YOASOBI (2 themes)
+[2026-04-11 17:27:23] [y2026]    ✅ New: 5 | Skipped: 0 | Failed: 1
+[2026-04-11 17:27:23] [y2026] 
+🎌 [7/80] ikoku_nikki
+[2026-04-11 17:27:26] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:27:28] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:27:28] [y2026]    📝 Ikoku Nikki | Journal with Witch | WINTER 2026
+[2026-04-11 17:27:28] [y2026]    🆔 MAL: 58788 | AniList: 177385
+[2026-04-11 17:27:28] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:27:28] [y2026]       OP1: "Sonare" — TOMOO (1 videos)
+[2026-04-11 17:27:28] [y2026]       ED1: "Kotozute" — Bialystocks (1 videos)
+[2026-04-11 17:27:28] [y2026]    💾 Saved: "Sonare" (OP1)
+[2026-04-11 17:27:28] [y2026]    💾 Saved: "Kotozute" (ED1)
+[2026-04-11 17:27:28] [y2026]    🎤 Artist: TOMOO (1 themes)
+[2026-04-11 17:27:28] [y2026]    🎤 Artist: Bialystocks (1 themes)
+[2026-04-11 17:27:28] [y2026]    ✅ New: 6 | Skipped: 0 | Failed: 1
+[2026-04-11 17:27:28] [y2026] 
+🎌 [8/80] kirei_ni_shitemoraemasu_ka
+[2026-04-11 17:27:31] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:27:32] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:27:32] [y2026]    📝 Kirei ni Shitemoraemasu ka. | Wash It All Away | WINTER 2026
+[2026-04-11 17:27:32] [y2026]    🆔 MAL: 61782 | AniList: 194028
+[2026-04-11 17:27:32] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:27:32] [y2026]       OP1: "Kirei." — Yuu. (1 videos)
+[2026-04-11 17:27:32] [y2026]       ED1: "Wakaba no Koro" — Natsumi Kiyoura (1 videos)
+[2026-04-11 17:27:32] [y2026]    💾 Saved: "Kirei." (OP1)
+[2026-04-11 17:27:32] [y2026]    💾 Saved: "Wakaba no Koro" (ED1)
+[2026-04-11 17:27:32] [y2026]    🎤 Artist: Yuu. (1 themes)
+[2026-04-11 17:27:32] [y2026]    🎤 Artist: Natsumi Kiyoura (1 themes)
+[2026-04-11 17:27:32] [y2026]    ✅ New: 7 | Skipped: 0 | Failed: 1
+[2026-04-11 17:27:32] [y2026] 
+🎌 [9/80] kizoku_tensei_megumareta_umare_kara_saikyou_no_chikara_wo_eru
+[2026-04-11 17:27:35] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:27:37] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:27:37] [y2026]    📝 Kizoku Tensei: Megumareta Umare kara Saikyou no Chikara wo Eru | Noble Reincarnation: Born Blessed, So I'll Obtain Ultimate Power | WINTER 2026
+[2026-04-11 17:27:37] [y2026]    🆔 MAL: 60692 | AniList: 185993
+[2026-04-11 17:27:37] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:27:37] [y2026]       OP1: "Break off" — SUPER★DRAGON (1 videos)
+[2026-04-11 17:27:37] [y2026]       ED1: "You'll Be In My Heart ~Soba ni~" — Azusa Tachibana (1 videos)
+[2026-04-11 17:27:37] [y2026]    💾 Saved: "Break off" (OP1)
+[2026-04-11 17:27:37] [y2026]    💾 Saved: "You'll Be In My Heart ~Soba ni~" (ED1)
+[2026-04-11 17:27:37] [y2026]    🎤 Artist: SUPER★DRAGON (1 themes)
+[2026-04-11 17:27:37] [y2026]    🎤 Artist: Azusa Tachibana (1 themes)
+[2026-04-11 17:27:37] [y2026]    ✅ New: 8 | Skipped: 0 | Failed: 1
+[2026-04-11 17:27:37] [y2026] 
+🎌 [10/80] majutsushi_kunon_wa_mieteiru
+[2026-04-11 17:27:40] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:27:41] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:27:41] [y2026]    📝 Majutsushi Kunon wa Mieteiru | Kunon the Sorcerer Can See | WINTER 2026
+[2026-04-11 17:27:41] [y2026]    🆔 MAL: 60810 | AniList: 186333
+[2026-04-11 17:27:41] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:27:41] [y2026]       OP1: "Rakenaria no Yume" — Isekaijoucho (1 videos)
+[2026-04-11 17:27:41] [y2026]       ED1: "Story feat. katagiri" — katagiri, KOHTA YAMAMOTO (1 videos)
+[2026-04-11 17:27:41] [y2026]    💾 Saved: "Rakenaria no Yume" (OP1)
+[2026-04-11 17:27:41] [y2026]    💾 Saved: "Story feat. katagiri" (ED1)
+[2026-04-11 17:27:41] [y2026]    🎤 Artist: Isekaijoucho (1 themes)
+[2026-04-11 17:27:41] [y2026]    🎤 Artist: katagiri (1 themes)
+[2026-04-11 17:27:41] [y2026]    🎤 Artist: KOHTA YAMAMOTO (1 themes)
+[2026-04-11 17:27:41] [y2026]    ✅ New: 9 | Skipped: 0 | Failed: 1
+[2026-04-11 17:27:41] [y2026] 
+🎌 [11/80] osananajimi_to_wa_love_comedy_ni_naranai
+[2026-04-11 17:27:44] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:27:45] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:27:45] [y2026]    📝 Osananajimi to wa Love Comedy ni Naranai | You Can't Be In a Rom-Com with Your Childhood Friends! | WINTER 2026
+[2026-04-11 17:27:45] [y2026]    🆔 MAL: 61359 | AniList: 189565
+[2026-04-11 17:27:45] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:27:45] [y2026]       OP1: "I Love You ♡" — Yuu Serizawa, HoneyWorks, Sae Hiratsuka, Rin Kusumi, Yuuki Yamamoto (1 videos)
+[2026-04-11 17:27:45] [y2026]       ED1: "Amanojaku" — Hikari Kodama (1 videos)
+[2026-04-11 17:27:45] [y2026]    💾 Saved: "I Love You ♡" (OP1)
+[2026-04-11 17:27:45] [y2026]    💾 Saved: "Amanojaku" (ED1)
+[2026-04-11 17:27:45] [y2026]    🎤 Artist: Yuu Serizawa (1 themes)
+[2026-04-11 17:27:45] [y2026]    🎤 Artist: HoneyWorks (1 themes)
+[2026-04-11 17:27:45] [y2026]    🎤 Artist: Sae Hiratsuka (1 themes)
+[2026-04-11 17:27:46] [y2026]    🎤 Artist: Rin Kusumi (1 themes)
+[2026-04-11 17:27:46] [y2026]    🎤 Artist: Yuuki Yamamoto (1 themes)
+[2026-04-11 17:27:46] [y2026]    🎤 Artist: Hikari Kodama (1 themes)
+[2026-04-11 17:27:46] [y2026]    ✅ New: 10 | Skipped: 0 | Failed: 1
+[2026-04-11 17:27:46] [y2026] 
+🎌 [12/80] vigilante_boku_no_hero_academia_illegals_2nd_season
+[2026-04-11 17:27:48] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:27:50] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:27:50] [y2026]    📝 Vigilante: Boku no Hero Academia Illegals 2nd Season | My Hero Academia: Vigilantes Season 2 | WINTER 2026
+[2026-04-11 17:27:50] [y2026]    🆔 MAL: 61942 | AniList: 195322
+[2026-04-11 17:27:50] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:27:50] [y2026]       OP1: "CATCH!!!" — Surii (1 videos)
+[2026-04-11 17:27:50] [y2026]       ED1: "Miss You" — Shytaupe (1 videos)
+[2026-04-11 17:27:50] [y2026]    💾 Saved: "CATCH!!!" (OP1)
+[2026-04-11 17:27:50] [y2026]    💾 Saved: "Miss You" (ED1)
+[2026-04-11 17:27:50] [y2026]    🎤 Artist: Surii (1 themes)
+[2026-04-11 17:27:50] [y2026]    🎤 Artist: Shytaupe (1 themes)
+[2026-04-11 17:27:50] [y2026]    ✅ New: 11 | Skipped: 0 | Failed: 1
+[2026-04-11 17:27:50] [y2026] 
+🎌 [13/80] mf_ghost_3rd_season
+[2026-04-11 17:27:53] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:27:54] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:27:54] [y2026]    📝 MF Ghost 3rd Season | MF GHOST Season 3 | WINTER 2026
+[2026-04-11 17:27:54] [y2026]    🆔 MAL: 60602 | AniList: 185753
+[2026-04-11 17:27:54] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:27:54] [y2026]       OP1: "TIMELESS POWER feat. MOTSU" — Yuu Serizawa, MOTSU (1 videos)
+[2026-04-11 17:27:54] [y2026]       ED1: "Yokan no Tochuu Prod. ☆Taku Takahashi (m-flo)" — Himika Akaneya (1 videos)
+[2026-04-11 17:27:54] [y2026]    💾 Saved: "TIMELESS POWER feat. MOTSU" (OP1)
+[2026-04-11 17:27:54] [y2026]    💾 Saved: "Yokan no Tochuu Prod. ☆Taku Takahashi (m-flo)" (ED1)
+[2026-04-11 17:27:55] [y2026]    🎤 Artist: Yuu Serizawa (1 themes)
+[2026-04-11 17:27:55] [y2026]    🎤 Artist: MOTSU (1 themes)
+[2026-04-11 17:27:55] [y2026]    🎤 Artist: Himika Akaneya (1 themes)
+[2026-04-11 17:27:55] [y2026]    ✅ New: 12 | Skipped: 0 | Failed: 1
+[2026-04-11 17:27:55] [y2026] 
+🎌 [14/80] 29sai_dokushin_chuuken_boukensha_no_nichijou
+[2026-04-11 17:27:57] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:27:59] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:27:59] [y2026]    📝 29-sai Dokushin Chuuken Boukensha no Nichijou | An Adventurer’s Daily Grind at Age 29 | WINTER 2026
+[2026-04-11 17:27:59] [y2026]    🆔 MAL: 61637 | AniList: 192261
+[2026-04-11 17:27:59] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:27:59] [y2026]       OP1: "Kimi ga Tomoshite Kureta Hikari wo Ima" — HoneyWorks, Hanon (1 videos)
+[2026-04-11 17:27:59] [y2026]       ED1: "Kimi no Tonari wa Kuuki ga Oishii" — HoneyWorks, Kotoha (1 videos)
+[2026-04-11 17:27:59] [y2026]    💾 Saved: "Kimi ga Tomoshite Kureta Hikari wo Ima" (OP1)
+[2026-04-11 17:27:59] [y2026]    💾 Saved: "Kimi no Tonari wa Kuuki ga Oishii" (ED1)
+[2026-04-11 17:27:59] [y2026]    🎤 Artist: HoneyWorks (2 themes)
+[2026-04-11 17:27:59] [y2026]    🎤 Artist: Hanon (1 themes)
+[2026-04-11 17:27:59] [y2026]    🎤 Artist: Kotoha (1 themes)
+[2026-04-11 17:27:59] [y2026]    ✅ New: 13 | Skipped: 0 | Failed: 1
+[2026-04-11 17:27:59] [y2026] 
+🎌 [15/80] arne_no_jikenbo
+[2026-04-11 17:28:01] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:28:03] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:28:03] [y2026]    📝 Arne no Jikenbo | The Case Book of Arne | WINTER 2026
+[2026-04-11 17:28:03] [y2026]    🆔 MAL: 60255 | AniList: 183984
+[2026-04-11 17:28:03] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:28:03] [y2026]       OP1: "Q.E.D." — Sou (2 videos)
+[2026-04-11 17:28:03] [y2026]       ED1: "Ningyou no Machi" — Watashi Kobayashi (1 videos)
+[2026-04-11 17:28:03] [y2026]    💾 Saved: "Q.E.D." (OP1)
+[2026-04-11 17:28:03] [y2026]    💾 Saved: "Ningyou no Machi" (ED1)
+[2026-04-11 17:28:03] [y2026]    🎤 Artist: Sou (1 themes)
+[2026-04-11 17:28:03] [y2026]    🎤 Artist: Watashi Kobayashi (1 themes)
+[2026-04-11 17:28:03] [y2026]    ✅ New: 14 | Skipped: 0 | Failed: 1
+[2026-04-11 17:28:03] [y2026] 
+🎌 [16/80] champignon_no_majo
+[2026-04-11 17:28:06] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:28:07] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:28:07] [y2026]    📝 Champignon no Majo | Champignon Witch | WINTER 2026
+[2026-04-11 17:28:07] [y2026]    🆔 MAL: 60509 | AniList: 185514
+[2026-04-11 17:28:07] [y2026]    🎬 Found 4 theme(s):
+[2026-04-11 17:28:07] [y2026]       OP1: "Mahoutsukai no Nikki" — Rosu (1 videos)
+[2026-04-11 17:28:07] [y2026]       ED1: "Kimi wa" — Ms.OOJA (1 videos)
+[2026-04-11 17:28:07] [y2026]       OP2: "Kimi wa" — Ms.OOJA (1 videos)
+[2026-04-11 17:28:07] [y2026]       ED2: "Mahoutsukai no Nikki" — Rosu (1 videos)
+[2026-04-11 17:28:08] [y2026]    💾 Saved: "Mahoutsukai no Nikki" (OP1)
+[2026-04-11 17:28:08] [y2026]    💾 Saved: "Kimi wa" (ED1)
+[2026-04-11 17:28:08] [y2026]    💾 Saved: "Kimi wa" (OP2)
+[2026-04-11 17:28:08] [y2026]    💾 Saved: "Mahoutsukai no Nikki" (ED2)
+[2026-04-11 17:28:08] [y2026]    🎤 Artist: Rosu (2 themes)
+[2026-04-11 17:28:08] [y2026]    🎤 Artist: Ms.OOJA (2 themes)
+[2026-04-11 17:28:08] [y2026]    ✅ New: 15 | Skipped: 0 | Failed: 1
+[2026-04-11 17:28:08] [y2026] 
+🎌 [17/80] jujutsu_kaisen_shimetsu_kaiyuu_zenpen
+[2026-04-11 17:28:11] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:28:13] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:28:13] [y2026]    📝 Jujutsu Kaisen: Shimetsu Kaiyuu - Zenpen | JUJUTSU KAISEN Season 3: The Culling Game Part 1 | WINTER 2026
+[2026-04-11 17:28:13] [y2026]    🆔 MAL: 57658 | AniList: 172463
+[2026-04-11 17:28:13] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:28:13] [y2026]       OP1: "AIZO" — King Gnu (1 videos)
+[2026-04-11 17:28:13] [y2026]       ED1: "Yoake no Uta" — jo0ji (1 videos)
+[2026-04-11 17:28:13] [y2026]    💾 Saved: "AIZO" (OP1)
+[2026-04-11 17:28:13] [y2026]    💾 Saved: "Yoake no Uta" (ED1)
+[2026-04-11 17:28:13] [y2026]    🎤 Artist: King Gnu (1 themes)
+[2026-04-11 17:28:13] [y2026]    🎤 Artist: jo0ji (1 themes)
+[2026-04-11 17:28:13] [y2026]    ✅ New: 16 | Skipped: 0 | Failed: 1
+[2026-04-11 17:28:13] [y2026] 
+🎌 [18/80] mayonaka_heart_tune
+[2026-04-11 17:28:16] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:28:17] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:28:17] [y2026]    📝 Mayonaka Heart Tune | Tune In to the Midnight Heart | WINTER 2026
+[2026-04-11 17:28:17] [y2026]    🆔 MAL: 61211 | AniList: 187942
+[2026-04-11 17:28:17] [y2026]    🎬 Found 3 theme(s):
+[2026-04-11 17:28:17] [y2026]       OP1: "Tsuki ni Mukatte Ute" — Suisei Hoshimachi (2 videos)
+[2026-04-11 17:28:17] [y2026]       ED1: "Koe no Kiseki" — Soala (1 videos)
+[2026-04-11 17:28:17] [y2026]       ED2: "ask for the moon" — Momoko Seto (1 videos)
+[2026-04-11 17:28:17] [y2026]    💾 Saved: "Tsuki ni Mukatte Ute" (OP1)
+[2026-04-11 17:28:17] [y2026]    💾 Saved: "Koe no Kiseki" (ED1)
+[2026-04-11 17:28:17] [y2026]    💾 Saved: "ask for the moon" (ED2)
+[2026-04-11 17:28:17] [y2026]    🎤 Artist: Suisei Hoshimachi (1 themes)
+[2026-04-11 17:28:17] [y2026]    🎤 Artist: Soala (1 themes)
+[2026-04-11 17:28:17] [y2026]    🎤 Artist: Momoko Seto (1 themes)
+[2026-04-11 17:28:17] [y2026]    ✅ New: 17 | Skipped: 0 | Failed: 1
+[2026-04-11 17:28:17] [y2026] 
+🎌 [19/80] maou_no_musume_wa_yasashi_sugiru
+[2026-04-11 17:28:20] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:28:21] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:28:21] [y2026]    📝 Maou no Musume wa Yasashi Sugiru!! | The Demon King's Daughter is Too Kind!! | WINTER 2026
+[2026-04-11 17:28:21] [y2026]    🆔 MAL: 61884 | AniList: 194742
+[2026-04-11 17:28:21] [y2026]    🎬 Found 3 theme(s):
+[2026-04-11 17:28:21] [y2026]       OP1: "We Can Do!!" — Kaori Ishihara (1 videos)
+[2026-04-11 17:28:21] [y2026]       ED1: "Ikko Nikoniko" — Ayaka Oohashi, Misaki Kuno, Akio Ootsuka (1 videos)
+[2026-04-11 17:28:21] [y2026]       ED2: "Dou nara Dekiru yo" — Ayaka Oohashi, Misaki Kuno (1 videos)
+[2026-04-11 17:28:21] [y2026]    💾 Saved: "We Can Do!!" (OP1)
+[2026-04-11 17:28:21] [y2026]    💾 Saved: "Ikko Nikoniko" (ED1)
+[2026-04-11 17:28:21] [y2026]    💾 Saved: "Dou nara Dekiru yo" (ED2)
+[2026-04-11 17:28:22] [y2026]    🎤 Artist: Kaori Ishihara (1 themes)
+[2026-04-11 17:28:22] [y2026]    🎤 Artist: Ayaka Oohashi (2 themes)
+[2026-04-11 17:28:22] [y2026]    🎤 Artist: Misaki Kuno (2 themes)
+[2026-04-11 17:28:22] [y2026]    🎤 Artist: Akio Ootsuka (1 themes)
+[2026-04-11 17:28:22] [y2026]    ✅ New: 18 | Skipped: 0 | Failed: 1
+[2026-04-11 17:28:22] [y2026] 
+🎌 [20/80] isekai_no_sata_wa_shachiku_shidai
+[2026-04-11 17:28:24] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:28:25] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:28:25] [y2026]    📝 Isekai no Sata wa Shachiku Shidai | Isekai Office Worker: The Other World's Books Depend on the Bean Counter | WINTER 2026
+[2026-04-11 17:28:25] [y2026]    🆔 MAL: 60226 | AniList: 183661
+[2026-04-11 17:28:25] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:28:25] [y2026]       OP1: "Magic" — kobore (1 videos)
+[2026-04-11 17:28:25] [y2026]       ED1: "Back to Back" — MORISAKI WIN (1 videos)
+[2026-04-11 17:28:26] [y2026]    💾 Saved: "Magic" (OP1)
+[2026-04-11 17:28:26] [y2026]    💾 Saved: "Back to Back" (ED1)
+[2026-04-11 17:28:26] [y2026]    🎤 Artist: kobore (1 themes)
+[2026-04-11 17:28:26] [y2026]    🎤 Artist: MORISAKI WIN (1 themes)
+[2026-04-11 17:28:26] [y2026]    ✅ New: 19 | Skipped: 0 | Failed: 1
+[2026-04-11 17:28:26] [y2026] 
+🎌 [21/80] yuusha_party_ni_kawaii_ko_ga_ita_no_de_kokuhaku_shitemita
+[2026-04-11 17:28:29] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:28:30] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:28:30] [y2026]    📝 Yuusha Party ni Kawaii Ko ga Ita no de, Kokuhaku Shitemita. | There was a Cute Girl in the Hero’s Party, so I Tried Confessing to Her | WINTER 2026
+[2026-04-11 17:28:30] [y2026]    🆔 MAL: 61983 | AniList: 195515
+[2026-04-11 17:28:30] [y2026]    🎬 Found 3 theme(s):
+[2026-04-11 17:28:30] [y2026]       OP1: "Lavish!!" — Yoshino (1 videos)
+[2026-04-11 17:28:30] [y2026]       ED1: "Kimi Kouryaku Game" — Hiyori Omiya (1 videos)
+[2026-04-11 17:28:30] [y2026]       ED2: "YES! Summer Love♡" — Iori Noguchi, Momo Sakurai, Aimi Ozawa (1 videos)
+[2026-04-11 17:28:30] [y2026]    💾 Saved: "Lavish!!" (OP1)
+[2026-04-11 17:28:30] [y2026]    💾 Saved: "Kimi Kouryaku Game" (ED1)
+[2026-04-11 17:28:30] [y2026]    💾 Saved: "YES! Summer Love♡" (ED2)
+[2026-04-11 17:28:31] [y2026]    🎤 Artist: Yoshino (1 themes)
+[2026-04-11 17:28:31] [y2026]    🎤 Artist: Hiyori Omiya (1 themes)
+[2026-04-11 17:28:31] [y2026]    🎤 Artist: Iori Noguchi (1 themes)
+[2026-04-11 17:28:31] [y2026]    🎤 Artist: Momo Sakurai (1 themes)
+[2026-04-11 17:28:31] [y2026]    🎤 Artist: Aimi Ozawa (1 themes)
+[2026-04-11 17:28:31] [y2026]    ✅ New: 20 | Skipped: 0 | Failed: 1
+[2026-04-11 17:28:31] [y2026] 
+🎌 [22/80] yoroi_shinden_samurai_troopers
+[2026-04-11 17:28:33] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:28:35] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:28:35] [y2026]    📝 Yoroi Shinden Samurai Troopers | Yoroi-Shinden Samurai Troopers | WINTER 2026
+[2026-04-11 17:28:35] [y2026]    🆔 MAL: 61830 | AniList: 194318
+[2026-04-11 17:28:35] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:28:35] [y2026]       OP1: "YOAKE" — blank paper (1 videos)
+[2026-04-11 17:28:35] [y2026]       ED1: "POWER" — ONE OR EIGHT (1 videos)
+[2026-04-11 17:28:35] [y2026]    💾 Saved: "YOAKE" (OP1)
+[2026-04-11 17:28:35] [y2026]    💾 Saved: "POWER" (ED1)
+[2026-04-11 17:28:36] [y2026]    🎤 Artist: blank paper (1 themes)
+[2026-04-11 17:28:36] [y2026]    🎤 Artist: ONE OR EIGHT (1 themes)
+[2026-04-11 17:28:36] [y2026]    ✅ New: 21 | Skipped: 0 | Failed: 1
+[2026-04-11 17:28:36] [y2026] 
+🎌 [23/80] okiraku_ryoushu_no_tanoshii_ryouchi_bouei
+[2026-04-11 17:28:38] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+══════════════════════════════════════════════════════════════════════
+[2026-04-11 17:38:58] [y2026] 🌱 SEEDING ANIME FROM YEAR: 2026
+[2026-04-11 17:38:58] [y2026]    Mode: Normal
+══════════════════════════════════════════════════════════════════════
+[2026-04-11 17:38:59] [y2026] ✅ Connected to database
+═════════════════════════════════════════════════════════════════
+[2026-04-11 17:38:59] [y2026] 🚀 Phase 1: Collecting anime list
+═════════════════════════════════════════════════════════════════
+[2026-04-11 17:38:59] [y2026] ✅ Already collected 80 anime — skipping
+═════════════════════════════════════════════════════════════════
+[2026-04-11 17:38:59] [y2026] 🚀 Phase 2: Processing anime
+═════════════════════════════════════════════════════════════════
+[2026-04-11 17:38:59] [y2026] 📊 Total anime: 80
+[2026-04-11 17:38:59] [y2026]    Already done: 21
+[2026-04-11 17:38:59] [y2026]    Previously skipped: 0
+[2026-04-11 17:38:59] [y2026]    Previously failed: 1
+[2026-04-11 17:38:59] [y2026]    Now processing: 59
+─────────────────────────────────────────────────────────────────
+[2026-04-11 17:38:59] [y2026] 
+🎌 [1/59] fatestrange_fake
+[2026-04-11 17:39:00] [y2026]    ⏭️  Anime already in DB: fatestrange_fake
+[2026-04-11 17:39:00] [y2026]    ⏭️ New: 21 | Skipped: 1 | Failed: 1
+[2026-04-11 17:39:00] [y2026] 
+🎌 [2/59] okiraku_ryoushu_no_tanoshii_ryouchi_bouei
+[2026-04-11 17:39:03] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:39:05] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:39:05] [y2026]    📝 Okiraku Ryoushu no Tanoshii Ryouchi Bouei | Easygoing Territory Defense by the Optimistic Lord | WINTER 2026
+[2026-04-11 17:39:05] [y2026]    🆔 MAL: 61549 | AniList: 191205
+[2026-04-11 17:39:05] [y2026]    🎬 Found 3 theme(s):
+[2026-04-11 17:39:05] [y2026]       OP1: "Okirakuzation" — Rei Nakashima (1 videos)
+[2026-04-11 17:39:05] [y2026]       ED1: "Make it" — Nonoka Oobuchi (6 videos)
+[2026-04-11 17:39:05] [y2026]       ED2: "Magic Clock" — Nonoka Oobuchi (1 videos)
+[2026-04-11 17:39:05] [y2026]    💾 Saved: "Okirakuzation" (OP1)
+[2026-04-11 17:39:05] [y2026]    💾 Saved: "Make it" (ED1)
+[2026-04-11 17:39:05] [y2026]    💾 Saved: "Magic Clock" (ED2)
+[2026-04-11 17:39:05] [y2026]    🎤 Artist: Rei Nakashima (1 themes)
+[2026-04-11 17:39:06] [y2026]    🎤 Artist: Nonoka Oobuchi (2 themes)
+[2026-04-11 17:39:06] [y2026]    ✅ New: 22 | Skipped: 1 | Failed: 1
+[2026-04-11 17:39:06] [y2026] 
+🎌 [3/59] shibou_yuugi_de_meshi_wo_kuu
+[2026-04-11 17:39:08] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:39:10] [y2026]    🔍 Found extra info via AniList (by_id)
+══════════════════════════════════════════════════════════════════════
+[2026-04-11 17:45:28] [y2026] 🌱 SEEDING ANIME FROM YEAR: 2026
+[2026-04-11 17:45:28] [y2026]    Mode: Normal
+══════════════════════════════════════════════════════════════════════
+[2026-04-11 17:45:29] [y2026] ✅ Connected to database
+═════════════════════════════════════════════════════════════════
+[2026-04-11 17:45:29] [y2026] 🚀 Phase 1: Collecting anime list
+═════════════════════════════════════════════════════════════════
+[2026-04-11 17:45:29] [y2026] ✅ Already collected 80 anime — skipping
+═════════════════════════════════════════════════════════════════
+[2026-04-11 17:45:29] [y2026] 🚀 Phase 2: Processing anime
+═════════════════════════════════════════════════════════════════
+[2026-04-11 17:45:29] [y2026] 📊 Total anime: 80
+[2026-04-11 17:45:29] [y2026]    Already done: 22
+[2026-04-11 17:45:29] [y2026]    Previously skipped: 1
+[2026-04-11 17:45:29] [y2026]    Previously failed: 1
+[2026-04-11 17:45:29] [y2026]    Now processing: 57
+─────────────────────────────────────────────────────────────────
+[2026-04-11 17:45:29] [y2026] 
+🎌 [1/57] shibou_yuugi_de_meshi_wo_kuu
+[2026-04-11 17:45:31] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+══════════════════════════════════════════════════════════════════════
+[2026-04-11 17:45:59] [y2026] 🌱 SEEDING ANIME FROM YEAR: 2026
+[2026-04-11 17:45:59] [y2026]    Mode: Normal
+══════════════════════════════════════════════════════════════════════
+[2026-04-11 17:46:00] [y2026] ✅ Connected to database
+═════════════════════════════════════════════════════════════════
+[2026-04-11 17:46:00] [y2026] 🚀 Phase 1: Collecting anime list
+═════════════════════════════════════════════════════════════════
+[2026-04-11 17:46:00] [y2026] ✅ Already collected 80 anime — skipping
+═════════════════════════════════════════════════════════════════
+[2026-04-11 17:46:00] [y2026] 🚀 Phase 2: Processing anime
+═════════════════════════════════════════════════════════════════
+[2026-04-11 17:46:00] [y2026] 📊 Total anime: 80
+[2026-04-11 17:46:00] [y2026]    Already done: 22
+[2026-04-11 17:46:00] [y2026]    Previously skipped: 1
+[2026-04-11 17:46:00] [y2026]    Previously failed: 1
+[2026-04-11 17:46:00] [y2026]    Now processing: 57
+─────────────────────────────────────────────────────────────────
+[2026-04-11 17:46:00] [y2026] 
+🎌 [1/57] shibou_yuugi_de_meshi_wo_kuu
+[2026-04-11 17:46:02] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:46:04] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:46:04] [y2026]    📝 Shibou Yuugi de Meshi wo Kuu. | SHIBOYUGI: Playing Death Games to Put Food on the Table | WINTER 2026
+[2026-04-11 17:46:04] [y2026]    🆔 MAL: 59711 | AniList: 180746
+[2026-04-11 17:46:04] [y2026]    🎬 Found 3 theme(s):
+[2026-04-11 17:46:04] [y2026]       OP1: "¬Ersterbend" — — (1 videos)
+[2026-04-11 17:46:04] [y2026]       ED1: "Whatever Will Be, Will Be (Que Sera, Sera)" — Dris Day (1 videos)
+[2026-04-11 17:46:04] [y2026]       ED2: "Inori" — Chiai Fujikawa (1 videos)
+[2026-04-11 17:46:04] [y2026]    💾 Saved: "¬Ersterbend" (OP1)
+[2026-04-11 17:46:04] [y2026]    💾 Saved: "Whatever Will Be, Will Be (Que Sera, Sera)" (ED1)
+[2026-04-11 17:46:04] [y2026]    💾 Saved: "Inori" (ED2)
+[2026-04-11 17:46:05] [y2026]    🎤 Artist: Dris Day (1 themes)
+[2026-04-11 17:46:05] [y2026]    🎤 Artist: Chiai Fujikawa (1 themes)
+[2026-04-11 17:46:05] [y2026]    ✅ New: 23 | Skipped: 1 | Failed: 1
+[2026-04-11 17:46:05] [y2026] 
+🎌 [2/57] odayaka_kizoku_no_kyuuka_no_susume
+[2026-04-11 17:46:06] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:46:08] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:46:08] [y2026]    📝 Odayaka Kizoku no Kyuuka no Susume. | A Gentle Noble's Vacation Recommendation | WINTER 2026
+[2026-04-11 17:46:08] [y2026]    🆔 MAL: 60071 | AniList: 182771
+[2026-04-11 17:46:08] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:46:08] [y2026]       OP1: "Gypso" — Hikaru Makishima (1 videos)
+[2026-04-11 17:46:08] [y2026]       ED1: "Ussura" — Hina Suguta (1 videos)
+[2026-04-11 17:46:08] [y2026]    💾 Saved: "Gypso" (OP1)
+[2026-04-11 17:46:08] [y2026]    💾 Saved: "Ussura" (ED1)
+[2026-04-11 17:46:08] [y2026]    🎤 Artist: Hikaru Makishima (1 themes)
+[2026-04-11 17:46:08] [y2026]    🎤 Artist: Hina Suguta (1 themes)
+[2026-04-11 17:46:08] [y2026]    ✅ New: 24 | Skipped: 1 | Failed: 1
+[2026-04-11 17:46:08] [y2026] 
+🎌 [3/57] eris_no_seihai
+[2026-04-11 17:46:10] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:46:11] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:46:11] [y2026]    📝 Eris no Seihai | The Holy Grail of Eris | WINTER 2026
+[2026-04-11 17:46:11] [y2026]    🆔 MAL: 60151 | AniList: 183270
+[2026-04-11 17:46:11] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:46:11] [y2026]       OP1: "Happy Ever After feat. YU-KA" — YU-KA, Reina Washio (1 videos)
+[2026-04-11 17:46:11] [y2026]       ED1: "Camellia" — Yukari Tamura (1 videos)
+[2026-04-11 17:46:11] [y2026]    💾 Saved: "Happy Ever After feat. YU-KA" (OP1)
+[2026-04-11 17:46:12] [y2026]    💾 Saved: "Camellia" (ED1)
+[2026-04-11 17:46:12] [y2026]    🎤 Artist: YU-KA (1 themes)
+[2026-04-11 17:46:12] [y2026]    🎤 Artist: Reina Washio (1 themes)
+[2026-04-11 17:46:12] [y2026]    🎤 Artist: Yukari Tamura (1 themes)
+[2026-04-11 17:46:12] [y2026]    ✅ New: 25 | Skipped: 1 | Failed: 1
+[2026-04-11 17:46:12] [y2026] 
+🎌 [4/57] toumei_otoko_to_ningen_onna_sonouchi_fuufu_ni_naru_futari
+[2026-04-11 17:46:13] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:46:15] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:46:15] [y2026]    📝 Toumei Otoko to Ningen Onna: Sonouchi Fuufu ni Naru Futari | The Invisible Man and His Soon-to-Be Wife | WINTER 2026
+[2026-04-11 17:46:15] [y2026]    🆔 MAL: 60395 | AniList: 185039
+[2026-04-11 17:46:15] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:46:15] [y2026]       ED1: "Hoshimegane" — Kaori Ishihara (1 videos)
+[2026-04-11 17:46:15] [y2026]       OP1: "Ding-dong" — Mao Abe (1 videos)
+[2026-04-11 17:46:15] [y2026]    💾 Saved: "Hoshimegane" (ED1)
+[2026-04-11 17:46:15] [y2026]    💾 Saved: "Ding-dong" (OP1)
+[2026-04-11 17:46:15] [y2026]    🎤 Artist: Kaori Ishihara (1 themes)
+[2026-04-11 17:46:15] [y2026]    🎤 Artist: Mao Abe (1 themes)
+[2026-04-11 17:46:15] [y2026]    ✅ New: 26 | Skipped: 1 | Failed: 1
+[2026-04-11 17:46:15] [y2026] 
+🎌 [5/57] mato_seihei_no_slave_2
+[2026-04-11 17:46:17] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:46:18] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:46:18] [y2026]    📝 Mato Seihei no Slave 2 | Chained Soldier Season 2 | WINTER 2026
+[2026-04-11 17:46:18] [y2026]    🆔 MAL: 58505 | AniList: 176276
+[2026-04-11 17:46:18] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:46:18] [y2026]       OP1: "Hikari yo, Boku ni." — Akari Kitou (1 videos)
+[2026-04-11 17:46:18] [y2026]       ED1: "Cipher Cipher" — Kana Hanazawa (1 videos)
+[2026-04-11 17:46:18] [y2026]    💾 Saved: "Hikari yo, Boku ni." (OP1)
+[2026-04-11 17:46:18] [y2026]    💾 Saved: "Cipher Cipher" (ED1)
+[2026-04-11 17:46:19] [y2026]    🎤 Artist: Akari Kitou (1 themes)
+[2026-04-11 17:46:19] [y2026]    🎤 Artist: Kana Hanazawa (1 themes)
+[2026-04-11 17:46:19] [y2026]    ✅ New: 27 | Skipped: 1 | Failed: 1
+[2026-04-11 17:46:19] [y2026] 
+🎌 [6/57] omae_gotoki_ga_maou_ni_kateru_to_omou_na_to_yuusha_party_wo_tsuihou_sareta_node_outo_de_kimama_ni_kurashitai
+[2026-04-11 17:46:20] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:46:22] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:46:22] [y2026]    📝 "Omae Gotoki ga Maou ni Kateru to Omou na" to Yuusha Party wo Tsuihou Sareta node, Outo de Kimama ni Kurashitai | ROLL OVER AND DIE: I Will Fight for an Ordinary Life with My Love and Cursed Sword! | WINTER 2026
+[2026-04-11 17:46:22] [y2026]    🆔 MAL: 61587 | AniList: 191718
+[2026-04-11 17:46:22] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:46:22] [y2026]       OP1: "Liberator" — PassCode (1 videos)
+[2026-04-11 17:46:22] [y2026]       ED1: "I need" — Yuki Tanaka (6 videos)
+[2026-04-11 17:46:22] [y2026]    💾 Saved: "Liberator" (OP1)
+[2026-04-11 17:46:22] [y2026]    💾 Saved: "I need" (ED1)
+[2026-04-11 17:46:22] [y2026]    🎤 Artist: PassCode (1 themes)
+[2026-04-11 17:46:22] [y2026]    🎤 Artist: Yuki Tanaka (1 themes)
+[2026-04-11 17:46:22] [y2026]    ✅ New: 28 | Skipped: 1 | Failed: 1
+[2026-04-11 17:46:22] [y2026] 
+🎌 [7/57] douse_koishite_shimaunda_season_2
+[2026-04-11 17:46:24] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:46:25] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:46:25] [y2026]    📝 Douse, Koishite Shimaunda. Season 2 | Anyway, I'm Falling in Love with You. Season 2 | WINTER 2026
+[2026-04-11 17:46:25] [y2026]    🆔 MAL: 61325 | AniList: 189137
+[2026-04-11 17:46:25] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:46:25] [y2026]       OP1: "L to R" — ME:I (1 videos)
+[2026-04-11 17:46:25] [y2026]       ED1: "Hatsukoi" — berry meet (1 videos)
+[2026-04-11 17:46:25] [y2026]    💾 Saved: "L to R" (OP1)
+[2026-04-11 17:46:25] [y2026]    💾 Saved: "Hatsukoi" (ED1)
+[2026-04-11 17:46:25] [y2026]    🎤 Artist: ME:I (1 themes)
+[2026-04-11 17:46:25] [y2026]    🎤 Artist: berry meet (1 themes)
+[2026-04-11 17:46:25] [y2026]    ✅ New: 29 | Skipped: 1 | Failed: 1
+[2026-04-11 17:46:25] [y2026] 
+🎌 [8/57] enen_no_shouboutai_san_no_shou_part_2
+[2026-04-11 17:46:27] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:46:28] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:46:28] [y2026]    📝 Enen no Shouboutai: San no Shou Part 2 | Fire Force Season 3 Part 2 | WINTER 2026
+[2026-04-11 17:46:28] [y2026]    🆔 MAL: 59229 | AniList: 179062
+[2026-04-11 17:46:28] [y2026]    🎬 Found 3 theme(s):
+[2026-04-11 17:46:28] [y2026]       OP1: "Ignis" — Takanori Nishikawa (1 videos)
+[2026-04-11 17:46:28] [y2026]       ED1: "Speak of the Devil" — Survive Said The Prophet (2 videos)
+[2026-04-11 17:46:28] [y2026]       ED2: "Speak of the Devil feat. Masato from coldrain" — Survive Said The Prophet, Masato (1 videos)
+[2026-04-11 17:46:29] [y2026]    💾 Saved: "Ignis" (OP1)
+[2026-04-11 17:46:29] [y2026]    💾 Saved: "Speak of the Devil" (ED1)
+[2026-04-11 17:46:29] [y2026]    💾 Saved: "Speak of the Devil feat. Masato from coldrain" (ED2)
+[2026-04-11 17:46:29] [y2026]    🎤 Artist: Takanori Nishikawa (1 themes)
+[2026-04-11 17:46:29] [y2026]    🎤 Artist: Survive Said The Prophet (2 themes)
+[2026-04-11 17:46:29] [y2026]    🎤 Artist: Masato (1 themes)
+[2026-04-11 17:46:29] [y2026]    ✅ New: 30 | Skipped: 1 | Failed: 1
+[2026-04-11 17:46:29] [y2026] 
+🎌 [9/57] trigun_stargaze
+[2026-04-11 17:46:31] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:46:32] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:46:32] [y2026]    📝 Trigun Stargaze | TRIGUN STARGAZE | WINTER 2026
+[2026-04-11 17:46:32] [y2026]    🆔 MAL: 54863 | AniList: 163144
+[2026-04-11 17:46:32] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:46:32] [y2026]       OP1: "PICARESQUE HERO" — ano (1 videos)
+[2026-04-11 17:46:32] [y2026]       ED1: "Stardust" — FOMARE (1 videos)
+[2026-04-11 17:46:32] [y2026]    💾 Saved: "PICARESQUE HERO" (OP1)
+[2026-04-11 17:46:32] [y2026]    💾 Saved: "Stardust" (ED1)
+[2026-04-11 17:46:33] [y2026]    🎤 Artist: ano (1 themes)
+[2026-04-11 17:46:33] [y2026]    🎤 Artist: FOMARE (1 themes)
+[2026-04-11 17:46:33] [y2026]    ✅ New: 31 | Skipped: 1 | Failed: 1
+[2026-04-11 17:46:33] [y2026] 
+🎌 [10/57] hell_mode_yarikomi_suki_no_gamer_wa_haisettei_no_isekai_de_musou_suru
+[2026-04-11 17:46:34] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:46:36] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:46:36] [y2026]    📝 Hell Mode: Yarikomi Suki no Gamer wa Haisettei no Isekai de Musou Suru | HELL MODE: The Hardcore Gamer Dominates in Another World with Garbage Balancing | WINTER 2026
+[2026-04-11 17:46:36] [y2026]    🆔 MAL: 60460 | AniList: 185262
+[2026-04-11 17:46:36] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:46:36] [y2026]       OP1: "Haku" — Atarayo (1 videos)
+[2026-04-11 17:46:36] [y2026]       ED1: "Sanctuary" — Kaya (1 videos)
+[2026-04-11 17:46:36] [y2026]    💾 Saved: "Haku" (OP1)
+[2026-04-11 17:46:36] [y2026]    💾 Saved: "Sanctuary" (ED1)
+[2026-04-11 17:46:36] [y2026]    🎤 Artist: Atarayo (1 themes)
+[2026-04-11 17:46:36] [y2026]    🎤 Artist: Kaya (1 themes)
+[2026-04-11 17:46:36] [y2026]    ✅ New: 32 | Skipped: 1 | Failed: 1
+[2026-04-11 17:46:36] [y2026] 
+🎌 [11/57] dark_moon_kuro_no_tsuki_tsuki_no_saidan
+[2026-04-11 17:46:38] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:46:39] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:46:39] [y2026]    📝 DARK MOON: Kuro no Tsuki - Tsuki no Saidan | DARK MOON: THE BLOOD ALTAR | WINTER 2026
+[2026-04-11 17:46:39] [y2026]    🆔 MAL: 59853 | AniList: 181443
+[2026-04-11 17:46:39] [y2026]    🎬 Found 3 theme(s):
+[2026-04-11 17:46:39] [y2026]       OP1: "One In A Billion (Japanese Ver.)" — ENHYPEN (1 videos)
+[2026-04-11 17:46:39] [y2026]       ED1: "Fatal Trouble" — ENHYPEN (1 videos)
+[2026-04-11 17:46:39] [y2026]       ED2: "CRIMINAL LOVE" — ENHYPEN (1 videos)
+[2026-04-11 17:46:39] [y2026]    💾 Saved: "One In A Billion (Japanese Ver.)" (OP1)
+[2026-04-11 17:46:40] [y2026]    💾 Saved: "Fatal Trouble" (ED1)
+[2026-04-11 17:46:40] [y2026]    💾 Saved: "CRIMINAL LOVE" (ED2)
+[2026-04-11 17:46:40] [y2026]    🎤 Artist: ENHYPEN (3 themes)
+[2026-04-11 17:46:40] [y2026]    ✅ New: 33 | Skipped: 1 | Failed: 1
+[2026-04-11 17:46:40] [y2026] 
+🎌 [12/57] tensei_shitara_dragon_no_tamago_datta
+══════════════════════════════════════════════════════════════════════
+[2026-04-11 17:47:54] [y2026] 🌱 SEEDING ANIME FROM YEAR: 2026
+[2026-04-11 17:47:54] [y2026]    Mode: Retry Failed
+══════════════════════════════════════════════════════════════════════
+[2026-04-11 17:47:55] [y2026] ✅ Connected to database
+═════════════════════════════════════════════════════════════════
+[2026-04-11 17:47:55] [y2026] 🚀 Phase 3: Retrying failed anime
+═════════════════════════════════════════════════════════════════
+[2026-04-11 17:47:55] [y2026] 🔄 Retrying 1 failed anime...
+[2026-04-11 17:47:55] [y2026] 
+🔄 [1/1] fatestrange_fake
+══════════════════════════════════════════════════════════════════════
+[2026-04-11 17:48:28] [y2026] 🌱 SEEDING ANIME FROM YEAR: 2026
+[2026-04-11 17:48:28] [y2026]    Mode: Retry Failed
+══════════════════════════════════════════════════════════════════════
+[2026-04-11 17:48:29] [y2026] ✅ Connected to database
+═════════════════════════════════════════════════════════════════
+[2026-04-11 17:48:29] [y2026] 🚀 Phase 3: Retrying failed anime
+═════════════════════════════════════════════════════════════════
+[2026-04-11 17:48:29] [y2026] 🔄 Retrying 1 failed anime...
+[2026-04-11 17:48:29] [y2026] 
+🔄 [1/1] fatestrange_fake
+[2026-04-11 17:48:32] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:48:32] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:48:32] [y2026]    📝 Fate/strange Fake | Fate/strange Fake | WINTER 2026
+[2026-04-11 17:48:32] [y2026]    ⏭️  Theme already in DB: "FAKEit" (ED1)
+[2026-04-11 17:48:32] [y2026]    ⏭️  Theme already in DB: "PROVANT" (OP1)
+[2026-04-11 17:48:33] [y2026]    💾 Saved: "Senzaiteki na Ai" (ED1)
+[2026-04-11 17:48:33] [y2026]    🎤 Artist: SawanoHiroyuki[nZk] (2 themes)
+[2026-04-11 17:48:33] [y2026]    🎤 Artist: Laco (1 themes)
+[2026-04-11 17:48:33] [y2026]    🎤 Artist: Jean-Ken Johnny (1 themes)
+[2026-04-11 17:48:33] [y2026]    🎤 Artist: TAKUMA (1 themes)
+[2026-04-11 17:48:33] [y2026]    🎤 Artist: 13.3g (1 themes)
+[2026-04-11 17:48:33] [y2026]    ✅ Retry success
+═════════════════════════════════════════════════════════════════
+[2026-04-11 17:48:33] [y2026] 🔄 RETRY DONE — ✅ 1 recovered | ❌ 0 still failing
+═════════════════════════════════════════════════════════════════
+[2026-04-11 17:48:33] [y2026] ✅ All done!
+══════════════════════════════════════════════════════════════════════
+[2026-04-11 17:50:35] [y2026] 🌱 SEEDING ANIME FROM YEAR: 2026
+[2026-04-11 17:50:35] [y2026]    Mode: Normal
+══════════════════════════════════════════════════════════════════════
+[2026-04-11 17:50:37] [y2026] ✅ Connected to database
+═════════════════════════════════════════════════════════════════
+[2026-04-11 17:50:37] [y2026] 🚀 Phase 1: Collecting anime list
+═════════════════════════════════════════════════════════════════
+[2026-04-11 17:50:37] [y2026] ✅ Already collected 80 anime — skipping
+═════════════════════════════════════════════════════════════════
+[2026-04-11 17:50:37] [y2026] 🚀 Phase 2: Processing anime
+═════════════════════════════════════════════════════════════════
+[2026-04-11 17:50:37] [y2026] 📊 Total anime: 80
+[2026-04-11 17:50:37] [y2026]    Already done: 34
+[2026-04-11 17:50:37] [y2026]    Previously skipped: 1
+[2026-04-11 17:50:37] [y2026]    Previously failed: 0
+[2026-04-11 17:50:37] [y2026]    Now processing: 46
+─────────────────────────────────────────────────────────────────
+[2026-04-11 17:50:37] [y2026] 
+🎌 [1/46] tensei_shitara_dragon_no_tamago_datta
+[2026-04-11 17:50:39] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:50:41] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:50:41] [y2026]    📝 Tensei Shitara Dragon no Tamago Datta | Reincarnated as a Dragon Hatchling | WINTER 2026
+[2026-04-11 17:50:41] [y2026]    🆔 MAL: 61207 | AniList: 187941
+[2026-04-11 17:50:41] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:50:41] [y2026]       OP1: "Gliding Claw" — Sizuk, AYAME (1 videos)
+[2026-04-11 17:50:41] [y2026]       ED1: "Sky Clipper" — TAO, SAK (1 videos)
+[2026-04-11 17:50:41] [y2026]    💾 Saved: "Gliding Claw" (OP1)
+[2026-04-11 17:50:42] [y2026]    💾 Saved: "Sky Clipper" (ED1)
+[2026-04-11 17:50:42] [y2026]    🎤 Artist: Sizuk (1 themes)
+[2026-04-11 17:50:42] [y2026]    🎤 Artist: AYAME (1 themes)
+[2026-04-11 17:50:42] [y2026]    🎤 Artist: TAO (1 themes)
+[2026-04-11 17:50:42] [y2026]    🎤 Artist: SAK (1 themes)
+[2026-04-11 17:50:42] [y2026]    ✅ New: 34 | Skipped: 1 | Failed: 1
+[2026-04-11 17:50:42] [y2026] 
+🎌 [2/46] dead_account
+[2026-04-11 17:50:44] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:50:46] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:50:46] [y2026]    📝 Dead Account | Dead Account | WINTER 2026
+[2026-04-11 17:50:46] [y2026]    🆔 MAL: 61196 | AniList: 187901
+[2026-04-11 17:50:46] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:50:46] [y2026]       OP1: "Dead End" — Haru Igarashi (1 videos)
+[2026-04-11 17:50:46] [y2026]       ED1: "Raise wa Douse" — Miyu Kaneko (1 videos)
+[2026-04-11 17:50:46] [y2026]    💾 Saved: "Dead End" (OP1)
+[2026-04-11 17:50:46] [y2026]    💾 Saved: "Raise wa Douse" (ED1)
+[2026-04-11 17:50:46] [y2026]    🎤 Artist: Haru Igarashi (1 themes)
+[2026-04-11 17:50:46] [y2026]    🎤 Artist: Miyu Kaneko (1 themes)
+[2026-04-11 17:50:46] [y2026]    ✅ New: 35 | Skipped: 1 | Failed: 1
+[2026-04-11 17:50:46] [y2026] 
+🎌 [3/46] jingai_kyoushitsu_no_ningengirai_kyoushi
+[2026-04-11 17:50:48] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:50:49] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:50:49] [y2026]    📝 Jingai Kyoushitsu no Ningengirai Kyoushi | A Misanthrope Teaches a Class for Demi-Humans | WINTER 2026
+[2026-04-11 17:50:49] [y2026]    🆔 MAL: 62432 | AniList: 198374
+[2026-04-11 17:50:49] [y2026]    🎬 Found 3 theme(s):
+[2026-04-11 17:50:49] [y2026]       OP1: "Ningen" — Masayoshi Ooishi (1 videos)
+[2026-04-11 17:50:49] [y2026]       ED1: "Ningen Come True!" — Maria Naganawa, Saori Oonishi, Sora Amamiya, Rui Tanabe (1 videos)
+[2026-04-11 17:50:49] [y2026]       ED2: "Sora no Iro" — Rui Tanabe (1 videos)
+[2026-04-11 17:50:50] [y2026]    💾 Saved: "Ningen" (OP1)
+[2026-04-11 17:50:50] [y2026]    💾 Saved: "Ningen Come True!" (ED1)
+[2026-04-11 17:50:50] [y2026]    💾 Saved: "Sora no Iro" (ED2)
+[2026-04-11 17:50:50] [y2026]    🎤 Artist: Masayoshi Ooishi (1 themes)
+[2026-04-11 17:50:50] [y2026]    🎤 Artist: Maria Naganawa (1 themes)
+[2026-04-11 17:50:50] [y2026]    🎤 Artist: Saori Oonishi (1 themes)
+[2026-04-11 17:50:50] [y2026]    🎤 Artist: Sora Amamiya (1 themes)
+[2026-04-11 17:50:50] [y2026]    🎤 Artist: Rui Tanabe (2 themes)
+[2026-04-11 17:50:50] [y2026]    ✅ New: 36 | Skipped: 1 | Failed: 1
+[2026-04-11 17:50:50] [y2026] 
+🎌 [4/46] yuusha_no_kuzu
+[2026-04-11 17:50:52] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:50:53] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:50:53] [y2026]    📝 Yuusha no Kuzu | Scum of the Brave | WINTER 2026
+[2026-04-11 17:50:53] [y2026]    🆔 MAL: 61217 | AniList: 187989
+[2026-04-11 17:50:53] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:50:53] [y2026]       OP1: "GUN POWDER" — TOOBOE (1 videos)
+[2026-04-11 17:50:53] [y2026]       ED1: "Mental Rental" — Mulasaki Ima (1 videos)
+[2026-04-11 17:50:54] [y2026]    💾 Saved: "GUN POWDER" (OP1)
+[2026-04-11 17:50:54] [y2026]    💾 Saved: "Mental Rental" (ED1)
+[2026-04-11 17:50:54] [y2026]    🎤 Artist: TOOBOE (1 themes)
+[2026-04-11 17:50:54] [y2026]    🎤 Artist: Mulasaki Ima (1 themes)
+[2026-04-11 17:50:54] [y2026]    ✅ New: 37 | Skipped: 1 | Failed: 1
+[2026-04-11 17:50:54] [y2026] 
+🎌 [5/46] uruwashi_no_yoi_no_tsuki
+[2026-04-11 17:50:56] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:50:57] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:50:57] [y2026]    📝 Uruwashi no Yoi no Tsuki | In the Clear Moonlit Dusk | WINTER 2026
+[2026-04-11 17:50:57] [y2026]    🆔 MAL: 61663 | AniList: 192507
+[2026-04-11 17:50:57] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:50:57] [y2026]       OP1: "Uruwashi" — UNISON SQUARE GARDEN (1 videos)
+[2026-04-11 17:50:57] [y2026]       ED1: "Azalea no Kaze" — UNISON SQUARE GARDEN (1 videos)
+[2026-04-11 17:50:57] [y2026]    💾 Saved: "Uruwashi" (OP1)
+[2026-04-11 17:50:58] [y2026]    💾 Saved: "Azalea no Kaze" (ED1)
+[2026-04-11 17:50:58] [y2026]    🎤 Artist: UNISON SQUARE GARDEN (2 themes)
+[2026-04-11 17:50:58] [y2026]    ✅ New: 38 | Skipped: 1 | Failed: 1
+[2026-04-11 17:50:58] [y2026] 
+🎌 [6/46] seihantai_na_kimi_to_boku
+[2026-04-11 17:50:59] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:51:01] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:51:01] [y2026]    📝 Seihantai na Kimi to Boku | You and I Are Polar Opposites | WINTER 2026
+[2026-04-11 17:51:01] [y2026]    🆔 MAL: 60371 | AniList: 184951
+[2026-04-11 17:51:01] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:51:01] [y2026]       OP1: "Megane wo Hazushite" — Noa (1 videos)
+[2026-04-11 17:51:01] [y2026]       ED1: "Pure feat. Eriko Hashimoto" — PAS TASTA, Eriko Hashimoto (1 videos)
+[2026-04-11 17:51:01] [y2026]    💾 Saved: "Megane wo Hazushite" (OP1)
+[2026-04-11 17:51:01] [y2026]    💾 Saved: "Pure feat. Eriko Hashimoto" (ED1)
+[2026-04-11 17:51:01] [y2026]    🎤 Artist: Noa (1 themes)
+[2026-04-11 17:51:01] [y2026]    🎤 Artist: PAS TASTA (1 themes)
+[2026-04-11 17:51:01] [y2026]    🎤 Artist: Eriko Hashimoto (1 themes)
+[2026-04-11 17:51:01] [y2026]    ✅ New: 39 | Skipped: 1 | Failed: 1
+[2026-04-11 17:51:01] [y2026] 
+🎌 [7/46] kayachan_wa_kowakunai
+[2026-04-11 17:51:03] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:51:05] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:51:05] [y2026]    📝 Kaya-chan wa Kowakunai | Kaya-chan Isn't Scary | WINTER 2026
+[2026-04-11 17:51:05] [y2026]    🆔 MAL: 60223 | AniList: 183660
+[2026-04-11 17:51:05] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:51:05] [y2026]       OP1: "Maboroshi no Yukue" — Isekaijoucho (1 videos)
+[2026-04-11 17:51:05] [y2026]       ED1: "Playmour feat. Kaya-chan" — Azusa Tachibana, TAO, SAK (1 videos)
+[2026-04-11 17:51:05] [y2026]    💾 Saved: "Maboroshi no Yukue" (OP1)
+[2026-04-11 17:51:05] [y2026]    💾 Saved: "Playmour feat. Kaya-chan" (ED1)
+[2026-04-11 17:51:05] [y2026]    🎤 Artist: Isekaijoucho (1 themes)
+[2026-04-11 17:51:05] [y2026]    🎤 Artist: Azusa Tachibana (1 themes)
+[2026-04-11 17:51:05] [y2026]    🎤 Artist: TAO (1 themes)
+[2026-04-11 17:51:05] [y2026]    🎤 Artist: SAK (1 themes)
+[2026-04-11 17:51:05] [y2026]    ✅ New: 40 | Skipped: 1 | Failed: 1
+[2026-04-11 17:51:05] [y2026] 
+🎌 [8/46] akuyaku_reijou_wa_ringoku_no_outaishi_ni_dekiai_sareru
+[2026-04-11 17:51:07] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:51:08] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:51:08] [y2026]    📝 Akuyaku Reijou wa Ringoku no Outaishi ni Dekiai Sareru | The Villainess Is Adored by the Prince of the Neighbor Kingdom | WINTER 2026
+[2026-04-11 17:51:08] [y2026]    🆔 MAL: 62000 | AniList: 195518
+[2026-04-11 17:51:08] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:51:08] [y2026]       OP1: "Ai no Fanfare" — Ayahi Takagaki, Yu Shirota (1 videos)
+[2026-04-11 17:51:08] [y2026]       ED1: "Mahou no Oto" — Ayahi Takagaki, Yu Shirota (1 videos)
+[2026-04-11 17:51:08] [y2026]    💾 Saved: "Ai no Fanfare" (OP1)
+[2026-04-11 17:51:09] [y2026]    💾 Saved: "Mahou no Oto" (ED1)
+[2026-04-11 17:51:09] [y2026]    🎤 Artist: Ayahi Takagaki (2 themes)
+[2026-04-11 17:51:09] [y2026]    🎤 Artist: Yu Shirota (2 themes)
+[2026-04-11 17:51:09] [y2026]    ✅ New: 41 | Skipped: 1 | Failed: 1
+[2026-04-11 17:51:09] [y2026] 
+🎌 [9/46] jigokuraku_2nd_season
+[2026-04-11 17:51:10] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:51:12] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:51:12] [y2026]    📝 Jigokuraku 2nd Season | Hell’s Paradise Season 2 | WINTER 2026
+[2026-04-11 17:51:12] [y2026]    🆔 MAL: 55825 | AniList: 166613
+[2026-04-11 17:51:12] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:51:12] [y2026]       OP1: "Kasukana Hana" — Tatsuya Kitani, BABYMETAL (1 videos)
+[2026-04-11 17:51:12] [y2026]       ED1: "PERSONAL" — Ziyoou-vachi (1 videos)
+[2026-04-11 17:51:12] [y2026]    💾 Saved: "Kasukana Hana" (OP1)
+[2026-04-11 17:51:12] [y2026]    💾 Saved: "PERSONAL" (ED1)
+[2026-04-11 17:51:12] [y2026]    🎤 Artist: Tatsuya Kitani (1 themes)
+[2026-04-11 17:51:12] [y2026]    🎤 Artist: BABYMETAL (1 themes)
+[2026-04-11 17:51:12] [y2026]    🎤 Artist: Ziyoou-vachi (1 themes)
+[2026-04-11 17:51:12] [y2026]    ✅ New: 42 | Skipped: 1 | Failed: 1
+[2026-04-11 17:51:12] [y2026] 
+🎌 [10/46] himesama_goumon_no_jikan_desu_2nd_season
+[2026-04-11 17:51:14] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:51:16] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:51:16] [y2026]    📝 Hime-sama, "Goumon" no Jikan desu 2nd Season | 'Tis Time for "Torture," Princess Season 2 | WINTER 2026
+[2026-04-11 17:51:16] [y2026]    🆔 MAL: 58524 | AniList: 176370
+[2026-04-11 17:51:16] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:51:16] [y2026]       OP1: "Sunday Morning" — ILLIT (1 videos)
+[2026-04-11 17:51:16] [y2026]       ED1: "Ohimesama ni wa Narenai" — 『Yuika』 (3 videos)
+[2026-04-11 17:51:16] [y2026]    💾 Saved: "Sunday Morning" (OP1)
+[2026-04-11 17:51:16] [y2026]    💾 Saved: "Ohimesama ni wa Narenai" (ED1)
+[2026-04-11 17:51:16] [y2026]    🎤 Artist: ILLIT (1 themes)
+[2026-04-11 17:51:16] [y2026]    🎤 Artist: 『Yuika』 (1 themes)
+[2026-04-11 17:51:16] [y2026]    ✅ New: 43 | Skipped: 1 | Failed: 1
+[2026-04-11 17:51:16] [y2026] 
+🎌 [11/46] oshi_no_ko_3rd_season
+[2026-04-11 17:51:18] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:51:19] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:51:19] [y2026]    📝 [Oshi no Ko] 3rd Season | 【OSHI NO KO】Season 3 | WINTER 2026
+[2026-04-11 17:51:19] [y2026]    🆔 MAL: 60058 | AniList: 182587
+[2026-04-11 17:51:19] [y2026]    🎬 Found 3 theme(s):
+[2026-04-11 17:51:19] [y2026]       OP1: "B no Revenge" — B-Komachi (1 videos)
+[2026-04-11 17:51:19] [y2026]       OP2: "TEST ME" — CHANMINA (1 videos)
+[2026-04-11 17:51:19] [y2026]       ED1: "Serenade" — natori (1 videos)
+[2026-04-11 17:51:19] [y2026]    💾 Saved: "B no Revenge" (OP1)
+[2026-04-11 17:51:20] [y2026]    💾 Saved: "TEST ME" (OP2)
+[2026-04-11 17:51:20] [y2026]    💾 Saved: "Serenade" (ED1)
+[2026-04-11 17:51:20] [y2026]    🎤 Artist: B-Komachi (1 themes)
+[2026-04-11 17:51:20] [y2026]    🎤 Artist: CHANMINA (1 themes)
+[2026-04-11 17:51:20] [y2026]    🎤 Artist: natori (1 themes)
+[2026-04-11 17:51:20] [y2026]    ✅ New: 44 | Skipped: 1 | Failed: 1
+[2026-04-11 17:51:20] [y2026] 
+🎌 [12/46] sousou_no_frieren_2nd_season
+[2026-04-11 17:51:21] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:51:23] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:51:23] [y2026]    📝 Sousou no Frieren 2nd Season | Frieren: Beyond Journey’s End Season 2 | WINTER 2026
+[2026-04-11 17:51:23] [y2026]    🆔 MAL: 59978 | AniList: 182255
+[2026-04-11 17:51:23] [y2026]    🎬 Found 3 theme(s):
+[2026-04-11 17:51:23] [y2026]       OP1: "lulu." — Mrs. GREEN APPLE (1 videos)
+[2026-04-11 17:51:23] [y2026]       ED1: "The Story of Us" — milet (1 videos)
+[2026-04-11 17:51:23] [y2026]       ED2: "Trace" — milet (1 videos)
+[2026-04-11 17:51:23] [y2026]    💾 Saved: "lulu." (OP1)
+[2026-04-11 17:51:23] [y2026]    💾 Saved: "The Story of Us" (ED1)
+[2026-04-11 17:51:23] [y2026]    💾 Saved: "Trace" (ED2)
+[2026-04-11 17:51:23] [y2026]    🎤 Artist: Mrs. GREEN APPLE (1 themes)
+[2026-04-11 17:51:23] [y2026]    🎤 Artist: milet (2 themes)
+[2026-04-11 17:51:23] [y2026]    ✅ New: 45 | Skipped: 1 | Failed: 1
+[2026-04-11 17:51:23] [y2026] 
+🎌 [13/46] yami_shibai_16
+[2026-04-11 17:51:25] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:51:27] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:51:27] [y2026]    📝 Yami Shibai 16 | Theatre of Darkness: Yamishibai 16 | WINTER 2026
+[2026-04-11 17:51:27] [y2026]    🆔 MAL: 63087 | AniList: 203939
+[2026-04-11 17:51:27] [y2026]    🎬 Found 1 theme(s):
+[2026-04-11 17:51:27] [y2026]       ED1: "Masquerade Night" — yosugala (1 videos)
+[2026-04-11 17:51:27] [y2026]    💾 Saved: "Masquerade Night" (ED1)
+[2026-04-11 17:51:27] [y2026]    🎤 Artist: yosugala (1 themes)
+[2026-04-11 17:51:27] [y2026]    ✅ New: 46 | Skipped: 1 | Failed: 1
+[2026-04-11 17:51:27] [y2026] 
+🎌 [14/46] hikuidori
+[2026-04-11 17:51:29] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:51:30] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:51:30] [y2026]    📝 Hikuidori | Oedo Fire Slayer -The Legend of Phoenix- | WINTER 2026
+[2026-04-11 17:51:30] [y2026]    🆔 MAL: 61084 | AniList: 187062
+[2026-04-11 17:51:30] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:51:30] [y2026]       OP1: "Hamidashi Gomen" — Porno Graffitti (1 videos)
+[2026-04-11 17:51:30] [y2026]       ED1: "Kagerou" — You Ooizumi (1 videos)
+[2026-04-11 17:51:30] [y2026]    💾 Saved: "Hamidashi Gomen" (OP1)
+[2026-04-11 17:51:30] [y2026]    💾 Saved: "Kagerou" (ED1)
+[2026-04-11 17:51:30] [y2026]    🎤 Artist: Porno Graffitti (1 themes)
+[2026-04-11 17:51:30] [y2026]    🎤 Artist: You Ooizumi (1 themes)
+[2026-04-11 17:51:30] [y2026]    ✅ New: 47 | Skipped: 1 | Failed: 1
+[2026-04-11 17:51:30] [y2026] 
+🎌 [15/46] yuusha_kei_ni_shosu_choubatsu_yuusha_9004tai_keimu_kiroku
+[2026-04-11 17:51:32] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:51:33] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:51:33] [y2026]    📝 Yuusha Kei ni Shosu: Choubatsu Yuusha 9004-tai Keimu Kiroku | Sentenced to Be a Hero | WINTER 2026
+[2026-04-11 17:51:33] [y2026]    🆔 MAL: 56009 | AniList: 167152
+[2026-04-11 17:51:33] [y2026]    🎬 Found 3 theme(s):
+[2026-04-11 17:51:33] [y2026]       OP1: "Kill the Noise" — SPYAIR (1 videos)
+[2026-04-11 17:51:33] [y2026]       ED1: "Kill the Noise" — SPYAIR (1 videos)
+[2026-04-11 17:51:33] [y2026]       ED2: "Unknown" — — (1 videos)
+[2026-04-11 17:51:34] [y2026]    💾 Saved: "Kill the Noise" (OP1)
+[2026-04-11 17:51:34] [y2026]    💾 Saved: "Kill the Noise" (ED1)
+[2026-04-11 17:51:34] [y2026]    💾 Saved: "Unknown" (ED2)
+[2026-04-11 17:51:34] [y2026]    🎤 Artist: SPYAIR (2 themes)
+[2026-04-11 17:51:34] [y2026]    ✅ New: 48 | Skipped: 1 | Failed: 1
+[2026-04-11 17:51:34] [y2026] 
+🎌 [16/46] meitantei_precure
+[2026-04-11 17:51:36] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:51:37] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:51:37] [y2026]    📝 Meitantei Precure! | Star Detective Precure! | WINTER 2026
+[2026-04-11 17:51:37] [y2026]    🆔 MAL: 63042 | AniList: 202957
+[2026-04-11 17:51:37] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:51:37] [y2026]       OP1: "Heart ni Hint! Meitantei Precure!" — Ami Ishii (1 videos)
+[2026-04-11 17:51:37] [y2026]       ED1: "Naze? Nazo?! ANSWER" — Akane Kumada, Yuuka Masui (1 videos)
+[2026-04-11 17:51:37] [y2026]    💾 Saved: "Heart ni Hint! Meitantei Precure!" (OP1)
+[2026-04-11 17:51:37] [y2026]    💾 Saved: "Naze? Nazo?! ANSWER" (ED1)
+[2026-04-11 17:51:37] [y2026]    🎤 Artist: Ami Ishii (1 themes)
+[2026-04-11 17:51:37] [y2026]    🎤 Artist: Akane Kumada (1 themes)
+[2026-04-11 17:51:38] [y2026]    🎤 Artist: Yuuka Masui (1 themes)
+[2026-04-11 17:51:38] [y2026]    ✅ New: 49 | Skipped: 1 | Failed: 1
+[2026-04-11 17:51:38] [y2026] 
+🎌 [17/46] medalist_2nd_season
+[2026-04-11 17:51:39] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:51:41] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:51:41] [y2026]    📝 Medalist 2nd Season | Medalist Season 2 | WINTER 2026
+[2026-04-11 17:51:41] [y2026]    🆔 MAL: 61335 | AniList: 189275
+[2026-04-11 17:51:41] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:51:41] [y2026]       OP1: "Cold Night" — HANA (1 videos)
+[2026-04-11 17:51:41] [y2026]       ED1: "Rookies" — Conton Candy (1 videos)
+[2026-04-11 17:51:41] [y2026]    💾 Saved: "Cold Night" (OP1)
+[2026-04-11 17:51:41] [y2026]    💾 Saved: "Rookies" (ED1)
+[2026-04-11 17:51:42] [y2026]    🎤 Artist: HANA (1 themes)
+[2026-04-11 17:51:42] [y2026]    🎤 Artist: Conton Candy (1 themes)
+[2026-04-11 17:51:42] [y2026]    ✅ New: 50 | Skipped: 1 | Failed: 1
+[2026-04-11 17:51:42] [y2026] 
+🎌 [18/46] darwin_jihen
+[2026-04-11 17:51:43] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:51:45] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:51:45] [y2026]    📝 Darwin Jihen | The Darwin Incident | WINTER 2026
+[2026-04-11 17:51:45] [y2026]    🆔 MAL: 58886 | AniList: 177679
+[2026-04-11 17:51:45] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:51:45] [y2026]       OP1: "Make Me Wonder" — Official HIGE DANdism (1 videos)
+[2026-04-11 17:51:45] [y2026]       ED1: "Turn It Up" — ako (1 videos)
+[2026-04-11 17:51:45] [y2026]    💾 Saved: "Make Me Wonder" (OP1)
+[2026-04-11 17:51:45] [y2026]    💾 Saved: "Turn It Up" (ED1)
+[2026-04-11 17:51:45] [y2026]    🎤 Artist: Official HIGE DANdism (1 themes)
+[2026-04-11 17:51:45] [y2026]    🎤 Artist: ako (1 themes)
+[2026-04-11 17:51:45] [y2026]    ✅ New: 51 | Skipped: 1 | Failed: 1
+[2026-04-11 17:51:45] [y2026] 
+🎌 [19/46] android_wa_keiken_ninzuu_ni_hairimasu_ka
+[2026-04-11 17:51:47] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:51:48] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:51:48] [y2026]    📝 Android wa Keiken Ninzuu ni Hairimasu ka?? | Does it Count if You Lose Your Innocence to an Android? | WINTER 2026
+[2026-04-11 17:51:48] [y2026]    🆔 MAL: 61694 | AniList: 192867
+[2026-04-11 17:51:48] [y2026]    🎬 Found 1 theme(s):
+[2026-04-11 17:51:48] [y2026]       ED1: "Android de Shin Jidai" — Komaru Kurikoma (1 videos)
+[2026-04-11 17:51:48] [y2026]    💾 Saved: "Android de Shin Jidai" (ED1)
+[2026-04-11 17:51:48] [y2026]    🎤 Artist: Komaru Kurikoma (1 themes)
+[2026-04-11 17:51:48] [y2026]    ✅ New: 52 | Skipped: 1 | Failed: 1
+[2026-04-11 17:51:48] [y2026] 
+🎌 [20/46] high_school_kimengumi_2026
+[2026-04-11 17:51:50] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:51:52] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:51:52] [y2026]    📝 High School! Kimengumi (2026) | High School! Kimengumi (2026) | WINTER 2026
+[2026-04-11 17:51:52] [y2026]    🆔 MAL: 62804 | AniList: 200556
+[2026-04-11 17:51:52] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:51:52] [y2026]       OP1: "Funky Spice feat. TOMOO" — TOMOO, BREIMEN (1 videos)
+[2026-04-11 17:51:52] [y2026]       ED1: "Suteki!!" — Rikon Densetsu (1 videos)
+[2026-04-11 17:51:52] [y2026]    💾 Saved: "Funky Spice feat. TOMOO" (OP1)
+[2026-04-11 17:51:52] [y2026]    💾 Saved: "Suteki!!" (ED1)
+[2026-04-11 17:51:52] [y2026]    🎤 Artist: TOMOO (1 themes)
+[2026-04-11 17:51:52] [y2026]    🎤 Artist: BREIMEN (1 themes)
+[2026-04-11 17:51:52] [y2026]    🎤 Artist: Rikon Densetsu (1 themes)
+[2026-04-11 17:51:52] [y2026]    ✅ New: 53 | Skipped: 1 | Failed: 1
+[2026-04-11 17:51:52] [y2026] 
+🎌 [21/46] jigoku_sensei_nube_2025_part_2
+[2026-04-11 17:51:54] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:51:55] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:51:55] [y2026]    📝 Jigoku Sensei Nube (2025) Part 2 | Hell Teacher: Jigoku Sensei Nube (2025) Part 2 | WINTER 2026
+[2026-04-11 17:51:55] [y2026]    🆔 MAL: 61608 | AniList: 191967
+[2026-04-11 17:51:55] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:51:55] [y2026]       OP1: "ERASE" — THE ORAL CIGARETTES (1 videos)
+[2026-04-11 17:51:55] [y2026]       ED1: "MAGICAL" — Ayumu Imazu (1 videos)
+[2026-04-11 17:51:56] [y2026]    💾 Saved: "ERASE" (OP1)
+[2026-04-11 17:51:56] [y2026]    💾 Saved: "MAGICAL" (ED1)
+[2026-04-11 17:51:56] [y2026]    🎤 Artist: THE ORAL CIGARETTES (1 themes)
+[2026-04-11 17:51:56] [y2026]    🎤 Artist: Ayumu Imazu (1 themes)
+[2026-04-11 17:51:56] [y2026]    ✅ New: 54 | Skipped: 1 | Failed: 1
+[2026-04-11 17:51:56] [y2026] 
+🎌 [22/46] cardfight_vanguard_divinez_genma_seisenhen
+[2026-04-11 17:51:58] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:51:59] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:51:59] [y2026]    📝 Cardfight!! Vanguard: Divinez Genma Seisen-hen | CARDFIGHT!! VANGUARD Divinez Parallactic Clash | WINTER 2026
+[2026-04-11 17:51:59] [y2026]    🆔 MAL: 62649 | AniList: 203296
+[2026-04-11 17:51:59] [y2026]    🎬 Found 3 theme(s):
+[2026-04-11 17:51:59] [y2026]       OP1: "Genkai" — V.W.P (1 videos)
+[2026-04-11 17:51:59] [y2026]       ED1: "Gira Gira" — RealRomantic (1 videos)
+[2026-04-11 17:51:59] [y2026]       OP2: "World's End Trigger" — Hina Aoki (1 videos)
+[2026-04-11 17:52:00] [y2026]    💾 Saved: "Genkai" (OP1)
+[2026-04-11 17:52:00] [y2026]    💾 Saved: "Gira Gira" (ED1)
+[2026-04-11 17:52:00] [y2026]    💾 Saved: "World's End Trigger" (OP2)
+[2026-04-11 17:52:00] [y2026]    🎤 Artist: V.W.P (1 themes)
+[2026-04-11 17:52:00] [y2026]    🎤 Artist: RealRomantic (1 themes)
+[2026-04-11 17:52:00] [y2026]    🎤 Artist: Hina Aoki (1 themes)
+[2026-04-11 17:52:00] [y2026]    ✅ New: 55 | Skipped: 1 | Failed: 1
+[2026-04-11 17:52:00] [y2026] 
+🎌 [23/46] jojo_no_kimyou_na_bouken_part_7_steel_ball_run
+[2026-04-11 17:52:02] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:52:03] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:52:03] [y2026]    📝 JoJo no Kimyou na Bouken Part 7: Steel Ball Run | STEEL BALL RUN JoJo's Bizarre Adventure 1st STAGE | WINTER 2026
+[2026-04-11 17:52:03] [y2026]    🆔 MAL: 61469 | AniList: 190327
+[2026-04-11 17:52:03] [y2026]    🎬 Found 1 theme(s):
+[2026-04-11 17:52:03] [y2026]       ED1: "Dance with STEEL BALL RUN" — — (1 videos)
+[2026-04-11 17:52:04] [y2026]    💾 Saved: "Dance with STEEL BALL RUN" (ED1)
+[2026-04-11 17:52:04] [y2026]    ✅ New: 56 | Skipped: 1 | Failed: 1
+[2026-04-11 17:52:04] [y2026] 
+🎌 [24/46] shunkashuutou_daikousha_haru_no_mai
+[2026-04-11 17:52:06] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:52:07] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:52:07] [y2026]    📝 Shunkashuutou Daikousha: Haru no Mai | Agents of the Four Seasons: Dance of Spring | SPRING 2026
+[2026-04-11 17:52:07] [y2026]    🆔 MAL: 61443 | AniList: 190143
+[2026-04-11 17:52:07] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:52:07] [y2026]       OP1: "Petals feat. Kase" — Orangestar (0 videos)
+[2026-04-11 17:52:07] [y2026]       ED1: "Hanaikada feat. Kase" — Orangestar (0 videos)
+[2026-04-11 17:52:07] [y2026]    💾 Saved: "Petals feat. Kase" (OP1)
+[2026-04-11 17:52:07] [y2026]    💾 Saved: "Hanaikada feat. Kase" (ED1)
+[2026-04-11 17:52:07] [y2026]    🎤 Artist: Orangestar (2 themes)
+[2026-04-11 17:52:07] [y2026]    ✅ New: 57 | Skipped: 1 | Failed: 1
+[2026-04-11 17:52:07] [y2026] 
+🎌 [25/46] niwatori_fighter
+[2026-04-11 17:52:09] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:52:11] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:52:11] [y2026]    📝 Niwatori Fighter | Rooster Fighter | SPRING 2026
+[2026-04-11 17:52:11] [y2026]    🆔 MAL: 59393 | AniList: 179813
+[2026-04-11 17:52:11] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:52:11] [y2026]       OP1: "What's a Hero?" — Daruma Rollin' (1 videos)
+[2026-04-11 17:52:11] [y2026]       ED1: "We're Loose Stars" — Tetsuya Takahashi (1 videos)
+[2026-04-11 17:52:11] [y2026]    💾 Saved: "What's a Hero?" (OP1)
+[2026-04-11 17:52:11] [y2026]    💾 Saved: "We're Loose Stars" (ED1)
+[2026-04-11 17:52:11] [y2026]    🎤 Artist: Daruma Rollin' (1 themes)
+[2026-04-11 17:52:11] [y2026]    🎤 Artist: Tetsuya Takahashi (1 themes)
+[2026-04-11 17:52:11] [y2026]    ✅ New: 58 | Skipped: 1 | Failed: 1
+[2026-04-11 17:52:11] [y2026] 
+🎌 [26/46] youkoso_jitsuryoku_shijou_shugi_no_kyoushitsu_e_4th_season_2nenseihen_ichi_gakki
+[2026-04-11 17:52:13] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:52:14] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:52:14] [y2026]    📝 Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e 4th Season 2-nensei-hen Ichi Gakki | Classroom of the Elite 4th Season: Second Year, First Semester | SPRING 2026
+[2026-04-11 17:52:14] [y2026]    🆔 MAL: 59708 | AniList: 180745
+[2026-04-11 17:52:14] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:52:14] [y2026]       OP1: "MONSTER" — Eir Aoi (1 videos)
+[2026-04-11 17:52:14] [y2026]       ED1: "Liar Veil" — ZAQ (1 videos)
+[2026-04-11 17:52:15] [y2026]    💾 Saved: "MONSTER" (OP1)
+[2026-04-11 17:52:15] [y2026]    💾 Saved: "Liar Veil" (ED1)
+[2026-04-11 17:52:15] [y2026]    🎤 Artist: Eir Aoi (1 themes)
+[2026-04-11 17:52:15] [y2026]    🎤 Artist: ZAQ (1 themes)
+[2026-04-11 17:52:15] [y2026]    ✅ New: 59 | Skipped: 1 | Failed: 1
+[2026-04-11 17:52:15] [y2026] 
+🎌 [27/46] koori_no_jouheki
+[2026-04-11 17:52:17] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:52:18] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:52:18] [y2026]    📝 Koori no Jouheki | The Ramparts of Ice | SPRING 2026
+[2026-04-11 17:52:18] [y2026]    🆔 MAL: 60852 | AniList: 186497
+[2026-04-11 17:52:18] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:52:18] [y2026]       OP1: "Toumei" — Novelbright (1 videos)
+[2026-04-11 17:52:18] [y2026]       ED1: "Sakasama" — Polkadot Stingray (1 videos)
+[2026-04-11 17:52:18] [y2026]    💾 Saved: "Toumei" (OP1)
+[2026-04-11 17:52:18] [y2026]    💾 Saved: "Sakasama" (ED1)
+[2026-04-11 17:52:18] [y2026]    🎤 Artist: Novelbright (1 themes)
+[2026-04-11 17:52:18] [y2026]    🎤 Artist: Polkadot Stingray (1 themes)
+[2026-04-11 17:52:18] [y2026]    ✅ New: 60 | Skipped: 1 | Failed: 1
+[2026-04-11 17:52:18] [y2026] 
+🎌 [28/46] otonari_no_tenshisama_ni_itsunomanika_dame_ningen_ni_sareteita_ken_2nd_season
+[2026-04-11 17:52:20] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:52:22] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:52:22] [y2026]    📝 Otonari no Tenshi-sama ni Itsunomanika Dame Ningen ni Sareteita Ken 2nd Season | The Angel Next Door Spoils Me Rotten 2 | SPRING 2026
+[2026-04-11 17:52:22] [y2026]    🆔 MAL: 56876 | AniList: 170019
+[2026-04-11 17:52:22] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:52:22] [y2026]       OP1: "Kimi wa Koibito" — Masayoshi Ooishi (1 videos)
+[2026-04-11 17:52:22] [y2026]       ED1: "Ureshii! Tanoshii! Daisuki!" — Manaka Iwami (1 videos)
+[2026-04-11 17:52:22] [y2026]    💾 Saved: "Kimi wa Koibito" (OP1)
+[2026-04-11 17:52:22] [y2026]    💾 Saved: "Ureshii! Tanoshii! Daisuki!" (ED1)
+[2026-04-11 17:52:22] [y2026]    🎤 Artist: Masayoshi Ooishi (1 themes)
+[2026-04-11 17:52:22] [y2026]    🎤 Artist: Manaka Iwami (1 themes)
+[2026-04-11 17:52:22] [y2026]    ✅ New: 61 | Skipped: 1 | Failed: 1
+[2026-04-11 17:52:22] [y2026] 
+🎌 [29/46] tensei_shitara_slime_datta_ken_4th_season
+[2026-04-11 17:52:24] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:52:26] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:52:26] [y2026]    📝 Tensei shitara Slime Datta Ken 4th Season | That Time I Got Reincarnated as a Slime Season 4 | SPRING 2026
+[2026-04-11 17:52:26] [y2026]    🆔 MAL: 59970 | AniList: 182205
+[2026-04-11 17:52:26] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:52:26] [y2026]       OP1: "Esoragoto" — Eir Aoi (1 videos)
+[2026-04-11 17:52:26] [y2026]       ED1: "Katsubou" — CiON (1 videos)
+[2026-04-11 17:52:26] [y2026]    💾 Saved: "Esoragoto" (OP1)
+[2026-04-11 17:52:26] [y2026]    💾 Saved: "Katsubou" (ED1)
+[2026-04-11 17:52:26] [y2026]    🎤 Artist: Eir Aoi (1 themes)
+[2026-04-11 17:52:26] [y2026]    🎤 Artist: CiON (1 themes)
+[2026-04-11 17:52:26] [y2026]    ✅ New: 62 | Skipped: 1 | Failed: 1
+[2026-04-11 17:52:26] [y2026] 
+🎌 [30/46] haibarakun_no_tsuyokute_seishun_new_game
+[2026-04-11 17:52:28] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:52:29] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:52:29] [y2026]    📝 Haibara-kun no Tsuyokute Seishun New Game | Haibara's Teenage New Game+ | SPRING 2026
+[2026-04-11 17:52:29] [y2026]    🆔 MAL: 61943 | AniList: 195333
+[2026-04-11 17:52:29] [y2026]    🎬 Found 1 theme(s):
+[2026-04-11 17:52:29] [y2026]       OP1: "Fly Again!!" — Ami Maeshima (1 videos)
+[2026-04-11 17:52:29] [y2026]    💾 Saved: "Fly Again!!" (OP1)
+[2026-04-11 17:52:29] [y2026]    🎤 Artist: Ami Maeshima (1 themes)
+[2026-04-11 17:52:29] [y2026]    ✅ New: 63 | Skipped: 1 | Failed: 1
+[2026-04-11 17:52:29] [y2026] 
+🎌 [31/46] akanebanashi
+[2026-04-11 17:52:31] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:52:32] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:52:32] [y2026]    📝 Akane-banashi | Akane-banashi | SPRING 2026
+[2026-04-11 17:52:32] [y2026]    🆔 MAL: 62164 | AniList: 196935
+[2026-04-11 17:52:32] [y2026]    🎬 Found 1 theme(s):
+[2026-04-11 17:52:32] [y2026]       OP1: "Hitotarashi" — Keisuke Kuwata (1 videos)
+[2026-04-11 17:52:33] [y2026]    💾 Saved: "Hitotarashi" (OP1)
+[2026-04-11 17:52:33] [y2026]    🎤 Artist: Keisuke Kuwata (1 themes)
+[2026-04-11 17:52:33] [y2026]    ✅ New: 64 | Skipped: 1 | Failed: 1
+[2026-04-11 17:52:33] [y2026] 
+🎌 [32/46] dorohedoro_season_2
+[2026-04-11 17:52:34] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:52:36] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:52:36] [y2026]    📝 Dorohedoro Season 2 | Dorohedoro Season 2 | SPRING 2026
+[2026-04-11 17:52:36] [y2026]    🆔 MAL: 57779 | AniList: 173172
+[2026-04-11 17:52:36] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:52:36] [y2026]       OP1: "Zettai MUST Danmen" — (K)NoW_NAME (1 videos)
+[2026-04-11 17:52:36] [y2026]       ED1: "Return to Atama" — (K)NoW_NAME (1 videos)
+[2026-04-11 17:52:36] [y2026]    💾 Saved: "Zettai MUST Danmen" (OP1)
+[2026-04-11 17:52:36] [y2026]    💾 Saved: "Return to Atama" (ED1)
+[2026-04-11 17:52:36] [y2026]    🎤 Artist: (K)NoW_NAME (2 themes)
+[2026-04-11 17:52:36] [y2026]    ✅ New: 65 | Skipped: 1 | Failed: 1
+[2026-04-11 17:52:36] [y2026] 
+🎌 [33/46] saikyou_no_ousama_nidome_no_jinsei_wa_nani_wo_suru_2nd_season
+[2026-04-11 17:52:38] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:52:39] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:52:39] [y2026]    📝 Saikyou no Ousama, Nidome no Jinsei wa Nani wo Suru? 2nd Season | The Beginning After the End Season 2 | SPRING 2026
+[2026-04-11 17:52:39] [y2026]    🆔 MAL: 61831 | AniList: 194317
+[2026-04-11 17:52:39] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:52:39] [y2026]       OP1: "Sayonara ja Nai Hou ga Ii" — SIX LOUNGE (0 videos)
+[2026-04-11 17:52:39] [y2026]       ED1: "Futatsu no Michi" — 22/7 (0 videos)
+[2026-04-11 17:52:39] [y2026]    💾 Saved: "Sayonara ja Nai Hou ga Ii" (OP1)
+[2026-04-11 17:52:40] [y2026]    💾 Saved: "Futatsu no Michi" (ED1)
+[2026-04-11 17:52:40] [y2026]    🎤 Artist: SIX LOUNGE (1 themes)
+[2026-04-11 17:52:40] [y2026]    🎤 Artist: 22/7 (1 themes)
+[2026-04-11 17:52:40] [y2026]    ✅ New: 66 | Skipped: 1 | Failed: 1
+[2026-04-11 17:52:40] [y2026] 
+🎌 [34/46] jidou_hanbaiki_ni_umarekawatta_ore_wa_meikyuu_wo_samayou_3rd_season
+[2026-04-11 17:52:41] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:52:43] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:52:43] [y2026]    📝 Jidou Hanbaiki ni Umarekawatta Ore wa Meikyuu wo Samayou 3rd Season | Reborn as a Vending Machine, I Now Wander the Dungeon Season 3 | SPRING 2026
+[2026-04-11 17:52:43] [y2026]    🆔 MAL: 62512 | AniList: 198939
+[2026-04-11 17:52:43] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:52:43] [y2026]       OP1: "Jihankism" — Vivarush (1 videos)
+[2026-04-11 17:52:43] [y2026]       ED1: "Mekurumeku Rendezvous" — FUWAMOCO (1 videos)
+[2026-04-11 17:52:43] [y2026]    💾 Saved: "Jihankism" (OP1)
+[2026-04-11 17:52:43] [y2026]    💾 Saved: "Mekurumeku Rendezvous" (ED1)
+[2026-04-11 17:52:44] [y2026]    🎤 Artist: Vivarush (1 themes)
+[2026-04-11 17:52:44] [y2026]    🎤 Artist: FUWAMOCO (1 themes)
+[2026-04-11 17:52:44] [y2026]    ✅ New: 67 | Skipped: 1 | Failed: 1
+[2026-04-11 17:52:44] [y2026] 
+🎌 [35/46] maidsan_wa_taberu_dake
+[2026-04-11 17:52:45] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:52:47] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:52:47] [y2026]    📝 Maid-san wa Taberu dake | The Food Diary of Miss Maid | SPRING 2026
+[2026-04-11 17:52:47] [y2026]    🆔 MAL: 62342 | AniList: 197868
+[2026-04-11 17:52:47] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:52:47] [y2026]       OP1: "Ribbon" — majiko (1 videos)
+[2026-04-11 17:52:47] [y2026]       ED1: "Shiawase Flavor" — ARCANA PROJECT (1 videos)
+[2026-04-11 17:52:47] [y2026]    💾 Saved: "Ribbon" (OP1)
+[2026-04-11 17:52:47] [y2026]    💾 Saved: "Shiawase Flavor" (ED1)
+[2026-04-11 17:52:47] [y2026]    🎤 Artist: majiko (1 themes)
+[2026-04-11 17:52:47] [y2026]    🎤 Artist: ARCANA PROJECT (1 themes)
+[2026-04-11 17:52:47] [y2026]    ✅ New: 68 | Skipped: 1 | Failed: 1
+[2026-04-11 17:52:47] [y2026] 
+🎌 [36/46] tongari_boushi_no_atelier
+[2026-04-11 17:52:49] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:52:50] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:52:50] [y2026]    📝 Tongari Boushi no Atelier | Witch Hat Atelier | SPRING 2026
+[2026-04-11 17:52:50] [y2026]    🆔 MAL: 51553 | AniList: 147105
+[2026-04-11 17:52:50] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:52:50] [y2026]       OP1: "Kaze no Anthem" — Eve, Yorushika (1 videos)
+[2026-04-11 17:52:50] [y2026]       ED1: "Tada Utsukushii Noroi" — Nakamura Hak (1 videos)
+[2026-04-11 17:52:51] [y2026]    💾 Saved: "Kaze no Anthem" (OP1)
+[2026-04-11 17:52:51] [y2026]    💾 Saved: "Tada Utsukushii Noroi" (ED1)
+[2026-04-11 17:52:51] [y2026]    🎤 Artist: Eve (1 themes)
+[2026-04-11 17:52:51] [y2026]    🎤 Artist: Yorushika (1 themes)
+[2026-04-11 17:52:51] [y2026]    🎤 Artist: Nakamura Hak (1 themes)
+[2026-04-11 17:52:51] [y2026]    ✅ New: 69 | Skipped: 1 | Failed: 1
+[2026-04-11 17:52:51] [y2026] 
+🎌 [37/46] beastars_final_season_part_2
+[2026-04-11 17:52:53] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:52:54] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:52:54] [y2026]    📝 Beastars Final Season Part 2 | BEASTARS Final Season Part 2 | WINTER 2026
+[2026-04-11 17:52:54] [y2026]    🆔 MAL: 61114 | AniList: 187267
+[2026-04-11 17:52:54] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:52:54] [y2026]       OP1: "LA FERALIA" — — (0 videos)
+[2026-04-11 17:52:54] [y2026]       ED1: "Tiny Light" — SEVENTEEN (0 videos)
+[2026-04-11 17:52:54] [y2026]    💾 Saved: "LA FERALIA" (OP1)
+[2026-04-11 17:52:54] [y2026]    💾 Saved: "Tiny Light" (ED1)
+[2026-04-11 17:52:54] [y2026]    🎤 Artist: SEVENTEEN (1 themes)
+[2026-04-11 17:52:54] [y2026]    ✅ New: 70 | Skipped: 1 | Failed: 1
+[2026-04-11 17:52:54] [y2026] 
+🎌 [38/46] the_idolmster_million_live_itsuka_mannaka_de
+[2026-04-11 17:52:56] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:53:01] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:53:01] [y2026]    📝 The iDOLM@STER Million Live! Itsuka, Mannaka de | The iDOLM@STER Million Live! | WINTER 2026
+[2026-04-11 17:53:01] [y2026]    🆔 MAL: 61156 | AniList: 187375
+[2026-04-11 17:53:01] [y2026]    🎬 Found 1 theme(s):
+[2026-04-11 17:53:01] [y2026]       ED1: "Flyers!!!" — 765 MILLION ALLSTARS (0 videos)
+[2026-04-11 17:53:01] [y2026]    💾 Saved: "Flyers!!!" (ED1)
+[2026-04-11 17:53:01] [y2026]    🎤 Artist: 765 MILLION ALLSTARS (1 themes)
+[2026-04-11 17:53:01] [y2026]    ✅ New: 71 | Skipped: 1 | Failed: 1
+[2026-04-11 17:53:01] [y2026] 
+🎌 [39/46] isekai_nonbiri_nouka_2
+[2026-04-11 17:53:03] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:53:05] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:53:05] [y2026]    📝 Isekai Nonbiri Nouka 2 | Farming Life in Another World 2 | SPRING 2026
+[2026-04-11 17:53:05] [y2026]    🆔 MAL: 62146 | AniList: 197824
+[2026-04-11 17:53:05] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:53:05] [y2026]       OP1: "It's a beautiful story" — Aya Suzaki, Shino Shimoji (1 videos)
+[2026-04-11 17:53:05] [y2026]       ED1: "Sunny Steps" — Yui Hizuki (1 videos)
+[2026-04-11 17:53:05] [y2026]    💾 Saved: "It's a beautiful story" (OP1)
+[2026-04-11 17:53:05] [y2026]    💾 Saved: "Sunny Steps" (ED1)
+[2026-04-11 17:53:05] [y2026]    🎤 Artist: Aya Suzaki (1 themes)
+[2026-04-11 17:53:05] [y2026]    🎤 Artist: Shino Shimoji (1 themes)
+[2026-04-11 17:53:06] [y2026]    🎤 Artist: Yui Hizuki (1 themes)
+[2026-04-11 17:53:06] [y2026]    ✅ New: 72 | Skipped: 1 | Failed: 1
+[2026-04-11 17:53:06] [y2026] 
+🎌 [40/46] saikyou_no_shokugyou_wa_yuusha_demo_kenja_demo_naku_kanteishi_kari_rashii_desu_yo
+[2026-04-11 17:53:07] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:53:09] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:53:09] [y2026]    📝 Saikyou no Shokugyou wa Yuusha demo Kenja demo Naku Kanteishi (Kari) Rashii desu yo? | The strongest job is apparently not a hero or a sage, but an appraiser (provisional)! | SPRING 2026
+[2026-04-11 17:53:09] [y2026]    🆔 MAL: — | AniList: 200769
+[2026-04-11 17:53:09] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:53:09] [y2026]       OP1: "Compass wa Toumei" — Ryushen (1 videos)
+[2026-04-11 17:53:09] [y2026]       ED1: "Mo-ii-kai?" — Phantom Siita (1 videos)
+[2026-04-11 17:53:09] [y2026]    💾 Saved: "Compass wa Toumei" (OP1)
+[2026-04-11 17:53:09] [y2026]    💾 Saved: "Mo-ii-kai?" (ED1)
+[2026-04-11 17:53:09] [y2026]    🎤 Artist: Ryushen (1 themes)
+[2026-04-11 17:53:09] [y2026]    🎤 Artist: Phantom Siita (1 themes)
+[2026-04-11 17:53:09] [y2026]    ✅ New: 73 | Skipped: 1 | Failed: 1
+[2026-04-11 17:53:09] [y2026] 
+🎌 [41/46] daikenja_riddle_no_jikan_gyakkou
+[2026-04-11 17:53:11] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:53:16] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:53:16] [y2026]    📝 Daikenja Riddle no Jikan Gyakkou | The Regression of Great Sage Riddle | SPRING 2026
+[2026-04-11 17:53:16] [y2026]    🆔 MAL: 63433 | AniList: 210375
+[2026-04-11 17:53:16] [y2026]    🎬 Found 1 theme(s):
+[2026-04-11 17:53:16] [y2026]       ED1: "Savage" — Asaka (0 videos)
+[2026-04-11 17:53:16] [y2026]    💾 Saved: "Savage" (ED1)
+[2026-04-11 17:53:16] [y2026]    🎤 Artist: Asaka (1 themes)
+[2026-04-11 17:53:16] [y2026]    ✅ New: 74 | Skipped: 1 | Failed: 1
+[2026-04-11 17:53:16] [y2026] 
+🎌 [42/46] nigashita_sakana_wa_ookikatta_ga_tsuriageta_sakana_ga_ookisugita_ken
+[2026-04-11 17:53:18] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:53:20] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:53:20] [y2026]    📝 Nigashita Sakana wa Ookikatta ga Tsuriageta Sakana ga Ookisugita Ken | Always a Catch! | SPRING 2026
+[2026-04-11 17:53:20] [y2026]    🆔 MAL: 62893 | AniList: 201817
+[2026-04-11 17:53:20] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:53:20] [y2026]       OP1: "Chikai wa Kyun to." — HoneyWorks, Airi Suzuki (0 videos)
+[2026-04-11 17:53:20] [y2026]       ED1: "DEAD OR LOVE" — Yoshino (0 videos)
+[2026-04-11 17:53:20] [y2026]    💾 Saved: "Chikai wa Kyun to." (OP1)
+[2026-04-11 17:53:20] [y2026]    💾 Saved: "DEAD OR LOVE" (ED1)
+[2026-04-11 17:53:20] [y2026]    🎤 Artist: HoneyWorks (1 themes)
+[2026-04-11 17:53:20] [y2026]    🎤 Artist: Airi Suzuki (1 themes)
+[2026-04-11 17:53:20] [y2026]    🎤 Artist: Yoshino (1 themes)
+[2026-04-11 17:53:20] [y2026]    ✅ New: 75 | Skipped: 1 | Failed: 1
+[2026-04-11 17:53:20] [y2026] 
+🎌 [43/46] ganbare_nakamurakun
+[2026-04-11 17:53:22] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:53:23] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:53:23] [y2026]    📝 Ganbare! Nakamura-kun!! | Go For It, Nakamura-kun!! | SPRING 2026
+[2026-04-11 17:53:23] [y2026]    🆔 MAL: 59551 | AniList: 180228
+[2026-04-11 17:53:23] [y2026]    🎬 Found 4 theme(s):
+[2026-04-11 17:53:23] [y2026]       OP1: "Shunpatsuteki ni Koi Shiyou" — Kento Nakajima, Yasuyuki Okamura (0 videos)
+[2026-04-11 17:53:23] [y2026]       ED1: "Hatsukoi" — Kouzou Murashita (0 videos)
+[2026-04-11 17:53:23] [y2026]       ED2: "WON'T BE LONG" — Bubblegum Brothers (0 videos)
+[2026-04-11 17:53:23] [y2026]       ED3: "Konya wa Boogie Back smooth rap" — Scha Dara Parr, Kenji Ozawa (0 videos)
+[2026-04-11 17:53:23] [y2026]    💾 Saved: "Shunpatsuteki ni Koi Shiyou" (OP1)
+[2026-04-11 17:53:24] [y2026]    💾 Saved: "Hatsukoi" (ED1)
+[2026-04-11 17:53:24] [y2026]    💾 Saved: "WON'T BE LONG" (ED2)
+[2026-04-11 17:53:24] [y2026]    💾 Saved: "Konya wa Boogie Back smooth rap" (ED3)
+[2026-04-11 17:53:24] [y2026]    🎤 Artist: Kento Nakajima (1 themes)
+[2026-04-11 17:53:24] [y2026]    🎤 Artist: Yasuyuki Okamura (1 themes)
+[2026-04-11 17:53:24] [y2026]    🎤 Artist: Kouzou Murashita (1 themes)
+[2026-04-11 17:53:24] [y2026]    🎤 Artist: Bubblegum Brothers (1 themes)
+[2026-04-11 17:53:24] [y2026]    🎤 Artist: Scha Dara Parr (1 themes)
+[2026-04-11 17:53:24] [y2026]    🎤 Artist: Kenji Ozawa (1 themes)
+[2026-04-11 17:53:24] [y2026]    ✅ New: 76 | Skipped: 1 | Failed: 1
+[2026-04-11 17:53:24] [y2026] 
+🎌 [44/46] ponkotsu_fuuki_iin_to_skirt_take_ga_futekisetsu_na_jk_no_hanashi
+[2026-04-11 17:53:26] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:53:27] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:53:27] [y2026]    📝 Ponkotsu Fuuki Iin to Skirt take ga Futekisetsu na JK no Hanashi | The Klutzy Class Monitor and the Girl with the Short Skirt | SPRING 2026
+[2026-04-11 17:53:27] [y2026]    🆔 MAL: 61425 | AniList: 189987
+[2026-04-11 17:53:27] [y2026]    🎬 Found 1 theme(s):
+[2026-04-11 17:53:27] [y2026]       OP1: "Hitorigoto" — osage (0 videos)
+[2026-04-11 17:53:28] [y2026]    💾 Saved: "Hitorigoto" (OP1)
+[2026-04-11 17:53:28] [y2026]    🎤 Artist: osage (1 themes)
+[2026-04-11 17:53:28] [y2026]    ✅ New: 77 | Skipped: 1 | Failed: 1
+[2026-04-11 17:53:28] [y2026] 
+🎌 [45/46] class_de_2banme_ni_kawaii_onnanoko_to_tomodachi_ni_natta
+[2026-04-11 17:53:29] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:53:31] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:53:31] [y2026]    📝 Class de 2-banme ni Kawaii Onnanoko to Tomodachi ni Natta | I Made Friends with the Second Prettiest Girl in My Class | SPRING 2026
+[2026-04-11 17:53:31] [y2026]    🆔 MAL: 56734 | AniList: 169580
+[2026-04-11 17:53:31] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:53:31] [y2026]       OP1: "Submarine Youth" — reGretGirl (0 videos)
+[2026-04-11 17:53:31] [y2026]       ED1: "Zutto 1-ban ni Shite ne" — Koresawa (0 videos)
+[2026-04-11 17:53:31] [y2026]    💾 Saved: "Submarine Youth" (OP1)
+[2026-04-11 17:53:31] [y2026]    💾 Saved: "Zutto 1-ban ni Shite ne" (ED1)
+[2026-04-11 17:53:31] [y2026]    🎤 Artist: reGretGirl (1 themes)
+[2026-04-11 17:53:31] [y2026]    🎤 Artist: Koresawa (1 themes)
+[2026-04-11 17:53:31] [y2026]    ✅ New: 78 | Skipped: 1 | Failed: 1
+[2026-04-11 17:53:31] [y2026] 
+🎌 [46/46] kamiina_botan_yoeru_sugata_wa_yuri_no_hana
+[2026-04-11 17:53:33] [y2026]    📡 Got anime info from AnimeThemes (full mode)
+[2026-04-11 17:53:34] [y2026]    🔍 Found extra info via AniList (by_id)
+[2026-04-11 17:53:34] [y2026]    📝 Kamiina Botan, Yoeru Sugata wa Yuri no Hana | Botan Kamiina Fully Blossoms When Drunk | SPRING 2026
+[2026-04-11 17:53:34] [y2026]    🆔 MAL: 61186 | AniList: 187869
+[2026-04-11 17:53:34] [y2026]    🎬 Found 2 theme(s):
+[2026-04-11 17:53:34] [y2026]       OP1: "Mebuku Toki" — yonige (1 videos)
+[2026-04-11 17:53:34] [y2026]       ED1: "Kanjou Glass" — Sayumi Suzushiro (1 videos)
+[2026-04-11 17:53:35] [y2026]    💾 Saved: "Mebuku Toki" (OP1)
+[2026-04-11 17:53:35] [y2026]    💾 Saved: "Kanjou Glass" (ED1)
+[2026-04-11 17:53:35] [y2026]    🎤 Artist: yonige (1 themes)
+[2026-04-11 17:53:35] [y2026]    🎤 Artist: Sayumi Suzushiro (1 themes)
+[2026-04-11 17:53:35] [y2026]    ✅ New: 79 | Skipped: 1 | Failed: 1
+═════════════════════════════════════════════════════════════════
+[2026-04-11 17:53:35] [y2026] 🎉 Done! New: 79 | Skipped: 1 | Failed: 1
+═════════════════════════════════════════════════════════════════
+[2026-04-11 17:53:35] [y2026] ✅ All done!
+══════════════════════════════════════════════════════════════════════
+[2026-04-11 18:02:12] [y2026] 🌱 SEEDING ANIME FROM YEAR: 2026
+[2026-04-11 18:02:12] [y2026]    Mode: Normal
+══════════════════════════════════════════════════════════════════════
+[2026-04-11 18:02:14] [y2026] ✅ Connected to database
+═════════════════════════════════════════════════════════════════
+[2026-04-11 18:02:14] [y2026] 🚀 Phase 1: Collecting anime list
+═════════════════════════════════════════════════════════════════
+[2026-04-11 18:02:14] [y2026] ✅ Already collected 80 anime — skipping
+═════════════════════════════════════════════════════════════════
+[2026-04-11 18:02:14] [y2026] 🚀 Phase 2: Processing anime
+═════════════════════════════════════════════════════════════════
+[2026-04-11 18:02:14] [y2026] 📊 Total anime: 80
+[2026-04-11 18:02:14] [y2026]    Already done: 80
+[2026-04-11 18:02:14] [y2026]    Previously skipped: 1
+[2026-04-11 18:02:14] [y2026]    Previously failed: 0
+[2026-04-11 18:02:14] [y2026]    Now processing: 0
+─────────────────────────────────────────────────────────────────
+═════════════════════════════════════════════════════════════════
+[2026-04-11 18:02:14] [y2026] 🎉 Done! New: 79 | Skipped: 1 | Failed: 1
+═════════════════════════════════════════════════════════════════
+[2026-04-11 18:02:14] [y2026] ✅ All done!

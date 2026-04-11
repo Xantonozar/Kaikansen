@@ -35,6 +35,16 @@ async function getSeasonalThemes(season: string, year: number) {
   }
 }
 
+async function getTopSeasonalThemes(season: string, year: number, limit: number = 15) {
+  try {
+    const res = await fetch(`${APP_URL}/api/themes/seasonal?season=${season}&year=${year}&sortBy=rating&limit=${limit}&page=1`, { cache: 'no-store' })
+    const json = await res.json()
+    return json.success ? json.data : []
+  } catch {
+    return []
+  }
+}
+
 async function getLiveStats() {
   try {
     const res = await fetch(`${APP_URL}/api/stats/live`, { cache: 'no-store' })
@@ -49,9 +59,10 @@ export default async function Home() {
   const { season, label } = getCurrentSeason()
   const year = new Date().getFullYear()
   
-  const [popularThemes, featuredThemes, stats] = await Promise.all([
+  const [popularThemes, featuredThemes, topSeasonalThemes, stats] = await Promise.all([
     getPopularThemes(),
     getSeasonalThemes(season, year),
+    getTopSeasonalThemes(season, year, 15),
     getLiveStats(),
   ])
 
@@ -71,6 +82,7 @@ export default async function Home() {
           <HomeClient 
             popularThemes={popularThemes}
             featuredThemes={featuredThemes}
+            topSeasonalThemes={topSeasonalThemes}
             currentSeason={{ season: label, year }}
             stats={stats}
           />
