@@ -3,7 +3,7 @@
 import { Suspense, useState, useEffect } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { useInfiniteQuery } from '@tanstack/react-query'
-import { Search as SearchIcon, Heart } from 'lucide-react'
+import { Search as SearchIcon, Heart, User } from 'lucide-react'
 import { ThemeListRow } from '@/app/components/theme/ThemeListRow'
 import { EmptyState } from '@/app/components/shared/EmptyState'
 import { LoadingSkeleton } from '@/app/components/shared/LoadingSkeleton'
@@ -12,6 +12,7 @@ import { queryKeys } from '@/lib/queryKeys'
 import { cn } from '@/lib/utils'
 
 type FilterType = 'all' | 'song' | 'singer' | 'anime'
+type TabType = 'themes' | 'artists'
 
 function SearchContent() {
   const searchParams = useSearchParams()
@@ -22,6 +23,7 @@ function SearchContent() {
   const [searchInput, setSearchInput] = useState(initialQuery)
   const [filter, setFilter] = useState<FilterType>(initialFilter)
   const [debouncedQuery, setDebouncedQuery] = useState(initialQuery)
+  const [activeTab, setActiveTab] = useState<TabType>('themes')
 
   // Debounce search input (300ms)
   useEffect(() => {
@@ -31,13 +33,21 @@ function SearchContent() {
     return () => clearTimeout(timer)
   }, [searchInput])
 
+  // Reset tab when filter changes
+  useEffect(() => {
+    setActiveTab('themes')
+  }, [debouncedQuery, filter])
+
   const { data, isLoading, hasNextPage, fetchNextPage } = useInfiniteQuery({
     queryKey: queryKeys.search.results(debouncedQuery, filter),
     queryFn: async ({ pageParam = 1 }) => {
       const by = filter === 'all' ? undefined : filter
-      const res = await fetch(
-        `/api/search?q=${encodeURIComponent(debouncedQuery)}&by=${by || ''}&page=${pageParam}`
-      )
+      const params = new URLSearchParams()
+      params.set('q', debouncedQuery)
+      params.set('page', String(pageParam))
+      if (by) params.set('by', by)
+      
+      const res = await fetch(`/api/search?${params.toString()}`)
       const json = await res.json()
       return json
     },
@@ -49,7 +59,10 @@ function SearchContent() {
     enabled: debouncedQuery.length >= 2,
   })
 
-  const results = data?.pages?.flatMap((page: any) => page.data || []) || []
+  const themes = data?.pages?.flatMap((page: any) => page.data?.themes || []) || []
+  const artists = data?.pages?.flatMap((page: any) => page.data?.artists || []) || []
+  const results = activeTab === 'themes' ? themes : artists
+  const showTabs = filter === 'all' && (themes.length > 0 || artists.length > 0)
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
@@ -107,13 +120,47 @@ function SearchContent() {
           ))}
         </div>
 
+        {/* Tabs for All filter */}
+        {showTabs && (
+          <div className="flex gap-1 p-1 bg-bg-elevated rounded-full mb-4 w-fit">
+            <button
+              onClick={() => setActiveTab('themes')}
+              className={cn(
+                'px-4 py-1.5 rounded-full text-sm font-body font-semibold transition-colors duration-150 interactive',
+                activeTab === 'themes'
+                  ? 'bg-accent text-white'
+                  : 'text-ktext-secondary'
+              )}
+            >
+              Themes ({themes.length})
+            </button>
+            <button
+              onClick={() => setActiveTab('artists')}
+              className={cn(
+                'px-4 py-1.5 rounded-full text-sm font-body font-semibold transition-colors duration-150 interactive',
+                activeTab === 'artists'
+                  ? 'bg-accent text-white'
+                  : 'text-ktext-secondary'
+              )}
+            >
+              Artists ({artists.length})
+            </button>
+          </div>
+        )}
+
         {isLoading ? (
           <LoadingSkeleton count={6} />
         ) : results.length > 0 ? (
           <div className="space-y-3">
-            {results.map((theme: any) => (
-              <ThemeListRow key={theme.slug} theme={theme} />
-            ))}
+            {activeTab === 'themes' ? (
+              results.map((theme: any) => (
+                <ThemeListRow key={theme.slug} theme={theme} />
+              ))
+            ) : (
+              results.map((artist: any) => (
+                <ArtistRow key={artist.slug} artist={artist} />
+              ))
+            )}
             {hasNextPage && (
               <button
                 onClick={() => fetchNextPage()}
@@ -126,7 +173,7 @@ function SearchContent() {
         ) : debouncedQuery.length >= 2 ? (
           <EmptyState
             title="No results"
-            description={`No themes found matching "${debouncedQuery}"`}
+            description={`No ${activeTab} found matching "${debouncedQuery}"`}
           />
         ) : debouncedQuery.length > 0 ? (
           <EmptyState
@@ -141,6 +188,30 @@ function SearchContent() {
         )}
       </main>
     </>
+  )
+}
+
+function ArtistRow({ artist }: { artist: any }) {
+  return (
+    <div className="flex items-center gap-3 p-3 bg-bg-surface rounded-[16px] border border-border-subtle shadow-card">
+      <div className="w-16 h-16 flex-shrink-0 rounded-[12px] overflow-hidden bg-bg-elevated">
+        {artist.imageUrl ? (
+          <img 
+            src={artist.imageUrl} 
+            alt={artist.name}
+            className="w-full h-full object-cover" 
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center">
+            <User className="w-8 h-8 text-ktext-tertiary" />
+          </div>
+        )}
+      </div>
+      <div className="flex-1 min-w-0">
+        <p className="text-sm font-body font-semibold text-ktext-primary truncate">{artist.name}</p>
+        <p className="text-xs font-body text-ktext-secondary">{artist.totalThemes || 0} themes</p>
+      </div>
+    </div>
   )
 }
 
