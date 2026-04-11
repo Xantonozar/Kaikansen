@@ -3,7 +3,7 @@
 import { Suspense, useState, useEffect } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { useInfiniteQuery } from '@tanstack/react-query'
-import { Search as SearchIcon, Heart, User } from 'lucide-react'
+import { Search as SearchIcon, X, User } from 'lucide-react'
 import { ThemeListRow } from '@/app/components/theme/ThemeListRow'
 import { EmptyState } from '@/app/components/shared/EmptyState'
 import { LoadingSkeleton } from '@/app/components/shared/LoadingSkeleton'
@@ -90,29 +90,38 @@ function SearchContent() {
       <AppHeader />
       <main className="p-4 max-w-4xl mx-auto">
         <form onSubmit={handleSearch} className="mb-4">
-          <div className="flex items-center gap-3 h-12 bg-bg-elevated rounded-full px-4 border border-border-default focus-within:border-border-accent">
+          <div className="flex items-center gap-3 h-12 bg-bg-elevated rounded-full px-4 border border-border-default focus-within:border-border-accent focus-within:ring-2 focus-within:ring-accent/20">
             <SearchIcon className="w-4 h-4 text-ktext-tertiary flex-shrink-0" />
             <input
               type="text"
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}
-              placeholder="Search themes, artists, anime..."
-              className="flex-1 bg-transparent outline-none text-sm font-body text-ktext-primary placeholder:text-ktext-disabled"
+              placeholder="Search songs, artists, anime…"
+              className="flex-1 bg-transparent outline-none text-sm font-body text-ktext-primary placeholder:text-ktext-tertiary"
             />
+            {searchInput && (
+              <button 
+                type="button"
+                onClick={() => setSearchInput('')} 
+                className="interactive rounded-full p-1"
+              >
+                <X className="w-4 h-4 text-ktext-tertiary" />
+              </button>
+            )}
           </div>
         </form>
 
         {/* Filter chips */}
-        <div className="flex gap-2 mb-4 overflow-x-auto">
+        <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-1">
           {filters.map((f) => (
             <button
               key={f.value}
               onClick={() => handleFilterChange(f.value)}
               className={cn(
-                'px-4 py-2 rounded-full text-sm font-body font-semibold transition-colors duration-150 interactive whitespace-nowrap',
+                'flex-shrink-0 h-9 px-4 rounded-full text-sm font-body font-medium transition-colors duration-150 interactive',
                 filter === f.value
                   ? 'bg-accent text-white'
-                  : 'bg-bg-elevated text-ktext-secondary border border-border-default'
+                  : 'bg-bg-surface border border-border-default text-ktext-secondary'
               )}
             >
               {f.label}
@@ -151,7 +160,7 @@ function SearchContent() {
         {isLoading ? (
           <LoadingSkeleton count={6} />
         ) : results.length > 0 ? (
-          <div className="space-y-3">
+          <div className="space-y-2">
             {activeTab === 'themes' ? (
               results.map((theme: any) => (
                 <ThemeListRow key={theme.slug} theme={theme} />
