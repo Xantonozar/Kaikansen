@@ -8,32 +8,24 @@ import { ThemeCache, ArtistCache } from '../lib/models'
 
 // ─────────────────────────────────────────────
 // CLI ARGS
-// Each parallel instance MUST have unique start/end
 // Usage:
-//   npx ts-node seed.ts --start=1   --end=30
-//   npx ts-node seed.ts --start=31  --end=60
-//   npx ts-node seed.ts --start=61  --end=90
-//   npx ts-node seed.ts --start=91  --end=120
-//   npx ts-node seed.ts --start=121 --end=142
-// Retry failed:
-//   npx ts-node seed.ts --start=1 --end=30 --retry-failed
+//   npm run seed:year -- --year=2020
+//   npm run seed:year -- --year=2019 --retry-failed
 // ─────────────────────────────────────────────
 
 const cliArgs = process.argv.slice(2)
-const startArg = cliArgs.find(a => a.startsWith('--start='))
-const endArg   = cliArgs.find(a => a.startsWith('--end='))
+const yearArg = cliArgs.find(a => a.startsWith('--year='))
 const retryArg = cliArgs.includes('--retry-failed')
 
-if (!startArg || !endArg) {
-  console.error('❌ Missing args. Usage: npx ts-node seed.ts --start=1 --end=30')
+if (!yearArg) {
+  console.error('❌ Missing --year argument. Usage: npm run seed:year -- --year=2020')
   process.exit(1)
 }
 
-const START_PAGE = parseInt(startArg.split('=')[1])
-const END_PAGE   = parseInt(endArg.split('=')[1])
+const YEAR = parseInt(yearArg.split('=')[1])
 
-if (isNaN(START_PAGE) || isNaN(END_PAGE) || START_PAGE < 1 || END_PAGE < START_PAGE) {
-  console.error(`❌ Invalid range: start=${START_PAGE} end=${END_PAGE}`)
+if (isNaN(YEAR) || YEAR < 1900 || YEAR > 2030) {
+  console.error(`❌ Invalid year: ${YEAR}`)
   process.exit(1)
 }
 
@@ -50,14 +42,12 @@ const DELAY_KT    = 1000
 const PAGE_SIZE   = 100
 
 // ─────────────────────────────────────────────
-// FILE PATHS — unique per run tag so parallel
-// instances NEVER share or overwrite each other
-// e.g. start=1 end=30 → tag = p1-p30
-//      start=31 end=60 → tag = p31-p60
+// FILE PATHS — unique per year so parallel runs
+// don't share files
 // ─────────────────────────────────────────────
 
 const SCRIPTS_DIR   = path.join(process.cwd(), 'scripts')
-const RUN_TAG       = `p${START_PAGE}-p${END_PAGE}`
+const RUN_TAG       = `y${YEAR}`
 const SLUG_FILE     = path.join(SCRIPTS_DIR, `slugs-${RUN_TAG}.json`)
 const PROGRESS_FILE = path.join(SCRIPTS_DIR, `progress-${RUN_TAG}.json`)
 const LOG_FILE      = path.join(SCRIPTS_DIR, `seed-${RUN_TAG}.log`)
@@ -68,20 +58,20 @@ const LOG_FILE      = path.join(SCRIPTS_DIR, `seed-${RUN_TAG}.log`)
 
 interface SlugFile {
   runTag: string
-  startPage: number
-  endPage: number
+  year: number
   totalSlugs: number
   collectedAt: string
-  slugs: string[]       // all slugs collected
-  processed: string[]   // successfully saved to DB
-  failed: string[]      // failed after all retries
+  slugs: string[]
+  processed: string[]
+  failed: string[]
+  skipped: string[]
 }
 
 interface ProgressFile {
   runTag: string
-  startPage: number
-  endPage: number
+  year: number
   totalProcessed: number
+  totalSkipped: number
   totalFailed: number
   lastSlug: string
   lastUpdated: string
@@ -214,11 +204,9 @@ function logPhase(label: string) {
   div('═')
 }
 
-function logPageBanner(page: number) {
-  const done  = page - START_PAGE + 1
-  const total = END_PAGE - START_PAGE + 1
+function logPageBanner(page: number, total: number) {
   div()
-  log(`📄 Page ${page}/${END_PAGE} [${done} of ${total}]`)
+  log(`📄 Page ${page}/${total}`)
   div()
 }
 
@@ -226,9 +214,9 @@ function logAnimeStart(index: number, total: number, slug: string) {
   log(`\n🎌 [${index}/${total}] ${slug}`)
 }
 
-function logAnimeEnd(success: boolean, processed: number, failed: number) {
-  const icon = success ? '✅' : '❌'
-  log(`   ${icon} Total: ${processed} done, ${failed} failed`)
+function logAnimeEnd(status: 'new' | 'skip' | 'fail', processed: number, skipped: number, failed: number) {
+  const icon = status === 'new' ? '✅' : status === 'skip' ? '⏭️' : '❌'
+  log(`   ${icon} New: ${processed} | Skipped: ${skipped} | Failed: ${failed}`)
 }
 
 function logATFetch(level: string) {
@@ -266,6 +254,10 @@ function logThemesCount(themes: ParsedTheme[]) {
   }
 }
 
+function logSkipped(reason: string, slug: string) {
+  log(`   ⏭️  ${reason}: ${slug}`)
+}
+
 // ─────────────────────────────────────────────
 // FILE HELPERS
 // ─────────────────────────────────────────────
@@ -301,49 +293,47 @@ function sleep(ms: number): Promise<void> {
 }
 
 // ─────────────────────────────────────────────
-// PHASE 1 — COLLECT SLUGS
-// Fetches only slug field — very lightweight
-// Saves after every page so crash-safe
+// PHASE 1 — COLLECT SLUGS BY YEAR
+// Uses filter[year]=YYYY instead of page numbers
 // ─────────────────────────────────────────────
 
 async function collectSlugs(): Promise<SlugFile> {
   logPhase('Phase 1: Collecting anime list')
 
-  // Resume if slug file already exists
   const existing = readSlugFile()
   if (existing && existing.slugs.length > 0) {
     log(`✅ Already collected ${existing.slugs.length} anime — skipping`)
     return existing
   }
 
-  log(`📥 Starting from page ${START_PAGE} to ${END_PAGE}...`)
+  log(`📥 Collecting anime from year ${YEAR}...`)
 
   const slugFile: SlugFile = {
-    runTag    : RUN_TAG,
-    startPage : START_PAGE,
-    endPage   : END_PAGE,
-    totalSlugs: 0,
+    runTag      : RUN_TAG,
+    year        : YEAR,
+    totalSlugs  : 0,
     collectedAt: new Date().toISOString(),
-    slugs     : [],
-    processed : [],
-    failed    : [],
+    slugs       : [],
+    processed   : [],
+    failed      : [],
+    skipped     : [],
   }
 
-  const totalPages = END_PAGE - START_PAGE + 1
+  let page = 1
+  let totalPages = 1
 
-  for (let page = START_PAGE; page <= END_PAGE; page++) {
-    const done = page - START_PAGE + 1
-    logPageBanner(page)
+  while (true) {
+    logPageBanner(page, totalPages)
 
     try {
       await sleep(DELAY_AT)
 
-      // Only fetch slug field — minimal payload
-      const url = `${BASE_URL}/anime?page[size]=${PAGE_SIZE}&page[number]=${page}&fields[anime]=slug`
+      const url = `${BASE_URL}/anime?filter[year]=${YEAR}&page[size]=${PAGE_SIZE}&page[number]=${page}&fields[anime]=slug`
       const res = await fetch(url, { headers: { 'User-Agent': 'AnimeSeeder/1.0' } })
 
       if (!res.ok) {
         log(`⚠️  Page ${page} returned ${res.status} — skipping`)
+        page++
         continue
       }
 
@@ -354,18 +344,20 @@ async function collectSlugs(): Promise<SlugFile> {
       slugFile.slugs.push(...slugs)
       slugFile.totalSlugs = slugFile.slugs.length
 
-      // ← Save after EVERY page (crash protection)
       writeSlugFile(slugFile)
 
-      log(`✅ Page ${done}/${totalPages}: got ${slugs.length} anime (total: ${slugFile.slugs.length})`)
+      log(`✅ Page ${page}: got ${slugs.length} anime (total: ${slugFile.slugs.length})`)
 
       if (isLast) {
         log(`📌 Reached last page — stopping collection`)
         break
       }
 
+      page++
+
     } catch (err) {
       log(`❌ Page ${page} failed: ${err instanceof Error ? err.message : 'unknown'}`)
+      page++
     }
   }
 
@@ -373,10 +365,21 @@ async function collectSlugs(): Promise<SlugFile> {
   writeSlugFile(slugFile)
 
   div('═')
-  log(`✅ Collection complete: ${slugFile.slugs.length} anime collected`)
+  log(`✅ Collection complete: ${slugFile.slugs.length} anime from ${YEAR}`)
   div('═')
 
   return slugFile
+}
+
+// ─────────────────────────────────────────────
+// CHECK IF ALREADY IN DB
+// Check by animeSlug AND by animethemesId
+// ─────────────────────────────────────────────
+
+async function checkAlreadyInDB(slug: string): Promise<{ skip: boolean; reason: string }> {
+  // Don't skip by animeSlug - let the pre-save check handle individual themes
+  // This allows partial re-seeds to continue and save missing themes
+  return { skip: false, reason: '' }
 }
 
 // ─────────────────────────────────────────────
@@ -533,8 +536,6 @@ async function fetchKitsu(params: string, label: string): Promise<KitsuData | nu
 
 // ─────────────────────────────────────────────
 // ENRICH — full fallback chain
-// AniList: by_id → by_malid → by_title
-// Kitsu  : by_malid → by_title (only if EN title missing)
 // ─────────────────────────────────────────────
 
 async function enrichAnime(
@@ -547,7 +548,6 @@ async function enrichAnime(
   let anilist: AniListData | null = null
   let kitsu  : KitsuData   | null = null
 
-  // ── AniList ──
   if (anilistId) {
     await sleep(DELAY_AL)
     anilist = await fetchAniList({ id: anilistId }, 'by_id')
@@ -566,7 +566,6 @@ async function enrichAnime(
     if (anilist) sources.anilist = 'by_title'
   }
 
-  // ── Kitsu — only if English title still missing ──
   if (!anilist?.animeTitleEnglish) {
     if (malId) {
       await sleep(DELAY_KT)
@@ -583,7 +582,6 @@ async function enrichAnime(
       if (kitsu) sources.kitsu = 'by_title'
     }
 
-    // If Kitsu found AniList ID → try AniList again with it
     if (!anilist && kitsu?.anilistId) {
       await sleep(DELAY_AL)
       anilist = await fetchAniList({ id: kitsu.anilistId }, 'by_id')
@@ -698,7 +696,6 @@ function mergeEnrichment(
   kitsu  : KitsuData   | null,
   sources: SourcesFetched,
 ): ParsedAnime {
-  // Dedupe alt titles
   const altTitles = [
     ...(anilist?.animeTitleAlternative ?? []),
     ...(kitsu?.animeTitleAlternative   ?? []),
@@ -733,9 +730,7 @@ function mergeEnrichment(
 }
 
 // ─────────────────────────────────────────────
-// DB — one document per theme (NOT per anime)
-// Each theme gets its own ThemeCache document
-// Uses animethemesId as unique key
+// DB — one document per theme
 // ─────────────────────────────────────────────
 
 async function upsertAnime(anime: ParsedAnime): Promise<void> {
@@ -835,8 +830,6 @@ async function upsertArtists(themes: ParsedTheme[]): Promise<void> {
   }
 }
 
-
-
 // ─────────────────────────────────────────────
 // PHASE 2 — PROCESS EACH SLUG
 // ─────────────────────────────────────────────
@@ -845,20 +838,22 @@ async function processSlugs(slugFile: SlugFile): Promise<void> {
   logPhase('Phase 2: Processing anime')
 
   const processedSet = new Set(slugFile.processed)
-  const pending      = slugFile.slugs.filter(s => !processedSet.has(s))
+  const skippedSet   = new Set(slugFile.skipped)
+  const pending      = slugFile.slugs.filter(s => !processedSet.has(s) && !skippedSet.has(s))
   const total        = pending.length
 
   log(`📊 Total anime: ${slugFile.slugs.length}`)
   log(`   Already done: ${processedSet.size}`)
+  log(`   Previously skipped: ${skippedSet.size}`)
   log(`   Previously failed: ${slugFile.failed.length}`)
   log(`   Now processing: ${total}`)
   div()
 
   let progress = readProgress() ?? {
     runTag        : RUN_TAG,
-    startPage     : START_PAGE,
-    endPage       : END_PAGE,
+    year          : YEAR,
     totalProcessed: processedSet.size,
+    totalSkipped  : skippedSet.size,
     totalFailed   : slugFile.failed.length,
     lastSlug      : '',
     lastUpdated   : new Date().toISOString(),
@@ -874,7 +869,21 @@ async function processSlugs(slugFile: SlugFile): Promise<void> {
     try {
       await sleep(DELAY_AT)
 
-      // ── Step 1: Fetch from AnimeThemes ──
+      // Check if already in DB
+      const { skip, reason } = await checkAlreadyInDB(slug)
+      if (skip) {
+        logSkipped(reason, slug)
+        slugFile.skipped.push(slug)
+        writeSlugFile(slugFile)
+        progress.totalSkipped++
+        progress.lastSlug    = slug
+        progress.lastUpdated = new Date().toISOString()
+        writeProgress(progress)
+        logAnimeEnd('skip', progress.totalProcessed, progress.totalSkipped, progress.totalFailed)
+        continue
+      }
+
+      // Fetch from AnimeThemes
       const atResult = await fetchFromAT(slug)
 
       if (!atResult) {
@@ -885,15 +894,15 @@ async function processSlugs(slugFile: SlugFile): Promise<void> {
         progress.lastSlug    = slug
         progress.lastUpdated = new Date().toISOString()
         writeProgress(progress)
-        logAnimeEnd(false, progress.totalProcessed, progress.totalFailed)
+        logAnimeEnd('fail', progress.totalProcessed, progress.totalSkipped, progress.totalFailed)
         continue
       }
 
-      // ── Step 2: Parse ──
+      // Parse
       const anime = parseATResponse(atResult.data, atResult.level)
       logATFetch(atResult.level)
 
-      // ── Step 3: Enrich ──
+      // Enrich
       const { anilist, kitsu, sources } = await enrichAnime(
         anime.anilistId,
         anime.malId,
@@ -909,21 +918,19 @@ async function processSlugs(slugFile: SlugFile): Promise<void> {
         logNoEnrichment()
       }
 
-      // ── Step 4: Merge ──
+      // Merge
       const merged = mergeEnrichment(anime, anilist, kitsu, sources)
 
-      // ── Step 5: Log results ──
+      // Log results
       logAnimeBasicInfo(merged)
       logIds(merged)
       logThemesCount(merged.themes)
 
-      // ── Step 6: Save to MongoDB ──
+      // Save to DB
       await upsertAnime(merged)
-
-      // ── Step 7: Save artists ──
       await upsertArtists(merged.themes)
 
-      // ── Step 8: Mark as processed ──
+      // Mark as processed
       slugFile.processed.push(slug)
       writeSlugFile(slugFile)
 
@@ -932,7 +939,7 @@ async function processSlugs(slugFile: SlugFile): Promise<void> {
       progress.lastUpdated = new Date().toISOString()
       writeProgress(progress)
 
-      logAnimeEnd(true, progress.totalProcessed, progress.totalFailed)
+      logAnimeEnd('new', progress.totalProcessed, progress.totalSkipped, progress.totalFailed)
 
     } catch (err) {
       log(`   ❌ Error: ${err instanceof Error ? err.message : 'unknown'}`)
@@ -942,7 +949,7 @@ async function processSlugs(slugFile: SlugFile): Promise<void> {
       progress.lastSlug    = slug
       progress.lastUpdated = new Date().toISOString()
       writeProgress(progress)
-      logAnimeEnd(false, progress.totalProcessed, progress.totalFailed)
+      logAnimeEnd('fail', progress.totalProcessed, progress.totalSkipped, progress.totalFailed)
     }
   }
 
@@ -950,13 +957,12 @@ async function processSlugs(slugFile: SlugFile): Promise<void> {
   writeProgress(progress)
 
   div('═')
-  log(`🎉 Done! Processed: ${progress.totalProcessed} | Failed: ${progress.totalFailed}`)
+  log(`🎉 Done! New: ${progress.totalProcessed} | Skipped: ${progress.totalSkipped} | Failed: ${progress.totalFailed}`)
   div('═')
 }
 
 // ─────────────────────────────────────────────
-// PHASE 3 — RETRY FAILED SLUGS
-// Run with: npx ts-node seed.ts --start=X --end=Y --retry-failed
+// PHASE 3 — RETRY FAILED
 // ─────────────────────────────────────────────
 
 async function retryFailed(): Promise<void> {
@@ -981,33 +987,42 @@ async function retryFailed(): Promise<void> {
 
     try {
       await sleep(DELAY_AT)
-      const atResult = await fetchFromAT(slug)
-
-      if (!atResult) {
-        log(`   ❌ Still failing`)
-        slugFile.failed.push(slug)
-        bad++
-      } else {
-        const anime  = parseATResponse(atResult.data, atResult.level)
-        const { anilist, kitsu, sources } = await enrichAnime(anime.anilistId, anime.malId, anime.animeTitle)
-        const merged = mergeEnrichment(anime, anilist, kitsu, sources)
-        
-        logATFetch(atResult.level)
-        if (sources.anilist !== 'none') {
-          logAnilistFetch(sources.anilist)
-        } else if (sources.kitsu !== 'none') {
-          logKitsuFetch(`Found via Kitsu (${sources.kitsu})`)
-        } else {
-          logNoEnrichment()
-        }
-        logAnimeBasicInfo(merged)
-
-        await upsertAnime(merged)
-        await upsertArtists(merged.themes)
-
-        slugFile.processed.push(slug)
+      
+      // Check if now exists in DB
+      const { skip, reason } = await checkAlreadyInDB(slug)
+      if (skip) {
+        logSkipped(reason, slug)
+        slugFile.skipped.push(slug)
         ok++
-        log(`   ✅ Retry success`)
+      } else {
+        const atResult = await fetchFromAT(slug)
+
+        if (!atResult) {
+          log(`   ❌ Still failing`)
+          slugFile.failed.push(slug)
+          bad++
+        } else {
+          const anime  = parseATResponse(atResult.data, atResult.level)
+          const { anilist, kitsu, sources } = await enrichAnime(anime.anilistId, anime.malId, anime.animeTitle)
+          const merged = mergeEnrichment(anime, anilist, kitsu, sources)
+          
+          logATFetch(atResult.level)
+          if (sources.anilist !== 'none') {
+            logAnilistFetch(sources.anilist)
+          } else if (sources.kitsu !== 'none') {
+            logKitsuFetch(`Found via Kitsu (${sources.kitsu})`)
+          } else {
+            logNoEnrichment()
+          }
+          logAnimeBasicInfo(merged)
+
+          await upsertAnime(merged)
+          await upsertArtists(merged.themes)
+
+          slugFile.processed.push(slug)
+          ok++
+          log(`   ✅ Retry success`)
+        }
       }
     } catch (err) {
       log(`   ❌ Error: ${err instanceof Error ? err.message : 'unknown'}`)
@@ -1015,12 +1030,11 @@ async function retryFailed(): Promise<void> {
       bad++
     }
 
-    // Save after every retry
     writeSlugFile(slugFile)
   }
 
   div('═')
-  log(`🔄 RETRY DONE — ✅ ${ok} recovered  ❌ ${bad} still failing`)
+  log(`🔄 RETRY DONE — ✅ ${ok} recovered | ❌ ${bad} still failing`)
   div('═')
 }
 
@@ -1033,8 +1047,7 @@ async function main() {
   initLog()
 
   div('═', 70)
-  log(`🌱 ANIME SEED SCRIPT`)
-  log(`   Pages: ${START_PAGE} → ${END_PAGE}`)
+  log(`🌱 SEEDING ANIME FROM YEAR: ${YEAR}`)
   log(`   Mode: ${retryArg ? 'Retry Failed' : 'Normal'}`)
   div('═', 70)
 
