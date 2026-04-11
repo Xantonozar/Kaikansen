@@ -92,32 +92,63 @@ export function HomeClient({ popularThemes, featuredThemes, currentSeason, stats
   return (
     <div className="max-w-2xl mx-auto md:max-w-7xl space-y-6 pt-4">
       {/* Section: Current Season Openings */}
-      <section>
-        <div className="flex items-center justify-between mb-3">
-          <div>
-            <p className="text-xs font-body font-semibold text-accent uppercase tracking-wide">Current Season</p>
-            <h2 className="text-2xl font-display font-bold text-ktext-primary">
-              {currentSeason.season} {currentSeason.year} Openings
-            </h2>
+      {featuredOPs.length > 0 ? (
+        <section>
+          <div className="flex items-center justify-between mb-3">
+            <div>
+              <p className="text-xs font-body font-semibold text-accent uppercase tracking-wide">Current Season</p>
+              <h2 className="text-2xl font-display font-bold text-ktext-primary">
+                {currentSeason.season} {currentSeason.year} Openings
+              </h2>
+            </div>
+            <Link 
+              href={`/season/${currentSeason.season.toLowerCase()}/${currentSeason.year}`}
+              className="text-sm font-body text-accent font-semibold interactive"
+            >
+              View All
+            </Link>
           </div>
-          <Link 
-            href={`/season/${currentSeason.season.toLowerCase()}/${currentSeason.year}`}
-            className="text-sm font-body text-accent font-semibold interactive"
-          >
-            View All
-          </Link>
-        </div>
-        
-        {featuredOPs.length > 0 ? (
+          
           <div className="flex gap-3 overflow-x-auto scrollbar-hide -mx-4 px-4 pb-2">
             {featuredOPs.map((theme) => (
               <ThemeFeaturedCard key={theme.slug} theme={theme} />
             ))}
           </div>
-        ) : (
-          <p className="text-sm text-ktext-tertiary">No opening themes for current season</p>
-        )}
-      </section>
+        </section>
+      ) : (
+        <section>
+          <div className="flex items-center justify-between mb-3">
+            <div>
+              <p className="text-xs font-body font-semibold text-accent uppercase tracking-wide">Current Season</p>
+              <h2 className="text-2xl font-display font-bold text-ktext-primary">
+                {currentSeason.season} {currentSeason.year}
+              </h2>
+            </div>
+          </div>
+          <div className="bg-bg-surface rounded-[20px] border border-border-subtle p-6 text-center mb-4">
+            <p className="text-sm font-body text-ktext-secondary mb-2">
+              No themes available for {currentSeason.season} {currentSeason.year}
+            </p>
+            <p className="text-xs font-body text-ktext-tertiary mb-4">
+              Run seed script to fetch latest anime themes
+            </p>
+          </div>
+        </section>
+      )}
+
+      {/* Section: Current Season Endings */}
+      {featuredEDs.length > 0 && (
+        <section>
+          <h2 className="text-lg font-display font-bold text-ktext-primary mb-3">
+            {currentSeason.season} {currentSeason.year} Endings
+          </h2>
+          <div className="flex gap-3 overflow-x-auto scrollbar-hide -mx-4 px-4 pb-2">
+            {featuredEDs.map((theme) => (
+              <ThemeFeaturedCard key={theme.slug} theme={theme} />
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* Section: Current Season Endings */}
       {featuredEDs.length > 0 && (
