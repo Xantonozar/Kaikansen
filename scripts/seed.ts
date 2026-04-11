@@ -18,9 +18,10 @@ const DELAY_KITSU = 1000
 const args = process.argv.slice(2)
 const startArg = args.find(a => a.startsWith('--start='))
 const endArg = args.find(a => a.startsWith('--end='))
-const START_PAGE = startArg ? parseInt(startArg.split('=')[1]) : 1
-const END_PAGE = endArg ? parseInt(endArg.split('=')[1]) : 150
-const PROGRESS_FILE = `seed-progress-${START_PAGE}-${END_PAGE}.json`
+const START_PAGE = startArg ? parseInt(startArg.split('=')[1]) : 150
+const END_PAGE = endArg ? parseInt(endArg.split('=')[1]) : 1
+const REVERSE = true  // Search from high pages to low pages (newer anime first)
+const PROGRESS_FILE = `seed-progress-${Math.max(START_PAGE, END_PAGE)}-${Math.min(START_PAGE, END_PAGE)}.json`
 
 interface SeedProgress {
   lastPage: number
@@ -59,7 +60,8 @@ function sleep(ms: number): Promise<void> {
 }
 
 async function getTotalThemePages(): Promise<number> {
-  return 150
+  // For reverse mode, start from high page number to find actual max
+  return START_PAGE
 }
 
 async function fetchThemePage(page: number): Promise<any[]> {
@@ -440,14 +442,15 @@ function parseATTheme(atTheme: any): ParsedTheme | null {
 
 async function upsertTheme(theme: ParsedTheme): Promise<void> {
   try {
+    // Use animethemesId as unique key to prevent data loss during parallel seed runs
     await ThemeCache.findOneAndUpdate(
-      { slug: theme.slug },
+      { animethemesId: theme.animethemesId },
       { $set: theme },
       { upsert: true }
     )
     console.log(`  ✅ Saved: ${theme.songTitle} (${theme.animeTitle}) [${theme.type}]`)
   } catch (err) {
-    // Ignore duplicate key errors - theme already exists with same slug
+    // Ignore duplicate key errors - theme already exists with same animethemesId
     const errMsg = err instanceof Error ? err.message : ''
     if (errMsg.includes('E11000') || errMsg.includes('duplicate key')) {
       console.log(`  ⏭️  Already exists: ${theme.songTitle} (${theme.animeTitle}) [${theme.type}]`)
@@ -533,17 +536,21 @@ async function main() {
     console.log(`📋 Resuming: Page ${progress.lastPage}, Processed: ${progress.totalProcessed}, Failed: ${progress.failedThemes}`)
   }
   
-  const totalPages = END_PAGE
+  const totalPages = REVERSE ? START_PAGE : END_PAGE
 
   console.log(`⏱️  Delays: ${DELAY_ANIMETHEMES}ms (AnimeThemes), ${DELAY_ANILIST}ms (AniList)`)
   console.log('')
 
-  let page = Math.max(progress.lastPage, START_PAGE)
+  let page = REVERSE 
+    ? Math.max(progress.lastPage > 0 ? progress.lastPage : START_PAGE, END_PAGE)
+    : Math.max(progress.lastPage, START_PAGE)
   let totalProcessedInThisRun = 0
 
-  while (page <= totalPages) {
+  const pageCondition = REVERSE ? (page >= END_PAGE) : (page <= totalPages)
+  
+  while (pageCondition) {
     console.log(`\n${'='.repeat(60)}`)
-    console.log(`📄 PAGE ${page}/${totalPages} - Fetching from AnimeThemes API...`)
+    console.log(`📄 PAGE ${page}/${REVERSE ? 'reverse' : totalPages} - Fetching from AnimeThemes API...`)
 
     let themes: any[]
     try {
@@ -671,7 +678,11 @@ async function main() {
     console.log(`   Total processed so far: ${progress.totalProcessed}`)
     console.log(`${'='.repeat(60)}\n`)
 
-    page++
+    if (REVERSE) {
+      page--
+    } else {
+      page++
+    }
   }
 
   console.log('')
