@@ -18,6 +18,7 @@ interface Theme {
   sequence?: number
   avgRating: number
   totalRatings: number
+  anilistId?: number | null
 }
 
 interface HomeClientProps {

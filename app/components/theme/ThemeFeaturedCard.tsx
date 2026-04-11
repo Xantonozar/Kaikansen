@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { Star } from 'lucide-react'
 
@@ -15,14 +16,45 @@ interface ThemeFeaturedCardProps {
     sequence?: number
     avgRating: number
     totalRatings: number
+    anilistId?: number | null
   }
 }
 
 export function ThemeFeaturedCard({ theme }: ThemeFeaturedCardProps) {
-  const coverImage = theme.animeCoverImage || theme.animeGrillImage || '/placeholder.svg'
+  const [coverImage, setCoverImage] = useState<string | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
+  
+  const fallbackImage = theme.animeCoverImage || theme.animeGrillImage || '/placeholder.svg'
   const displayTitle = theme.animeTitle || 'Unknown'
   const displayArtist = theme.artistName || theme.songTitle || 'Unknown'
-  
+
+  useEffect(() => {
+    const fetchAnilistImage = async () => {
+      if (!theme.anilistId) {
+        setCoverImage(fallbackImage)
+        setIsLoading(false)
+        return
+      }
+
+      try {
+        const anilistImage = `https://s4.anilist.co/Media/${theme.anilistId}/cover/large.jpg`
+        
+        const res = await fetch(anilistImage, { method: 'HEAD' })
+        if (res.ok) {
+          setCoverImage(anilistImage)
+        } else {
+          setCoverImage(fallbackImage)
+        }
+      } catch {
+        setCoverImage(fallbackImage)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    fetchAnilistImage()
+  }, [theme.anilistId, fallbackImage])
+
   return (
     <Link href={`/theme/${theme.slug}`}>
       <div className="
@@ -31,11 +63,15 @@ export function ThemeFeaturedCard({ theme }: ThemeFeaturedCardProps) {
         interactive cursor-pointer
         bg-bg-surface shadow-card
       ">
-        <img 
-          src={coverImage} 
-          alt={displayTitle}
-          className="w-full h-full object-cover" 
-        />
+        {isLoading ? (
+          <div className="w-full h-full bg-bg-elevated animate-pulse" />
+        ) : (
+          <img 
+            src={coverImage || fallbackImage} 
+            alt={displayTitle}
+            className="w-full h-full object-cover" 
+          />
+        )}
         
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
         
