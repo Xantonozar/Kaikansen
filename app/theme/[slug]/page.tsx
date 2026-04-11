@@ -35,6 +35,8 @@ export function ThemePageContent({ slug }: ThemePageContentProps) {
   if (isLoading) return <LoadingSkeleton />
   if (error || !theme) return <EmptyState title="Theme not found" />
 
+  console.log('Theme data:', { slug, hasEntries: !!theme.entries, entries: theme.entries })
+
   const videoSources = theme.entries?.flatMap((e: any) => 
     e.videos?.map((v: any) => ({
       resolution: v.resolution,
@@ -43,11 +45,15 @@ export function ThemePageContent({ slug }: ThemePageContentProps) {
     })) || []
   ) || []
 
+  console.log('Video sources:', videoSources)
+
   const fallbackVideoSources = theme.videoUrl ? [{
     resolution: theme.videoResolution || 1080,
     url: theme.videoUrl,
     tags: []
   }] : []
+
+  console.log('Fallback video sources:', fallbackVideoSources)
 
   const finalVideoSources = videoSources.length > 0 ? videoSources : fallbackVideoSources
 

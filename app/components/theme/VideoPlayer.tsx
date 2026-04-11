@@ -20,30 +20,41 @@ interface VideoPlayerProps {
 export function VideoPlayer({ videoSources, poster, mode }: VideoPlayerProps) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [isPlaying, setIsPlaying] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [player, setPlayer] = useState<Plyr | null>(null)
 
   useEffect(() => {
-    if (videoRef.current && videoSources.length > 0 && mode === 'watch') {
-      const sortedSources = [...videoSources].sort((a, b) => b.resolution - a.resolution)
-      
-      const player = new Plyr(videoRef.current, {
-        controls: [
-          'play-large',
-          'play',
-          'progress',
-          'current-time',
-          'mute',
-          'volume',
-          'captions',
-          'settings',
-          'pip',
-          'airplay',
-          'fullscreen',
-        ],
-        autoplay: false,
-      })
+    if (!videoRef.current) return
 
-      return () => {
-        player.destroy()
+    if (mode === 'watch' && videoSources.length > 0) {
+      try {
+        const sortedSources = [...videoSources].sort((a, b) => b.resolution - a.resolution)
+        
+        const newPlayer = new Plyr(videoRef.current, {
+          controls: [
+            'play-large',
+            'play',
+            'progress',
+            'current-time',
+            'mute',
+            'volume',
+            'settings',
+            'pip',
+            'fullscreen',
+          ],
+          autoplay: false,
+        })
+
+        setPlayer(newPlayer)
+        setError(null)
+
+        return () => {
+          newPlayer.destroy()
+          setPlayer(null)
+        }
+      } catch (err) {
+        console.error('Plyr init error:', err)
+        setError('Failed to initialize video player')
       }
     }
   }, [videoSources, mode])
@@ -54,27 +65,47 @@ export function VideoPlayer({ videoSources, poster, mode }: VideoPlayerProps) {
     }
   }
 
+  const hasVideos = videoSources.length > 0
+
   return (
     <div className="relative w-full aspect-video rounded-[20px] overflow-hidden bg-bg-elevated">
       {mode === 'watch' ? (
-        <video
-          ref={videoRef}
-          playsInline
-          poster={poster || undefined}
-          className="w-full h-full object-cover"
-          onPlay={handlePlay}
-        >
-          {videoSources
-            .sort((a, b) => b.resolution - a.resolution)
-            .map((source) => (
-              <source
-                key={source.resolution}
-                src={source.url}
-                type="video/webm"
-                data-resolution={source.resolution}
+        hasVideos ? (
+          <video
+            ref={videoRef}
+            playsInline
+            poster={poster || undefined}
+            className="w-full h-full object-cover"
+            onPlay={handlePlay}
+            onError={(e) => {
+              console.error('Video error:', e)
+              setError('Failed to load video')
+            }}
+          >
+            {videoSources
+              .sort((a, b) => b.resolution - a.resolution)
+              .map((source) => (
+                <source
+                  key={source.resolution}
+                  src={source.url}
+                  type="video/webm"
+                />
+              ))}
+          </video>
+        ) : (
+          <div className="absolute inset-0 flex flex-col items-center justify-center bg-bg-elevated">
+            {poster && (
+              <img 
+                src={poster} 
+                alt="Video poster" 
+                className="absolute inset-0 w-full h-full object-cover opacity-50"
               />
-            ))}
-        </video>
+            )}
+            <div className="relative z-10 text-center p-4">
+              <p className="text-sm font-body text-ktext-tertiary">No video available</p>
+            </div>
+          </div>
+        )
       ) : (
         /* Listen mode visualizer */
         <div className="absolute inset-0 flex items-center justify-center bg-bg-surface">
@@ -82,7 +113,7 @@ export function VideoPlayer({ videoSources, poster, mode }: VideoPlayerProps) {
             {[...Array(8)].map((_, i) => (
               <div
                 key={i}
-                className={`w-1.5 bg-accent-mint rounded-full eq-bar-${i + 1} animate-pulse`}
+                className="w-1.5 bg-accent-mint rounded-full animate-pulse"
                 style={{
                   height: `${20 + Math.random() * 30}px`,
                   animationDelay: `${i * 0.1}s`,

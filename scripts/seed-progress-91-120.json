@@ -1,7 +1,14 @@
 {
-  "lastPage": 101,
-  "totalProcessed": 1100,
-  "failedThemes": 0,
-  "lastUpdated": "2026-04-11T08:40:33.073Z",
-  "failedSlugs": []
+  "lastPage": 103,
+  "totalProcessed": 1294,
+  "failedThemes": 6,
+  "lastUpdated": "2026-04-11T09:02:07.940Z",
+  "failedSlugs": [
+    "OP1",
+    "ED1",
+    "OP2",
+    "ED2",
+    "OP1",
+    "ED1"
+  ]
 }
