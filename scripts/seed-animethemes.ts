@@ -822,7 +822,6 @@ async function processTheme(query: { anime: string; title: string; type: string 
     'voice': ['voice'],
     'just communication': ['just communication'],
     'sakura kiss': ['sakura kiss'],
-    'again': ['again'],
     'my secret': ['my secret'],
     'friendship': ['friendship'],
     'kamisama hajimemashita': ['kamisama hajimemashita'],
