@@ -14,7 +14,7 @@ export function ThemeCard({ theme, showArtists = true }: ThemeCardProps) {
           <div className="relative h-40 w-full overflow-hidden bg-muted">
             <img
               src={theme.animeCoverImage}
-              alt={theme.animeTitle || 'Anime cover'}
+              alt={theme.animeTitleEnglish || theme.animeTitle || 'Anime cover'}
               className="h-full w-full object-cover transition-transform group-hover:scale-105"
             />
             <span className="absolute top-2 right-2 rounded-full bg-primary px-2 py-1 text-xs font-semibold text-primary-foreground">
@@ -26,7 +26,7 @@ export function ThemeCard({ theme, showArtists = true }: ThemeCardProps) {
         <div className="p-3">
           <h3 className="font-semibold line-clamp-2 text-sm">{theme.songTitle}</h3>
           <p className="mt-1 text-xs text-muted-foreground line-clamp-1">
-            {theme.animeTitle}
+            {theme.animeTitleEnglish || theme.animeTitle}
           </p>
 
           {showArtists && theme.allArtists.length > 0 && (

@@ -9,6 +9,7 @@ interface ArtistDiscographyRowProps {
     slug: string
     songTitle: string
     animeTitle: string
+    animeTitleEnglish?: string | null
     animeCoverImage: string | null
     type: 'OP' | 'ED'
     sequence?: number
@@ -20,6 +21,7 @@ interface ArtistDiscographyRowProps {
 
 export function ArtistDiscographyRow({ theme }: ArtistDiscographyRowProps) {
   const coverImage = theme.animeCoverImage || '/placeholder.svg'
+  const displayTitle = theme.animeTitleEnglish || theme.animeTitle || 'Unknown'
   
   return (
     <Link href={`/theme/${theme.slug}`}>
@@ -33,7 +35,7 @@ export function ArtistDiscographyRow({ theme }: ArtistDiscographyRowProps) {
         <div className="w-12 h-12 flex-shrink-0 rounded-[12px] overflow-hidden bg-bg-elevated">
           <img 
             src={coverImage} 
-            alt={theme.animeTitle}
+            alt={displayTitle}
             className="w-full h-full object-cover" 
           />
         </div>
@@ -56,7 +58,7 @@ export function ArtistDiscographyRow({ theme }: ArtistDiscographyRowProps) {
             {theme.songTitle}
           </p>
           <p className="text-xs font-body text-ktext-secondary truncate">
-            {theme.animeTitle}
+            {displayTitle}
           </p>
         </div>
         

@@ -8,6 +8,7 @@ export interface Theme {
   season?: string
   anilistId?: number
   animeTitle?: string
+  animeTitleEnglish?: string
   animeTitleAlternative?: string
   animeCoverImage?: string
   videoSources: { resolution: number; url: string }[]
