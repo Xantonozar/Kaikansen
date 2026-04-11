@@ -88,22 +88,22 @@ function SearchContent() {
   return (
     <>
       <AppHeader />
-      <main className="p-4 max-w-4xl mx-auto">
-        <form onSubmit={handleSearch} className="mb-4">
-          <div className="flex items-center gap-3 h-12 bg-bg-elevated rounded-full px-4 border border-border-default focus-within:border-border-accent focus-within:ring-2 focus-within:ring-accent/20">
+      <main className="px-3 py-4 md:px-4">
+        <form onSubmit={handleSearch} className="mb-3">
+          <div className="flex items-center gap-2 md:gap-3 h-10 md:h-12 bg-bg-elevated rounded-full px-3 md:px-4 border border-border-default focus-within:border-border-accent focus-within:ring-2 focus-within:ring-accent/20">
             <SearchIcon className="w-4 h-4 text-ktext-tertiary flex-shrink-0" />
             <input
               type="text"
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}
               placeholder="Search songs, artists, anime…"
-              className="flex-1 bg-transparent outline-none text-sm font-body text-ktext-primary placeholder:text-ktext-tertiary"
+              className="flex-1 bg-transparent outline-none text-sm font-body text-ktext-primary placeholder:text-ktext-tertiary min-w-0"
             />
             {searchInput && (
               <button 
                 type="button"
                 onClick={() => setSearchInput('')} 
-                className="interactive rounded-full p-1"
+                className="interactive rounded-full p-1 flex-shrink-0"
               >
                 <X className="w-4 h-4 text-ktext-tertiary" />
               </button>
@@ -112,13 +112,13 @@ function SearchContent() {
         </form>
 
         {/* Filter chips */}
-        <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-1">
+        <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-2 -mx-3 px-3 md:mx-0 md:px-0">
           {filters.map((f) => (
             <button
               key={f.value}
               onClick={() => handleFilterChange(f.value)}
               className={cn(
-                'flex-shrink-0 h-9 px-4 rounded-full text-sm font-body font-medium transition-colors duration-150 interactive',
+                'flex-shrink-0 h-8 md:h-9 px-3 md:px-4 rounded-full text-xs md:text-sm font-body font-medium transition-colors duration-150 interactive whitespace-nowrap',
                 filter === f.value
                   ? 'bg-accent text-white'
                   : 'bg-bg-surface border border-border-default text-ktext-secondary'
@@ -131,11 +131,11 @@ function SearchContent() {
 
         {/* Tabs for All filter */}
         {showTabs && (
-          <div className="flex gap-1 p-1 bg-bg-elevated rounded-full mb-4 w-fit">
+          <div className="flex gap-1 p-1 bg-bg-elevated rounded-full mb-3 w-fit">
             <button
               onClick={() => setActiveTab('themes')}
               className={cn(
-                'px-4 py-1.5 rounded-full text-sm font-body font-semibold transition-colors duration-150 interactive',
+                'px-3 md:px-4 py-1.5 rounded-full text-xs md:text-sm font-body font-semibold transition-colors duration-150 interactive whitespace-nowrap',
                 activeTab === 'themes'
                   ? 'bg-accent text-white'
                   : 'text-ktext-secondary'
@@ -146,7 +146,7 @@ function SearchContent() {
             <button
               onClick={() => setActiveTab('artists')}
               className={cn(
-                'px-4 py-1.5 rounded-full text-sm font-body font-semibold transition-colors duration-150 interactive',
+                'px-3 md:px-4 py-1.5 rounded-full text-xs md:text-sm font-body font-semibold transition-colors duration-150 interactive whitespace-nowrap',
                 activeTab === 'artists'
                   ? 'bg-accent text-white'
                   : 'text-ktext-secondary'
