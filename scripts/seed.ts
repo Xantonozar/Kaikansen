@@ -673,7 +673,7 @@ function parseATResponse(atData: any, level: 'full' | 'basic' | 'bare'): ParsedA
     animeGrillImage      : images.find((i: any) => i.facet === 'Grill')?.link        ?? null,
     animeSynopsis        : atData.synopsis     ?? null,
     animeMediaFormat     : atData.media_format ?? null,
-    animeSeries          : (atData.series  ?? []).map((s: any) => ({ id: s.id, name: s.name, slug: s.slug })),
+    animeSeries          : (atData.series  ?? []).map((s: any) => s.name).filter(Boolean),
     animeStudios         : (atData.studios ?? []).map((s: any) => s.name).filter(Boolean),
     animeSynonyms        : (atData.animesynonyms ?? []).map((s: any) => s.text).filter(Boolean),
     malId,
@@ -739,9 +739,9 @@ function mergeEnrichment(
 
 async function upsertAnime(anime: ParsedAnime): Promise<void> {
   await ThemeCache.findOneAndUpdate(
-    { animeSlug: anime.animeSlug },   // unique key
-    { $set: anime },                  // only update, never wipe
-    { upsert: true, new: true }
+    { animeSlug: anime.animeSlug },
+    { $set: anime },
+    { upsert: true, returnDocument: 'after' }
   )
 }
 
@@ -754,7 +754,7 @@ async function upsertArtists(themes: ParsedTheme[]): Promise<void> {
         await ArtistCache.findOneAndUpdate(
           { slug },
           { $set: { slug, name, syncedAt: new Date() } },
-          { upsert: true }
+          { upsert: true, returnDocument: 'after' }
         )
         log(`  │  🎤 Artist: ${name}`)
       } catch {

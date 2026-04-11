@@ -709,3 +709,199 @@
 [2026-04-11 16:09:52] [p1-p28]   │  📺 Format : TV
 [2026-04-11 16:09:52] [p1-p28]   │  📅 Season : FALL 2016
 [2026-04-11 16:09:52] [p1-p28]   │  🗂  Series : 12-sai.: Chicchana Mune no Tokimeki
+══════════════════════════════════════════════════════════════════════
+[2026-04-11 16:13:25] [p1-p28] 🌱 ANIME SEED SCRIPT STARTED
+[2026-04-11 16:13:25] [p1-p28]    Run tag    : p1-p28
+[2026-04-11 16:13:25] [p1-p28]    Pages      : 1 → 28
+[2026-04-11 16:13:25] [p1-p28]    Page size  : 100
+[2026-04-11 16:13:25] [p1-p28]    Mode       : NORMAL
+[2026-04-11 16:13:25] [p1-p28]    Files:
+[2026-04-11 16:13:25] [p1-p28]      Slugs    → /root/kaikansen/scripts/slugs-p1-p28.json
+[2026-04-11 16:13:25] [p1-p28]      Progress → /root/kaikansen/scripts/progress-p1-p28.json
+[2026-04-11 16:13:25] [p1-p28]      Log      → /root/kaikansen/scripts/seed-p1-p28.log
+[2026-04-11 16:13:25] [p1-p28]    Delays: AT=700ms  AniList=1000ms  Kitsu=1000ms
+══════════════════════════════════════════════════════════════════════
+[2026-04-11 16:13:26] [p1-p28] ✅ Connected to MongoDB
+═════════════════════════════════════════════════════════════════
+[2026-04-11 16:13:26] [p1-p28] 🚀 PHASE: 1 — Collecting Slugs
+═════════════════════════════════════════════════════════════════
+[2026-04-11 16:13:26] [p1-p28] ✅ Slug file exists — 2800 slugs already collected
+[2026-04-11 16:13:26] [p1-p28]    Skipping collection phase
+═════════════════════════════════════════════════════════════════
+[2026-04-11 16:13:26] [p1-p28] 🚀 PHASE: 2 — Processing Slugs
+═════════════════════════════════════════════════════════════════
+[2026-04-11 16:13:26] [p1-p28] 📊 Stats for run [p1-p28]
+[2026-04-11 16:13:26] [p1-p28]    Total slugs      : 2800
+[2026-04-11 16:13:26] [p1-p28]    Already processed: 1
+[2026-04-11 16:13:26] [p1-p28]    Previously failed: 20
+[2026-04-11 16:13:26] [p1-p28]    Pending now      : 2799
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:13:26] [p1-p28] 
+  ┌─ [1/2799] 🎌 hackliminality
+[2026-04-11 16:13:28] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:13:28] [p1-p28]   │  📺 Format : OVA
+[2026-04-11 16:13:28] [p1-p28]   │  📅 Season : SPRING 2002
+[2026-04-11 16:13:28] [p1-p28]   │  🗂  Series : .hack
+[2026-04-11 16:13:30] [p1-p28]   │  ✅ [AniList:by_id] → .hack//Liminality
+[2026-04-11 16:13:30] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:none
+[2026-04-11 16:13:30] [p1-p28]   │  📝 JP      : .hack//Liminality
+[2026-04-11 16:13:30] [p1-p28]   │  📝 EN      : .hack//Liminality
+[2026-04-11 16:13:30] [p1-p28]   │  📝 Romaji  : .hack//Liminality
+[2026-04-11 16:13:30] [p1-p28]   │  📝 Native  : .hack//Liminality
+[2026-04-11 16:13:30] [p1-p28]   │  📝 Alt     : 2 titles
+[2026-04-11 16:13:30] [p1-p28]   │  🆔 MAL:299  AniList:299  Kitsu:—
+[2026-04-11 16:13:30] [p1-p28]   │  🎬 Themes  : 4
+[2026-04-11 16:13:30] [p1-p28]   │    [OP1] "Edge" — See-Saw
+[2026-04-11 16:13:30] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:13:30] [p1-p28]   │    [OP2] "Senyaichiya" — See-Saw
+[2026-04-11 16:13:30] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:13:30] [p1-p28]   │    [OP3] "Kimi ga Ita Monogatari" — See-Saw
+[2026-04-11 16:13:30] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:13:30] [p1-p28]   │    [OP4] "Kioku" — See-Saw
+[2026-04-11 16:13:30] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:13:30] [p1-p28]   │  ❌ Unexpected: Cast to [string] failed for value "[ { id: 1, name: '.hack', slug: 'dot_hack' } ]" (type string) at path "animeSeries.0" because of "CastError"
+[2026-04-11 16:13:30] [p1-p28]   └─ ❌  running total → processed:1  failed:21
+[2026-04-11 16:13:30] [p1-p28] 
+  ┌─ [2/2799] 🎌 hackroots
+[2026-04-11 16:13:32] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:13:32] [p1-p28]   │  📺 Format : TV
+[2026-04-11 16:13:32] [p1-p28]   │  📅 Season : SPRING 2006
+[2026-04-11 16:13:32] [p1-p28]   │  🗂  Series : .hack
+[2026-04-11 16:13:33] [p1-p28]   │  ✅ [AniList:by_id] → .hack//Roots
+[2026-04-11 16:13:33] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:none
+[2026-04-11 16:13:33] [p1-p28]   │  📝 JP      : .hack//roots
+[2026-04-11 16:13:33] [p1-p28]   │  📝 EN      : .hack//Roots
+[2026-04-11 16:13:33] [p1-p28]   │  📝 Romaji  : .hack//Roots
+[2026-04-11 16:13:33] [p1-p28]   │  📝 Native  : .hack//Roots
+[2026-04-11 16:13:33] [p1-p28]   │  📝 Alt     : 2 titles
+[2026-04-11 16:13:33] [p1-p28]   │  🆔 MAL:873  AniList:873  Kitsu:—
+[2026-04-11 16:13:33] [p1-p28]   │  🎬 Themes  : 2
+[2026-04-11 16:13:33] [p1-p28]   │    [OP1] "Silly-go-Round" — Yuuka Nanri
+[2026-04-11 16:13:33] [p1-p28]   │        entries:1  videos:2  audio:✅
+[2026-04-11 16:13:33] [p1-p28]   │    [ED1] "Boukoku Kakusei - Catharsis" — ALI PROJECT
+[2026-04-11 16:13:33] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:13:33] [p1-p28]   │  ❌ Unexpected: Cast to [string] failed for value "[ { id: 1, name: '.hack', slug: 'dot_hack' } ]" (type string) at path "animeSeries.0" because of "CastError"
+[2026-04-11 16:13:33] [p1-p28]   └─ ❌  running total → processed:1  failed:22
+[2026-04-11 16:13:33] [p1-p28] 
+  ┌─ [3/2799] 🎌 hacksign
+[2026-04-11 16:13:34] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:13:34] [p1-p28]   │  📺 Format : TV
+[2026-04-11 16:13:34] [p1-p28]   │  📅 Season : SPRING 2002
+[2026-04-11 16:13:34] [p1-p28]   │  🗂  Series : .hack
+[2026-04-11 16:13:36] [p1-p28]   │  ✅ [AniList:by_id] → .hack//SIGN
+[2026-04-11 16:13:36] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:none
+[2026-04-11 16:13:36] [p1-p28]   │  📝 JP      : .hack//Sign
+[2026-04-11 16:13:36] [p1-p28]   │  📝 EN      : .hack//SIGN
+[2026-04-11 16:13:36] [p1-p28]   │  📝 Romaji  : .hack//SIGN
+[2026-04-11 16:13:36] [p1-p28]   │  📝 Native  : .hack//SIGN
+[2026-04-11 16:13:36] [p1-p28]   │  📝 Alt     : 1 titles
+[2026-04-11 16:13:36] [p1-p28]   │  🆔 MAL:48  AniList:48  Kitsu:—
+[2026-04-11 16:13:36] [p1-p28]   │  🎬 Themes  : 2
+[2026-04-11 16:13:36] [p1-p28]   │    [OP1] "Obsession" — See-Saw
+[2026-04-11 16:13:36] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:13:36] [p1-p28]   │    [ED1] "Yasashii Yoake" — See-Saw
+[2026-04-11 16:13:36] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:13:36] [p1-p28]   │  ❌ Unexpected: Cast to [string] failed for value "[ { id: 1, name: '.hack', slug: 'dot_hack' } ]" (type string) at path "animeSeries.0" because of "CastError"
+[2026-04-11 16:13:36] [p1-p28]   └─ ❌  running total → processed:1  failed:23
+[2026-04-11 16:13:36] [p1-p28] 
+  ┌─ [4/2799] 🎌 hacktasogare_no_udewa_densetsu
+[2026-04-11 16:13:38] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:13:38] [p1-p28]   │  📺 Format : TV
+[2026-04-11 16:13:38] [p1-p28]   │  📅 Season : WINTER 2003
+[2026-04-11 16:13:38] [p1-p28]   │  🗂  Series : .hack
+[2026-04-11 16:13:39] [p1-p28]   │  ✅ [AniList:by_id] → .hack//Tasogare no Udewa Densetsu
+[2026-04-11 16:13:39] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:none
+[2026-04-11 16:13:39] [p1-p28]   │  📝 JP      : .hack//Tasogare no Udewa Densetsu
+[2026-04-11 16:13:39] [p1-p28]   │  📝 EN      : .hack//Legend Of The Twilight
+[2026-04-11 16:13:39] [p1-p28]   │  📝 Romaji  : .hack//Tasogare no Udewa Densetsu
+[2026-04-11 16:13:39] [p1-p28]   │  📝 Native  : .hack//黄昏の腕輪伝説
+[2026-04-11 16:13:39] [p1-p28]   │  📝 Alt     : 7 titles
+[2026-04-11 16:13:39] [p1-p28]   │  🆔 MAL:298  AniList:298  Kitsu:—
+[2026-04-11 16:13:39] [p1-p28]   │  🎬 Themes  : 2
+[2026-04-11 16:13:39] [p1-p28]   │    [OP1] "New World" — ROUND TABLE feat. Nino
+[2026-04-11 16:13:39] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:13:39] [p1-p28]   │    [ED1] "Emerald Green" — See-Saw
+[2026-04-11 16:13:39] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:13:39] [p1-p28]   │  ❌ Unexpected: Cast to [string] failed for value "[ { id: 1, name: '.hack', slug: 'dot_hack' } ]" (type string) at path "animeSeries.0" because of "CastError"
+[2026-04-11 16:13:39] [p1-p28]   └─ ❌  running total → processed:1  failed:24
+[2026-04-11 16:13:39] [p1-p28] 
+  ┌─ [5/2799] 🎌 100_man_no_inochi_no_ue_ni_ore_wa_tatteiru
+[2026-04-11 16:13:42] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:13:42] [p1-p28]   │  📺 Format : TV
+[2026-04-11 16:13:42] [p1-p28]   │  📅 Season : FALL 2020
+[2026-04-11 16:13:42] [p1-p28]   │  🗂  Series : 100-man no Inochi no Ue ni Ore wa Tatteiru
+[2026-04-11 16:13:44] [p1-p28]   │  ✅ [AniList:by_id] → 100-man no Inochi no Ue ni Ore wa Tatteiru
+[2026-04-11 16:13:44] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:none
+[2026-04-11 16:13:44] [p1-p28]   │  📝 JP      : 100-man no Inochi no Ue ni Ore wa Tatteiru
+[2026-04-11 16:13:44] [p1-p28]   │  📝 EN      : I'm Standing on a Million Lives
+[2026-04-11 16:13:44] [p1-p28]   │  📝 Romaji  : 100-man no Inochi no Ue ni Ore wa Tatteiru
+[2026-04-11 16:13:44] [p1-p28]   │  📝 Native  : 100万の命の上に俺は立っている
+[2026-04-11 16:13:44] [p1-p28]   │  📝 Alt     : 5 titles
+[2026-04-11 16:13:44] [p1-p28]   │  🆔 MAL:41380  AniList:116242  Kitsu:—
+[2026-04-11 16:13:44] [p1-p28]   │  🎬 Themes  : 3
+[2026-04-11 16:13:44] [p1-p28]   │    [OP1] "Anti world" — Kanako Takatsuki
+[2026-04-11 16:13:44] [p1-p28]   │        entries:1  videos:2  audio:✅
+[2026-04-11 16:13:44] [p1-p28]   │    [OP2] "Dear My MAJIHA Sisters" — Kanako Takatsuki, Ai Furihata
+[2026-04-11 16:13:44] [p1-p28]   │        entries:1  videos:2  audio:✅
+[2026-04-11 16:13:44] [p1-p28]   │    [ED1] "Carpe Diem" — Liyuu
+[2026-04-11 16:13:44] [p1-p28]   │        entries:4  videos:8  audio:✅
+[2026-04-11 16:13:44] [p1-p28]   │  ❌ Unexpected: Cast to [string] failed for value "[\n' +
+  '  {\n' +
+  '    id: 419,\n' +
+  "    name: '100-man no Inochi no Ue ni Ore wa Tatteiru',\n" +
+  "    slug: '100_man_no_inochi_no_ue_ni_ore_wa_tatteiru'\n" +
+  '  }\n' +
+  ']" (type string) at path "animeSeries.0" because of "CastError"
+[2026-04-11 16:13:44] [p1-p28]   └─ ❌  running total → processed:1  failed:25
+[2026-04-11 16:13:44] [p1-p28] 
+  ┌─ [6/2799] 🎌 11eyes
+[2026-04-11 16:13:45] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:13:45] [p1-p28]   │  📺 Format : TV
+[2026-04-11 16:13:45] [p1-p28]   │  📅 Season : FALL 2009
+[2026-04-11 16:13:45] [p1-p28]   │  🗂  Series : —
+[2026-04-11 16:13:47] [p1-p28]   │  ✅ [AniList:by_id] → 11eyes
+[2026-04-11 16:13:47] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:none
+[2026-04-11 16:13:47] [p1-p28]   │  📝 JP      : 11eyes
+[2026-04-11 16:13:47] [p1-p28]   │  📝 EN      : 11eyes
+[2026-04-11 16:13:47] [p1-p28]   │  📝 Romaji  : 11eyes
+[2026-04-11 16:13:47] [p1-p28]   │  📝 Native  : イレブンアイズ
+[2026-04-11 16:13:47] [p1-p28]   │  📝 Alt     : 3 titles
+[2026-04-11 16:13:47] [p1-p28]   │  🆔 MAL:6682  AniList:6682  Kitsu:—
+[2026-04-11 16:13:47] [p1-p28]   │  🎬 Themes  : 2
+[2026-04-11 16:13:47] [p1-p28]   │    [OP1] "Arrival of Tears" — Ayane
+[2026-04-11 16:13:47] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:13:47] [p1-p28]   │    [ED1] "Sequentia" — Asriel
+[2026-04-11 16:13:47] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:13:47] [p1-p28]   │  ❌ Unexpected: Plan executor error during findAndModify :: caused by :: E11000 duplicate key error collection: test.themecaches index: slug_1 dup key: { slug: null }
+[2026-04-11 16:13:47] [p1-p28]   └─ ❌  running total → processed:1  failed:26
+[2026-04-11 16:13:47] [p1-p28] 
+  ┌─ [7/2799] 🎌 12_sai_chicchana_mune_no_tokimeki
+[2026-04-11 16:13:49] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:13:49] [p1-p28]   │  📺 Format : TV
+[2026-04-11 16:13:49] [p1-p28]   │  📅 Season : SPRING 2016
+[2026-04-11 16:13:49] [p1-p28]   │  🗂  Series : 12-sai.: Chicchana Mune no Tokimeki
+[2026-04-11 16:13:50] [p1-p28]   │  ✅ [AniList:by_id] → 12-sai.: Chiccha na Mune no Tokimeki
+[2026-04-11 16:13:52] [p1-p28]   │  ⚠️  [Kitsu:by_malid] no results
+[2026-04-11 16:13:53] [p1-p28]   │  ✅ [Kitsu:by_title] → 12-sai.: Chicchana Mune no Tokimeki
+[2026-04-11 16:13:53] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:by_title
+[2026-04-11 16:13:53] [p1-p28]   │  📝 JP      : 12-sai.: Chicchana Mune no Tokimeki
+[2026-04-11 16:13:53] [p1-p28]   │  📝 EN      : 12-sai.: Chicchana Mune no Tokimeki
+[2026-04-11 16:13:53] [p1-p28]   │  📝 Romaji  : 12-sai.: Chiccha na Mune no Tokimeki
+[2026-04-11 16:13:53] [p1-p28]   │  📝 Native  : 12歳。～ちっちゃなムネのトキメキ～
+[2026-04-11 16:13:53] [p1-p28]   │  📝 Alt     : 5 titles
+[2026-04-11 16:13:53] [p1-p28]   │  🆔 MAL:32601  AniList:21609  Kitsu:11782
+[2026-04-11 16:13:53] [p1-p28]   │  🎬 Themes  : 2
+[2026-04-11 16:13:53] [p1-p28]   │    [OP1] "Sweet Sensation" — Rie Murakawa
+[2026-04-11 16:13:53] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:13:53] [p1-p28]   │    [ED1] "Cotona MODE" — AOP
+[2026-04-11 16:13:53] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:13:53] [p1-p28]   │  ❌ Unexpected: Cast to [string] failed for value "[\n' +
+  '  {\n' +
+  '    id: 507,\n' +
+  "    name: '12-sai.: Chicchana Mune no Tokimeki',\n" +
+  "    slug: '12_sai_chicchana_mune_no_tokimeki'\n" +
+  '  }\n' +
+  ']" (type string) at path "animeSeries.0" because of "CastError"
+[2026-04-11 16:13:53] [p1-p28]   └─ ❌  running total → processed:1  failed:27
+[2026-04-11 16:13:53] [p1-p28] 
+  ┌─ [8/2799] 🎌 12_sai_chicchana_mune_no_tokimeki_2nd_season
