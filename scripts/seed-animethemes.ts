@@ -7,8 +7,8 @@ import { connectDB } from '../lib/db'
 import { ThemeCache, ArtistCache } from '../lib/models'
 
 const BASE_URL = 'https://api.animethemes.moe'
-const DELAY_AT = 1200
-const MAX_RETRIES = 3
+const DELAY_AT = 800
+const MAX_RETRIES = 2
 
 const THEMES = [
   { anime: "Neon Genesis Evangelion", title: "A Cruel Angel's Thesis", type: "OP" },
@@ -332,34 +332,76 @@ function sleep(ms: number): Promise<void> {
   return new Promise(r => setTimeout(r, ms))
 }
 
-async function searchAnime(query: string): Promise<{ slug: string; id: number } | null> {
-  for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
-    try {
-      await sleep(DELAY_AT * attempt)
-      const url = `${BASE_URL}/anime?filter[search]=${encodeURIComponent(query)}&fields[anime]=slug,id`
-      const res = await fetch(url, { 
-        headers: { 
-          'User-Agent': 'AnimeSeeder/1.0',
-          'Accept': 'application/json'
-        } 
-      })
-      
-      if (!res.ok) continue
-      
-      const data = await res.json()
-      const anime = data.anime?.[0]
-      
-      if (anime) {
-        log(`   📍 Found: ${anime.name} (${anime.slug})`)
-        return { slug: anime.slug, id: anime.id }
-      }
-      return null
-    } catch (err) {
-      if (attempt === MAX_RETRIES) {
-        log(`   ⚠️  Search failed after ${MAX_RETRIES} attempts`)
-      }
+const animeCache = new Map<string, { slug: string; id: number; name: string }>()
+
+async function fetchAnimeListPage(page: number): Promise<{ slug: string; id: number; name: string }[]> {
+  try {
+    await sleep(DELAY_AT)
+    const url = `${BASE_URL}/anime?page[number]=${page}&page[size]=100&fields[anime]=slug,id,name`
+    const res = await fetch(url, { 
+      headers: { 
+        'User-Agent': 'AnimeSeeder/1.0',
+        'Accept': 'application/json'
+      } 
+    })
+    
+    if (!res.ok) {
+      log(`   ⚠️  HTTP ${res.status} on page ${page}`)
+      return []
+    }
+    
+    const data = await res.json()
+    const animeList = (data.anime ?? []).map((a: any) => ({
+      slug: a.slug,
+      id: a.id,
+      name: a.name
+    }))
+    
+    return animeList
+  } catch (err) {
+    log(`   ⚠️  Error on page ${page}: ${err instanceof Error ? err.message : 'unknown'}`)
+    return []
+  }
+}
+
+async function buildAnimeCache(): Promise<void> {
+  log(`📥 Building anime cache...`)
+  
+  const pageSize = 100
+  const maxPages = 15
+  
+  for (let page = 1; page <= maxPages; page++) {
+    const animeList = await fetchAnimeListPage(page)
+    
+    if (animeList.length === 0) {
+      log(`   Reached end at page ${page - 1}`)
+      break
+    }
+    
+    for (const a of animeList) {
+      const searchKey = a.name.toLowerCase()
+      animeCache.set(searchKey, a)
+    }
+    
+    log(`   Page ${page}: added ${animeList.length} (total: ${animeCache.size})`)
+    
+    if (page >= maxPages) break
+  }
+  
+  log(`   ✅ Cache built: ${animeCache.size} anime`)
+}
+
+function searchAnime(query: string): { slug: string; id: number } | null {
+  const q = query.toLowerCase()
+  
+  for (const [name, data] of animeCache) {
+    if (name.includes(q) || q.includes(name)) {
+      log(`   📍 Found: ${data.name} (${data.slug})`)
+      return { slug: data.slug, id: data.id }
     }
   }
+  
+  log(`   ⚠️  Not found: ${query}`)
   return null
 }
 
@@ -572,9 +614,7 @@ async function upsertArtists(themes: ParsedTheme[]): Promise<void> {
 async function processTheme(query: { anime: string; title: string; type: string }, index: number, total: number): Promise<void> {
   log(`\n[${index}/${total}] ${query.anime} → "${query.title}" (${query.type})`)
 
-  await sleep(DELAY_AT)
-
-  const animeSearch = await searchAnime(query.anime)
+  const animeSearch = searchAnime(query.anime)
   if (!animeSearch) {
     log(`   ❌ Anime not found: ${query.anime}`)
     progress.failed++
@@ -637,6 +677,8 @@ async function main() {
     log(`❌ DB failed: ${err instanceof Error ? err.message : 'unknown'}`)
     process.exit(1)
   }
+
+  await buildAnimeCache()
 
   const startIdx = progress.processed + progress.skipped + progress.failed
   const startFrom = progress.lastAnime

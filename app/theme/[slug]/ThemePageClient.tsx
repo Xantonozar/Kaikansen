@@ -120,7 +120,7 @@ export function ThemePageClient({ slug }: ThemePageClientProps) {
               href={`/anime/${theme.anilistId || ''}`}
               className="text-xs font-body text-ktext-tertiary mt-0.5 hover:text-accent transition-colors"
             >
-              ∞ {theme.animeTitle}
+              ∞ {theme.animeTitleEnglish || theme.animeTitle}
             </Link>
           </div>
           {/* Share button */}
