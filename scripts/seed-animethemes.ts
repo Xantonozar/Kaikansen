@@ -277,6 +277,7 @@ interface ParsedAnime {
 
 const SCRIPTS_DIR = path.join(process.cwd(), 'scripts')
 const PROGRESS_FILE = path.join(SCRIPTS_DIR, 'seed-animethemes-progress.json')
+const CACHE_FILE = path.join(SCRIPTS_DIR, 'anime-cache.json')
 
 interface Progress {
   total: number
@@ -365,10 +366,30 @@ async function fetchAnimeListPage(page: number): Promise<{ slug: string; id: num
 }
 
 async function buildAnimeCache(): Promise<void> {
+  if (animeCache.size > 0) {
+    log(`   ✅ Already have ${animeCache.size} anime in memory`)
+    return
+  }
+  
+  if (fs.existsSync(CACHE_FILE)) {
+    try {
+      const cached = JSON.parse(fs.readFileSync(CACHE_FILE, 'utf-8'))
+      for (const a of cached) {
+        animeCache.set(a.name.toLowerCase(), a)
+      }
+      log(`   ✅ Loaded from file: ${animeCache.size} anime`)
+      return
+    } catch (e) {
+      log(`   ⚠️  Cache file read failed, rebuilding...`)
+    }
+  }
+  
   log(`📥 Building anime cache...`)
   
   const pageSize = 100
-  const maxPages = 15
+  const maxPages = 30
+  
+  const allAnime: { slug: string; id: number; name: string }[] = []
   
   for (let page = 1; page <= maxPages; page++) {
     const animeList = await fetchAnimeListPage(page)
@@ -378,27 +399,86 @@ async function buildAnimeCache(): Promise<void> {
       break
     }
     
+    allAnime.push(...animeList)
+    
     for (const a of animeList) {
-      const searchKey = a.name.toLowerCase()
-      animeCache.set(searchKey, a)
+      const searchKey = a.name.toLowerCase().trim()
+      if (!animeCache.has(searchKey)) {
+        animeCache.set(searchKey, a)
+      }
     }
     
     log(`   Page ${page}: added ${animeList.length} (total: ${animeCache.size})`)
     
+    if (page % 5 === 0) {
+      fs.writeFileSync(CACHE_FILE, JSON.stringify(allAnime))
+      log(`      💾 Saved checkpoint at page ${page}`)
+    }
+    
     if (page >= maxPages) break
   }
   
-  log(`   ✅ Cache built: ${animeCache.size} anime`)
+  fs.writeFileSync(CACHE_FILE, JSON.stringify(allAnime))
+  log(`   ✅ Cache built: ${animeCache.size} anime (saved to ${CACHE_FILE})`)
+}
+
+function normalizeTitle(title: string): string {
+  return title.toLowerCase()
+    .replace(/\s+/g, ' ')
+    .replace(/[:;!?.]/g, '')
+    .replace(/[()]/g, '')
+    .trim()
+}
+
+const fuzzyAliases: Record<string, string[]> = {
+  'fullmetal alchemist brotherhood': ['fullmetal alchemist'],
+  'attack on titan': ['shingeki no kyojin'],
+  'jujutsu kaisen': [' jujutsu kaisen'],
+  'tokyo ghoul': ['tokyo ghoul', 'tokyoghoul'],
+  'one piece': ['one piece'],
+  'naruto shippuden': ['naruto shippuden', 'naruto'],
+  'demon slayer': ['kimetsu no yaiba'],
+  'my hero academia': ['boku no hero academia', 'my hero academia'],
+  'steins;gate': ['steins gate'],
+  'blue lock': ['blue lock', 'bluelock'],
+  'frieren': ['sousou no freiren', 'frieren beyond journeys end'],
+  're:zero': ['rezero', 're zero'],
+  'spy x family': ['spy x family'],
+  'chainsaw man': ['chainsaw man'],
+  'cyberpunk edgerunners': ['cyberpunk edgerunners'],
+  'violet evergarden': ['violet evergarden'],
+  'tanjiro': ['kimetsu no yaiba'],
+  'haikyu': ['haikyuu'],
+  'mob psycho': ['mob psycho 100'],
 }
 
 function searchAnime(query: string): { slug: string; id: number } | null {
-  const q = query.toLowerCase()
+  const q = normalizeTitle(query)
   
-  for (const [name, data] of animeCache) {
-    if (name.includes(q) || q.includes(name)) {
-      log(`   📍 Found: ${data.name} (${data.slug})`)
-      return { slug: data.slug, id: data.id }
+  const aliases = fuzzyAliases[q] || [q]
+  
+  for (const alias of aliases) {
+    const exact = animeCache.get(alias)
+    if (exact) {
+      log(`   📍 Found: ${exact.name} (${exact.slug})`)
+      return { slug: exact.slug, id: exact.id }
     }
+  }
+  
+  const startsWith = [...animeCache.entries()].find(([name]) => 
+    aliases.some(alias => name.startsWith(alias) || alias.startsWith(name))
+  )
+  if (startsWith) {
+    log(`   📍 Found: ${startsWith[1].name} (${startsWith[1].slug})`)
+    return { slug: startsWith[1].slug, id: startsWith[1].id }
+  }
+  
+  const contains = [...animeCache.entries()].find(([name]) => 
+    aliases.some(alias => name.includes(alias) || alias.includes(name))
+  )
+  if (contains) {
+    log(`   📍 Found: ${contains[1].name} (${contains[1].slug})`)
+    return { slug: contains[1].slug, id: contains[1].id }
   }
   
   log(`   ⚠️  Not found: ${query}`)
@@ -660,6 +740,14 @@ async function processTheme(query: { anime: string; title: string; type: string 
 async function main() {
   ensureDir()
   initLog()
+  
+  const cacheExists = fs.existsSync(CACHE_FILE)
+  log(`📁 Cache file exists: ${cacheExists}`)
+  if (cacheExists) {
+    const stats = fs.statSync(CACHE_FILE)
+    log(`   Size: ${stats.size} bytes`)
+  }
+  
   progress = loadProgress()
 
   div('═')
