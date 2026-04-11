@@ -9,6 +9,7 @@ const searchSchema = z.object({
   q: z.string().min(1).max(100),
   page: z.string().optional().transform((v) => Math.max(1, parseInt(v || '1'))),
   limit: z.string().optional().transform((v) => Math.min(50, parseInt(v || '20'))),
+  by: z.string().optional(),
 })
 
 export async function GET(request: NextRequest) {
@@ -20,17 +21,38 @@ export async function GET(request: NextRequest) {
       q: url.searchParams.get('q'),
       page: url.searchParams.get('page'),
       limit: url.searchParams.get('limit'),
+      by: url.searchParams.get('by'),
     })
 
     const skip = (params.page - 1) * params.limit
+    const searchTerm = params.q.trim()
 
-    const [themes, artists] = await Promise.all([
-      ThemeCache.find({ $text: { $search: params.q } })
-        .limit(20)
-        .lean(),
-      ArtistCache.find({ $text: { $search: params.q } })
-        .limit(10)
-        .lean(),
+    const themeFields = ['animeTitle', 'animeTitleEnglish', 'animeTitleAlternative', 'songTitle', 'artistName', 'allArtists']
+    const artistFields = ['name', 'aliases']
+
+    const buildRegexQuery = (fields: string[], term: string) => ({
+      $or: fields.map(field => ({ [field]: { $regex: term, $options: 'i' } }))
+    })
+
+    let themeQuery: Record<string, unknown> = {}
+    let artistQuery: Record<string, unknown> = {}
+
+    if (params.by === 'anime') {
+      themeQuery = buildRegexQuery(['animeTitle', 'animeTitleEnglish', 'animeTitleAlternative'], searchTerm)
+    } else if (params.by === 'song') {
+      themeQuery = buildRegexQuery(['songTitle'], searchTerm)
+    } else if (params.by === 'singer') {
+      themeQuery = buildRegexQuery(['artistName', 'allArtists'], searchTerm)
+    } else {
+      themeQuery = buildRegexQuery(themeFields, searchTerm)
+      artistQuery = buildRegexQuery(artistFields, searchTerm)
+    }
+
+    const [themes, artists, themeCount, artistCount] = await Promise.all([
+      themeQuery ? ThemeCache.find(themeQuery).sort({ avgRating: -1, totalRatings: -1 }).skip(skip).limit(params.limit).lean() : [],
+      artistQuery ? ArtistCache.find(artistQuery).sort({ totalThemes: -1 }).skip(skip).limit(Math.floor(params.limit / 2)).lean() : [],
+      themeQuery ? ThemeCache.countDocuments(themeQuery) : 0,
+      artistQuery ? ArtistCache.countDocuments(artistQuery) : 0,
     ])
 
     return NextResponse.json(
@@ -42,6 +64,8 @@ export async function GET(request: NextRequest) {
         },
         meta: {
           page: params.page,
+          total: params.by === 'artist' ? artistCount : themeCount,
+          hasMore: skip + params.limit < (params.by === 'artist' ? artistCount : themeCount),
           query: params.q,
         },
       },
