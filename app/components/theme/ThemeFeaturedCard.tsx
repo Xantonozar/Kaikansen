@@ -21,6 +21,23 @@ interface ThemeFeaturedCardProps {
   }
 }
 
+const anilistImageUrls = (id: number) => [
+  `https://s4.anilist.co/Media/${id}/cover/extraLarge.jpg`,
+  `https://s4.anilist.co/Media/${id}/cover/large.jpg`,
+]
+
+const fetchWithRetry = async (url: string, retries = 2): Promise<boolean> => {
+  for (let i = 0; i < retries; i++) {
+    try {
+      const res = await fetch(url, { method: 'HEAD' })
+      if (res.ok) return true
+    } catch {
+      // Continue to next retry
+    }
+  }
+  return false
+}
+
 export function ThemeFeaturedCard({ theme }: ThemeFeaturedCardProps) {
   const [coverImage, setCoverImage] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(true)
@@ -30,30 +47,29 @@ export function ThemeFeaturedCard({ theme }: ThemeFeaturedCardProps) {
   const displayArtist = theme.artistName || theme.songTitle || 'Unknown'
 
   useEffect(() => {
-    const fetchAnilistImage = async () => {
+    const fetchHighResImage = async () => {
       if (!theme.anilistId) {
         setCoverImage(fallbackImage)
         setIsLoading(false)
         return
       }
 
-      try {
-        const anilistImage = `https://s4.anilist.co/Media/${theme.anilistId}/cover/large.jpg`
-        
-        const res = await fetch(anilistImage, { method: 'HEAD' })
-        if (res.ok) {
-          setCoverImage(anilistImage)
-        } else {
-          setCoverImage(fallbackImage)
+      const urls = anilistImageUrls(theme.anilistId)
+      
+      for (const url of urls) {
+        const exists = await fetchWithRetry(url, 2)
+        if (exists) {
+          setCoverImage(url)
+          setIsLoading(false)
+          return
         }
-      } catch {
-        setCoverImage(fallbackImage)
-      } finally {
-        setIsLoading(false)
       }
+
+      setCoverImage(fallbackImage)
+      setIsLoading(false)
     }
 
-    fetchAnilistImage()
+    fetchHighResImage()
   }, [theme.anilistId, fallbackImage])
 
   return (
