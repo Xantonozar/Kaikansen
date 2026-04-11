@@ -101,6 +101,17 @@ export function VideoPlayer({ videoSources, poster, mode }: VideoPlayerProps) {
     }
   }, [])
 
+  // Reset video state when mode changes to ensure clean transition
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+    
+    // Pause video and reset state when switching modes
+    video.pause()
+    setIsPaused(true)
+    setIsPlaying(false)
+  }, [mode])
+
   // Update video source when quality changes
   useEffect(() => {
     const video = videoRef.current
