@@ -1,697 +1,992 @@
 import dotenv from 'dotenv'
 dotenv.config({ path: '.env.local' })
 
-console.log('ENV CHECK - MONGODB_URI:', process.env.MONGODB_URI ? 'loaded' : 'NOT loaded')
-
 import path from 'path'
 import fs from 'fs'
 import { connectDB } from '../lib/db'
 import { ThemeCache, ArtistCache } from '../lib/models'
 
-const BASE_URL = 'https://api.animethemes.moe'
+// ─────────────────────────────────────────────
+// CLI ARGS
+// Each parallel instance MUST have unique start/end
+// Usage:
+//   npx ts-node seed.ts --start=1   --end=30
+//   npx ts-node seed.ts --start=31  --end=60
+//   npx ts-node seed.ts --start=61  --end=90
+//   npx ts-node seed.ts --start=91  --end=120
+//   npx ts-node seed.ts --start=121 --end=142
+// Retry failed:
+//   npx ts-node seed.ts --start=1 --end=30 --retry-failed
+// ─────────────────────────────────────────────
+
+const cliArgs = process.argv.slice(2)
+const startArg = cliArgs.find(a => a.startsWith('--start='))
+const endArg   = cliArgs.find(a => a.startsWith('--end='))
+const retryArg = cliArgs.includes('--retry-failed')
+
+if (!startArg || !endArg) {
+  console.error('❌ Missing args. Usage: npx ts-node seed.ts --start=1 --end=30')
+  process.exit(1)
+}
+
+const START_PAGE = parseInt(startArg.split('=')[1])
+const END_PAGE   = parseInt(endArg.split('=')[1])
+
+if (isNaN(START_PAGE) || isNaN(END_PAGE) || START_PAGE < 1 || END_PAGE < START_PAGE) {
+  console.error(`❌ Invalid range: start=${START_PAGE} end=${END_PAGE}`)
+  process.exit(1)
+}
+
+// ─────────────────────────────────────────────
+// CONSTANTS
+// ─────────────────────────────────────────────
+
+const BASE_URL    = 'https://api.animethemes.moe'
 const ANILIST_API = 'https://graphql.anilist.co'
-const KITSU_API = 'https://kitsu.io/api/edge'
-const DELAY_ANIMETHEMES = 700
-const DELAY_ANILIST = 1000
-const DELAY_KITSU = 1000
+const KITSU_API   = 'https://kitsu.io/api/edge'
+const DELAY_AT    = 700
+const DELAY_AL    = 1000
+const DELAY_KT    = 1000
+const PAGE_SIZE   = 100
 
-const args = process.argv.slice(2)
-const startArg = args.find(a => a.startsWith('--start='))
-const endArg = args.find(a => a.startsWith('--end='))
-const START_PAGE = startArg ? parseInt(startArg.split('=')[1]) : 150
-const END_PAGE = endArg ? parseInt(endArg.split('=')[1]) : 1
-const REVERSE = true  // Search from high pages to low pages (newer anime first)
-const PROGRESS_FILE = `seed-progress-${Math.max(START_PAGE, END_PAGE)}-${Math.min(START_PAGE, END_PAGE)}.json`
+// ─────────────────────────────────────────────
+// FILE PATHS — unique per run tag so parallel
+// instances NEVER share or overwrite each other
+// e.g. start=1 end=30 → tag = p1-p30
+//      start=31 end=60 → tag = p31-p60
+// ─────────────────────────────────────────────
 
-interface SeedProgress {
-  lastPage: number
+const SCRIPTS_DIR   = path.join(process.cwd(), 'scripts')
+const RUN_TAG       = `p${START_PAGE}-p${END_PAGE}`
+const SLUG_FILE     = path.join(SCRIPTS_DIR, `slugs-${RUN_TAG}.json`)
+const PROGRESS_FILE = path.join(SCRIPTS_DIR, `progress-${RUN_TAG}.json`)
+const LOG_FILE      = path.join(SCRIPTS_DIR, `seed-${RUN_TAG}.log`)
+
+// ─────────────────────────────────────────────
+// INTERFACES
+// ─────────────────────────────────────────────
+
+interface SlugFile {
+  runTag: string
+  startPage: number
+  endPage: number
+  totalSlugs: number
+  collectedAt: string
+  slugs: string[]       // all slugs collected
+  processed: string[]   // successfully saved to DB
+  failed: string[]      // failed after all retries
+}
+
+interface ProgressFile {
+  runTag: string
+  startPage: number
+  endPage: number
   totalProcessed: number
-  failedThemes: number
+  totalFailed: number
+  lastSlug: string
   lastUpdated: string
-  failedSlugs: string[]
+  phase: 'collecting' | 'processing' | 'retrying' | 'done'
 }
 
-function loadProgress(): SeedProgress {
-  const progressPath = path.join(process.cwd(), 'scripts', PROGRESS_FILE)
-  if (fs.existsSync(progressPath)) {
-    try {
-      const data = JSON.parse(fs.readFileSync(progressPath, 'utf-8'))
-      return { ...data, failedSlugs: data.failedSlugs || [] }
-    } catch {
-      return { lastPage: START_PAGE, totalProcessed: 0, failedThemes: 0, lastUpdated: new Date().toISOString(), failedSlugs: [] }
-    }
-  }
-  return { lastPage: START_PAGE, totalProcessed: 0, failedThemes: 0, lastUpdated: new Date().toISOString(), failedSlugs: [] }
-}
-
-function saveProgress(progress: SeedProgress): void {
-  const progressPath = path.join(process.cwd(), 'scripts', PROGRESS_FILE)
-  try {
-    const json = JSON.stringify(progress, null, 2)
-    fs.writeFileSync(progressPath, json)
-    console.log(`  💾 Progress saved: Page ${progress.lastPage}, Processed ${progress.totalProcessed}, Failed ${progress.failedThemes}`)
-  } catch (error) {
-    console.error(`💾 Failed to save progress: ${error instanceof Error ? error.message : 'unknown'}`)
-  }
-}
-
-function sleep(ms: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, ms))
-}
-
-async function getTotalThemePages(): Promise<number> {
-  // For reverse mode, start from high page number to find actual max
-  return START_PAGE
-}
-
-async function fetchThemePage(page: number): Promise<any[]> {
-  const fullIncludes = 'anime,anime.images,song,animethemeentries,animethemeentries.videos,song.artists'
-  const fallbackIncludes = 'anime,song,animethemeentries,animethemeentries.videos'
-  const minimalIncludes = 'anime,song'
-  
-  const url = new URL(`${BASE_URL}/animetheme`)
-  url.searchParams.set('page[size]', '100')
-  url.searchParams.set('page[number]', String(page))
-  url.searchParams.set('include', fullIncludes)
-  
-  console.log(`  🔗 URL: ${url.toString().substring(0, 60)}...`)
-  
-  let res = await fetch(url.toString(), {
-    headers: { 'User-Agent': 'Kaikansen/1.0' }
-  })
-  
-  if (res.status === 422) {
-    console.log(`  ⚠️  Full includes not supported, retrying with fallback...`)
-    url.searchParams.set('include', fallbackIncludes)
-    res = await fetch(url.toString(), {
-      headers: { 'User-Agent': 'Kaikansen/1.0' }
-    })
-  }
-  
-  if (res.status === 422) {
-    console.log(`  ⚠️  Fallback includes not supported, trying minimal...`)
-    url.searchParams.set('include', minimalIncludes)
-    res = await fetch(url.toString(), {
-      headers: { 'User-Agent': 'Kaikansen/1.0' }
-    })
-  }
-  
-  if (res.status === 422) {
-    console.log(`  ⚠️  Minimal includes not supported, trying bare query...`)
-    url.searchParams.delete('include')
-    res = await fetch(url.toString(), {
-      headers: { 'User-Agent': 'Kaikansen/1.0' }
-    })
-  }
-  
-  if (!res.ok) {
-    const errText = await res.text()
-    console.log(`  ❌ API Error ${res.status}: ${errText.substring(0, 200)}`)
-    throw new Error(`AT API error: ${res.status}`)
-  }
-  
-  const data = await res.json()
-  const themes = data.animethemes || []
-  console.log(`  ✅ Got ${themes.length} themes from page ${page}`)
-  return themes
-}
-
-interface AniListEnrichment {
-  anilistId: number | null
-  animeTitleEnglish: string | null
-  animeTitleAlternative: string[]
-  animeSeason: string | null
-  animeSeasonYear: number | null
-  animeCoverImage: string | null
-  animeMediaFormat: string | null
-  animeSynonyms: string[]
-  animeStudios: string[]
-}
-
-async function enrichFromAniList(anilistId: number): Promise<AniListEnrichment | null> {
-  const query = `
-    query GetByAnilistId($anilistId: Int) {
-      Media(id: $anilistId, type: ANIME) {
-        id
-        title { romaji english native }
-        season
-        seasonYear
-        format
-        coverImage { large }
-        synonyms
-        studios {
-          nodes {
-            studio {
-              name
-            }
-          }
-        }
-      }
-    }
-  `
-  try {
-    const res = await fetch(ANILIST_API, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ query, variables: { anilistId } }),
-    })
-    const { data } = await res.json()
-    if (!data?.Media) return null
-    
-    const media = data.Media
-    const studios = media.studios?.nodes?.map((n: any) => n.studio?.name).filter(Boolean) ?? []
-    return {
-      anilistId: media.id,
-      animeTitleEnglish: media.title.english ?? null,
-      animeTitleAlternative: [media.title.native, media.title.romaji, ...(media.synonyms ?? [])].filter(Boolean),
-      animeSeason: media.season?.toUpperCase() ?? null,
-      animeSeasonYear: media.seasonYear ?? null,
-      animeCoverImage: media.coverImage?.large ?? null,
-      animeMediaFormat: media.format ?? null,
-      animeSynonyms: media.synonyms ?? [],
-      animeStudios: studios,
-    }
-  } catch (error) {
-    console.log(`    ❌ AniList enrichment failed: ${error instanceof Error ? error.message : 'unknown'}`)
-    return null
-  }
-}
-
-async function enrichFromAniListByTitle(title: string): Promise<AniListEnrichment | null> {
-  const query = `
-    query SearchAnime($title: String) {
-      Media(search: $title, type: ANIME, limit: 1) {
-        id
-        title { romaji english native }
-        season
-        seasonYear
-        format
-        coverImage { large }
-        synonyms
-        studios {
-          nodes {
-            studio {
-              name
-            }
-          }
-        }
-      }
-    }
-  `
-  try {
-    const res = await fetch(ANILIST_API, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ query, variables: { title } }),
-    })
-    const { data } = await res.json()
-    if (!data?.Media || data.Media.length === 0) return null
-    
-    const media = data.Media[0]
-    const studios = media.studios?.nodes?.map((n: any) => n.studio?.name).filter(Boolean) ?? []
-    return {
-      anilistId: media.id,
-      animeTitleEnglish: media.title.english ?? null,
-      animeTitleAlternative: [media.title.native, media.title.romaji, ...(media.synonyms ?? [])].filter(Boolean),
-      animeSeason: media.season?.toUpperCase() ?? null,
-      animeSeasonYear: media.seasonYear ?? null,
-      animeCoverImage: media.coverImage?.large ?? null,
-      animeMediaFormat: media.format ?? null,
-      animeSynonyms: media.synonyms ?? [],
-      animeStudios: studios,
-    }
-  } catch (error) {
-    console.log(`    ❌ AniList search failed: ${error instanceof Error ? error.message : 'unknown'}`)
-    return null
-  }
-}
-
-interface KitsuEnrichment {
-  kitsuId: string | null
-  anilistId: number | null
-  animeTitleEnglish: string | null
-  animeTitleRomaji: string | null
-  animeTitleAlternative: string[]
-  animeCoverImage: string | null
-}
-
-async function enrichFromKitsu(title: string): Promise<KitsuEnrichment | null> {
-  try {
-    const res = await fetch(
-      `${KITSU_API}/anime?filter[text]=${encodeURIComponent(title)}&page[limit]=5&include=mappings`,
-      { headers: { 'Accept': 'application/vnd.api+json' } }
-    )
-    const data = await res.json()
-    if (!data?.data?.length) return null
-
-    const anime = data.data[0].attributes
-    const titles = anime.titles || {}
-    const altTitles = [
-      titles.en_jp,
-      titles.ja_jp,
-      ...(anime.abbreviatedTitles || [])
-    ].filter(Boolean)
-
-    let anilistId: number | null = null
-    if (data.included) {
-      const mappings = data.included.filter((i: any) => i.type === 'mappings')
-      const anilistMapping = mappings.find((m: any) => m.attributes?.externalSite === 'anilist')
-      if (anilistMapping) {
-        anilistId = parseInt(anilistMapping.attributes.externalId, 10) || null
-      }
-    }
-
-    return {
-      kitsuId: anime.id || null,
-      anilistId,
-      animeTitleEnglish: titles.en ?? null,
-      animeTitleRomaji: titles.en_jp ?? null,
-      animeTitleAlternative: altTitles,
-      animeCoverImage: anime.posterImage?.large ?? null,
-    }
-  } catch (error) {
-    console.log(`    ❌ Kitsu enrichment failed: ${error instanceof Error ? error.message : 'unknown'}`)
-    return null
-  }
+interface SourcesFetched {
+  at_level  : 'full' | 'basic' | 'bare' | 'none'
+  anilist   : 'by_id' | 'by_malid' | 'by_title' | 'none'
+  kitsu     : 'by_malid' | 'by_title' | 'none'
 }
 
 interface VideoSource {
-  resolution: number
-  url: string
-  source: string | null
-  nc: boolean
-  lyrics: boolean
-  subbed: boolean
-  overlap: string | null
+  resolution : number | null
+  url        : string | null
+  audioUrl   : string | null
+  audioSize  : number | null
+  source     : string | null
+  nc         : boolean
+  lyrics     : boolean
+  subbed     : boolean
+  uncen      : boolean
+  overlap    : string | null
+  size       : number | null
+  tags       : string | null
+  basename   : string | null
 }
 
 interface Entry {
-  version: number
-  episodes: string | null
-  isNsfw: boolean
+  version  : number
+  episodes : string | null
+  isNsfw   : boolean
   isSpoiler: boolean
-  notes: string | null
-  videos: VideoSource[]
+  notes    : string | null
+  videos   : VideoSource[]
 }
 
 interface ParsedTheme {
-  slug: string
-  animethemesId: number
-  songTitle: string
-  artistName: string | null
-  allArtists: string[]
-  artistSlugs: string[]
-  artistRoles: string[]
-  anilistId: number | null
-  animeTitle: string
-  animeTitleEnglish: string | null
-  animeTitleAlternative: string[]
-  animeSeason: string | null
-  animeSeasonYear: number | null
-  animeCoverImage: string | null
-  animeSmallCoverImage: string | null
-  animeGrillImage: string | null
-  animeSynopsis: string | null
-  animeMediaFormat: string | null
-  animeSeries: string[]
-  animeStudios: string[]
-  animeSynonyms: string[]
-  type: 'OP' | 'ED'
-  sequence: number
-  entries: Entry[]
-  videoUrl: string
-  videoResolution: number | null
-  videoSource: string | null
-  hasLyrics: boolean
-  isCreditless: boolean
-  overlapNote: string | null
-  syncedAt: Date
+  animethemesThemeId : number
+  slug               : string
+  type               : 'OP' | 'ED' | 'IN'
+  sequence           : number
+  songTitle          : string
+  allArtists         : string[]
+  artistSlugs        : string[]
+  artistRoles        : string[]
+  entries            : Entry[]
+  overlapNote        : string | null
 }
 
-function parseATTheme(atTheme: any): ParsedTheme | null {
-  const anime = atTheme.anime
-  if (!anime) return null
+interface ParsedAnime {
+  animeSlug              : string
+  animethemesId          : number
+  animeTitle             : string
+  animeTitleEnglish      : string | null
+  animeTitleRomaji       : string | null
+  animeTitleNative       : string | null
+  animeTitleAlternative  : string[]
+  animeSeason            : string | null
+  animeSeasonYear        : number | null
+  animeCoverImage        : string | null
+  animeSmallCoverImage   : string | null
+  animeBannerImage       : string | null
+  animeGrillImage        : string | null
+  animeSynopsis          : string | null
+  animeMediaFormat       : string | null
+  animeSeries            : { id: number; name: string; slug: string }[]
+  animeStudios           : string[]
+  animeSynonyms          : string[]
+  malId                  : number | null
+  anilistId              : number | null
+  kitsuId                : string | null
+  themes                 : ParsedTheme[]
+  sourcesFetched         : SourcesFetched
+  syncedAt               : Date
+}
 
-  const entries = atTheme.animethemeentries ?? []
-  if (entries.length === 0) return null
+interface AniListData {
+  anilistId            : number | null
+  animeTitleEnglish    : string | null
+  animeTitleRomaji     : string | null
+  animeTitleNative     : string | null
+  animeTitleAlternative: string[]
+  animeSeason          : string | null
+  animeSeasonYear      : number | null
+  animeCoverImage      : string | null
+  animeMediaFormat     : string | null
+  animeSynonyms        : string[]
+  animeStudios         : string[]
+}
 
-  const artists = atTheme.song?.artists ?? []
-  const allArtists = artists.map((a: any) => a.name)
-  const artistSlugs = artists.map((a: any) => a.slug)
-  const artistRoles = artists.map((a: any) => a.as ?? 'performer')
+interface KitsuData {
+  kitsuId              : string | null
+  anilistId            : number | null
+  malId                : number | null
+  animeTitleEnglish    : string | null
+  animeTitleRomaji     : string | null
+  animeTitleNative     : string | null
+  animeTitleAlternative: string[]
+  animeCoverImage      : string | null
+  animeBannerImage     : string | null
+}
 
-  const images = anime.images ?? []
-  const atCoverImage = images.find((i: any) => i.facet === 'Large Cover')?.link ?? images.find((i: any) => i.facet === 'Small Cover')?.link ?? null
-  const atSmallCoverImage = images.find((i: any) => i.facet === 'Small Cover')?.link ?? null
-  const atGrillImage = images.find((i: any) => i.facet === 'Grill')?.link ?? null
+// ─────────────────────────────────────────────
+// LOGGING — writes to both console and .log file
+// ─────────────────────────────────────────────
 
-  const animeSeries: string[] = []
-  const animeStudios: string[] = []
-  const animeSynonyms: string[] = []
+let logStream: fs.WriteStream
 
-  const anilistIdFromAt = (anime.anilistid as any) ? parseInt(String(anime.anilistid), 10) : null
+function initLog() {
+  logStream = fs.createWriteStream(LOG_FILE, { flags: 'a' })
+}
 
-  const parsedEntries: Entry[] = entries.map((entry: any) => {
-    const videos = entry.videos ?? []
-    const sortedVideos = [...videos].sort((a: any, b: any) => b.resolution - a.resolution)
-    
-    const videoSources: VideoSource[] = sortedVideos.map((v: any) => ({
-      resolution: v.resolution,
-      url: v.link,
-      source: v.source ?? null,
-      nc: v.nc ?? false,
-      lyrics: v.lyrics ?? false,
-      subbed: v.subbed ?? false,
-      overlap: v.overlap ?? null,
-    }))
+function log(msg: string) {
+  const ts   = new Date().toISOString().replace('T', ' ').substring(0, 19)
+  const line = `[${ts}] [${RUN_TAG}] ${msg}`
+  console.log(line)
+  logStream?.write(line + '\n')
+}
+
+function div(char = '─', len = 65) {
+  const line = char.repeat(len)
+  console.log(line)
+  logStream?.write(line + '\n')
+}
+
+function logPhase(label: string) {
+  div('═')
+  log(`🚀 PHASE: ${label}`)
+  div('═')
+}
+
+function logPageBanner(page: number) {
+  const done  = page - START_PAGE + 1
+  const total = END_PAGE - START_PAGE + 1
+  div()
+  log(`📄 PAGE ${page}/${END_PAGE}  [${done} of ${total} pages in this run]`)
+  div()
+}
+
+function logAnimeStart(index: number, total: number, slug: string) {
+  log(`\n  ┌─ [${index}/${total}] 🎌 ${slug}`)
+}
+
+function logAnimeEnd(success: boolean, processed: number, failed: number) {
+  const icon = success ? '✅' : '❌'
+  log(`  └─ ${icon}  running total → processed:${processed}  failed:${failed}`)
+}
+
+function logSources(s: SourcesFetched) {
+  log(`  │  🔗 Sources  AT:${s.at_level} | AniList:${s.anilist} | Kitsu:${s.kitsu}`)
+}
+
+function logTitles(a: ParsedAnime) {
+  log(`  │  📝 JP      : ${a.animeTitle}`)
+  log(`  │  📝 EN      : ${a.animeTitleEnglish      ?? '—'}`)
+  log(`  │  📝 Romaji  : ${a.animeTitleRomaji        ?? '—'}`)
+  log(`  │  📝 Native  : ${a.animeTitleNative        ?? '—'}`)
+  log(`  │  📝 Alt     : ${a.animeTitleAlternative.length} titles`)
+}
+
+function logIds(a: ParsedAnime) {
+  log(`  │  🆔 MAL:${a.malId ?? '—'}  AniList:${a.anilistId ?? '—'}  Kitsu:${a.kitsuId ?? '—'}`)
+}
+
+function logThemeList(themes: ParsedTheme[]) {
+  log(`  │  🎬 Themes  : ${themes.length}`)
+  for (const t of themes) {
+    const artists  = t.allArtists.join(', ') || '—'
+    const videos   = t.entries.reduce((n, e) => n + e.videos.length, 0)
+    const hasAudio = t.entries.some(e => e.videos.some(v => v.audioUrl))
+    log(`  │    [${t.type}${t.sequence}] "${t.songTitle}" — ${artists}`)
+    log(`  │        entries:${t.entries.length}  videos:${videos}  audio:${hasAudio ? '✅' : '❌'}`)
+  }
+}
+
+// ─────────────────────────────────────────────
+// FILE HELPERS
+// ─────────────────────────────────────────────
+
+function ensureDir() {
+  if (!fs.existsSync(SCRIPTS_DIR)) fs.mkdirSync(SCRIPTS_DIR, { recursive: true })
+}
+
+function readSlugFile(): SlugFile | null {
+  try {
+    if (!fs.existsSync(SLUG_FILE)) return null
+    return JSON.parse(fs.readFileSync(SLUG_FILE, 'utf-8'))
+  } catch { return null }
+}
+
+function writeSlugFile(data: SlugFile) {
+  fs.writeFileSync(SLUG_FILE, JSON.stringify(data, null, 2))
+}
+
+function readProgress(): ProgressFile | null {
+  try {
+    if (!fs.existsSync(PROGRESS_FILE)) return null
+    return JSON.parse(fs.readFileSync(PROGRESS_FILE, 'utf-8'))
+  } catch { return null }
+}
+
+function writeProgress(data: ProgressFile) {
+  fs.writeFileSync(PROGRESS_FILE, JSON.stringify(data, null, 2))
+}
+
+function sleep(ms: number): Promise<void> {
+  return new Promise(r => setTimeout(r, ms))
+}
+
+// ─────────────────────────────────────────────
+// PHASE 1 — COLLECT SLUGS
+// Fetches only slug field — very lightweight
+// Saves after every page so crash-safe
+// ─────────────────────────────────────────────
+
+async function collectSlugs(): Promise<SlugFile> {
+  logPhase('1 — Collecting Slugs')
+
+  // Resume if slug file already exists
+  const existing = readSlugFile()
+  if (existing && existing.slugs.length > 0) {
+    log(`✅ Slug file exists — ${existing.slugs.length} slugs already collected`)
+    log(`   Skipping collection phase`)
+    return existing
+  }
+
+  const slugFile: SlugFile = {
+    runTag    : RUN_TAG,
+    startPage : START_PAGE,
+    endPage   : END_PAGE,
+    totalSlugs: 0,
+    collectedAt: new Date().toISOString(),
+    slugs     : [],
+    processed : [],
+    failed    : [],
+  }
+
+  const totalPages = END_PAGE - START_PAGE + 1
+
+  for (let page = START_PAGE; page <= END_PAGE; page++) {
+    const done = page - START_PAGE + 1
+    logPageBanner(page)
+
+    try {
+      await sleep(DELAY_AT)
+
+      // Only fetch slug field — minimal payload
+      const url = `${BASE_URL}/anime?page[size]=${PAGE_SIZE}&page[number]=${page}&fields[anime]=slug`
+      const res = await fetch(url, { headers: { 'User-Agent': 'AnimeSeeder/1.0' } })
+
+      if (!res.ok) {
+        log(`⚠️  Page ${page} returned ${res.status} — skipping`)
+        continue
+      }
+
+      const data   = await res.json()
+      const slugs  = (data.anime ?? []).map((a: any) => a.slug).filter(Boolean) as string[]
+      const isLast = !data.links?.next
+
+      slugFile.slugs.push(...slugs)
+      slugFile.totalSlugs = slugFile.slugs.length
+
+      // ← Save after EVERY page (crash protection)
+      writeSlugFile(slugFile)
+
+      log(`✅ Page ${page}/${END_PAGE} [${done}/${totalPages}] — got ${slugs.length} slugs  (total: ${slugFile.slugs.length})`)
+
+      if (isLast) {
+        log(`📌 API says this is the last page — stopping collection`)
+        break
+      }
+
+    } catch (err) {
+      log(`❌ Page ${page} collection failed: ${err instanceof Error ? err.message : 'unknown'}`)
+    }
+  }
+
+  slugFile.collectedAt = new Date().toISOString()
+  writeSlugFile(slugFile)
+
+  div('═')
+  log(`✅ COLLECTION COMPLETE`)
+  log(`   Total slugs : ${slugFile.slugs.length}`)
+  log(`   Saved to    : ${SLUG_FILE}`)
+  div('═')
+
+  return slugFile
+}
+
+// ─────────────────────────────────────────────
+// ANIMETHEMES — fetch with fallback chain
+// ─────────────────────────────────────────────
+
+const AT_INCLUDES = [
+  {
+    level  : 'full' as const,
+    include: 'animethemes.animethemeentries.videos.audio,animethemes.song.artists,animethemes.group,animesynonyms,images,resources,series,studios',
+  },
+  {
+    level  : 'basic' as const,
+    include: 'animethemes.animethemeentries.videos,animethemes.song.artists,images,series,studios',
+  },
+  {
+    level  : 'bare' as const,
+    include: 'animethemes.animethemeentries.videos,animethemes.song.artists',
+  },
+]
+
+async function fetchFromAT(slug: string): Promise<{ data: any; level: 'full' | 'basic' | 'bare' } | null> {
+  for (const { level, include } of AT_INCLUDES) {
+    try {
+      const url = `${BASE_URL}/anime/${slug}?include=${encodeURIComponent(include)}`
+      const res = await fetch(url, { headers: { 'User-Agent': 'AnimeSeeder/1.0' } })
+
+      if (res.status === 404) { log(`  │  ⚠️  [AT] 404 not found`); return null }
+      if (res.status === 422) { log(`  │  ⚠️  [AT:${level}] 422 — trying next`); continue }
+      if (!res.ok)            { log(`  │  ⚠️  [AT:${level}] ${res.status} — trying next`); continue }
+
+      const data = await res.json()
+      if (!data?.anime)       { log(`  │  ⚠️  [AT:${level}] empty — trying next`); continue }
+
+      log(`  │  ✅ [AT:${level}] fetched`)
+      return { data: data.anime, level }
+
+    } catch (err) {
+      log(`  │  ⚠️  [AT:${level}] error: ${err instanceof Error ? err.message : 'unknown'}`)
+    }
+  }
+
+  log(`  │  ❌ [AT] all levels failed`)
+  return null
+}
+
+// ─────────────────────────────────────────────
+// ANILIST
+// ─────────────────────────────────────────────
+
+const AL_QUERY = `
+  query ($id: Int, $malId: Int, $search: String) {
+    Media(id: $id, idMal: $malId, search: $search, type: ANIME) {
+      id
+      title { romaji english native }
+      season seasonYear format
+      coverImage { large }
+      synonyms
+      studios(isMain: true) { nodes { name } }
+    }
+  }
+`
+
+async function fetchAniList(vars: Record<string, any>, label: string): Promise<AniListData | null> {
+  try {
+    const res  = await fetch(ANILIST_API, {
+      method : 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body   : JSON.stringify({ query: AL_QUERY, variables: vars }),
+    })
+    const json = await res.json()
+
+    if (json.errors) {
+      log(`  │  ⚠️  [AniList:${label}] ${json.errors[0]?.message}`)
+      return null
+    }
+
+    const m = json.data?.Media
+    if (!m) return null
+
+    const studios = m.studios?.nodes?.map((n: any) => n.name).filter(Boolean) ?? []
+    log(`  │  ✅ [AniList:${label}] → ${m.title?.romaji ?? m.title?.english ?? '?'}`)
 
     return {
-      version: entry.version ?? 1,
-      episodes: entry.episodes ?? null,
-      isNsfw: entry.nsfw ?? false,
-      isSpoiler: entry.spoiler ?? false,
-      notes: entry.notes ?? null,
-      videos: videoSources,
+      anilistId            : m.id,
+      animeTitleEnglish    : m.title?.english ?? null,
+      animeTitleRomaji     : m.title?.romaji  ?? null,
+      animeTitleNative     : m.title?.native  ?? null,
+      animeTitleAlternative: [m.title?.native, m.title?.romaji, ...(m.synonyms ?? [])].filter(Boolean),
+      animeSeason          : m.season?.toUpperCase() ?? null,
+      animeSeasonYear      : m.seasonYear ?? null,
+      animeCoverImage      : m.coverImage?.large ?? null,
+      animeMediaFormat     : m.format ?? null,
+      animeSynonyms        : m.synonyms ?? [],
+      animeStudios         : studios,
+    }
+  } catch (err) {
+    log(`  │  ❌ [AniList:${label}] ${err instanceof Error ? err.message : 'unknown'}`)
+    return null
+  }
+}
+
+// ─────────────────────────────────────────────
+// KITSU
+// ─────────────────────────────────────────────
+
+function parseKitsuResponse(data: any): KitsuData | null {
+  const item = Array.isArray(data.data) ? data.data[0] : data.data
+  if (!item) return null
+
+  const attrs  = item.attributes ?? {}
+  const titles = attrs.titles ?? {}
+  const alt    = [titles.en_jp, titles.ja_jp, ...(attrs.abbreviatedTitles ?? [])].filter(Boolean)
+
+  let anilistId: number | null = null
+  let malId    : number | null = null
+
+  if (data.included) {
+    const maps  = data.included.filter((i: any) => i.type === 'mappings')
+    const alMap = maps.find((m: any) => m.attributes?.externalSite === 'anilist/anime')
+    const malMap= maps.find((m: any) => m.attributes?.externalSite === 'myanimelist/anime')
+    if (alMap)  anilistId = parseInt(alMap.attributes.externalId,  10) || null
+    if (malMap) malId     = parseInt(malMap.attributes.externalId, 10) || null
+  }
+
+  return {
+    kitsuId              : item.id ?? null,
+    anilistId,
+    malId,
+    animeTitleEnglish    : titles.en    ?? null,
+    animeTitleRomaji     : titles.en_jp ?? null,
+    animeTitleNative     : titles.ja_jp ?? null,
+    animeTitleAlternative: alt,
+    animeCoverImage      : attrs.posterImage?.large ?? null,
+    animeBannerImage     : attrs.coverImage?.large  ?? null,
+  }
+}
+
+async function fetchKitsu(params: string, label: string): Promise<KitsuData | null> {
+  try {
+    const url  = `${KITSU_API}/anime?${params}&include=mappings`
+    const res  = await fetch(url, { headers: { Accept: 'application/vnd.api+json' } })
+    const data = await res.json()
+
+    if (!data?.data?.length && !data?.data?.id) {
+      log(`  │  ⚠️  [Kitsu:${label}] no results`)
+      return null
+    }
+
+    const parsed = parseKitsuResponse(data)
+    if (parsed) log(`  │  ✅ [Kitsu:${label}] → ${parsed.animeTitleEnglish ?? parsed.animeTitleRomaji ?? '?'}`)
+    return parsed
+  } catch (err) {
+    log(`  │  ❌ [Kitsu:${label}] ${err instanceof Error ? err.message : 'unknown'}`)
+    return null
+  }
+}
+
+// ─────────────────────────────────────────────
+// ENRICH — full fallback chain
+// AniList: by_id → by_malid → by_title
+// Kitsu  : by_malid → by_title (only if EN title missing)
+// ─────────────────────────────────────────────
+
+async function enrichAnime(
+  anilistId: number | null,
+  malId    : number | null,
+  title    : string,
+): Promise<{ anilist: AniListData | null; kitsu: KitsuData | null; sources: SourcesFetched }> {
+
+  const sources: SourcesFetched = { at_level: 'none', anilist: 'none', kitsu: 'none' }
+  let anilist: AniListData | null = null
+  let kitsu  : KitsuData   | null = null
+
+  // ── AniList ──
+  if (anilistId) {
+    await sleep(DELAY_AL)
+    anilist = await fetchAniList({ id: anilistId }, 'by_id')
+    if (anilist) sources.anilist = 'by_id'
+  }
+
+  if (!anilist && malId) {
+    await sleep(DELAY_AL)
+    anilist = await fetchAniList({ malId }, 'by_malid')
+    if (anilist) sources.anilist = 'by_malid'
+  }
+
+  if (!anilist) {
+    await sleep(DELAY_AL)
+    anilist = await fetchAniList({ search: title }, 'by_title')
+    if (anilist) sources.anilist = 'by_title'
+  }
+
+  // ── Kitsu — only if English title still missing ──
+  if (!anilist?.animeTitleEnglish) {
+    if (malId) {
+      await sleep(DELAY_KT)
+      kitsu = await fetchKitsu(`filter[malId]=${malId}`, 'by_malid')
+      if (kitsu) sources.kitsu = 'by_malid'
+    }
+
+    if (!kitsu) {
+      await sleep(DELAY_KT)
+      kitsu = await fetchKitsu(
+        `filter[text]=${encodeURIComponent(title)}&page[limit]=5`,
+        'by_title',
+      )
+      if (kitsu) sources.kitsu = 'by_title'
+    }
+
+    // If Kitsu found AniList ID → try AniList again with it
+    if (!anilist && kitsu?.anilistId) {
+      await sleep(DELAY_AL)
+      anilist = await fetchAniList({ id: kitsu.anilistId }, 'by_id')
+      if (anilist) sources.anilist = 'by_id'
+    }
+  }
+
+  return { anilist, kitsu, sources }
+}
+
+// ─────────────────────────────────────────────
+// PARSE AT RESPONSE → ParsedAnime
+// ─────────────────────────────────────────────
+
+function parseATResponse(atData: any, level: 'full' | 'basic' | 'bare'): ParsedAnime {
+  const images    = atData.images    ?? []
+  const resources = atData.resources ?? []
+
+  const malId     = resources.find((r: any) => r.site === 'MyAnimeList')?.external_id ?? null
+  const anilistId = resources.find((r: any) => r.site === 'AniList')?.external_id     ?? null
+
+  const themes: ParsedTheme[] = (atData.animethemes ?? []).map((t: any) => {
+    const artists  = t.song?.artists ?? []
+    const type     = (t.type?.toUpperCase() ?? 'OP') as 'OP' | 'ED' | 'IN'
+    const sequence = t.sequence ?? 1
+
+    const entries: Entry[] = (t.animethemeentries ?? []).map((e: any) => {
+      const videos: VideoSource[] = [...(e.videos ?? [])]
+        .sort((a: any, b: any) => (b.resolution ?? 0) - (a.resolution ?? 0))
+        .map((v: any) => ({
+          resolution : v.resolution  ?? null,
+          url        : v.link        ?? null,
+          audioUrl   : v.audio?.link ?? null,
+          audioSize  : v.audio?.size ?? null,
+          source     : v.source      ?? null,
+          nc         : v.nc          ?? false,
+          lyrics     : v.lyrics      ?? false,
+          subbed     : v.subbed      ?? false,
+          uncen      : v.uncen       ?? false,
+          overlap    : v.overlap     ?? null,
+          size       : v.size        ?? null,
+          tags       : v.tags        ?? null,
+          basename   : v.basename    ?? null,
+        }))
+
+      return {
+        version  : e.version  ?? 1,
+        episodes : e.episodes ?? null,
+        isNsfw   : e.nsfw     ?? false,
+        isSpoiler: e.spoiler  ?? false,
+        notes    : e.notes    ?? null,
+        videos,
+      }
+    })
+
+    const firstOverlap = entries[0]?.videos?.[0]?.overlap
+    const overlapNote  =
+      firstOverlap === 'Over'       ? 'Plays over episode' :
+      firstOverlap === 'Transition' ? 'Transition overlap' : null
+
+    return {
+      animethemesThemeId: t.id,
+      slug              : `${atData.slug}-${type.toLowerCase()}${sequence}`,
+      type,
+      sequence,
+      songTitle  : t.song?.title ?? 'Unknown',
+      allArtists : artists.map((a: any) => a.name),
+      artistSlugs: artists.map((a: any) => a.slug),
+      artistRoles: artists.map((a: any) => a.as ?? 'performer'),
+      entries,
+      overlapNote,
     }
   })
 
-  const firstEntry = parsedEntries[0]
-  const firstVideo = firstEntry?.videos?.[0]
-
-  const animeName = anime.name ?? 'Unknown'
-  const animeSlug = anime.slug ?? animeName.toLowerCase().replace(/\s+/g, '-')
-  const themeType = atTheme.type?.toUpperCase() ?? 'OP'
-  const themeSequence = atTheme.sequence ?? 1
-
-  let overlapNote: string | null = null
-  if (themeType === 'ED' && firstVideo?.overlap === 'Over') {
-    overlapNote = 'Plays over episode'
+  return {
+    animeSlug            : atData.slug,
+    animethemesId        : atData.id,
+    animeTitle           : atData.name ?? 'Unknown',
+    animeTitleEnglish    : null,
+    animeTitleRomaji     : null,
+    animeTitleNative     : null,
+    animeTitleAlternative: (atData.animesynonyms ?? []).map((s: any) => s.text).filter(Boolean),
+    animeSeason          : atData.season?.toUpperCase() ?? null,
+    animeSeasonYear      : atData.year  ?? null,
+    animeCoverImage      : images.find((i: any) => i.facet === 'Large Cover')?.link
+                        ?? images.find((i: any) => i.facet === 'Small Cover')?.link ?? null,
+    animeSmallCoverImage : images.find((i: any) => i.facet === 'Small Cover')?.link ?? null,
+    animeBannerImage     : images.find((i: any) => i.facet === 'Banner')?.link       ?? null,
+    animeGrillImage      : images.find((i: any) => i.facet === 'Grill')?.link        ?? null,
+    animeSynopsis        : atData.synopsis     ?? null,
+    animeMediaFormat     : atData.media_format ?? null,
+    animeSeries          : (atData.series  ?? []).map((s: any) => ({ id: s.id, name: s.name, slug: s.slug })),
+    animeStudios         : (atData.studios ?? []).map((s: any) => s.name).filter(Boolean),
+    animeSynonyms        : (atData.animesynonyms ?? []).map((s: any) => s.text).filter(Boolean),
+    malId,
+    anilistId,
+    kitsuId              : null,
+    themes,
+    sourcesFetched       : { at_level: level, anilist: 'none', kitsu: 'none' },
+    syncedAt             : new Date(),
   }
-
-  const parsedTheme = {
-    slug: `${animeSlug}-${themeType.toLowerCase()}${themeSequence}`,
-    animethemesId: atTheme.id,
-    songTitle: atTheme.song?.title ?? 'Unknown',
-    artistName: artists[0]?.name ?? null,
-    allArtists,
-    artistSlugs,
-    artistRoles,
-    anilistId: anilistIdFromAt,
-    animeTitle: animeName,
-    animeTitleEnglish: null,
-    animeTitleAlternative: [],
-    animeSeason: anime.season?.toUpperCase() ?? null,
-    animeSeasonYear: anime.year ?? null,
-    animeCoverImage: atCoverImage,
-    animeSmallCoverImage: atSmallCoverImage,
-    animeGrillImage: atGrillImage,
-    animeSynopsis: anime.synopsis ?? null,
-    animeMediaFormat: anime.media_format ?? null,
-    animeSeries,
-    animeStudios,
-    animeSynonyms,
-    type: themeType as 'OP' | 'ED',
-    sequence: themeSequence,
-    entries: parsedEntries,
-    videoUrl: firstVideo?.url ?? '',
-    videoResolution: firstVideo?.resolution ?? null,
-    videoSource: firstVideo?.source ?? null,
-    hasLyrics: firstVideo?.lyrics ?? false,
-    isCreditless: firstVideo?.nc ?? false,
-    overlapNote,
-    syncedAt: new Date(),
-  }
-
-  console.log(`    📋 animeTitle: ${parsedTheme.animeTitle}`)
-  console.log(`    📋 animeTitleEnglish: ${parsedTheme.animeTitleEnglish || 'null'}`)
-  console.log(`    📋 anilistId: ${parsedTheme.anilistId || 'null'}`)
-  console.log(`    📋 animeSeason: ${parsedTheme.animeSeason || 'null'}`)
-  console.log(`    📋 animeSeasonYear: ${parsedTheme.animeSeasonYear || 'null'}`)
-  console.log(`    📋 animeMediaFormat: ${parsedTheme.animeMediaFormat || 'null'}`)
-  console.log(`    📋 animeCoverImage: ${parsedTheme.animeCoverImage ? 'present' : 'null'}`)
-  console.log(`    📋 animeSmallCoverImage: ${parsedTheme.animeSmallCoverImage ? 'present' : 'null'}`)
-  console.log(`    📋 animeGrillImage: ${parsedTheme.animeGrillImage ? 'present' : 'null'}`)
-  console.log(`    📋 animeSynopsis: ${parsedTheme.animeSynopsis ? 'present' : 'null'}`)
-  console.log(`    📋 animeSeries: ${parsedTheme.animeSeries.length} items`, parsedTheme.animeSeries.slice(0, 3))
-  console.log(`    📋 animeStudios: ${parsedTheme.animeStudios.length} items`, parsedTheme.animeStudios.slice(0, 3))
-  console.log(`    📋 animeSynonyms: ${parsedTheme.animeSynonyms.length} items`, parsedTheme.animeSynonyms.slice(0, 3))
-  console.log(`    📋 animeTitleAlternative: ${parsedTheme.animeTitleAlternative.length} items`)
-
-  return parsedTheme
 }
 
-async function upsertTheme(theme: ParsedTheme): Promise<void> {
-  try {
-    // Use animethemesId as unique key to prevent data loss during parallel seed runs
-    await ThemeCache.findOneAndUpdate(
-      { animethemesId: theme.animethemesId },
-      { $set: theme },
-      { upsert: true }
-    )
-    console.log(`  ✅ Saved: ${theme.songTitle} (${theme.animeTitle}) [${theme.type}]`)
-  } catch (err) {
-    // Ignore duplicate key errors - theme already exists with same animethemesId
-    const errMsg = err instanceof Error ? err.message : ''
-    if (errMsg.includes('E11000') || errMsg.includes('duplicate key')) {
-      console.log(`  ⏭️  Already exists: ${theme.songTitle} (${theme.animeTitle}) [${theme.type}]`)
-      return
+// ─────────────────────────────────────────────
+// MERGE ENRICHMENT
+// ─────────────────────────────────────────────
+
+function mergeEnrichment(
+  anime  : ParsedAnime,
+  anilist: AniListData | null,
+  kitsu  : KitsuData   | null,
+  sources: SourcesFetched,
+): ParsedAnime {
+  // Dedupe alt titles
+  const altTitles = [
+    ...(anilist?.animeTitleAlternative ?? []),
+    ...(kitsu?.animeTitleAlternative   ?? []),
+    ...anime.animeTitleAlternative,
+  ].filter((v, i, arr) => v && arr.indexOf(v) === i)
+
+  return {
+    ...anime,
+
+    anilistId : anilist?.anilistId  ?? kitsu?.anilistId ?? anime.anilistId,
+    kitsuId   : kitsu?.kitsuId      ?? null,
+    malId     : anime.malId         ?? kitsu?.malId     ?? null,
+
+    animeTitleEnglish  : anilist?.animeTitleEnglish ?? kitsu?.animeTitleEnglish ?? kitsu?.animeTitleRomaji ?? anime.animeTitleEnglish,
+    animeTitleRomaji   : anilist?.animeTitleRomaji  ?? kitsu?.animeTitleRomaji  ?? anime.animeTitleRomaji,
+    animeTitleNative   : anilist?.animeTitleNative  ?? kitsu?.animeTitleNative  ?? anime.animeTitleNative,
+    animeTitleAlternative: altTitles,
+
+    animeSeason        : anilist?.animeSeason      ?? anime.animeSeason,
+    animeSeasonYear    : anilist?.animeSeasonYear   ?? anime.animeSeasonYear,
+    animeMediaFormat   : anilist?.animeMediaFormat  ?? anime.animeMediaFormat,
+
+    animeCoverImage    : anilist?.animeCoverImage   ?? kitsu?.animeCoverImage   ?? anime.animeCoverImage,
+    animeBannerImage   : kitsu?.animeBannerImage    ?? anime.animeBannerImage,
+
+    animeStudios       : anilist?.animeStudios?.length ? anilist.animeStudios : anime.animeStudios,
+    animeSynonyms      : anilist?.animeSynonyms?.length ? anilist.animeSynonyms : anime.animeSynonyms,
+
+    sourcesFetched     : { ...sources, at_level: anime.sourcesFetched.at_level },
+    syncedAt           : new Date(),
+  }
+}
+
+// ─────────────────────────────────────────────
+// DB — upsert only, NEVER delete or replace
+// Uses animeSlug as unique key
+// $set only updates provided fields
+// Safe for parallel runs — MongoDB handles
+// concurrent upserts on different slugs
+// ─────────────────────────────────────────────
+
+async function upsertAnime(anime: ParsedAnime): Promise<void> {
+  await ThemeCache.findOneAndUpdate(
+    { animeSlug: anime.animeSlug },   // unique key
+    { $set: anime },                  // only update, never wipe
+    { upsert: true, new: true }
+  )
+}
+
+async function upsertArtists(themes: ParsedTheme[]): Promise<void> {
+  for (const theme of themes) {
+    for (let i = 0; i < theme.allArtists.length; i++) {
+      const name = theme.allArtists[i]
+      const slug = theme.artistSlugs[i] ?? name.toLowerCase().replace(/\s+/g, '-')
+      try {
+        await ArtistCache.findOneAndUpdate(
+          { slug },
+          { $set: { slug, name, syncedAt: new Date() } },
+          { upsert: true }
+        )
+        log(`  │  🎤 Artist: ${name}`)
+      } catch {
+        log(`  │  ⚠️  Artist upsert failed: ${name}`)
+      }
     }
-    console.log(`  ❌ Failed: ${theme.songTitle} - ${errMsg || 'unknown'}`)
-    throw err
   }
 }
 
-async function upsertArtist(artistName: string, artistSlug: string, animethemesId: number): Promise<void> {
-  try {
-    await ArtistCache.findOneAndUpdate(
-      { slug: artistSlug },
-      {
-        $set: {
-          slug: artistSlug,
-          animethemesId,
-          name: artistName,
-          syncedAt: new Date(),
-        },
-      },
-      { upsert: true }
-    )
-    console.log(`    🎤 Artist: ${artistName}`)
-  } catch (err) {
-    console.log(`    ❌ Artist failed: ${artistName}`)
+// ─────────────────────────────────────────────
+// PHASE 2 — PROCESS EACH SLUG
+// ─────────────────────────────────────────────
+
+async function processSlugs(slugFile: SlugFile): Promise<void> {
+  logPhase('2 — Processing Slugs')
+
+  const processedSet = new Set(slugFile.processed)
+  const pending      = slugFile.slugs.filter(s => !processedSet.has(s))
+  const total        = pending.length
+
+  log(`📊 Stats for run [${RUN_TAG}]`)
+  log(`   Total slugs      : ${slugFile.slugs.length}`)
+  log(`   Already processed: ${processedSet.size}`)
+  log(`   Previously failed: ${slugFile.failed.length}`)
+  log(`   Pending now      : ${total}`)
+  div()
+
+  let progress = readProgress() ?? {
+    runTag        : RUN_TAG,
+    startPage     : START_PAGE,
+    endPage       : END_PAGE,
+    totalProcessed: processedSet.size,
+    totalFailed   : slugFile.failed.length,
+    lastSlug      : '',
+    lastUpdated   : new Date().toISOString(),
+    phase         : 'processing' as const,
   }
+
+  let index = 0
+
+  for (const slug of pending) {
+    index++
+    logAnimeStart(index, total, slug)
+
+    try {
+      await sleep(DELAY_AT)
+
+      // ── Step 1: Fetch from AnimeThemes ──
+      const atResult = await fetchFromAT(slug)
+
+      if (!atResult) {
+        log(`  │  ❌ Fetch failed — skipping`)
+        slugFile.failed.push(slug)
+        writeSlugFile(slugFile)
+        progress.totalFailed++
+        progress.lastSlug    = slug
+        progress.lastUpdated = new Date().toISOString()
+        writeProgress(progress)
+        logAnimeEnd(false, progress.totalProcessed, progress.totalFailed)
+        continue
+      }
+
+      // ── Step 2: Parse ──
+      const anime = parseATResponse(atResult.data, atResult.level)
+
+      log(`  │  📺 Format : ${anime.animeMediaFormat ?? '—'}`)
+      log(`  │  📅 Season : ${anime.animeSeason ?? '—'} ${anime.animeSeasonYear ?? ''}`)
+      log(`  │  🗂  Series : ${anime.animeSeries.map(s => s.name).join(', ') || '—'}`)
+
+      // ── Step 3: Enrich ──
+      const { anilist, kitsu, sources } = await enrichAnime(
+        anime.anilistId,
+        anime.malId,
+        anime.animeTitle,
+      )
+
+      // ── Step 4: Merge ──
+      const merged = mergeEnrichment(anime, anilist, kitsu, sources)
+
+      // ── Step 5: Log results ──
+      logSources(merged.sourcesFetched)
+      logTitles(merged)
+      logIds(merged)
+      logThemeList(merged.themes)
+
+      // ── Step 6: Save to MongoDB ──
+      await upsertAnime(merged)
+      log(`  │  💾 Saved to MongoDB`)
+
+      // ── Step 7: Save artists ──
+      await upsertArtists(merged.themes)
+
+      // ── Step 8: Mark as processed — save IMMEDIATELY ──
+      // This is the most important step for crash safety
+      slugFile.processed.push(slug)
+      writeSlugFile(slugFile)                 // ← saved after every anime
+
+      progress.totalProcessed++
+      progress.lastSlug    = slug
+      progress.lastUpdated = new Date().toISOString()
+      writeProgress(progress)                 // ← saved after every anime
+
+      logAnimeEnd(true, progress.totalProcessed, progress.totalFailed)
+
+    } catch (err) {
+      log(`  │  ❌ Unexpected: ${err instanceof Error ? err.message : 'unknown'}`)
+      slugFile.failed.push(slug)
+      writeSlugFile(slugFile)
+      progress.totalFailed++
+      progress.lastSlug    = slug
+      progress.lastUpdated = new Date().toISOString()
+      writeProgress(progress)
+      logAnimeEnd(false, progress.totalProcessed, progress.totalFailed)
+    }
+  }
+
+  progress.phase = 'done'
+  writeProgress(progress)
+
+  div('═')
+  log(`🎉 PROCESSING COMPLETE [${RUN_TAG}]`)
+  log(`   ✅ Processed : ${progress.totalProcessed}`)
+  log(`   ❌ Failed    : ${progress.totalFailed}`)
+  log(`   📁 Slug file : ${SLUG_FILE}`)
+  log(`   📁 Log file  : ${LOG_FILE}`)
+  div('═')
 }
+
+// ─────────────────────────────────────────────
+// PHASE 3 — RETRY FAILED SLUGS
+// Run with: npx ts-node seed.ts --start=X --end=Y --retry-failed
+// ─────────────────────────────────────────────
+
+async function retryFailed(): Promise<void> {
+  logPhase('3 — Retrying Failed Slugs')
+
+  const slugFile = readSlugFile()
+  if (!slugFile || slugFile.failed.length === 0) {
+    log('✅ No failed slugs to retry')
+    return
+  }
+
+  const toRetry = [...slugFile.failed]
+  slugFile.failed = []
+  let ok = 0
+  let bad = 0
+
+  log(`⏳ Retrying ${toRetry.length} failed slugs`)
+
+  for (let i = 0; i < toRetry.length; i++) {
+    const slug = toRetry[i]
+    log(`\n  [${i + 1}/${toRetry.length}] 🔄 ${slug}`)
+
+    try {
+      await sleep(DELAY_AT)
+      const atResult = await fetchFromAT(slug)
+
+      if (!atResult) {
+        log(`  │  ❌ Still failing`)
+        slugFile.failed.push(slug)
+        bad++
+      } else {
+        const anime  = parseATResponse(atResult.data, atResult.level)
+        const { anilist, kitsu, sources } = await enrichAnime(anime.anilistId, anime.malId, anime.animeTitle)
+        const merged = mergeEnrichment(anime, anilist, kitsu, sources)
+
+        logSources(merged.sourcesFetched)
+        logTitles(merged)
+
+        await upsertAnime(merged)
+        await upsertArtists(merged.themes)
+
+        slugFile.processed.push(slug)
+        ok++
+        log(`  │  ✅ Retry success`)
+      }
+    } catch (err) {
+      log(`  │  ❌ Error: ${err instanceof Error ? err.message : 'unknown'}`)
+      slugFile.failed.push(slug)
+      bad++
+    }
+
+    // Save after every retry
+    writeSlugFile(slugFile)
+  }
+
+  div('═')
+  log(`🔄 RETRY DONE — ✅ ${ok} recovered  ❌ ${bad} still failing`)
+  div('═')
+}
+
+// ─────────────────────────────────────────────
+// MAIN
+// ─────────────────────────────────────────────
 
 async function main() {
-  const args = process.argv.slice(2)
-  const startArg = args.find(a => a.startsWith('--start='))
-  const endArg = args.find(a => a.startsWith('--end='))
-  const startPage = startArg ? parseInt(startArg.split('=')[1]) : 1
-  const endPage = endArg ? parseInt(endArg.split('=')[1]) : 150
+  ensureDir()
+  initLog()
 
-  const progressFileName = `seed-progress-${startPage}-${endPage}.json`
-  console.log(`🌱 Starting seed script (Pages ${startPage} to ${endPage})...`)
-  console.log(`📁 Progress file: ${progressFileName}`)
-  console.log('')
+  div('═', 70)
+  log(`🌱 ANIME SEED SCRIPT STARTED`)
+  log(`   Run tag    : ${RUN_TAG}`)
+  log(`   Pages      : ${START_PAGE} → ${END_PAGE}`)
+  log(`   Page size  : ${PAGE_SIZE}`)
+  log(`   Mode       : ${retryArg ? 'RETRY FAILED' : 'NORMAL'}`)
+  log(`   Files:`)
+  log(`     Slugs    → ${SLUG_FILE}`)
+  log(`     Progress → ${PROGRESS_FILE}`)
+  log(`     Log      → ${LOG_FILE}`)
+  log(`   Delays: AT=${DELAY_AT}ms  AniList=${DELAY_AL}ms  Kitsu=${DELAY_KT}ms`)
+  div('═', 70)
 
   try {
     await connectDB()
-    console.log('✅ Connected to MongoDB')
-  } catch (error) {
-    console.error('❌ MongoDB connection failed:', error instanceof Error ? error.message : 'unknown')
+    log('✅ Connected to MongoDB')
+  } catch (err) {
+    log(`❌ MongoDB connection failed: ${err instanceof Error ? err.message : 'unknown'}`)
     process.exit(1)
   }
 
-  const progressPath = path.join(process.cwd(), 'scripts', progressFileName)
-  let progress: SeedProgress
-  
-  if (!fs.existsSync(progressPath)) {
-    console.log('🗑️  Clearing ThemeCache database for fresh start...')
-    await ThemeCache.deleteMany({})
-    console.log('🗑️  Cleared ThemeCache')
-    progress = { lastPage: startPage, totalProcessed: 0, failedThemes: 0, lastUpdated: new Date().toISOString(), failedSlugs: [] }
-    saveProgress(progress)
+  if (retryArg) {
+    await retryFailed()
   } else {
-    try {
-      const data = JSON.parse(fs.readFileSync(progressPath, 'utf-8'))
-      progress = { ...data, failedSlugs: data.failedSlugs || [] }
-      console.log(`📋 Resuming: Page ${progress.lastPage}, Processed: ${progress.totalProcessed}, Failed: ${progress.failedThemes}`)
-    } catch {
-      progress = { lastPage: startPage, totalProcessed: 0, failedThemes: 0, lastUpdated: new Date().toISOString(), failedSlugs: [] }
-    }
-  }
-  
-  if (!progress || !progress.lastPage || progress.lastPage < startPage) {
-    progress = { lastPage: startPage, totalProcessed: progress?.totalProcessed || 0, failedThemes: progress?.failedThemes || 0, lastUpdated: new Date().toISOString(), failedSlugs: progress?.failedSlugs || [] }
-    saveProgress(progress)
-  } else {
-    if (!progress.failedSlugs) progress.failedSlugs = []
-  }
-  
-  if (!progress || !progress.lastPage || progress.lastPage < 1) {
-    progress = { lastPage: 1, totalProcessed: 0, failedThemes: 0, lastUpdated: new Date().toISOString(), failedSlugs: [] }
-    console.log('🔄 Starting FRESH (no valid progress found)')
-    saveProgress(progress)
-  } else {
-    if (!progress.failedSlugs) progress.failedSlugs = []
-    console.log(`📋 Resuming: Page ${progress.lastPage}, Processed: ${progress.totalProcessed}, Failed: ${progress.failedThemes}`)
-  }
-  
-  const totalPages = REVERSE ? START_PAGE : END_PAGE
-
-  console.log(`⏱️  Delays: ${DELAY_ANIMETHEMES}ms (AnimeThemes), ${DELAY_ANILIST}ms (AniList)`)
-  console.log('')
-
-  let page = REVERSE 
-    ? Math.max(progress.lastPage > 0 ? progress.lastPage : START_PAGE, END_PAGE)
-    : Math.max(progress.lastPage, START_PAGE)
-  let totalProcessedInThisRun = 0
-
-  const pageCondition = REVERSE ? (page >= END_PAGE) : (page <= totalPages)
-  
-  while (pageCondition) {
-    console.log(`\n${'='.repeat(60)}`)
-    console.log(`📄 PAGE ${page}/${REVERSE ? 'reverse' : totalPages} - Fetching from AnimeThemes API...`)
-
-    let themes: any[]
-    try {
-      await sleep(DELAY_ANIMETHEMES)
-      themes = await fetchThemePage(page)
-      console.log(`  📥 Got ${themes.length} themes from API`)
-    } catch (error) {
-      console.error(`❌ Failed to fetch page ${page}: ${error instanceof Error ? error.message : 'unknown'}`)
-      break
-    }
-
-    if (themes.length === 0) {
-      console.log('✅ No more themes found - SEED COMPLETE!')
-      break
-    }
-
-    let pageSuccessCount = 0
-    let pageFailCount = 0
-
-    console.log(`\n📝 Processing ${themes.length} themes from page ${page}...`)
-
-    let themeIndex = 0
-    for (const atTheme of themes) {
-      themeIndex++
-      try {
-        const theme = parseATTheme(atTheme)
-        if (!theme) {
-          pageFailCount++
-          progress.failedThemes++
-          const parseSlug = atTheme?.slug || atTheme?.anime?.name || `parse-fail-${page}-${themeIndex}`
-          progress.failedSlugs.push(parseSlug)
-          console.log(`  ${themeIndex}. ❌ Parse failed - keys:`, atTheme ? Object.keys(atTheme).join(',') : 'no data')
-          console.log(`      anime keys:`, atTheme?.anime ? Object.keys(atTheme.anime).join(',') : 'no anime')
-          continue
-        }
-        
-        console.log(`  ${themeIndex}. 🎵 ${theme.songTitle} - ${theme.animeTitle} [${theme.type}]`)
-
-        let enrichment: AniListEnrichment | null = null
-        let kitsuEnrichment: KitsuEnrichment | null = null
-        
-        // ALWAYS try AniList enrichment to get animeTitleEnglish and other fields
-        // Try by anilistId first, then by title search
-        if (theme.anilistId) {
-          await sleep(DELAY_ANILIST)
-          enrichment = await enrichFromAniList(theme.anilistId)
-        } else {
-          // Try search by anime title to get anilistId
-          await sleep(DELAY_ANILIST)
-          enrichment = await enrichFromAniListByTitle(theme.animeTitle)
-        }
-
-        // If AniList didn't provide English title, try Kitsu as fallback
-        if (!enrichment?.animeTitleEnglish) {
-          await sleep(DELAY_KITSU)
-          kitsuEnrichment = await enrichFromKitsu(theme.animeTitle)
-        }
-
-        const finalTheme: ParsedTheme = {
-          ...theme,
-          // anilistId: from AniList OR from Kitsu mappings
-          anilistId: enrichment?.anilistId ?? kitsuEnrichment?.anilistId ?? theme.anilistId,
-          // Priority: AniList English → Kitsu English → Kitsu Romaji → AniList Romaji → Original
-          animeTitleEnglish: enrichment?.animeTitleEnglish 
-            ?? kitsuEnrichment?.animeTitleEnglish 
-            ?? kitsuEnrichment?.animeTitleRomaji 
-            ?? enrichment?.animeTitleAlternative?.[1] // AniList romaji from alt titles
-            ?? theme.animeTitleEnglish,
-          // Priority: AniList alternatives → Kitsu alternatives → original
-          animeTitleAlternative: enrichment?.animeTitleAlternative?.length
-            ? enrichment.animeTitleAlternative
-            : kitsuEnrichment?.animeTitleAlternative?.length
-              ? kitsuEnrichment.animeTitleAlternative
-              : theme.animeTitleAlternative,
-          animeSeason: enrichment?.animeSeason ?? theme.animeSeason,
-          animeSeasonYear: enrichment?.animeSeasonYear ?? theme.animeSeasonYear,
-          // Priority: AniList cover → Kitsu cover → original
-          animeCoverImage: enrichment?.animeCoverImage 
-            ?? kitsuEnrichment?.animeCoverImage 
-            ?? theme.animeCoverImage,
-          animeMediaFormat: enrichment?.animeMediaFormat ?? theme.animeMediaFormat,
-          animeStudios: enrichment?.animeStudios?.length ? enrichment.animeStudios : theme.animeStudios,
-          animeSynonyms: enrichment?.animeSynonyms?.length ? enrichment.animeSynonyms : theme.animeSynonyms,
-        }
-
-        if (enrichment) {
-          console.log(`    📋 [ANILIST] anilistId: ${enrichment.anilistId || 'null'}`)
-          console.log(`    📋 [ANILIST] animeTitleEnglish: ${enrichment.animeTitleEnglish || 'null'}`)
-          console.log(`    📋 [ANILIST] animeMediaFormat: ${enrichment.animeMediaFormat || 'null'}`)
-          console.log(`    📋 [ANILIST] animeStudios: ${enrichment.animeStudios.length} items`, enrichment.animeStudios.slice(0, 3))
-          console.log(`    📋 [ANILIST] animeSynonyms: ${enrichment.animeSynonyms.length} items`, enrichment.animeSynonyms.slice(0, 3))
-        }
-        if (kitsuEnrichment) {
-          console.log(`    📋 [KITSU] anilistId: ${kitsuEnrichment.anilistId || 'null'}`)
-          console.log(`    📋 [KITSU] animeTitleEnglish: ${kitsuEnrichment.animeTitleEnglish || 'null'}`)
-          console.log(`    📋 [KITSU] animeTitleRomaji: ${kitsuEnrichment.animeTitleRomaji || 'null'}`)
-          console.log(`    📋 [KITSU] animeTitleAlternative: ${kitsuEnrichment.animeTitleAlternative.length} items`, kitsuEnrichment.animeTitleAlternative.slice(0, 3))
-        }
-
-        await upsertTheme(finalTheme)
-
-        for (let i = 0; i < theme.allArtists.length; i++) {
-          const artistName = theme.allArtists[i]
-          const artistSlug = theme.artistSlugs[i] ?? artistName.toLowerCase().replace(/\s+/g, '-')
-          await upsertArtist(artistName, artistSlug, theme.animethemesId)
-        }
-
-        progress.totalProcessed++
-        pageSuccessCount++
-      } catch (err) {
-        pageFailCount++
-        progress.failedThemes++
-        const errorSlug = atTheme?.slug || atTheme?.anime?.name || `unknown-${page}-${themeIndex}`
-        progress.failedSlugs.push(errorSlug)
-        console.error(`❌ Error processing theme ${atTheme.slug}: ${err instanceof Error ? err.message : 'unknown'}`)
-      }
-    }
-
-    progress.lastPage = page
-    progress.lastUpdated = new Date().toISOString()
-    saveProgress(progress)
-
-    console.log(`\n${'='.repeat(60)}`)
-    console.log(`📊 PAGE ${page} COMPLETE: ${pageSuccessCount} ✅ saved, ${pageFailCount} ❌ failed`)
-    console.log(`   Total processed so far: ${progress.totalProcessed}`)
-    console.log(`${'='.repeat(60)}\n`)
-
-    if (REVERSE) {
-      page--
-    } else {
-      page++
-    }
+    const slugFile = await collectSlugs()
+    await processSlugs(slugFile)
   }
 
-  console.log('')
-  console.log('🎉🎉🎉 SEED COMPLETE! 🎉🎉🎉')
-  console.log(`   ✅ Total saved: ${progress.totalProcessed} themes`)
-  console.log(`   ❌ Total failed: ${progress.failedThemes} themes`)
+  log('✅ SEED SCRIPT FINISHED')
+  logStream?.end()
 }
 
-main().catch((error) => {
-  console.error('❌ Seed failed:', error instanceof Error ? error.message : 'unknown')
+main().catch(err => {
+  log(`❌ Fatal: ${err instanceof Error ? err.message : 'unknown'}`)
+  logStream?.end()
   process.exit(1)
 })
