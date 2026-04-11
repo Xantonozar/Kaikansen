@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef, useEffect, useState } from 'react'
-import { Play, Pause, Volume2, VolumeX, Maximize, Loader2 } from 'lucide-react'
+import { Play, Pause, Volume2, VolumeX, Maximize, Loader2, Settings, X } from 'lucide-react'
 
 interface VideoSource {
   resolution: number
@@ -25,10 +25,26 @@ export function VideoPlayer({ videoSources, poster, mode }: VideoPlayerProps) {
   const [showControls, setShowControls] = useState(true)
   const [currentTime, setCurrentTime] = useState(0)
   const [duration, setDuration] = useState(0)
-  const [volume, setVolume] = useState(1)
   const [isMuted, setIsMuted] = useState(false)
+  
+  // Quality selector state
+  const [currentQuality, setCurrentQuality] = useState<number>(0)
+  const [showQualityMenu, setShowQualityMenu] = useState(false)
+  
+  // Hover state for pause button
+  const [isHoveringCenter, setIsHoveringCenter] = useState(false)
 
   const hasVideos = videoSources.length > 0
+  
+  // Get unique qualities sorted by resolution (highest first)
+  const qualities = [...new Set(videoSources.map(v => v.resolution))].sort((a, b) => b - a)
+
+  useEffect(() => {
+    // Set default quality to highest available
+    if (qualities.length > 0 && currentQuality === 0) {
+      setCurrentQuality(qualities[0])
+    }
+  }, [qualities, currentQuality])
 
   useEffect(() => {
     const video = videoRef.current
@@ -85,6 +101,18 @@ export function VideoPlayer({ videoSources, poster, mode }: VideoPlayerProps) {
     }
   }, [])
 
+  // Update video source when quality changes
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video || currentQuality === 0) return
+
+    const selectedSource = videoSources.find(s => s.resolution === currentQuality)
+    if (selectedSource) {
+      video.src = selectedSource.url
+      video.load()
+    }
+  }, [currentQuality, videoSources])
+
   const togglePlay = () => {
     const video = videoRef.current
     if (!video) return
@@ -135,34 +163,88 @@ export function VideoPlayer({ videoSources, poster, mode }: VideoPlayerProps) {
     return `${minutes}:${seconds.toString().padStart(2, '0')}`
   }
 
+  // === LISTEN MODE ===
   if (mode === 'listen') {
+    const isAudioPlaying = isPlaying
+    
+    const toggleAudioPlay = () => {
+      const video = videoRef.current
+      if (!video) return
+
+      if (isPaused) {
+        video.play()
+      } else {
+        video.pause()
+      }
+    }
+
     return (
       <div className="relative w-full aspect-video rounded-[20px] overflow-hidden bg-bg-surface">
-        <div className="absolute inset-0 flex items-center justify-center">
-          {poster && (
-            <img src={poster} alt="Album cover" className="absolute inset-0 w-full h-full object-cover opacity-30" />
-          )}
-          <div className="relative z-10 flex flex-col items-center gap-6">
-            <div className="flex items-end gap-1 h-16">
-              {[...Array(8)].map((_, i) => (
-                <div
-                  key={i}
-                  className="w-2 bg-accent-mint rounded-full animate-pulse"
-                  style={{
-                    height: `${20 + Math.random() * 40}px`,
-                    animationDelay: `${i * 0.1}s`,
-                    animationDuration: '0.8s',
-                  }}
-                />
-              ))}
-            </div>
-            <p className="text-sm font-body text-ktext-secondary">Listening to theme...</p>
+        {/* Background Cover Image */}
+        {poster && (
+          <img src={poster} alt="Album cover" className="absolute inset-0 w-full h-full object-cover opacity-30" />
+        )}
+        
+        <div className="absolute inset-0 flex flex-col items-center justify-center">
+          {/* Visualizer */}
+          <div className="flex items-end gap-1 h-16 mb-6">
+            {[...Array(8)].map((_, i) => (
+              <div
+                key={i}
+                className="w-2 bg-accent-mint rounded-full animate-pulse"
+                style={{
+                  height: `${20 + Math.random() * 40}px`,
+                  animationDelay: `${i * 0.1}s`,
+                  animationDuration: '0.8s',
+                }}
+              />
+            ))}
           </div>
+
+          {/* Mini Audio Player */}
+          <div className="relative z-10 bg-black/60 rounded-2xl p-6 backdrop-blur-sm">
+            {/* Play/Pause Button */}
+            <button 
+              onClick={toggleAudioPlay}
+              className="w-16 h-16 rounded-full bg-accent flex items-center justify-center hover:bg-accent-hover transition-all mx-auto mb-4"
+            >
+              {isPaused ? (
+                <Play className="w-8 h-8 text-white fill-white ml-1" />
+              ) : (
+                <Pause className="w-8 h-8 text-white fill-white" />
+              )}
+            </button>
+
+            {/* Progress Bar */}
+            <div className="relative w-64 h-1 bg-white/30 rounded-full mb-3 cursor-pointer">
+              <div 
+                className="absolute h-full bg-accent rounded-full"
+                style={{ width: `${duration > 0 ? (currentTime / duration) * 100 : 0}%` }}
+              />
+              <input
+                type="range"
+                min={0}
+                max={duration || 100}
+                value={currentTime}
+                onChange={handleSeek}
+                className="absolute inset-0 w-full opacity-0 cursor-pointer"
+              />
+            </div>
+
+            {/* Time Display */}
+            <div className="flex items-center justify-between text-white text-sm font-mono">
+              <span>{formatTime(currentTime)}</span>
+              <span>{formatTime(duration)}</span>
+            </div>
+          </div>
+
+          <p className="text-white/60 text-sm mt-4">Listening to theme...</p>
         </div>
       </div>
     )
   }
 
+  // === NO VIDEOS ===
   if (!hasVideos) {
     return (
       <div className="relative w-full aspect-video rounded-[20px] overflow-hidden bg-bg-elevated">
@@ -176,12 +258,17 @@ export function VideoPlayer({ videoSources, poster, mode }: VideoPlayerProps) {
     )
   }
 
+  // === WATCH MODE ===
   return (
     <div 
       ref={containerRef}
       className="relative w-full aspect-video rounded-[20px] overflow-hidden bg-black"
       onMouseEnter={() => setShowControls(true)}
-      onMouseLeave={() => setShowControls(false)}
+      onMouseLeave={() => {
+        setShowControls(false)
+        setIsHoveringCenter(false)
+        setShowQualityMenu(false)
+      }}
     >
       {/* Video Element */}
       <video
@@ -189,7 +276,6 @@ export function VideoPlayer({ videoSources, poster, mode }: VideoPlayerProps) {
         className="w-full h-full object-contain"
         poster={poster || undefined}
         playsInline
-        onClick={togglePlay}
       >
         {videoSources.map((source) => (
           <source key={source.resolution} src={source.url} type="video/webm" />
@@ -203,15 +289,25 @@ export function VideoPlayer({ videoSources, poster, mode }: VideoPlayerProps) {
         </div>
       )}
 
-      {/* Play/Pause Overlay (center) */}
-      {!isLoading && isPaused && (
+      {/* Center Overlay - Play/Pause */}
+      {isPaused && !isLoading && (
         <div 
           className="absolute inset-0 flex items-center justify-center cursor-pointer z-10"
           onClick={togglePlay}
+          onMouseEnter={() => setIsHoveringCenter(true)}
+          onMouseLeave={() => setIsHoveringCenter(false)}
         >
-          <div className="w-20 h-20 rounded-full bg-black/60 flex items-center justify-center hover:bg-black/80 transition-all hover:scale-110">
-            <Play className="w-10 h-10 text-white fill-white ml-1" />
-          </div>
+          {isHoveringCenter ? (
+            /* Pause button on hover */
+            <div className="w-20 h-20 rounded-full bg-black/60 flex items-center justify-center hover:bg-black/80 transition-all hover:scale-110">
+              <Pause className="w-10 h-10 text-white fill-white" />
+            </div>
+          ) : (
+            /* Play button when paused */
+            <div className="w-20 h-20 rounded-full bg-black/60 flex items-center justify-center hover:bg-black/80 transition-all hover:scale-110">
+              <Play className="w-10 h-10 text-white fill-white ml-1" />
+            </div>
+          )}
         </div>
       )}
 
@@ -221,7 +317,7 @@ export function VideoPlayer({ videoSources, poster, mode }: VideoPlayerProps) {
         <div className="relative w-full h-1 bg-white/30 rounded-full mb-2 cursor-pointer group">
           <div 
             className="absolute h-full bg-accent rounded-full"
-            style={{ width: `${(currentTime / duration) * 100}%` }}
+            style={{ width: `${duration > 0 ? (currentTime / duration) * 100 : 0}%` }}
           />
           <input
             type="range"
@@ -248,6 +344,40 @@ export function VideoPlayer({ videoSources, poster, mode }: VideoPlayerProps) {
           </div>
 
           <div className="flex items-center gap-3">
+            {/* Quality Selector */}
+            <div className="relative">
+              <button 
+                onClick={() => setShowQualityMenu(!showQualityMenu)}
+                className="text-white hover:text-accent transition-colors flex items-center gap-1 text-sm font-mono"
+              >
+                <Settings className="w-4 h-4" />
+                {currentQuality}p
+              </button>
+
+              {/* Quality Dropdown Menu */}
+              {showQualityMenu && (
+                <div className="absolute bottom-full right-0 mb-2 bg-black/90 rounded-lg overflow-hidden min-w-[100px]">
+                  <div className="text-xs text-white/60 px-3 py-1 bg-black/50">Quality</div>
+                  {qualities.map((q) => (
+                    <button
+                      key={q}
+                      onClick={() => {
+                        setCurrentQuality(q)
+                        setShowQualityMenu(false)
+                      }}
+                      className={`w-full text-left px-3 py-2 text-sm font-mono transition-colors ${
+                        q === currentQuality 
+                          ? 'bg-accent text-white' 
+                          : 'text-white hover:bg-white/10'
+                      }`}
+                    >
+                      {q}p {q === Math.max(...qualities) && '(Best)'}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
             {/* Mute Button */}
             <button onClick={toggleMute} className="text-white hover:text-accent transition-colors">
               {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
