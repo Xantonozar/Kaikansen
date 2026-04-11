@@ -2,6 +2,8 @@ import mongoose from 'mongoose'
 
 const themeCacheSchema = new mongoose.Schema({
   // === PRIMARY ===
+  // slug is NOT unique - duplicates allowed (some anime have null slug)
+  // Use animethemesId as the true unique identifier
   slug: { type: String, required: true, index: true },
   animethemesId: { type: Number, required: true, unique: true, index: true },
   

@@ -3,10 +3,11 @@ import mongoose from 'mongoose'
 const artistCacheSchema = new mongoose.Schema(
   {
     slug: { type: String, required: true, unique: true, index: true },
-    animethemesId: { type: Number, required: true },
+    animethemesId: { type: Number, default: null },
     name: { type: String, required: true },
     aliases: [String],
     imageUrl: { type: String, default: null },
+    themeAnimethemesIds: [Number],
     totalThemes: { type: Number, default: 0 },
     syncedAt: { type: Date, required: true },
   },
