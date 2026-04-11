@@ -5,6 +5,10 @@ const themeCacheSchema = new mongoose.Schema({
   slug: { type: String, required: true, unique: true, index: true },
   animethemesId: { type: Number, required: true, unique: true, index: true },
   
+  // === ANIME IDENTIFIER (for anime-level queries) ===
+  animeSlug: { type: String, default: null, index: true },
+  animeBannerImage: { type: String, default: null },
+  
   // === SONG ===
   songTitle: { type: String, required: true },
   artistName: { type: String, default: null },

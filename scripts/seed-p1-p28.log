@@ -1,0 +1,661 @@
+══════════════════════════════════════════════════════════════════════
+[2026-04-11 16:02:29] [p1-p28] 🌱 ANIME SEED SCRIPT STARTED
+[2026-04-11 16:02:29] [p1-p28]    Run tag    : p1-p28
+[2026-04-11 16:02:29] [p1-p28]    Pages      : 1 → 28
+[2026-04-11 16:02:29] [p1-p28]    Page size  : 100
+[2026-04-11 16:02:29] [p1-p28]    Mode       : NORMAL
+[2026-04-11 16:02:29] [p1-p28]    Files:
+[2026-04-11 16:02:29] [p1-p28]      Slugs    → /root/kaikansen/scripts/slugs-p1-p28.json
+[2026-04-11 16:02:29] [p1-p28]      Progress → /root/kaikansen/scripts/progress-p1-p28.json
+[2026-04-11 16:02:29] [p1-p28]      Log      → /root/kaikansen/scripts/seed-p1-p28.log
+[2026-04-11 16:02:29] [p1-p28]    Delays: AT=700ms  AniList=1000ms  Kitsu=1000ms
+══════════════════════════════════════════════════════════════════════
+[2026-04-11 16:02:30] [p1-p28] ✅ Connected to MongoDB
+═════════════════════════════════════════════════════════════════
+[2026-04-11 16:02:30] [p1-p28] 🚀 PHASE: 1 — Collecting Slugs
+═════════════════════════════════════════════════════════════════
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:02:30] [p1-p28] 📄 PAGE 1/28  [1 of 28 pages in this run]
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:02:33] [p1-p28] ✅ Page 1/28 [1/28] — got 100 slugs  (total: 100)
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:02:33] [p1-p28] 📄 PAGE 2/28  [2 of 28 pages in this run]
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:02:35] [p1-p28] ✅ Page 2/28 [2/28] — got 100 slugs  (total: 200)
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:02:35] [p1-p28] 📄 PAGE 3/28  [3 of 28 pages in this run]
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:02:37] [p1-p28] ✅ Page 3/28 [3/28] — got 100 slugs  (total: 300)
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:02:37] [p1-p28] 📄 PAGE 4/28  [4 of 28 pages in this run]
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:02:39] [p1-p28] ✅ Page 4/28 [4/28] — got 100 slugs  (total: 400)
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:02:39] [p1-p28] 📄 PAGE 5/28  [5 of 28 pages in this run]
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:02:41] [p1-p28] ✅ Page 5/28 [5/28] — got 100 slugs  (total: 500)
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:02:41] [p1-p28] 📄 PAGE 6/28  [6 of 28 pages in this run]
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:02:43] [p1-p28] ✅ Page 6/28 [6/28] — got 100 slugs  (total: 600)
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:02:43] [p1-p28] 📄 PAGE 7/28  [7 of 28 pages in this run]
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:02:46] [p1-p28] ✅ Page 7/28 [7/28] — got 100 slugs  (total: 700)
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:02:46] [p1-p28] 📄 PAGE 8/28  [8 of 28 pages in this run]
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:02:48] [p1-p28] ✅ Page 8/28 [8/28] — got 100 slugs  (total: 800)
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:02:48] [p1-p28] 📄 PAGE 9/28  [9 of 28 pages in this run]
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:02:50] [p1-p28] ✅ Page 9/28 [9/28] — got 100 slugs  (total: 900)
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:02:50] [p1-p28] 📄 PAGE 10/28  [10 of 28 pages in this run]
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:02:52] [p1-p28] ✅ Page 10/28 [10/28] — got 100 slugs  (total: 1000)
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:02:52] [p1-p28] 📄 PAGE 11/28  [11 of 28 pages in this run]
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:02:54] [p1-p28] ✅ Page 11/28 [11/28] — got 100 slugs  (total: 1100)
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:02:54] [p1-p28] 📄 PAGE 12/28  [12 of 28 pages in this run]
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:02:56] [p1-p28] ✅ Page 12/28 [12/28] — got 100 slugs  (total: 1200)
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:02:56] [p1-p28] 📄 PAGE 13/28  [13 of 28 pages in this run]
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:02:58] [p1-p28] ✅ Page 13/28 [13/28] — got 100 slugs  (total: 1300)
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:02:58] [p1-p28] 📄 PAGE 14/28  [14 of 28 pages in this run]
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:03:00] [p1-p28] ✅ Page 14/28 [14/28] — got 100 slugs  (total: 1400)
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:03:00] [p1-p28] 📄 PAGE 15/28  [15 of 28 pages in this run]
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:03:03] [p1-p28] ✅ Page 15/28 [15/28] — got 100 slugs  (total: 1500)
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:03:03] [p1-p28] 📄 PAGE 16/28  [16 of 28 pages in this run]
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:03:05] [p1-p28] ✅ Page 16/28 [16/28] — got 100 slugs  (total: 1600)
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:03:05] [p1-p28] 📄 PAGE 17/28  [17 of 28 pages in this run]
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:03:07] [p1-p28] ✅ Page 17/28 [17/28] — got 100 slugs  (total: 1700)
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:03:07] [p1-p28] 📄 PAGE 18/28  [18 of 28 pages in this run]
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:03:09] [p1-p28] ✅ Page 18/28 [18/28] — got 100 slugs  (total: 1800)
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:03:09] [p1-p28] 📄 PAGE 19/28  [19 of 28 pages in this run]
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:03:12] [p1-p28] ✅ Page 19/28 [19/28] — got 100 slugs  (total: 1900)
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:03:12] [p1-p28] 📄 PAGE 20/28  [20 of 28 pages in this run]
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:03:14] [p1-p28] ✅ Page 20/28 [20/28] — got 100 slugs  (total: 2000)
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:03:14] [p1-p28] 📄 PAGE 21/28  [21 of 28 pages in this run]
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:03:16] [p1-p28] ✅ Page 21/28 [21/28] — got 100 slugs  (total: 2100)
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:03:16] [p1-p28] 📄 PAGE 22/28  [22 of 28 pages in this run]
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:03:18] [p1-p28] ✅ Page 22/28 [22/28] — got 100 slugs  (total: 2200)
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:03:18] [p1-p28] 📄 PAGE 23/28  [23 of 28 pages in this run]
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:03:20] [p1-p28] ✅ Page 23/28 [23/28] — got 100 slugs  (total: 2300)
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:03:20] [p1-p28] 📄 PAGE 24/28  [24 of 28 pages in this run]
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:03:22] [p1-p28] ✅ Page 24/28 [24/28] — got 100 slugs  (total: 2400)
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:03:22] [p1-p28] 📄 PAGE 25/28  [25 of 28 pages in this run]
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:03:25] [p1-p28] ✅ Page 25/28 [25/28] — got 100 slugs  (total: 2500)
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:03:25] [p1-p28] 📄 PAGE 26/28  [26 of 28 pages in this run]
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:03:27] [p1-p28] ✅ Page 26/28 [26/28] — got 100 slugs  (total: 2600)
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:03:27] [p1-p28] 📄 PAGE 27/28  [27 of 28 pages in this run]
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:03:29] [p1-p28] ✅ Page 27/28 [27/28] — got 100 slugs  (total: 2700)
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:03:29] [p1-p28] 📄 PAGE 28/28  [28 of 28 pages in this run]
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:03:32] [p1-p28] ✅ Page 28/28 [28/28] — got 100 slugs  (total: 2800)
+═════════════════════════════════════════════════════════════════
+[2026-04-11 16:03:32] [p1-p28] ✅ COLLECTION COMPLETE
+[2026-04-11 16:03:32] [p1-p28]    Total slugs : 2800
+[2026-04-11 16:03:32] [p1-p28]    Saved to    : /root/kaikansen/scripts/slugs-p1-p28.json
+═════════════════════════════════════════════════════════════════
+═════════════════════════════════════════════════════════════════
+[2026-04-11 16:03:32] [p1-p28] 🚀 PHASE: 2 — Processing Slugs
+═════════════════════════════════════════════════════════════════
+[2026-04-11 16:03:32] [p1-p28] 📊 Stats for run [p1-p28]
+[2026-04-11 16:03:32] [p1-p28]    Total slugs      : 2800
+[2026-04-11 16:03:32] [p1-p28]    Already processed: 0
+[2026-04-11 16:03:32] [p1-p28]    Previously failed: 0
+[2026-04-11 16:03:32] [p1-p28]    Pending now      : 2800
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:03:32] [p1-p28] 
+  ┌─ [1/2800] 🎌 hackliminality
+[2026-04-11 16:03:33] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:03:33] [p1-p28]   │  📺 Format : OVA
+[2026-04-11 16:03:33] [p1-p28]   │  📅 Season : SPRING 2002
+[2026-04-11 16:03:33] [p1-p28]   │  🗂  Series : .hack
+[2026-04-11 16:03:35] [p1-p28]   │  ✅ [AniList:by_id] → .hack//Liminality
+[2026-04-11 16:03:35] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:none
+[2026-04-11 16:03:35] [p1-p28]   │  📝 JP      : .hack//Liminality
+[2026-04-11 16:03:35] [p1-p28]   │  📝 EN      : .hack//Liminality
+[2026-04-11 16:03:35] [p1-p28]   │  📝 Romaji  : .hack//Liminality
+[2026-04-11 16:03:35] [p1-p28]   │  📝 Native  : .hack//Liminality
+[2026-04-11 16:03:35] [p1-p28]   │  📝 Alt     : 2 titles
+[2026-04-11 16:03:35] [p1-p28]   │  🆔 MAL:299  AniList:299  Kitsu:—
+[2026-04-11 16:03:35] [p1-p28]   │  🎬 Themes  : 4
+[2026-04-11 16:03:35] [p1-p28]   │    [OP1] "Edge" — See-Saw
+[2026-04-11 16:03:35] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:03:35] [p1-p28]   │    [OP2] "Senyaichiya" — See-Saw
+[2026-04-11 16:03:35] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:03:35] [p1-p28]   │    [OP3] "Kimi ga Ita Monogatari" — See-Saw
+[2026-04-11 16:03:35] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:03:35] [p1-p28]   │    [OP4] "Kioku" — See-Saw
+[2026-04-11 16:03:35] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:03:35] [p1-p28]   │  ❌ Unexpected: Path "animeSlug" is not in schema, strict mode is `true`, and upsert is `true`.
+[2026-04-11 16:03:35] [p1-p28]   └─ ❌  running total → processed:0  failed:1
+[2026-04-11 16:03:35] [p1-p28] 
+  ┌─ [2/2800] 🎌 hackroots
+[2026-04-11 16:03:37] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:03:37] [p1-p28]   │  📺 Format : TV
+[2026-04-11 16:03:37] [p1-p28]   │  📅 Season : SPRING 2006
+[2026-04-11 16:03:37] [p1-p28]   │  🗂  Series : .hack
+[2026-04-11 16:03:38] [p1-p28]   │  ✅ [AniList:by_id] → .hack//Roots
+[2026-04-11 16:03:38] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:none
+[2026-04-11 16:03:38] [p1-p28]   │  📝 JP      : .hack//roots
+[2026-04-11 16:03:38] [p1-p28]   │  📝 EN      : .hack//Roots
+[2026-04-11 16:03:38] [p1-p28]   │  📝 Romaji  : .hack//Roots
+[2026-04-11 16:03:38] [p1-p28]   │  📝 Native  : .hack//Roots
+[2026-04-11 16:03:38] [p1-p28]   │  📝 Alt     : 2 titles
+[2026-04-11 16:03:38] [p1-p28]   │  🆔 MAL:873  AniList:873  Kitsu:—
+[2026-04-11 16:03:38] [p1-p28]   │  🎬 Themes  : 2
+[2026-04-11 16:03:38] [p1-p28]   │    [OP1] "Silly-go-Round" — Yuuka Nanri
+[2026-04-11 16:03:38] [p1-p28]   │        entries:1  videos:2  audio:✅
+[2026-04-11 16:03:38] [p1-p28]   │    [ED1] "Boukoku Kakusei - Catharsis" — ALI PROJECT
+[2026-04-11 16:03:38] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:03:38] [p1-p28]   │  ❌ Unexpected: Path "animeSlug" is not in schema, strict mode is `true`, and upsert is `true`.
+[2026-04-11 16:03:38] [p1-p28]   └─ ❌  running total → processed:0  failed:2
+[2026-04-11 16:03:38] [p1-p28] 
+  ┌─ [3/2800] 🎌 hacksign
+[2026-04-11 16:03:40] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:03:40] [p1-p28]   │  📺 Format : TV
+[2026-04-11 16:03:40] [p1-p28]   │  📅 Season : SPRING 2002
+[2026-04-11 16:03:40] [p1-p28]   │  🗂  Series : .hack
+[2026-04-11 16:03:41] [p1-p28]   │  ✅ [AniList:by_id] → .hack//SIGN
+[2026-04-11 16:03:41] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:none
+[2026-04-11 16:03:41] [p1-p28]   │  📝 JP      : .hack//Sign
+[2026-04-11 16:03:41] [p1-p28]   │  📝 EN      : .hack//SIGN
+[2026-04-11 16:03:41] [p1-p28]   │  📝 Romaji  : .hack//SIGN
+[2026-04-11 16:03:41] [p1-p28]   │  📝 Native  : .hack//SIGN
+[2026-04-11 16:03:41] [p1-p28]   │  📝 Alt     : 1 titles
+[2026-04-11 16:03:41] [p1-p28]   │  🆔 MAL:48  AniList:48  Kitsu:—
+[2026-04-11 16:03:41] [p1-p28]   │  🎬 Themes  : 2
+[2026-04-11 16:03:41] [p1-p28]   │    [OP1] "Obsession" — See-Saw
+[2026-04-11 16:03:41] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:03:41] [p1-p28]   │    [ED1] "Yasashii Yoake" — See-Saw
+[2026-04-11 16:03:41] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:03:41] [p1-p28]   │  ❌ Unexpected: Path "animeSlug" is not in schema, strict mode is `true`, and upsert is `true`.
+[2026-04-11 16:03:41] [p1-p28]   └─ ❌  running total → processed:0  failed:3
+[2026-04-11 16:03:41] [p1-p28] 
+  ┌─ [4/2800] 🎌 hacktasogare_no_udewa_densetsu
+[2026-04-11 16:03:43] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:03:43] [p1-p28]   │  📺 Format : TV
+[2026-04-11 16:03:43] [p1-p28]   │  📅 Season : WINTER 2003
+[2026-04-11 16:03:43] [p1-p28]   │  🗂  Series : .hack
+══════════════════════════════════════════════════════════════════════
+[2026-04-11 16:05:19] [p1-p28] 🌱 ANIME SEED SCRIPT STARTED
+[2026-04-11 16:05:19] [p1-p28]    Run tag    : p1-p28
+[2026-04-11 16:05:19] [p1-p28]    Pages      : 1 → 28
+[2026-04-11 16:05:19] [p1-p28]    Page size  : 100
+[2026-04-11 16:05:19] [p1-p28]    Mode       : NORMAL
+[2026-04-11 16:05:20] [p1-p28]    Files:
+[2026-04-11 16:05:20] [p1-p28]      Slugs    → /root/kaikansen/scripts/slugs-p1-p28.json
+[2026-04-11 16:05:20] [p1-p28]      Progress → /root/kaikansen/scripts/progress-p1-p28.json
+[2026-04-11 16:05:20] [p1-p28]      Log      → /root/kaikansen/scripts/seed-p1-p28.log
+[2026-04-11 16:05:20] [p1-p28]    Delays: AT=700ms  AniList=1000ms  Kitsu=1000ms
+══════════════════════════════════════════════════════════════════════
+[2026-04-11 16:05:21] [p1-p28] ✅ Connected to MongoDB
+═════════════════════════════════════════════════════════════════
+[2026-04-11 16:05:21] [p1-p28] 🚀 PHASE: 1 — Collecting Slugs
+═════════════════════════════════════════════════════════════════
+[2026-04-11 16:05:21] [p1-p28] ✅ Slug file exists — 2800 slugs already collected
+[2026-04-11 16:05:21] [p1-p28]    Skipping collection phase
+═════════════════════════════════════════════════════════════════
+[2026-04-11 16:05:21] [p1-p28] 🚀 PHASE: 2 — Processing Slugs
+═════════════════════════════════════════════════════════════════
+[2026-04-11 16:05:21] [p1-p28] 📊 Stats for run [p1-p28]
+[2026-04-11 16:05:21] [p1-p28]    Total slugs      : 2800
+[2026-04-11 16:05:21] [p1-p28]    Already processed: 0
+[2026-04-11 16:05:21] [p1-p28]    Previously failed: 3
+[2026-04-11 16:05:21] [p1-p28]    Pending now      : 2800
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:05:21] [p1-p28] 
+  ┌─ [1/2800] 🎌 hackliminality
+[2026-04-11 16:05:23] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:05:23] [p1-p28]   │  📺 Format : OVA
+[2026-04-11 16:05:23] [p1-p28]   │  📅 Season : SPRING 2002
+[2026-04-11 16:05:23] [p1-p28]   │  🗂  Series : .hack
+[2026-04-11 16:05:25] [p1-p28]   │  ✅ [AniList:by_id] → .hack//Liminality
+[2026-04-11 16:05:25] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:none
+[2026-04-11 16:05:25] [p1-p28]   │  📝 JP      : .hack//Liminality
+[2026-04-11 16:05:25] [p1-p28]   │  📝 EN      : .hack//Liminality
+[2026-04-11 16:05:25] [p1-p28]   │  📝 Romaji  : .hack//Liminality
+[2026-04-11 16:05:25] [p1-p28]   │  📝 Native  : .hack//Liminality
+[2026-04-11 16:05:25] [p1-p28]   │  📝 Alt     : 2 titles
+[2026-04-11 16:05:25] [p1-p28]   │  🆔 MAL:299  AniList:299  Kitsu:—
+[2026-04-11 16:05:25] [p1-p28]   │  🎬 Themes  : 4
+[2026-04-11 16:05:25] [p1-p28]   │    [OP1] "Edge" — See-Saw
+[2026-04-11 16:05:25] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:05:25] [p1-p28]   │    [OP2] "Senyaichiya" — See-Saw
+[2026-04-11 16:05:25] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:05:25] [p1-p28]   │    [OP3] "Kimi ga Ita Monogatari" — See-Saw
+[2026-04-11 16:05:25] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:05:25] [p1-p28]   │    [OP4] "Kioku" — See-Saw
+[2026-04-11 16:05:25] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:05:25] [p1-p28]   │  ❌ Unexpected: Path "animeSlug" is not in schema, strict mode is `true`, and upsert is `true`.
+[2026-04-11 16:05:25] [p1-p28]   └─ ❌  running total → processed:0  failed:4
+[2026-04-11 16:05:25] [p1-p28] 
+  ┌─ [2/2800] 🎌 hackroots
+[2026-04-11 16:05:26] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:05:26] [p1-p28]   │  📺 Format : TV
+[2026-04-11 16:05:26] [p1-p28]   │  📅 Season : SPRING 2006
+[2026-04-11 16:05:26] [p1-p28]   │  🗂  Series : .hack
+[2026-04-11 16:05:28] [p1-p28]   │  ✅ [AniList:by_id] → .hack//Roots
+[2026-04-11 16:05:28] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:none
+[2026-04-11 16:05:28] [p1-p28]   │  📝 JP      : .hack//roots
+[2026-04-11 16:05:28] [p1-p28]   │  📝 EN      : .hack//Roots
+[2026-04-11 16:05:28] [p1-p28]   │  📝 Romaji  : .hack//Roots
+[2026-04-11 16:05:28] [p1-p28]   │  📝 Native  : .hack//Roots
+[2026-04-11 16:05:28] [p1-p28]   │  📝 Alt     : 2 titles
+[2026-04-11 16:05:28] [p1-p28]   │  🆔 MAL:873  AniList:873  Kitsu:—
+[2026-04-11 16:05:28] [p1-p28]   │  🎬 Themes  : 2
+[2026-04-11 16:05:28] [p1-p28]   │    [OP1] "Silly-go-Round" — Yuuka Nanri
+[2026-04-11 16:05:28] [p1-p28]   │        entries:1  videos:2  audio:✅
+[2026-04-11 16:05:28] [p1-p28]   │    [ED1] "Boukoku Kakusei - Catharsis" — ALI PROJECT
+[2026-04-11 16:05:28] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:05:28] [p1-p28]   │  ❌ Unexpected: Path "animeSlug" is not in schema, strict mode is `true`, and upsert is `true`.
+[2026-04-11 16:05:28] [p1-p28]   └─ ❌  running total → processed:0  failed:5
+[2026-04-11 16:05:28] [p1-p28] 
+  ┌─ [3/2800] 🎌 hacksign
+[2026-04-11 16:05:30] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:05:30] [p1-p28]   │  📺 Format : TV
+[2026-04-11 16:05:30] [p1-p28]   │  📅 Season : SPRING 2002
+[2026-04-11 16:05:30] [p1-p28]   │  🗂  Series : .hack
+[2026-04-11 16:05:31] [p1-p28]   │  ✅ [AniList:by_id] → .hack//SIGN
+[2026-04-11 16:05:31] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:none
+[2026-04-11 16:05:31] [p1-p28]   │  📝 JP      : .hack//Sign
+[2026-04-11 16:05:31] [p1-p28]   │  📝 EN      : .hack//SIGN
+[2026-04-11 16:05:31] [p1-p28]   │  📝 Romaji  : .hack//SIGN
+[2026-04-11 16:05:31] [p1-p28]   │  📝 Native  : .hack//SIGN
+[2026-04-11 16:05:31] [p1-p28]   │  📝 Alt     : 1 titles
+[2026-04-11 16:05:31] [p1-p28]   │  🆔 MAL:48  AniList:48  Kitsu:—
+[2026-04-11 16:05:31] [p1-p28]   │  🎬 Themes  : 2
+[2026-04-11 16:05:31] [p1-p28]   │    [OP1] "Obsession" — See-Saw
+[2026-04-11 16:05:31] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:05:31] [p1-p28]   │    [ED1] "Yasashii Yoake" — See-Saw
+[2026-04-11 16:05:31] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:05:31] [p1-p28]   │  ❌ Unexpected: Path "animeSlug" is not in schema, strict mode is `true`, and upsert is `true`.
+[2026-04-11 16:05:31] [p1-p28]   └─ ❌  running total → processed:0  failed:6
+[2026-04-11 16:05:31] [p1-p28] 
+  ┌─ [4/2800] 🎌 hacktasogare_no_udewa_densetsu
+[2026-04-11 16:05:33] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:05:33] [p1-p28]   │  📺 Format : TV
+[2026-04-11 16:05:33] [p1-p28]   │  📅 Season : WINTER 2003
+[2026-04-11 16:05:33] [p1-p28]   │  🗂  Series : .hack
+[2026-04-11 16:05:34] [p1-p28]   │  ✅ [AniList:by_id] → .hack//Tasogare no Udewa Densetsu
+[2026-04-11 16:05:34] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:none
+[2026-04-11 16:05:34] [p1-p28]   │  📝 JP      : .hack//Tasogare no Udewa Densetsu
+[2026-04-11 16:05:34] [p1-p28]   │  📝 EN      : .hack//Legend Of The Twilight
+[2026-04-11 16:05:34] [p1-p28]   │  📝 Romaji  : .hack//Tasogare no Udewa Densetsu
+[2026-04-11 16:05:34] [p1-p28]   │  📝 Native  : .hack//黄昏の腕輪伝説
+[2026-04-11 16:05:34] [p1-p28]   │  📝 Alt     : 7 titles
+[2026-04-11 16:05:34] [p1-p28]   │  🆔 MAL:298  AniList:298  Kitsu:—
+[2026-04-11 16:05:34] [p1-p28]   │  🎬 Themes  : 2
+[2026-04-11 16:05:34] [p1-p28]   │    [OP1] "New World" — ROUND TABLE feat. Nino
+[2026-04-11 16:05:34] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:05:34] [p1-p28]   │    [ED1] "Emerald Green" — See-Saw
+[2026-04-11 16:05:34] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:05:34] [p1-p28]   │  ❌ Unexpected: Path "animeSlug" is not in schema, strict mode is `true`, and upsert is `true`.
+[2026-04-11 16:05:34] [p1-p28]   └─ ❌  running total → processed:0  failed:7
+[2026-04-11 16:05:34] [p1-p28] 
+  ┌─ [5/2800] 🎌 07_ghost
+[2026-04-11 16:05:36] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:05:36] [p1-p28]   │  📺 Format : TV
+[2026-04-11 16:05:36] [p1-p28]   │  📅 Season : SPRING 2009
+[2026-04-11 16:05:36] [p1-p28]   │  🗂  Series : —
+[2026-04-11 16:05:37] [p1-p28]   │  ✅ [AniList:by_id] → 07-Ghost
+[2026-04-11 16:05:37] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:none
+[2026-04-11 16:05:37] [p1-p28]   │  📝 JP      : 07-Ghost
+[2026-04-11 16:05:37] [p1-p28]   │  📝 EN      : 07-Ghost
+[2026-04-11 16:05:37] [p1-p28]   │  📝 Romaji  : 07-Ghost
+[2026-04-11 16:05:37] [p1-p28]   │  📝 Native  : セブンゴースト
+[2026-04-11 16:05:37] [p1-p28]   │  📝 Alt     : 6 titles
+[2026-04-11 16:05:37] [p1-p28]   │  🆔 MAL:5525  AniList:5525  Kitsu:—
+[2026-04-11 16:05:37] [p1-p28]   │  🎬 Themes  : 2
+[2026-04-11 16:05:37] [p1-p28]   │    [OP1] "Aka no Kakera" — —
+[2026-04-11 16:05:37] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:05:37] [p1-p28]   │    [ED1] "Hitomi no Kotae" — —
+[2026-04-11 16:05:37] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:05:37] [p1-p28]   │  ❌ Unexpected: Path "animeSlug" is not in schema, strict mode is `true`, and upsert is `true`.
+[2026-04-11 16:05:37] [p1-p28]   └─ ❌  running total → processed:0  failed:8
+[2026-04-11 16:05:37] [p1-p28] 
+  ┌─ [6/2800] 🎌 100_man_no_inochi_no_ue_ni_ore_wa_tatteiru
+[2026-04-11 16:05:39] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:05:39] [p1-p28]   │  📺 Format : TV
+[2026-04-11 16:05:39] [p1-p28]   │  📅 Season : FALL 2020
+[2026-04-11 16:05:39] [p1-p28]   │  🗂  Series : 100-man no Inochi no Ue ni Ore wa Tatteiru
+[2026-04-11 16:05:40] [p1-p28]   │  ✅ [AniList:by_id] → 100-man no Inochi no Ue ni Ore wa Tatteiru
+[2026-04-11 16:05:40] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:none
+[2026-04-11 16:05:40] [p1-p28]   │  📝 JP      : 100-man no Inochi no Ue ni Ore wa Tatteiru
+[2026-04-11 16:05:40] [p1-p28]   │  📝 EN      : I'm Standing on a Million Lives
+[2026-04-11 16:05:40] [p1-p28]   │  📝 Romaji  : 100-man no Inochi no Ue ni Ore wa Tatteiru
+[2026-04-11 16:05:40] [p1-p28]   │  📝 Native  : 100万の命の上に俺は立っている
+[2026-04-11 16:05:40] [p1-p28]   │  📝 Alt     : 5 titles
+[2026-04-11 16:05:40] [p1-p28]   │  🆔 MAL:41380  AniList:116242  Kitsu:—
+[2026-04-11 16:05:40] [p1-p28]   │  🎬 Themes  : 3
+[2026-04-11 16:05:40] [p1-p28]   │    [OP1] "Anti world" — Kanako Takatsuki
+[2026-04-11 16:05:40] [p1-p28]   │        entries:1  videos:2  audio:✅
+[2026-04-11 16:05:40] [p1-p28]   │    [OP2] "Dear My MAJIHA Sisters" — Kanako Takatsuki, Ai Furihata
+[2026-04-11 16:05:40] [p1-p28]   │        entries:1  videos:2  audio:✅
+[2026-04-11 16:05:40] [p1-p28]   │    [ED1] "Carpe Diem" — Liyuu
+[2026-04-11 16:05:40] [p1-p28]   │        entries:4  videos:8  audio:✅
+[2026-04-11 16:05:40] [p1-p28]   │  ❌ Unexpected: Path "animeSlug" is not in schema, strict mode is `true`, and upsert is `true`.
+[2026-04-11 16:05:40] [p1-p28]   └─ ❌  running total → processed:0  failed:9
+[2026-04-11 16:05:40] [p1-p28] 
+  ┌─ [7/2800] 🎌 11eyes
+[2026-04-11 16:05:42] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:05:42] [p1-p28]   │  📺 Format : TV
+[2026-04-11 16:05:42] [p1-p28]   │  📅 Season : FALL 2009
+[2026-04-11 16:05:42] [p1-p28]   │  🗂  Series : —
+[2026-04-11 16:05:44] [p1-p28]   │  ✅ [AniList:by_id] → 11eyes
+[2026-04-11 16:05:44] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:none
+[2026-04-11 16:05:44] [p1-p28]   │  📝 JP      : 11eyes
+[2026-04-11 16:05:44] [p1-p28]   │  📝 EN      : 11eyes
+[2026-04-11 16:05:44] [p1-p28]   │  📝 Romaji  : 11eyes
+[2026-04-11 16:05:44] [p1-p28]   │  📝 Native  : イレブンアイズ
+[2026-04-11 16:05:44] [p1-p28]   │  📝 Alt     : 3 titles
+[2026-04-11 16:05:44] [p1-p28]   │  🆔 MAL:6682  AniList:6682  Kitsu:—
+[2026-04-11 16:05:44] [p1-p28]   │  🎬 Themes  : 2
+[2026-04-11 16:05:44] [p1-p28]   │    [OP1] "Arrival of Tears" — Ayane
+[2026-04-11 16:05:44] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:05:44] [p1-p28]   │    [ED1] "Sequentia" — Asriel
+[2026-04-11 16:05:44] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:05:44] [p1-p28]   │  ❌ Unexpected: Path "animeSlug" is not in schema, strict mode is `true`, and upsert is `true`.
+[2026-04-11 16:05:44] [p1-p28]   └─ ❌  running total → processed:0  failed:10
+[2026-04-11 16:05:44] [p1-p28] 
+  ┌─ [8/2800] 🎌 12_sai_chicchana_mune_no_tokimeki
+[2026-04-11 16:05:46] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:05:46] [p1-p28]   │  📺 Format : TV
+[2026-04-11 16:05:46] [p1-p28]   │  📅 Season : SPRING 2016
+[2026-04-11 16:05:46] [p1-p28]   │  🗂  Series : 12-sai.: Chicchana Mune no Tokimeki
+[2026-04-11 16:05:47] [p1-p28]   │  ✅ [AniList:by_id] → 12-sai.: Chiccha na Mune no Tokimeki
+[2026-04-11 16:05:49] [p1-p28]   │  ⚠️  [Kitsu:by_malid] no results
+[2026-04-11 16:05:50] [p1-p28]   │  ✅ [Kitsu:by_title] → 12-sai.: Chicchana Mune no Tokimeki
+[2026-04-11 16:05:50] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:by_title
+[2026-04-11 16:05:50] [p1-p28]   │  📝 JP      : 12-sai.: Chicchana Mune no Tokimeki
+[2026-04-11 16:05:50] [p1-p28]   │  📝 EN      : 12-sai.: Chicchana Mune no Tokimeki
+[2026-04-11 16:05:50] [p1-p28]   │  📝 Romaji  : 12-sai.: Chiccha na Mune no Tokimeki
+[2026-04-11 16:05:50] [p1-p28]   │  📝 Native  : 12歳。～ちっちゃなムネのトキメキ～
+[2026-04-11 16:05:50] [p1-p28]   │  📝 Alt     : 5 titles
+[2026-04-11 16:05:50] [p1-p28]   │  🆔 MAL:32601  AniList:21609  Kitsu:11782
+[2026-04-11 16:05:50] [p1-p28]   │  🎬 Themes  : 2
+[2026-04-11 16:05:50] [p1-p28]   │    [OP1] "Sweet Sensation" — Rie Murakawa
+[2026-04-11 16:05:50] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:05:50] [p1-p28]   │    [ED1] "Cotona MODE" — AOP
+[2026-04-11 16:05:50] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:05:50] [p1-p28]   │  ❌ Unexpected: Path "animeSlug" is not in schema, strict mode is `true`, and upsert is `true`.
+[2026-04-11 16:05:50] [p1-p28]   └─ ❌  running total → processed:0  failed:11
+[2026-04-11 16:05:50] [p1-p28] 
+  ┌─ [9/2800] 🎌 12_sai_chicchana_mune_no_tokimeki_2nd_season
+[2026-04-11 16:05:52] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:05:52] [p1-p28]   │  📺 Format : TV
+[2026-04-11 16:05:52] [p1-p28]   │  📅 Season : FALL 2016
+[2026-04-11 16:05:52] [p1-p28]   │  🗂  Series : 12-sai.: Chicchana Mune no Tokimeki
+[2026-04-11 16:05:54] [p1-p28]   │  ✅ [AniList:by_id] → 12-sai.: Chiccha na Mune no Tokimeki 2
+[2026-04-11 16:05:56] [p1-p28]   │  ⚠️  [Kitsu:by_malid] no results
+[2026-04-11 16:05:57] [p1-p28]   │  ✅ [Kitsu:by_title] → 12-sai.: Chicchana Mune no Tokimeki 2nd Season
+[2026-04-11 16:05:57] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:by_title
+[2026-04-11 16:05:57] [p1-p28]   │  📝 JP      : 12-sai.: Chicchana Mune no Tokimeki 2nd Season
+[2026-04-11 16:05:57] [p1-p28]   │  📝 EN      : 12-sai.: Chicchana Mune no Tokimeki 2nd Season
+[2026-04-11 16:05:57] [p1-p28]   │  📝 Romaji  : 12-sai.: Chiccha na Mune no Tokimeki 2
+[2026-04-11 16:05:57] [p1-p28]   │  📝 Native  : 12歳。～ちっちゃなムネのトキメキ～ 2
+[2026-04-11 16:05:57] [p1-p28]   │  📝 Alt     : 6 titles
+[2026-04-11 16:05:57] [p1-p28]   │  🆔 MAL:33419  AniList:21839  Kitsu:12270
+[2026-04-11 16:05:57] [p1-p28]   │  🎬 Themes  : 2
+[2026-04-11 16:05:57] [p1-p28]   │    [OP1] "Ano ne, Kimi dake ni" — AOP
+[2026-04-11 16:05:57] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:05:57] [p1-p28]   │    [ED1] "Yuuki no Tsubasa" — Machico
+[2026-04-11 16:05:57] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:05:57] [p1-p28]   │  ❌ Unexpected: Path "animeSlug" is not in schema, strict mode is `true`, and upsert is `true`.
+[2026-04-11 16:05:57] [p1-p28]   └─ ❌  running total → processed:0  failed:12
+[2026-04-11 16:05:57] [p1-p28] 
+  ┌─ [10/2800] 🎌 18if
+[2026-04-11 16:05:59] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:05:59] [p1-p28]   │  📺 Format : TV
+[2026-04-11 16:05:59] [p1-p28]   │  📅 Season : SUMMER 2017
+[2026-04-11 16:05:59] [p1-p28]   │  🗂  Series : —
+[2026-04-11 16:06:01] [p1-p28]   │  ✅ [AniList:by_id] → 18if
+[2026-04-11 16:06:02] [p1-p28]   │  ⚠️  [Kitsu:by_malid] no results
+[2026-04-11 16:06:04] [p1-p28]   │  ✅ [Kitsu:by_title] → 18if
+[2026-04-11 16:06:04] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:by_title
+[2026-04-11 16:06:04] [p1-p28]   │  📝 JP      : 18if
+[2026-04-11 16:06:04] [p1-p28]   │  📝 EN      : 18if
+[2026-04-11 16:06:04] [p1-p28]   │  📝 Romaji  : 18if
+[2026-04-11 16:06:04] [p1-p28]   │  📝 Native  : 18if
+[2026-04-11 16:06:04] [p1-p28]   │  📝 Alt     : 2 titles
+[2026-04-11 16:06:04] [p1-p28]   │  🆔 MAL:35248  AniList:98512  Kitsu:13281
+[2026-04-11 16:06:04] [p1-p28]   │  🎬 Themes  : 14
+[2026-04-11 16:06:04] [p1-p28]   │    [OP1] "Red Doors feat. Yoshikazu Mera" — TeddyLoid
+[2026-04-11 16:06:04] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:06:04] [p1-p28]   │    [ED1] "Wonderland" — —
+[2026-04-11 16:06:04] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:06:04] [p1-p28]   │    [ED2] "Break The Doors feat. Aina The End (BiSH)" — TeddyLoid, AiNA THE END
+[2026-04-11 16:06:04] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:06:04] [p1-p28]   │    [ED3] "Yume Koibana" — —
+[2026-04-11 16:06:04] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:06:04] [p1-p28]   │    [ED4] "ANGELNOIR" — —
+[2026-04-11 16:06:04] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:06:04] [p1-p28]   │    [ED5] "Plumeria" — —
+[2026-04-11 16:06:04] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:06:04] [p1-p28]   │    [ED6] "Yukue Shirezu" — —
+[2026-04-11 16:06:04] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:06:04] [p1-p28]   │    [ED7] "too late" — Inori Minase
+[2026-04-11 16:06:04] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:06:04] [p1-p28]   │    [ED8] "Sora no Oto" — —
+[2026-04-11 16:06:04] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:06:04] [p1-p28]   │    [ED9] "Tsubasa" — —
+[2026-04-11 16:06:04] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:06:04] [p1-p28]   │    [ED10] "Factor Word" — —
+[2026-04-11 16:06:04] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:06:04] [p1-p28]   │    [ED11] "Salvation" — TeddyLoid
+[2026-04-11 16:06:04] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:06:04] [p1-p28]   │    [ED12] "Hakuchou wa Nemuru feat. Yoshikazu Mera" — TeddyLoid
+[2026-04-11 16:06:04] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:06:04] [p1-p28]   │    [ED13] "if" — Nobunaga Shimazaki
+[2026-04-11 16:06:04] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:06:04] [p1-p28]   │  ❌ Unexpected: Path "animeSlug" is not in schema, strict mode is `true`, and upsert is `true`.
+[2026-04-11 16:06:04] [p1-p28]   └─ ❌  running total → processed:0  failed:13
+[2026-04-11 16:06:04] [p1-p28] 
+  ┌─ [11/2800] 🎌 243_seiin_koukou_danshi_volley_bu
+══════════════════════════════════════════════════════════════════════
+[2026-04-11 16:09:16] [p1-p28] 🌱 ANIME SEED SCRIPT STARTED
+[2026-04-11 16:09:16] [p1-p28]    Run tag    : p1-p28
+[2026-04-11 16:09:16] [p1-p28]    Pages      : 1 → 28
+[2026-04-11 16:09:16] [p1-p28]    Page size  : 100
+[2026-04-11 16:09:16] [p1-p28]    Mode       : NORMAL
+[2026-04-11 16:09:16] [p1-p28]    Files:
+[2026-04-11 16:09:16] [p1-p28]      Slugs    → /root/kaikansen/scripts/slugs-p1-p28.json
+[2026-04-11 16:09:16] [p1-p28]      Progress → /root/kaikansen/scripts/progress-p1-p28.json
+[2026-04-11 16:09:16] [p1-p28]      Log      → /root/kaikansen/scripts/seed-p1-p28.log
+[2026-04-11 16:09:16] [p1-p28]    Delays: AT=700ms  AniList=1000ms  Kitsu=1000ms
+══════════════════════════════════════════════════════════════════════
+[2026-04-11 16:09:18] [p1-p28] ✅ Connected to MongoDB
+═════════════════════════════════════════════════════════════════
+[2026-04-11 16:09:18] [p1-p28] 🚀 PHASE: 1 — Collecting Slugs
+═════════════════════════════════════════════════════════════════
+[2026-04-11 16:09:18] [p1-p28] ✅ Slug file exists — 2800 slugs already collected
+[2026-04-11 16:09:18] [p1-p28]    Skipping collection phase
+═════════════════════════════════════════════════════════════════
+[2026-04-11 16:09:18] [p1-p28] 🚀 PHASE: 2 — Processing Slugs
+═════════════════════════════════════════════════════════════════
+[2026-04-11 16:09:18] [p1-p28] 📊 Stats for run [p1-p28]
+[2026-04-11 16:09:18] [p1-p28]    Total slugs      : 2800
+[2026-04-11 16:09:18] [p1-p28]    Already processed: 0
+[2026-04-11 16:09:18] [p1-p28]    Previously failed: 13
+[2026-04-11 16:09:18] [p1-p28]    Pending now      : 2800
+─────────────────────────────────────────────────────────────────
+[2026-04-11 16:09:18] [p1-p28] 
+  ┌─ [1/2800] 🎌 hackliminality
+[2026-04-11 16:09:21] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:09:21] [p1-p28]   │  📺 Format : OVA
+[2026-04-11 16:09:21] [p1-p28]   │  📅 Season : SPRING 2002
+[2026-04-11 16:09:21] [p1-p28]   │  🗂  Series : .hack
+[2026-04-11 16:09:22] [p1-p28]   │  ✅ [AniList:by_id] → .hack//Liminality
+[2026-04-11 16:09:22] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:none
+[2026-04-11 16:09:22] [p1-p28]   │  📝 JP      : .hack//Liminality
+[2026-04-11 16:09:22] [p1-p28]   │  📝 EN      : .hack//Liminality
+[2026-04-11 16:09:22] [p1-p28]   │  📝 Romaji  : .hack//Liminality
+[2026-04-11 16:09:22] [p1-p28]   │  📝 Native  : .hack//Liminality
+[2026-04-11 16:09:22] [p1-p28]   │  📝 Alt     : 2 titles
+[2026-04-11 16:09:22] [p1-p28]   │  🆔 MAL:299  AniList:299  Kitsu:—
+[2026-04-11 16:09:22] [p1-p28]   │  🎬 Themes  : 4
+[2026-04-11 16:09:22] [p1-p28]   │    [OP1] "Edge" — See-Saw
+[2026-04-11 16:09:22] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:09:22] [p1-p28]   │    [OP2] "Senyaichiya" — See-Saw
+[2026-04-11 16:09:22] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:09:22] [p1-p28]   │    [OP3] "Kimi ga Ita Monogatari" — See-Saw
+[2026-04-11 16:09:22] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:09:22] [p1-p28]   │    [OP4] "Kioku" — See-Saw
+[2026-04-11 16:09:22] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:09:22] [p1-p28]   │  ❌ Unexpected: Cast to [string] failed for value "[ { id: 1, name: '.hack', slug: 'dot_hack' } ]" (type string) at path "animeSeries.0" because of "CastError"
+[2026-04-11 16:09:22] [p1-p28]   └─ ❌  running total → processed:0  failed:14
+[2026-04-11 16:09:22] [p1-p28] 
+  ┌─ [2/2800] 🎌 hackroots
+[2026-04-11 16:09:24] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:09:24] [p1-p28]   │  📺 Format : TV
+[2026-04-11 16:09:24] [p1-p28]   │  📅 Season : SPRING 2006
+[2026-04-11 16:09:24] [p1-p28]   │  🗂  Series : .hack
+[2026-04-11 16:09:26] [p1-p28]   │  ✅ [AniList:by_id] → .hack//Roots
+[2026-04-11 16:09:26] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:none
+[2026-04-11 16:09:26] [p1-p28]   │  📝 JP      : .hack//roots
+[2026-04-11 16:09:26] [p1-p28]   │  📝 EN      : .hack//Roots
+[2026-04-11 16:09:26] [p1-p28]   │  📝 Romaji  : .hack//Roots
+[2026-04-11 16:09:26] [p1-p28]   │  📝 Native  : .hack//Roots
+[2026-04-11 16:09:26] [p1-p28]   │  📝 Alt     : 2 titles
+[2026-04-11 16:09:26] [p1-p28]   │  🆔 MAL:873  AniList:873  Kitsu:—
+[2026-04-11 16:09:26] [p1-p28]   │  🎬 Themes  : 2
+[2026-04-11 16:09:26] [p1-p28]   │    [OP1] "Silly-go-Round" — Yuuka Nanri
+[2026-04-11 16:09:26] [p1-p28]   │        entries:1  videos:2  audio:✅
+[2026-04-11 16:09:26] [p1-p28]   │    [ED1] "Boukoku Kakusei - Catharsis" — ALI PROJECT
+[2026-04-11 16:09:26] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:09:26] [p1-p28]   │  ❌ Unexpected: Cast to [string] failed for value "[ { id: 1, name: '.hack', slug: 'dot_hack' } ]" (type string) at path "animeSeries.0" because of "CastError"
+[2026-04-11 16:09:26] [p1-p28]   └─ ❌  running total → processed:0  failed:15
+[2026-04-11 16:09:26] [p1-p28] 
+  ┌─ [3/2800] 🎌 hacksign
+[2026-04-11 16:09:27] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:09:27] [p1-p28]   │  📺 Format : TV
+[2026-04-11 16:09:27] [p1-p28]   │  📅 Season : SPRING 2002
+[2026-04-11 16:09:27] [p1-p28]   │  🗂  Series : .hack
+[2026-04-11 16:09:29] [p1-p28]   │  ✅ [AniList:by_id] → .hack//SIGN
+[2026-04-11 16:09:29] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:none
+[2026-04-11 16:09:29] [p1-p28]   │  📝 JP      : .hack//Sign
+[2026-04-11 16:09:29] [p1-p28]   │  📝 EN      : .hack//SIGN
+[2026-04-11 16:09:29] [p1-p28]   │  📝 Romaji  : .hack//SIGN
+[2026-04-11 16:09:29] [p1-p28]   │  📝 Native  : .hack//SIGN
+[2026-04-11 16:09:29] [p1-p28]   │  📝 Alt     : 1 titles
+[2026-04-11 16:09:29] [p1-p28]   │  🆔 MAL:48  AniList:48  Kitsu:—
+[2026-04-11 16:09:29] [p1-p28]   │  🎬 Themes  : 2
+[2026-04-11 16:09:29] [p1-p28]   │    [OP1] "Obsession" — See-Saw
+[2026-04-11 16:09:29] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:09:29] [p1-p28]   │    [ED1] "Yasashii Yoake" — See-Saw
+[2026-04-11 16:09:29] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:09:29] [p1-p28]   │  ❌ Unexpected: Cast to [string] failed for value "[ { id: 1, name: '.hack', slug: 'dot_hack' } ]" (type string) at path "animeSeries.0" because of "CastError"
+[2026-04-11 16:09:29] [p1-p28]   └─ ❌  running total → processed:0  failed:16
+[2026-04-11 16:09:29] [p1-p28] 
+  ┌─ [4/2800] 🎌 hacktasogare_no_udewa_densetsu
+[2026-04-11 16:09:30] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:09:30] [p1-p28]   │  📺 Format : TV
+[2026-04-11 16:09:30] [p1-p28]   │  📅 Season : WINTER 2003
+[2026-04-11 16:09:30] [p1-p28]   │  🗂  Series : .hack
+[2026-04-11 16:09:32] [p1-p28]   │  ✅ [AniList:by_id] → .hack//Tasogare no Udewa Densetsu
+[2026-04-11 16:09:32] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:none
+[2026-04-11 16:09:32] [p1-p28]   │  📝 JP      : .hack//Tasogare no Udewa Densetsu
+[2026-04-11 16:09:32] [p1-p28]   │  📝 EN      : .hack//Legend Of The Twilight
+[2026-04-11 16:09:32] [p1-p28]   │  📝 Romaji  : .hack//Tasogare no Udewa Densetsu
+[2026-04-11 16:09:32] [p1-p28]   │  📝 Native  : .hack//黄昏の腕輪伝説
+[2026-04-11 16:09:32] [p1-p28]   │  📝 Alt     : 7 titles
+[2026-04-11 16:09:32] [p1-p28]   │  🆔 MAL:298  AniList:298  Kitsu:—
+[2026-04-11 16:09:32] [p1-p28]   │  🎬 Themes  : 2
+[2026-04-11 16:09:32] [p1-p28]   │    [OP1] "New World" — ROUND TABLE feat. Nino
+[2026-04-11 16:09:32] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:09:32] [p1-p28]   │    [ED1] "Emerald Green" — See-Saw
+[2026-04-11 16:09:32] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:09:32] [p1-p28]   │  ❌ Unexpected: Cast to [string] failed for value "[ { id: 1, name: '.hack', slug: 'dot_hack' } ]" (type string) at path "animeSeries.0" because of "CastError"
+[2026-04-11 16:09:32] [p1-p28]   └─ ❌  running total → processed:0  failed:17
+[2026-04-11 16:09:32] [p1-p28] 
+  ┌─ [5/2800] 🎌 07_ghost
+[2026-04-11 16:09:34] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:09:34] [p1-p28]   │  📺 Format : TV
+[2026-04-11 16:09:34] [p1-p28]   │  📅 Season : SPRING 2009
+[2026-04-11 16:09:34] [p1-p28]   │  🗂  Series : —
+[2026-04-11 16:09:36] [p1-p28]   │  ✅ [AniList:by_id] → 07-Ghost
+[2026-04-11 16:09:36] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:none
+[2026-04-11 16:09:36] [p1-p28]   │  📝 JP      : 07-Ghost
+[2026-04-11 16:09:36] [p1-p28]   │  📝 EN      : 07-Ghost
+[2026-04-11 16:09:36] [p1-p28]   │  📝 Romaji  : 07-Ghost
+[2026-04-11 16:09:36] [p1-p28]   │  📝 Native  : セブンゴースト
+[2026-04-11 16:09:36] [p1-p28]   │  📝 Alt     : 6 titles
+[2026-04-11 16:09:36] [p1-p28]   │  🆔 MAL:5525  AniList:5525  Kitsu:—
+[2026-04-11 16:09:36] [p1-p28]   │  🎬 Themes  : 2
+[2026-04-11 16:09:36] [p1-p28]   │    [OP1] "Aka no Kakera" — —
+[2026-04-11 16:09:36] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:09:36] [p1-p28]   │    [ED1] "Hitomi no Kotae" — —
+[2026-04-11 16:09:36] [p1-p28]   │        entries:1  videos:1  audio:✅
+[2026-04-11 16:09:36] [p1-p28]   │  💾 Saved to MongoDB
+[2026-04-11 16:09:36] [p1-p28]   └─ ✅  running total → processed:1  failed:17
+[2026-04-11 16:09:36] [p1-p28] 
+  ┌─ [6/2800] 🎌 100_man_no_inochi_no_ue_ni_ore_wa_tatteiru
+[2026-04-11 16:09:38] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:09:38] [p1-p28]   │  📺 Format : TV
+[2026-04-11 16:09:38] [p1-p28]   │  📅 Season : FALL 2020
+[2026-04-11 16:09:38] [p1-p28]   │  🗂  Series : 100-man no Inochi no Ue ni Ore wa Tatteiru
+[2026-04-11 16:09:39] [p1-p28]   │  ✅ [AniList:by_id] → 100-man no Inochi no Ue ni Ore wa Tatteiru
+[2026-04-11 16:09:39] [p1-p28]   │  🔗 Sources  AT:full | AniList:by_id | Kitsu:none
+[2026-04-11 16:09:39] [p1-p28]   │  📝 JP      : 100-man no Inochi no Ue ni Ore wa Tatteiru
+[2026-04-11 16:09:39] [p1-p28]   │  📝 EN      : I'm Standing on a Million Lives
+[2026-04-11 16:09:39] [p1-p28]   │  📝 Romaji  : 100-man no Inochi no Ue ni Ore wa Tatteiru
+[2026-04-11 16:09:39] [p1-p28]   │  📝 Native  : 100万の命の上に俺は立っている
+[2026-04-11 16:09:39] [p1-p28]   │  📝 Alt     : 5 titles
+[2026-04-11 16:09:39] [p1-p28]   │  🆔 MAL:41380  AniList:116242  Kitsu:—
+[2026-04-11 16:09:39] [p1-p28]   │  🎬 Themes  : 3
+[2026-04-11 16:09:39] [p1-p28]   │    [OP1] "Anti world" — Kanako Takatsuki
+[2026-04-11 16:09:39] [p1-p28]   │        entries:1  videos:2  audio:✅
+[2026-04-11 16:09:39] [p1-p28]   │    [OP2] "Dear My MAJIHA Sisters" — Kanako Takatsuki, Ai Furihata
+[2026-04-11 16:09:39] [p1-p28]   │        entries:1  videos:2  audio:✅
+[2026-04-11 16:09:39] [p1-p28]   │    [ED1] "Carpe Diem" — Liyuu
+[2026-04-11 16:09:39] [p1-p28]   │        entries:4  videos:8  audio:✅
+[2026-04-11 16:09:39] [p1-p28]   │  ❌ Unexpected: Cast to [string] failed for value "[\n' +
+  '  {\n' +
+  '    id: 419,\n' +
+  "    name: '100-man no Inochi no Ue ni Ore wa Tatteiru',\n" +
+  "    slug: '100_man_no_inochi_no_ue_ni_ore_wa_tatteiru'\n" +
+  '  }\n' +
+  ']" (type string) at path "animeSeries.0" because of "CastError"
+[2026-04-11 16:09:39] [p1-p28]   └─ ❌  running total → processed:1  failed:18
+[2026-04-11 16:09:39] [p1-p28] 
+  ┌─ [7/2800] 🎌 11eyes
+[2026-04-11 16:09:41] [p1-p28]   │  ✅ [AT:full] fetched
+[2026-04-11 16:09:41] [p1-p28]   │  📺 Format : TV
+[2026-04-11 16:09:41] [p1-p28]   │  📅 Season : FALL 2009
+[2026-04-11 16:09:41] [p1-p28]   │  🗂  Series : —
