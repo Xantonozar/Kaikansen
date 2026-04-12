@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Home, Search, Bell, User } from 'lucide-react'
-import { useAuth } from '@/providers/AuthProvider'
+import { useAuth } from '@/hooks/useAuth'
 import { cn } from '@/lib/utils'
 
 const navItems: Array<{ path: string; label: string; Icon: any; badge?: number }> = [
