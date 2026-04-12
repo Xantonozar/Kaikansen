@@ -53,20 +53,23 @@ function parseSearchQuery(q: string, by: string = 'all') {
   const queryParts: any[] = []
   
   if (textTerms.length > 0) {
+    // Use AND between terms - each term must match at least one field
     const textQuery = {
-      $or: textTerms.flatMap(term => 
-        textFields.map(field => ({ [field]: { $regex: term, $options: 'i' } }))
-      )
+      $and: textTerms.map(term => ({
+        $or: textFields.map(field => ({ [field]: { $regex: term, $options: 'i' } }))
+      }))
     }
     queryParts.push(textQuery)
   }
-  
-  if (typeFilter) {
-    queryParts.push({ type: typeFilter })
-  }
-  
-  if (sequenceFilter) {
-    queryParts.push({ sequence: sequenceFilter })
+
+  // OP/ED filters are optional - add them only if specified
+  if (typeFilter || sequenceFilter) {
+    const filters: any[] = []
+    if (typeFilter) filters.push({ type: typeFilter })
+    if (sequenceFilter) filters.push({ sequence: sequenceFilter })
+    if (filters.length > 0) {
+      queryParts.push({ $and: filters })
+    }
   }
   
   if (queryParts.length === 0) {
