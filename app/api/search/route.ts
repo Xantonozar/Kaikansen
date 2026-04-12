@@ -26,29 +26,18 @@ export async function GET(request: NextRequest) {
       'animeTitleAlternative', 
       'songTitle', 
       'artistName', 
-      'allArtists',
-      'type',
-      'sequence'
+      'allArtists'
     ]
 
     const buildRegexQuery = (fields: string[], term: string) => {
-      const numSequence = parseInt(term)
       const queries = fields.map(field => {
-        if (field === 'sequence' && !isNaN(numSequence)) {
-          return { [field]: numSequence }
-        }
-        if (field === 'type') {
-          const upperTerm = term.toUpperCase()
-          if (upperTerm === 'OP' || upperTerm === 'ED') {
-            return { [field]: upperTerm }
-          }
-        }
         return { [field]: { $regex: term, $options: 'i' } }
       })
       return { $or: queries }
     }
 
     const themeQuery = buildRegexQuery(themeFields, searchTerm)
+    console.log('[SEARCH] Query:', JSON.stringify(themeQuery))
     const skip = (page - 1) * limit
 
     const [themes, total] = await Promise.all([
