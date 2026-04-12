@@ -40,6 +40,7 @@ export function VideoPlayer({ videoSources, audioUrl, poster, mode, onEnded }: V
   const [isMuted, setIsMuted] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const [hasError, setHasError] = useState(false)
+  const [hasStarted, setHasStarted] = useState(false)
 
   const hasVideos = videoSources.length > 0
 
@@ -89,9 +90,12 @@ export function VideoPlayer({ videoSources, audioUrl, poster, mode, onEnded }: V
         errorMsg = `Video failed to load: ${error.message || error.code}`
       }
       console.error('Video error:', errorMsg, target.error)
-      setHasError(true)
-      setIsLoading(false)
-      showToast(errorMsg, 'error')
+      // Only show error if user has tried to play the video
+      if (hasStarted) {
+        setHasError(true)
+        setIsLoading(false)
+        showToast(errorMsg, 'error')
+      }
     }
 
     const handleWaiting = () => {
@@ -146,6 +150,7 @@ export function VideoPlayer({ videoSources, audioUrl, poster, mode, onEnded }: V
     const video = videoRef.current
     if (!video) return
 
+    setHasStarted(true)
     if (video.paused) {
       video.play()
     } else {
@@ -297,7 +302,7 @@ export function VideoPlayer({ videoSources, audioUrl, poster, mode, onEnded }: V
       </video>
 
       {/* Center Play Button Overlay */}
-      {isPaused && !hasError && !isLoading && (
+      {isPaused && !hasError && (
         <div 
           className="absolute inset-0 flex items-center justify-center cursor-pointer z-10"
           onClick={togglePlay}
@@ -308,15 +313,15 @@ export function VideoPlayer({ videoSources, audioUrl, poster, mode, onEnded }: V
         </div>
       )}
 
-      {/* Loading Spinner */}
-      {isLoading && (
+      {/* Loading Spinner - only show if user has interacted */}
+      {isLoading && hasStarted && (
         <div className="absolute inset-0 flex items-center justify-center z-10">
           <Loader2 className="w-10 h-10 text-white animate-spin" />
         </div>
       )}
 
       {/* Error Display */}
-      {hasError && (
+      {hasError && hasStarted && (
         <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/60 z-10">
           <AlertTriangle className="w-12 h-12 text-error mb-2" />
           <p className="text-white text-sm">Failed to load video</p>
