@@ -93,6 +93,7 @@ export function ThemePageClient({ slug }: ThemePageClientProps) {
       <div className="-mx-4 md:-mx-6">
         <VideoPlayer
           videoSources={finalVideoSources}
+          audioUrl={null}
           poster={theme.animeCoverImage}
           mode={mode}
         />

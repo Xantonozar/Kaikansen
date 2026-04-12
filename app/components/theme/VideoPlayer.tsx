@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef, useEffect, useState } from 'react'
-import { Play, Pause } from 'lucide-react'
+import { Play, Pause, Download } from 'lucide-react'
 
 interface VideoSource {
   resolution: number
@@ -11,12 +11,23 @@ interface VideoSource {
 
 interface VideoPlayerProps {
   videoSources: VideoSource[]
+  audioUrl?: string | null
   poster?: string | null
   mode: 'watch' | 'listen'
   onModeChange?: (mode: 'watch' | 'listen') => void
 }
 
-export function VideoPlayer({ videoSources, poster, mode }: VideoPlayerProps) {
+function handleDownload(url: string, filename: string) {
+  const link = document.createElement('a')
+  link.href = url
+  link.download = filename
+  link.target = '_blank'
+  document.body.appendChild(link)
+  link.click()
+  document.body.removeChild(link)
+}
+
+export function VideoPlayer({ videoSources, audioUrl, poster, mode }: VideoPlayerProps) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const [isPlaying, setIsPlaying] = useState(false)
@@ -231,9 +242,20 @@ export function VideoPlayer({ videoSources, poster, mode }: VideoPlayerProps) {
             </div>
 
             {/* Time Display */}
-            <div className="flex items-center justify-between text-white text-sm font-mono">
+            <div className="flex items-center justify-between text-white text-sm font-mono w-64">
               <span>{formatTime(currentTime)}</span>
-              <span>{formatTime(duration)}</span>
+              <div className="flex items-center gap-2">
+                {audioUrl && (
+                  <button 
+                    onClick={() => handleDownload(audioUrl, 'audio.mp3')} 
+                    title="Download Audio"
+                    className="hover:text-accent"
+                  >
+                    <Download className="w-4 h-4" />
+                  </button>
+                )}
+                <span>{formatTime(duration)}</span>
+              </div>
             </div>
           </div>
         </div>
@@ -317,6 +339,15 @@ export function VideoPlayer({ videoSources, poster, mode }: VideoPlayerProps) {
                 <span className="text-xs">🔊</span>
               )}
             </button>
+            {currentSource?.url && (
+              <button 
+                onClick={() => handleDownload(currentSource.url, 'video.webm')} 
+                className="text-white hover:text-accent"
+                title="Download Video"
+              >
+                <Download className="w-4 h-4" />
+              </button>
+            )}
             <button onClick={toggleFullscreen} className="text-white hover:text-accent">
               <span className="text-xs">⛶</span>
             </button>
