@@ -4,6 +4,8 @@ import './globals.css'
 import { QueryProvider } from '@/providers/QueryProvider'
 import { AppThemeProvider } from '@/providers/ThemeProvider'
 import { AuthProvider } from '@/providers/AuthProvider'
+import { SidebarProvider } from '@/app/components/layout/SidebarProvider'
+import { ToastProvider } from '@/app/components/shared/Toast'
 
 const outfit = Outfit({
   variable: '--font-outfit',
@@ -42,7 +44,13 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-bg-base text-ktext-primary">
         <AppThemeProvider>
           <QueryProvider>
-            <AuthProvider>{children}</AuthProvider>
+            <AuthProvider>
+              <SidebarProvider>
+                <ToastProvider>
+                {children}
+                </ToastProvider>
+              </SidebarProvider>
+            </AuthProvider>
           </QueryProvider>
         </AppThemeProvider>
       </body>

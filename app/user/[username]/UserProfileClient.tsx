@@ -3,10 +3,12 @@
 import { useUser } from '@/lib/api/users'
 import { useFollow, useUnfollow, useFollowStatus } from '@/lib/api/follow'
 import { useAuth } from '@/providers/AuthProvider'
+import { useHistory } from '@/lib/api/history'
 import { AppHeader } from '@/app/components/layout/AppHeader'
 import { BottomNav } from '@/app/components/layout/BottomNav'
 import { LoadingSkeleton } from '@/app/components/shared/LoadingSkeleton'
 import { EmptyState } from '@/app/components/shared/EmptyState'
+import { HistoryCard } from '@/app/components/theme/HistoryCard'
 import { cn, formatCount } from '@/lib/utils'
 import Link from 'next/link'
 
@@ -24,6 +26,9 @@ export function UserProfileClient({ username }: UserProfileClientProps) {
 
   const profile = profileData?.data as any
   const isFollowing = (followData?.data as any)?.following ?? false
+  const isOwnProfile = currentUser?.username === username
+  const { data: historyData } = isOwnProfile && currentUser?.id ? useHistory(currentUser.id, undefined, 1) : { data: undefined }
+  const recentActivity = (historyData?.data as any[] ?? []).slice(0, 5)
 
   if (isLoading) {
     return (
@@ -62,8 +67,6 @@ export function UserProfileClient({ username }: UserProfileClientProps) {
       </div>
     )
   }
-
-  const isOwnProfile = currentUser?.username === username
 
   const handleFollowToggle = () => {
     if (isFollowing) {
@@ -144,9 +147,15 @@ export function UserProfileClient({ username }: UserProfileClientProps) {
           <section className="mt-4">
             <h2 className="text-lg font-display font-bold text-ktext-primary mb-3">Recent Activity</h2>
             <div className="space-y-2">
-              <p className="text-sm text-ktext-tertiary text-center py-4">
-                No recent activity
-              </p>
+              {recentActivity.length > 0 ? (
+                recentActivity.map((item: any) => (
+                  <HistoryCard key={item._id} item={item} />
+                ))
+              ) : (
+                <p className="text-sm text-ktext-tertiary text-center py-4">
+                  No recent activity
+                </p>
+              )}
             </div>
           </section>
         </div>

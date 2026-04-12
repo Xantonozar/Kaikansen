@@ -96,6 +96,7 @@ export function ThemePageClient({ slug }: ThemePageClientProps) {
           audioUrl={null}
           poster={theme.animeCoverImage}
           mode={mode}
+          onEnded={handleWatchListen}
         />
       </div>
 

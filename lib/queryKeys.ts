@@ -12,6 +12,7 @@ export const queryKeys = {
     byId: (id: number) => ['anime', id] as const,
   },
   artist: {
+    list: (page: number, search?: string) => ['artists', 'list', page, search] as const,
     bySlug: (slug: string) => ['artist', slug] as const,
   },
   ratings: {

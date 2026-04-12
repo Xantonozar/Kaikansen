@@ -1,7 +1,8 @@
 'use client'
 
 import { useRef, useEffect, useState } from 'react'
-import { Play, Pause, Download } from 'lucide-react'
+import { Play, Pause, Download, Loader2, AlertTriangle } from 'lucide-react'
+import { useToast } from '@/app/components/shared/Toast'
 
 interface VideoSource {
   resolution: number
@@ -15,6 +16,7 @@ interface VideoPlayerProps {
   poster?: string | null
   mode: 'watch' | 'listen'
   onModeChange?: (mode: 'watch' | 'listen') => void
+  onEnded?: () => void
 }
 
 function handleDownload(url: string, filename: string) {
@@ -27,14 +29,17 @@ function handleDownload(url: string, filename: string) {
   document.body.removeChild(link)
 }
 
-export function VideoPlayer({ videoSources, audioUrl, poster, mode }: VideoPlayerProps) {
+export function VideoPlayer({ videoSources, audioUrl, poster, mode, onEnded }: VideoPlayerProps) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
+  const { showToast } = useToast()
   const [isPlaying, setIsPlaying] = useState(false)
   const [isPaused, setIsPaused] = useState(true)
   const [currentTime, setCurrentTime] = useState(0)
   const [duration, setDuration] = useState(0)
   const [isMuted, setIsMuted] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
+  const [hasError, setHasError] = useState(false)
 
   const hasVideos = videoSources.length > 0
 
@@ -55,14 +60,6 @@ export function VideoPlayer({ videoSources, audioUrl, poster, mode }: VideoPlaye
       setDuration(video.duration)
     }
 
-    const handleCanPlay = () => {
-      // Video is ready
-    }
-
-    const handleWaiting = () => {
-      // Buffering
-    }
-
     const handlePlaying = () => {
       setIsPlaying(true)
       setIsPaused(false)
@@ -75,15 +72,34 @@ export function VideoPlayer({ videoSources, audioUrl, poster, mode }: VideoPlaye
 
     const handleTimeUpdate = () => {
       setCurrentTime(video.currentTime)
+      setIsLoading(false)
     }
 
     const handleEnded = () => {
       setIsPaused(true)
       setIsPlaying(false)
+      if (onEnded) onEnded()
     }
 
-    const handleProgress = () => {
-      // Buffer progress if needed
+    const handleError = (e: Event) => {
+      const target = e.target as HTMLVideoElement
+      const error = target.error
+      let errorMsg = 'Video failed to load'
+      if (error) {
+        errorMsg = `Video failed to load: ${error.message || error.code}`
+      }
+      console.error('Video error:', errorMsg, target.error)
+      setHasError(true)
+      setIsLoading(false)
+      showToast(errorMsg, 'error')
+    }
+
+    const handleWaiting = () => {
+      setIsLoading(true)
+    }
+
+    const handleCanPlay = () => {
+      setIsLoading(false)
     }
 
     video.addEventListener('loadedmetadata', handleLoadedMetadata)
@@ -93,7 +109,7 @@ export function VideoPlayer({ videoSources, audioUrl, poster, mode }: VideoPlaye
     video.addEventListener('pause', handlePause)
     video.addEventListener('timeupdate', handleTimeUpdate)
     video.addEventListener('ended', handleEnded)
-    video.addEventListener('progress', handleProgress)
+    video.addEventListener('error', handleError)
 
     return () => {
       video.removeEventListener('loadedmetadata', handleLoadedMetadata)
@@ -103,7 +119,6 @@ export function VideoPlayer({ videoSources, audioUrl, poster, mode }: VideoPlaye
       video.removeEventListener('pause', handlePause)
       video.removeEventListener('timeupdate', handleTimeUpdate)
       video.removeEventListener('ended', handleEnded)
-      video.removeEventListener('progress', handleProgress)
     }
   }, [])
 
@@ -282,7 +297,7 @@ export function VideoPlayer({ videoSources, audioUrl, poster, mode }: VideoPlaye
       </video>
 
       {/* Center Play Button Overlay */}
-      {isPaused && (
+      {isPaused && !hasError && !isLoading && (
         <div 
           className="absolute inset-0 flex items-center justify-center cursor-pointer z-10"
           onClick={togglePlay}
@@ -290,6 +305,31 @@ export function VideoPlayer({ videoSources, audioUrl, poster, mode }: VideoPlaye
           <div className="w-20 h-20 rounded-full bg-black/60 flex items-center justify-center hover:bg-black/80 transition-all hover:scale-110">
             <Play className="w-10 h-10 text-white fill-white ml-1" />
           </div>
+        </div>
+      )}
+
+      {/* Loading Spinner */}
+      {isLoading && (
+        <div className="absolute inset-0 flex items-center justify-center z-10">
+          <Loader2 className="w-10 h-10 text-white animate-spin" />
+        </div>
+      )}
+
+      {/* Error Display */}
+      {hasError && (
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/60 z-10">
+          <AlertTriangle className="w-12 h-12 text-error mb-2" />
+          <p className="text-white text-sm">Failed to load video</p>
+          <button 
+            onClick={() => {
+              setHasError(false)
+              setIsLoading(true)
+              videoRef.current?.load()
+            }} 
+            className="mt-2 px-4 py-2 bg-accent text-white rounded-full text-sm"
+          >
+            Retry
+          </button>
         </div>
       )}
 
@@ -318,16 +358,12 @@ export function VideoPlayer({ videoSources, audioUrl, poster, mode }: VideoPlaye
               {isPaused ? (
                 <Play className="w-6 h-6 fill-white" />
               ) : (
-                <span className="text-white text-sm font-mono">
-                  {formatTime(currentTime)} / {formatTime(duration)}
-                </span>
+                <Pause className="w-6 h-6 fill-white" />
               )}
             </button>
-            {isPaused && (
-              <span className="text-white text-sm font-mono">
-                {formatTime(currentTime)} / {formatTime(duration)}
-              </span>
-            )}
+            <span className="text-white text-sm font-mono">
+              {formatTime(currentTime)} / {formatTime(duration)}
+            </span>
           </div>
 
           <div className="flex items-center gap-3">
