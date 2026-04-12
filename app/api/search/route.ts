@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
     const url = new URL(request.url)
     const q = url.searchParams.get('q')
     const page = Math.max(1, parseInt(url.searchParams.get('page') || '1'))
-    const limit = 10
+    const limit = 20
 
     if (!q || q.trim().length === 0) {
       return NextResponse.json({ success: false, error: 'Missing search query', code: 400 }, { status: 400 })
