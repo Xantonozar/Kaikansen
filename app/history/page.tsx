@@ -5,10 +5,9 @@ import { useAuth } from '@/providers/AuthProvider'
 import { AppHeader } from '@/app/components/layout/AppHeader'
 import { LoadingSkeleton } from '@/app/components/shared/LoadingSkeleton'
 import { EmptyState } from '@/app/components/shared/EmptyState'
+import { HistoryCard } from '@/app/components/theme/HistoryCard'
 import { useState } from 'react'
-import { cn, timeAgo } from '@/lib/utils'
-import { Eye, Headphones } from 'lucide-react'
-import Link from 'next/link'
+import { cn } from '@/lib/utils'
 
 export default function HistoryPage() {
   const { user, isLoading: isAuthLoading } = useAuth()
@@ -90,30 +89,7 @@ export default function HistoryPage() {
                 </div>
                 <div className="space-y-2">
                   {(items as any[]).map((item: any) => (
-                    <Link
-                      key={item._id}
-                      href={`/theme/${item.themeSlug}`}
-                      className="flex items-center gap-3 bg-bg-surface rounded-[16px] border border-border-subtle p-4 shadow-card"
-                    >
-                      <div className="w-16 h-16 flex-shrink-0 rounded-[12px] overflow-hidden bg-bg-elevated">
-                        {item.themeId?.animeCoverImage && (
-                          <img src={item.themeId.animeCoverImage} className="w-full h-full object-cover" />
-                        )}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-[10px] font-body font-semibold tracking-wide uppercase text-accent flex items-center gap-1 mb-1">
-                          {item.mode === 'watch' ? <Eye className="w-3 h-3" /> : <Headphones className="w-3 h-3" />}
-                          {item.themeId?.type === 'OP' ? 'Opening Theme' : 'Ending Theme'}
-                        </p>
-                        <p className="text-sm font-body font-bold text-ktext-primary truncate">{item.themeId?.songTitle}</p>
-                        <p className="text-xs font-body text-ktext-secondary italic truncate">{item.themeId?.artistName}</p>
-                        <div className="flex items-center gap-3 mt-1 text-xs text-ktext-tertiary">
-                          <span className="flex items-center gap-1">
-                            {timeAgo(item.viewedAt)}
-                          </span>
-                        </div>
-                      </div>
-                    </Link>
+                    <HistoryCard key={item._id} item={item} />
                   ))}
                 </div>
               </div>

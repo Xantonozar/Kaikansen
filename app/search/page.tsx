@@ -4,22 +4,33 @@ import { useState, useEffect, useRef } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { Search as SearchIcon, X, Loader2 } from 'lucide-react'
-import { ThemeFeaturedCard } from '@/app/components/theme/ThemeFeaturedCard'
 import { ThemeListRow } from '@/app/components/theme/ThemeListRow'
 import { EmptyState } from '@/app/components/shared/EmptyState'
 import { LoadingSkeleton } from '@/app/components/shared/LoadingSkeleton'
 import { AppHeader } from '@/app/components/layout/AppHeader'
 import { BottomNav } from '@/app/components/layout/BottomNav'
 import { queryKeys } from '@/lib/queryKeys'
+import { cn } from '@/lib/utils'
+
+type SearchFilter = 'all' | 'song' | 'artist' | 'anime'
+
+const FILTERS: { value: SearchFilter; label: string }[] = [
+  { value: 'all', label: 'All Results' },
+  { value: 'song', label: 'Song' },
+  { value: 'artist', label: 'Singer' },
+  { value: 'anime', label: 'Anime' },
+]
 
 export default function SearchPage() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const initialQuery = searchParams.get('q') || ''
+  const initialBy = (searchParams.get('by') as SearchFilter) || 'all'
   const loadMoreRef = useRef<HTMLDivElement>(null)
   
   const [searchInput, setSearchInput] = useState(initialQuery)
   const [debouncedQuery, setDebouncedQuery] = useState(initialQuery)
+  const [filterBy, setFilterBy] = useState<SearchFilter>(initialBy)
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -29,10 +40,11 @@ export default function SearchPage() {
   }, [searchInput])
 
   const { data, isLoading, hasNextPage, fetchNextPage } = useInfiniteQuery({
-    queryKey: queryKeys.search.results(debouncedQuery, 'all'),
+    queryKey: queryKeys.search.results(debouncedQuery, filterBy),
     queryFn: async ({ pageParam = 1 }) => {
       const params = new URLSearchParams()
       params.set('q', debouncedQuery)
+      params.set('by', filterBy)
       params.set('page', String(pageParam))
       
       const res = await fetch(`/api/search?${params.toString()}`)
@@ -70,9 +82,15 @@ export default function SearchPage() {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
     if (searchInput.trim()) {
-      router.push(`/search?q=${encodeURIComponent(searchInput.trim())}`)
+      router.push(`/search?q=${encodeURIComponent(searchInput.trim())}&by=${filterBy}`)
     }
   }
+
+  useEffect(() => {
+    if (searchInput.trim()) {
+      router.replace(`/search?q=${encodeURIComponent(searchInput.trim())}&by=${filterBy}`)
+    }
+  }, [filterBy, searchInput, router])
 
   return (
     <div className="min-h-screen bg-bg-base flex w-full">
@@ -107,6 +125,23 @@ export default function SearchPage() {
               )}
             </div>
           </form>
+
+          <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-2 mb-2">
+            {FILTERS.map((filter) => (
+              <button
+                key={filter.value}
+                onClick={() => setFilterBy(filter.value)}
+                className={cn(
+                  'flex-shrink-0 h-9 px-4 rounded-full text-sm font-body font-medium transition-colors duration-150 interactive',
+                  filterBy === filter.value
+                    ? 'bg-accent text-white'
+                    : 'bg-bg-surface border border-border-default text-ktext-secondary'
+                )}
+              >
+                {filter.label}
+              </button>
+            ))}
+          </div>
 
           {isLoading ? (
             <div className="space-y-2">

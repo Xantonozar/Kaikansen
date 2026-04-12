@@ -4,25 +4,23 @@ import { NextRequest, NextResponse } from 'next/server'
 import { connectDB } from '@/lib/db'
 import { ThemeCache } from '@/lib/models'
 
-function parseSearchQuery(q: string) {
+function parseSearchQuery(q: string, by: string = 'all') {
   const terms = q.toLowerCase().split(/\s+/)
   
-  const textFields = [
-    'animeTitle', 
-    'animeTitleEnglish', 
-    'animeTitleRomaji',
-    'animeTitleAlternative', 
-    'songTitle', 
-    'artistName', 
-    'allArtists'
-  ]
+  const fieldSets: Record<string, string[]> = {
+    all: ['animeTitle', 'animeTitleEnglish', 'animeTitleRomaji', 'animeTitleAlternative', 'songTitle', 'artistName', 'allArtists'],
+    song: ['songTitle'],
+    artist: ['artistName', 'allArtists'],
+    anime: ['animeTitle', 'animeTitleEnglish', 'animeTitleRomaji', 'animeTitleAlternative'],
+  }
+  
+  const textFields = fieldSets[by] || fieldSets.all
   
   let typeFilter: string | null = null
   let sequenceFilter: number | null = null
   const textTerms: string[] = []
-  
+
   for (const term of terms) {
-    // Check for "op1", "op2", "ed1", "ed12" pattern (no space)
     const combinedMatch = term.match(/^(op|ed)(\d+)$/i)
     if (combinedMatch) {
       const type = combinedMatch[1].toUpperCase()
@@ -34,7 +32,6 @@ function parseSearchQuery(q: string) {
       }
     }
     
-    // Check for "op", "ed" alone
     if (term === 'op') {
       typeFilter = 'OP'
       continue
@@ -44,21 +41,17 @@ function parseSearchQuery(q: string) {
       continue
     }
     
-    // Check for standalone number (sequence)
     const num = parseInt(term)
     if (!isNaN(num) && num >= 1 && num <= 99) {
       sequenceFilter = num
       continue
     }
     
-    // Otherwise, treat as text search term
     textTerms.push(term)
   }
   
-  // Build final query
   const queryParts: any[] = []
   
-  // Text search - match ANY of the text fields for ANY of the text terms
   if (textTerms.length > 0) {
     const textQuery = {
       $or: textTerms.flatMap(term => 
@@ -76,17 +69,14 @@ function parseSearchQuery(q: string) {
     queryParts.push({ sequence: sequenceFilter })
   }
   
-  // If no conditions, return empty query (match all)
   if (queryParts.length === 0) {
     return {}
   }
   
-  // If only one condition, return it directly
   if (queryParts.length === 1) {
     return queryParts[0]
   }
   
-  // Multiple conditions - use $and
   return { $and: queryParts }
 }
 
@@ -96,6 +86,7 @@ export async function GET(request: NextRequest) {
 
     const url = new URL(request.url)
     const q = url.searchParams.get('q')
+    const by = url.searchParams.get('by') || 'all'
     const page = Math.max(1, parseInt(url.searchParams.get('page') || '1'))
     const limit = 100
 
@@ -104,7 +95,7 @@ export async function GET(request: NextRequest) {
     }
 
     const searchTerm = q.trim()
-    const themeQuery = parseSearchQuery(searchTerm)
+    const themeQuery = parseSearchQuery(searchTerm, by)
 
     // If query is empty (no valid conditions), return empty results
     if (!themeQuery || Object.keys(themeQuery).length === 0) {
