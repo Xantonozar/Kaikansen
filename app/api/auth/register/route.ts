@@ -37,6 +37,7 @@ export async function POST(request: NextRequest) {
       username,
       email,
       passwordHash,
+      displayName: username,
       isPublic: true,
     })
 
