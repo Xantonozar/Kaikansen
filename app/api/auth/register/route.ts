@@ -13,6 +13,18 @@ const registerSchema = z.object({
   password: z.string().min(6),
 })
 
+const PLACEHOLDER_AVATARS = [
+  '/avatars/1.svg',
+  '/avatars/2.svg',
+  '/avatars/3.svg',
+  '/avatars/4.svg',
+  '/avatars/5.svg',
+]
+
+function getRandomAvatar(): string {
+  return PLACEHOLDER_AVATARS[Math.floor(Math.random() * PLACEHOLDER_AVATARS.length)]
+}
+
 export async function POST(request: NextRequest) {
   try {
     await connectDB()
@@ -38,6 +50,7 @@ export async function POST(request: NextRequest) {
       email,
       passwordHash,
       displayName: username,
+      avatarUrl: getRandomAvatar(),
       isPublic: true,
     })
 
