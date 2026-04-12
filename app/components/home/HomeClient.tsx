@@ -2,7 +2,9 @@
 
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useInfiniteQuery } from '@tanstack/react-query'
+import { Sparkles, Loader2 } from 'lucide-react'
 import { ThemeFeaturedCard } from '@/app/components/theme/ThemeFeaturedCard'
 import { ThemeListRow } from '@/app/components/theme/ThemeListRow'
 import { useAuth } from '@/providers/AuthProvider'
@@ -32,7 +34,9 @@ interface HomeClientProps {
 
 export function HomeClient({ popularThemes, featuredThemes, topSeasonalThemes, currentSeason, stats }: HomeClientProps) {
   const { user } = useAuth()
+  const router = useRouter()
   const [typeFilter, setTypeFilter] = useState<'OP' | 'ED' | null>(null)
+  const [isRandomLoading, setIsRandomLoading] = useState(false)
   const loadMoreRef = useRef<HTMLDivElement>(null)
 
   const {
@@ -92,8 +96,39 @@ export function HomeClient({ popularThemes, featuredThemes, topSeasonalThemes, c
     enabled: !!user,
   })
 
+  const handleSurpriseMe = async () => {
+    setIsRandomLoading(true)
+    try {
+      const res = await fetch('/api/themes/random')
+      const json = await res.json()
+      if (json.success && json.data?.slug) {
+        router.push(`/theme/${json.data.slug}`)
+      }
+    } catch (error) {
+      console.error('Random theme error:', error)
+    } finally {
+      setIsRandomLoading(false)
+    }
+  }
+
   return (
     <div className="max-w-2xl mx-auto md:max-w-7xl space-y-6 pt-4">
+      {/* Surprise Me Button */}
+      <div className="flex justify-center mb-4">
+        <button
+          onClick={handleSurpriseMe}
+          disabled={isRandomLoading}
+          className="flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-accent to-purple-500 text-white font-body font-semibold hover:opacity-90 transition-opacity disabled:opacity-50"
+        >
+          {isRandomLoading ? (
+            <Loader2 className="w-5 h-5 animate-spin" />
+          ) : (
+            <Sparkles className="w-5 h-5" />
+          )}
+          Surprise Me 🎲
+        </button>
+      </div>
+
       {/* Section: Current Season Openings */}
       {featuredOPs.length > 0 ? (
         <section>
