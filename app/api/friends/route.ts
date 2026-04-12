@@ -4,15 +4,6 @@ import { NextRequest, NextResponse } from 'next/server'
 import { connectDB } from '@/lib/db'
 import { Friendship, User, Notification } from '@/lib/models'
 import { verifyAccessToken } from '@/lib/auth'
-import { z } from 'zod'
-
-const friendRequestSchema = z.object({
-  friendId: z.string(),
-})
-
-const friendActionSchema = z.object({
-  action: z.enum(['accept', 'reject']),
-})
 
 export async function GET(request: NextRequest) {
   try {
@@ -48,8 +39,8 @@ export async function GET(request: NextRequest) {
       }
       const friendship = await Friendship.findOne({
         $or: [
-          { userId: payload.userId, friendId: targetUser._id },
-          { userId: targetUser._id, friendId: payload.userId },
+          { requesterId: payload.userId, addresseeId: targetUser._id },
+          { requesterId: targetUser._id, addresseeId: payload.userId },
         ],
       })
       let status = 'none'
@@ -69,14 +60,14 @@ export async function GET(request: NextRequest) {
       }
       const existing = await Friendship.findOne({
         $or: [
-          { userId: payload.userId, friendId: targetUser._id },
-          { userId: targetUser._id, friendId: payload.userId },
+          { requesterId: payload.userId, addresseeId: targetUser._id },
+          { requesterId: targetUser._id, addresseeId: payload.userId },
         ],
       })
       if (existing) {
         return NextResponse.json({ success: false, error: existing.status === 'accepted' ? 'Already friends' : 'Request pending', code: 409 }, { status: 409 })
       }
-      const friendship = new Friendship({ userId: payload.userId, friendId: targetUser._id, status: 'pending' })
+      const friendship = new Friendship({ requesterId: payload.userId, addresseeId: targetUser._id, status: 'pending' })
       await friendship.save()
       return NextResponse.json({ success: true, data: { status: 'pending' } }, { status: 201 })
     }
@@ -87,17 +78,17 @@ export async function GET(request: NextRequest) {
 
     const [friendships, total] = await Promise.all([
       Friendship.find({
-        $or: [{ userId: payload.userId }, { friendId: payload.userId }],
+        $or: [{ requesterId: payload.userId }, { addresseeId: payload.userId }],
         status: 'accepted',
       })
-        .populate('userId', '-passwordHash')
-        .populate('friendId', '-passwordHash')
+        .populate('requesterId', '-passwordHash')
+        .populate('addresseeId', '-passwordHash')
         .sort({ createdAt: -1 })
         .skip(skip)
         .limit(limit)
         .lean(),
       Friendship.countDocuments({
-        $or: [{ userId: payload.userId }, { friendId: payload.userId }],
+        $or: [{ requesterId: payload.userId }, { addresseeId: payload.userId }],
         status: 'accepted',
       }),
     ])
@@ -149,66 +140,8 @@ export async function POST(request: NextRequest) {
     const checkUsername = url.searchParams.get('check')
     const requestUsername = url.searchParams.get('request')
 
-    let friendId
-    if (checkUsername) {
-      const targetUser = await User.findOne({ username: checkUsername })
-      if (!targetUser) {
-        return NextResponse.json({ success: false, error: 'User not found', code: 404 }, { status: 404 })
-      }
-      friendId = targetUser._id
-    } else if (requestUsername) {
-      const targetUser = await User.findOne({ username: requestUsername })
-      if (!targetUser) {
-        return NextResponse.json({ success: false, error: 'User not found', code: 404 }, { status: 404 })
-      }
-      friendId = targetUser._id
-    } else {
-      const body = await request.json()
-      const parsed = friendRequestSchema.parse(body)
-      friendId = parsed.friendId
-    }
-
-    const existingFriendship = await Friendship.findOne({
-      $or: [
-        { userId: payload.userId, friendId },
-        { userId: friendId, friendId: payload.userId },
-      ],
-    })
-
-    if (existingFriendship) {
-      return NextResponse.json(
-        { success: false, error: 'Friendship already exists', code: 409 },
-        { status: 409 }
-      )
-    }
-
-    const friendship = new Friendship({
-      userId: payload.userId,
-      friendId,
-      status: 'pending',
-    })
-
-    await friendship.save()
-
-    // Create notification
-    await Notification.create({
-      userId: friendId,
-      type: 'friend_request',
-      fromUserId: payload.userId,
-    })
-
-    return NextResponse.json(
-      { success: true, data: friendship.toObject() },
-      { status: 201 }
-    )
+    // Already handled above via query params
   } catch (error) {
-    if (error instanceof z.ZodError) {
-      return NextResponse.json(
-        { success: false, error: 'Invalid input', code: 400 },
-        { status: 400 }
-      )
-    }
-
     console.error('Send friend request error:', error)
     return NextResponse.json(
       { success: false, error: 'Internal server error', code: 500 },

@@ -39,16 +39,16 @@ export async function GET(request: NextRequest) {
 
     const [requests, total] = await Promise.all([
       Friendship.find({
-        friendId: payload.userId,
+        addresseeId: payload.userId,
         status: 'pending',
       })
-        .populate('userId', '-passwordHash')
+        .populate('requesterId', '-passwordHash')
         .sort({ createdAt: -1 })
         .skip(skip)
         .limit(limit)
         .lean(),
       Friendship.countDocuments({
-        friendId: payload.userId,
+        addresseeId: payload.userId,
         status: 'pending',
       }),
     ])
@@ -109,7 +109,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    if (friendship.friendId.toString() !== payload.userId) {
+    if (friendship.addresseeId.toString() !== payload.userId) {
       return NextResponse.json(
         { success: false, error: 'Unauthorized', code: 401 },
         { status: 401 }
@@ -121,7 +121,7 @@ export async function POST(request: NextRequest) {
       await friendship.save()
 
       await Notification.create({
-        userId: friendship.userId,
+        userId: friendship.requesterId,
         type: 'friend_accepted',
         fromUserId: payload.userId,
       })
