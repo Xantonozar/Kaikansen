@@ -138,7 +138,7 @@ export function UserProfileClient({ username }: UserProfileClientProps) {
                   disabled={friendStatus !== 'none' || sendFriendRequest.isPending}
                   className={cn(
                     'px-4 h-11 font-body font-semibold rounded-full transition-colors flex items-center gap-1',
-                    friendStatus === 'accepted'
+                    friendStatus === 'accepted' || sendFriendRequest.isSuccess
                       ? 'bg-accent text-white'
                       : friendStatus === 'pending'
                       ? 'bg-bg-elevated border border-border-default text-ktext-secondary'
@@ -147,7 +147,7 @@ export function UserProfileClient({ username }: UserProfileClientProps) {
                 >
                   {sendFriendRequest.isPending ? (
                     <Loader2 className="w-4 h-4 animate-spin" />
-                  ) : friendStatus === 'accepted' ? (
+                  ) : sendFriendRequest.isSuccess || friendStatus === 'accepted' ? (
                     <>
                       <UserCheck className="w-4 h-4" /> Friends
                     </>
