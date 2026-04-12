@@ -5,6 +5,7 @@ import { useSearchParams, useRouter } from 'next/navigation'
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { Search as SearchIcon, X, Loader2 } from 'lucide-react'
 import { ThemeFeaturedCard } from '@/app/components/theme/ThemeFeaturedCard'
+import { ThemeListRow } from '@/app/components/theme/ThemeListRow'
 import { EmptyState } from '@/app/components/shared/EmptyState'
 import { LoadingSkeleton } from '@/app/components/shared/LoadingSkeleton'
 import { AppHeader } from '@/app/components/layout/AppHeader'
@@ -99,14 +100,14 @@ export default function SearchPage() {
         </form>
 
         {isLoading ? (
-          <div className="flex gap-3 overflow-x-auto scrollbar-hide -mx-4 px-4 pb-2">
-            <LoadingSkeleton count={6} />
+          <div className="space-y-2">
+            <LoadingSkeleton count={8} />
           </div>
         ) : themes.length > 0 ? (
           <>
-            <div className="flex gap-3 overflow-x-auto scrollbar-hide -mx-4 px-4 pb-2">
+            <div className="space-y-2">
               {themes.map((theme: any) => (
-                <ThemeFeaturedCard key={theme.slug} theme={theme} />
+                <ThemeListRow key={theme.slug} theme={theme} />
               ))}
             </div>
             {hasNextPage && (
