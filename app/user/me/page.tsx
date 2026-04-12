@@ -8,21 +8,22 @@ import { LoadingSkeleton } from '@/app/components/shared/LoadingSkeleton'
 export default function UserMePage() {
   const router = useRouter()
   const { user, isLoading: authLoading } = useAuth()
-  const [mounted, setMounted] = useState(false)
+  const [ready, setReady] = useState(false)
 
   useEffect(() => {
-    setMounted(true)
+    const timer = setTimeout(() => setReady(true), 50)
+    return () => clearTimeout(timer)
   }, [])
 
   useEffect(() => {
-    if (!mounted || authLoading) return
+    if (!ready || authLoading) return
     
     if (user) {
       router.replace(`/user/${user.username}`)
     } else {
       router.replace('/login')
     }
-  }, [user, authLoading, router, mounted])
+  }, [user, authLoading, router, ready])
 
   return (
     <div className="min-h-screen bg-bg-base flex items-center justify-center">
