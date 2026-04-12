@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { Menu, Search, ArrowLeft } from 'lucide-react'
-import { useAuth } from '@/hooks/useAuth'
+import { useAuth } from '@/providers/AuthProvider'
 import { useThemeMode } from '@/hooks/useTheme'
 import { cn } from '@/lib/utils'
 
@@ -54,8 +54,8 @@ export function AppHeader() {
           href={user ? "/user/me" : "/login"} 
           className="w-9 h-9 rounded-full overflow-hidden border-2 border-accent-mint bg-bg-elevated"
         >
-          {user?.avatar ? (
-            <img src={user.avatar} alt="Avatar" className="w-full h-full object-cover" />
+          {user?.avatarUrl ? (
+            <img src={user.avatarUrl} alt="Avatar" className="w-full h-full object-cover" />
           ) : (
             <div className="w-full h-full bg-bg-elevated" />
           )}
