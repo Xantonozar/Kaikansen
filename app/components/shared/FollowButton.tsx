@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { UserPlus, UserCheck, Loader2 } from 'lucide-react'
 import { useAuth } from '@/providers/AuthProvider'
 import { useFollow, useUnfollow, useFollowStatus } from '@/lib/api/follow'
+import { useToast } from '@/app/components/shared/Toast'
 
 interface FollowButtonProps {
   username: string
@@ -14,6 +15,7 @@ interface FollowButtonProps {
 export function FollowButton({ username, size = 'md' }: FollowButtonProps) {
   const router = useRouter()
   const { user } = useAuth()
+  const { showToast } = useToast()
   const { data: statusData, isLoading: statusLoading } = useFollowStatus(username)
   const follow = useFollow()
   const unfollow = useUnfollow()
@@ -21,11 +23,15 @@ export function FollowButton({ username, size = 'md' }: FollowButtonProps) {
   const isFollowing = (statusData?.data as any)?.following ?? false
 
   useEffect(() => {
-    // Refresh follow status when mutations complete
-    if (follow.isSuccess || unfollow.isSuccess) {
-      // Query will be invalidated by the mutation
+    if (follow.isError) {
+      const err = follow.error as any
+      showToast(err?.message || 'Failed to follow user', 'error')
     }
-  }, [follow.isSuccess, unfollow.isSuccess])
+    if (unfollow.isError) {
+      const err = unfollow.error as any
+      showToast(err?.message || 'Failed to unfollow user', 'error')
+    }
+  }, [follow.isError, unfollow.isError])
 
   const isLoading = statusLoading || follow.isPending || unfollow.isPending
 

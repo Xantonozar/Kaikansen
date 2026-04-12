@@ -5,6 +5,7 @@ import { useFollow, useUnfollow, useFollowStatus } from '@/lib/api/follow'
 import { useFriendStatus, useSendFriendRequest } from '@/lib/api/friends'
 import { useAuth } from '@/providers/AuthProvider'
 import { useHistory } from '@/lib/api/history'
+import { useToast } from '@/app/components/shared/Toast'
 import { AppHeader } from '@/app/components/layout/AppHeader'
 import { BottomNav } from '@/app/components/layout/BottomNav'
 import { LoadingSkeleton } from '@/app/components/shared/LoadingSkeleton'
@@ -13,6 +14,7 @@ import { HistoryCard } from '@/app/components/theme/HistoryCard'
 import { UserPlus, UserCheck, Loader2 } from 'lucide-react'
 import { cn, formatCount } from '@/lib/utils'
 import Link from 'next/link'
+import { useEffect } from 'react'
 
 interface UserProfileClientProps {
   username: string
@@ -20,6 +22,7 @@ interface UserProfileClientProps {
 
 export function UserProfileClient({ username }: UserProfileClientProps) {
   const { user: currentUser } = useAuth()
+  const { showToast } = useToast()
   const { data: profileData, isLoading } = useUser(username)
   const { data: followData } = useFollowStatus(username)
   
@@ -35,6 +38,12 @@ export function UserProfileClient({ username }: UserProfileClientProps) {
   const friendStatus = (friendData?.data as any)?.status ?? 'none'
   const { data: historyData } = isOwnProfile && currentUser?.id ? useHistory(currentUser.id, undefined, 1) : { data: undefined }
   const recentActivity = (historyData?.data as any[] ?? []).slice(0, 5)
+
+  useEffect(() => {
+    if (follow.isError) showToast('Failed to follow user', 'error')
+    if (unfollow.isError) showToast('Failed to unfollow user', 'error')
+    if (sendFriendRequest.isError) showToast('Failed to send friend request', 'error')
+  }, [follow.isError, unfollow.isError, sendFriendRequest.isError])
 
   if (isLoading) {
     return (
