@@ -12,6 +12,26 @@ export function useFriends(userId: string, page = 1) {
   })
 }
 
+export function useFriendStatus(username: string) {
+  return useQuery({
+    queryKey: ['friends', 'status', username],
+    queryFn: () => fetchWithAuth(`/api/friends?check=${username}`),
+    enabled: !!username,
+  })
+}
+
+export function useSendFriendRequest() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (username: string) =>
+      fetchWithAuth(`/api/friends?request=${username}`, { method: 'POST' }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['friends'] })
+      queryClient.invalidateQueries({ queryKey: ['friends', 'status'] })
+    },
+  })
+}
+
 export function useFriendRequests(userId: string, page = 1) {
   return useQuery({
     queryKey: queryKeys.friends.requests(userId),
@@ -25,20 +45,6 @@ export function useFriendActivity(userId: string) {
     queryKey: queryKeys.friends.activity(userId),
     queryFn: () => fetchWithAuth('/api/friends/activity'),
     enabled: !!userId,
-  })
-}
-
-export function useSendFriendRequest() {
-  const queryClient = useQueryClient()
-  return useMutation({
-    mutationFn: (friendId: string) =>
-      fetchWithAuth('/api/friends', {
-        method: 'POST',
-        body: JSON.stringify({ friendId }),
-      }),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['friends'] })
-    },
   })
 }
 

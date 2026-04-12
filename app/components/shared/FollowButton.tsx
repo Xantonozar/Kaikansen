@@ -1,19 +1,33 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { UserPlus, UserCheck, Loader2 } from 'lucide-react'
 import { useAuth } from '@/providers/AuthProvider'
+import { useFollow, useUnfollow, useFollowStatus } from '@/lib/api/follow'
 
 interface FollowButtonProps {
   username: string
+  size?: 'sm' | 'md' | 'lg'
 }
 
-export function FollowButton({ username }: FollowButtonProps) {
+export function FollowButton({ username, size = 'md' }: FollowButtonProps) {
   const router = useRouter()
   const { user } = useAuth()
-  const [isLoading, setIsLoading] = useState(false)
-  const [isFollowing, setIsFollowing] = useState(false)
+  const { data: statusData, isLoading: statusLoading } = useFollowStatus(username)
+  const follow = useFollow()
+  const unfollow = useUnfollow()
+
+  const isFollowing = (statusData?.data as any)?.following ?? false
+
+  useEffect(() => {
+    // Refresh follow status when mutations complete
+    if (follow.isSuccess || unfollow.isSuccess) {
+      // Query will be invalidated by the mutation
+    }
+  }, [follow.isSuccess, unfollow.isSuccess])
+
+  const isLoading = statusLoading || follow.isPending || unfollow.isPending
 
   const handleToggle = async () => {
     if (!user) {
@@ -21,38 +35,38 @@ export function FollowButton({ username }: FollowButtonProps) {
       return
     }
 
-    setIsLoading(true)
-    try {
-      const method = isFollowing ? 'DELETE' : 'POST'
-      const res = await fetch(`/api/follow/${username}`, { method })
-      const json = await res.json()
-      if (json.success) {
-        setIsFollowing(!isFollowing)
-      }
-    } catch (err) {
-      console.error('Follow error:', err)
-    } finally {
-      setIsLoading(false)
+    if (isFollowing) {
+      unfollow.mutate(username)
+    } else {
+      follow.mutate(username)
     }
   }
+
+  const sizeClasses = {
+    sm: 'px-3 h-8 text-xs',
+    md: 'px-5 h-10 text-sm',
+    lg: 'px-8 h-12 text-base',
+  }
+
+  const iconSize = size === 'sm' ? 'w-3 h-3' : size === 'lg' ? 'w-5 h-5' : 'w-4 h-4'
 
   return (
     <button
       onClick={handleToggle}
       disabled={isLoading}
-      className="px-8 h-11 bg-accent text-white rounded-full font-body font-semibold interactive hover:bg-accent-hover disabled:opacity-50 flex items-center gap-2"
+      className={`${sizeClasses[size]} bg-accent text-white rounded-full font-body font-semibold interactive hover:bg-accent-hover disabled:opacity-50 flex items-center gap-2`}
     >
       {isLoading ? (
-        <Loader2 className="w-4 h-4 animate-spin" />
+        <Loader2 className={`${iconSize} animate-spin`} />
       ) : isFollowing ? (
         <>
-          <UserCheck className="w-4 h-4" />
-          Following
+          <UserCheck className={iconSize} />
+          <span>Following</span>
         </>
       ) : (
         <>
-          <UserPlus className="w-4 h-4" />
-          Follow Artist
+          <UserPlus className={iconSize} />
+          <span>Follow</span>
         </>
       )}
     </button>

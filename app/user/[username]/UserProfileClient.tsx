@@ -2,6 +2,7 @@
 
 import { useUser } from '@/lib/api/users'
 import { useFollow, useUnfollow, useFollowStatus } from '@/lib/api/follow'
+import { useFriendStatus, useSendFriendRequest } from '@/lib/api/friends'
 import { useAuth } from '@/providers/AuthProvider'
 import { useHistory } from '@/lib/api/history'
 import { AppHeader } from '@/app/components/layout/AppHeader'
@@ -9,6 +10,7 @@ import { BottomNav } from '@/app/components/layout/BottomNav'
 import { LoadingSkeleton } from '@/app/components/shared/LoadingSkeleton'
 import { EmptyState } from '@/app/components/shared/EmptyState'
 import { HistoryCard } from '@/app/components/theme/HistoryCard'
+import { UserPlus, UserCheck, Loader2 } from 'lucide-react'
 import { cn, formatCount } from '@/lib/utils'
 import Link from 'next/link'
 
@@ -27,6 +29,10 @@ export function UserProfileClient({ username }: UserProfileClientProps) {
   const profile = profileData?.data as any
   const isFollowing = (followData?.data as any)?.following ?? false
   const isOwnProfile = currentUser?.username === username
+  
+  const { data: friendData } = !isOwnProfile ? useFriendStatus(username) : { data: undefined }
+  const sendFriendRequest = useSendFriendRequest()
+  const friendStatus = (friendData?.data as any)?.status ?? 'none'
   const { data: historyData } = isOwnProfile && currentUser?.id ? useHistory(currentUser.id, undefined, 1) : { data: undefined }
   const recentActivity = (historyData?.data as any[] ?? []).slice(0, 5)
 
@@ -114,18 +120,46 @@ export function UserProfileClient({ username }: UserProfileClientProps) {
                 Edit Profile
               </button>
             ) : (
-              <button
-                onClick={handleFollowToggle}
-                disabled={follow.isPending || unfollow.isPending}
-                className={cn(
-                  'px-8 h-11 font-body font-semibold rounded-full transition-colors',
-                  isFollowing
-                    ? 'bg-bg-elevated border border-border-default text-ktext-primary'
-                    : 'bg-accent text-white'
-                )}
-              >
-                {isFollowing ? 'Following' : 'Follow'}
-              </button>
+              <div className="flex gap-2">
+                <button
+                  onClick={handleFollowToggle}
+                  disabled={follow.isPending || unfollow.isPending}
+                  className={cn(
+                    'px-4 h-11 font-body font-semibold rounded-full transition-colors',
+                    isFollowing
+                      ? 'bg-bg-elevated border border-border-default text-ktext-primary'
+                      : 'bg-accent text-white'
+                  )}
+                >
+                  {follow.isPending ? <Loader2 className="w-4 h-4 animate-spin mx-auto" /> : isFollowing ? 'Following' : 'Follow'}
+                </button>
+                <button
+                  onClick={() => sendFriendRequest.mutate(username)}
+                  disabled={friendStatus !== 'none' || sendFriendRequest.isPending}
+                  className={cn(
+                    'px-4 h-11 font-body font-semibold rounded-full transition-colors flex items-center gap-1',
+                    friendStatus === 'accepted'
+                      ? 'bg-accent text-white'
+                      : friendStatus === 'pending'
+                      ? 'bg-bg-elevated border border-border-default text-ktext-secondary'
+                      : 'bg-accent-container border border-border-accent text-accent'
+                  )}
+                >
+                  {sendFriendRequest.isPending ? (
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                  ) : friendStatus === 'accepted' ? (
+                    <>
+                      <UserCheck className="w-4 h-4" /> Friends
+                    </>
+                  ) : friendStatus === 'pending' ? (
+                    'Pending'
+                  ) : (
+                    <>
+                      <UserPlus className="w-4 h-4" /> Add
+                    </>
+                  )}
+                </button>
+              </div>
             )}
 
             <div className="flex gap-3 w-full max-w-xs">

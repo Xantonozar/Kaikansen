@@ -16,7 +16,7 @@ export function useFollow() {
   const queryClient = useQueryClient()
   return useMutation({
     mutationFn: (username: string) =>
-      fetchWithAuth(`/api/follow/${username}`, { method: 'POST' }),
+      fetchWithAuth(`/api/follow/${username}?action=follow`, { method: 'POST' }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['follow'] })
     },
@@ -27,7 +27,7 @@ export function useUnfollow() {
   const queryClient = useQueryClient()
   return useMutation({
     mutationFn: (username: string) =>
-      fetchWithAuth(`/api/follow/${username}`, { method: 'DELETE' }),
+      fetchWithAuth(`/api/follow/${username}?action=unfollow`, { method: 'POST' }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['follow'] })
     },
