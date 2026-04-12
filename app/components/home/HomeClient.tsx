@@ -113,27 +113,6 @@ export function HomeClient({ popularThemes, featuredThemes, topSeasonalThemes, c
 
   return (
     <div className="max-w-2xl mx-auto md:max-w-7xl space-y-6 pt-4">
-      {/* Surprise Me Box - Above Popular */}
-      <div className="relative overflow-hidden rounded-[24px] bg-gradient-to-br from-accent via-purple-600 to-indigo-700 p-8 text-center cursor-pointer group" onClick={handleSurpriseMe}>
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-4 left-4 w-20 h-20 bg-white/20 rounded-full blur-2xl" />
-          <div className="absolute bottom-4 right-4 w-32 h-32 bg-white/10 rounded-full blur-3xl" />
-        </div>
-        <div className="relative z-10">
-          {isRandomLoading ? (
-            <Loader2 className="w-8 h-8 animate-spin text-white mx-auto" />
-          ) : (
-            <Sparkles className="w-10 h-10 text-white mx-auto mb-3 group-hover:scale-110 transition-transform" />
-          )}
-          <h3 className="text-2xl font-display font-bold text-white mb-2">
-            Surprise Me!
-          </h3>
-          <p className="text-white/80 text-sm font-body">
-            Discover a random anime theme
-          </p>
-        </div>
-      </div>
-
       {/* Section: Current Season Openings */}
       {featuredOPs.length > 0 ? (
         <section>
@@ -204,6 +183,32 @@ export function HomeClient({ popularThemes, featuredThemes, topSeasonalThemes, c
           </div>
         </section>
       )}
+
+      {/* Surprise Me Box - Between Top Rated and Popular */}
+      <section>
+        <div 
+          className="relative overflow-hidden rounded-[24px] bg-gradient-to-br from-accent via-purple-600 to-indigo-700 p-8 text-center cursor-pointer group" 
+          onClick={handleSurpriseMe}
+        >
+          <div className="absolute inset-0 opacity-20">
+            <div className="absolute top-4 left-4 w-20 h-20 bg-white/20 rounded-full blur-2xl" />
+            <div className="absolute bottom-4 right-4 w-32 h-32 bg-white/10 rounded-full blur-3xl" />
+          </div>
+          <div className="relative z-10">
+            {isRandomLoading ? (
+              <Loader2 className="w-8 h-8 animate-spin text-white mx-auto" />
+            ) : (
+              <Sparkles className="w-10 h-10 text-white mx-auto mb-3 group-hover:scale-110 transition-transform" />
+            )}
+            <h3 className="text-2xl font-display font-bold text-white mb-2">
+              Surprise Me!
+            </h3>
+            <p className="text-white/80 text-sm font-body">
+              Discover a random anime theme
+            </p>
+          </div>
+        </div>
+      </section>
 
       {/* Section: Friends Activity (logged in + has friends) */}
       {user && friendActivity && (
