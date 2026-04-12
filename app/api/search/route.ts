@@ -5,7 +5,6 @@ import { connectDB } from '@/lib/db'
 import { ThemeCache } from '@/lib/models'
 
 function parseSearchQuery(q: string) {
-  const conditions: any[] = []
   const terms = q.toLowerCase().split(/\s+/)
   
   const textFields = [
@@ -20,6 +19,7 @@ function parseSearchQuery(q: string) {
   
   let typeFilter: string | null = null
   let sequenceFilter: number | null = null
+  const textTerms: string[] = []
   
   for (const term of terms) {
     // Check for "op1", "op2", "ed1", "ed12" pattern (no space)
@@ -28,8 +28,7 @@ function parseSearchQuery(q: string) {
       const type = combinedMatch[1].toUpperCase()
       const seq = parseInt(combinedMatch[2])
       if (seq >= 1 && seq <= 99) {
-        if (type === 'OP') typeFilter = 'OP'
-        else typeFilter = 'ED'
+        typeFilter = type === 'OP' ? 'OP' : 'ED'
         sequenceFilter = seq
         continue
       }
@@ -52,34 +51,43 @@ function parseSearchQuery(q: string) {
       continue
     }
     
-    // Otherwise, treat as text search
-    const textConditions = textFields.map(field => ({
-      [field]: { $regex: term, $options: 'i' }
-    }))
-    conditions.push({ $or: textConditions })
+    // Otherwise, treat as text search term
+    textTerms.push(term)
   }
   
-  // Build final query with all conditions
-  const query: any = { $and: [] }
+  // Build final query
+  const queryParts: any[] = []
   
-  if (conditions.length > 0) {
-    query.$and.push({ $or: conditions.map(c => c.$or) })
+  // Text search - match ANY of the text fields for ANY of the text terms
+  if (textTerms.length > 0) {
+    const textQuery = {
+      $or: textTerms.flatMap(term => 
+        textFields.map(field => ({ [field]: { $regex: term, $options: 'i' } }))
+      )
+    }
+    queryParts.push(textQuery)
   }
   
   if (typeFilter) {
-    query.$and.push({ type: typeFilter })
+    queryParts.push({ type: typeFilter })
   }
   
   if (sequenceFilter) {
-    query.$and.push({ sequence: sequenceFilter })
+    queryParts.push({ sequence: sequenceFilter })
   }
   
-  // If no conditions, return empty (shouldn't happen but safety)
-  if (query.$and.length === 0) {
+  // If no conditions, return empty query (match all)
+  if (queryParts.length === 0) {
     return {}
   }
   
-  return query
+  // If only one condition, return it directly
+  if (queryParts.length === 1) {
+    return queryParts[0]
+  }
+  
+  // Multiple conditions - use $and
+  return { $and: queryParts }
 }
 
 export async function GET(request: NextRequest) {
