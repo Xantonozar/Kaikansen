@@ -1,9 +1,9 @@
 'use client'
 
-import { Suspense, useState, useEffect } from 'react'
+import { Suspense, useState, useEffect, useRef } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { useInfiniteQuery } from '@tanstack/react-query'
-import { Search as SearchIcon, X, User } from 'lucide-react'
+import { Search as SearchIcon, X, User, Loader2 } from 'lucide-react'
 import { ThemeListRow } from '@/app/components/theme/ThemeListRow'
 import { EmptyState } from '@/app/components/shared/EmptyState'
 import { LoadingSkeleton } from '@/app/components/shared/LoadingSkeleton'
@@ -63,6 +63,27 @@ function SearchContent() {
   const artists = data?.pages?.flatMap((page: any) => page.data?.artists || []) || []
   const results = activeTab === 'themes' ? themes : artists
   const showTabs = filter === 'all' && (themes.length > 0 || artists.length > 0)
+  const loadMoreRef = useRef<HTMLDivElement>(null)
+
+  // Infinite scroll auto-load
+  useEffect(() => {
+    if (!hasNextPage || isLoading) return
+    
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !isLoading) {
+          fetchNextPage()
+        }
+      },
+      { threshold: 0.1 }
+    )
+    
+    if (loadMoreRef.current) {
+      observer.observe(loadMoreRef.current)
+    }
+    
+    return () => observer.disconnect()
+  }, [hasNextPage, isLoading, fetchNextPage])
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
@@ -171,12 +192,9 @@ function SearchContent() {
               ))
             )}
             {hasNextPage && (
-              <button
-                onClick={() => fetchNextPage()}
-                className="w-full py-3 text-center text-sm text-ktext-secondary interactive"
-              >
-                Load more
-              </button>
+              <div ref={loadMoreRef} className="py-4 text-center">
+                <Loader2 className="w-5 h-5 text-ktext-tertiary animate-spin mx-auto" />
+              </div>
             )}
           </div>
         ) : debouncedQuery.length >= 2 ? (
