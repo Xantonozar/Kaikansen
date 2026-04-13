@@ -107,13 +107,17 @@ export async function GET(request: NextRequest) {
     }
     
     // Get list of friends
-    const currentUser = await User.findById(currentUserId)
-      .select('friends')
-      .populate('friends', 'username displayName avatarUrl bio')
-      .lean()
+    const user = await User.findById(currentUserId).lean()
+    if (!user) {
+      return NextResponse.json({ success: true, data: [], meta: { total: 0 } }, { status: 200 })
+    }
 
-    console.log('friends user:', currentUser)
-    const friends = currentUser?.friends ?? []
+    const friendIds = user.friends || []
+    const friends = await User.find({
+      _id: { $in: friendIds },
+      select: 'username displayName avatarUrl bio',
+    }).lean()
+
     const total = friends.length
 
     return NextResponse.json(
