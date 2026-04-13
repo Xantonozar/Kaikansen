@@ -151,26 +151,33 @@ export default function FriendsPage() {
             <LoadingSkeleton count={5} />
           ) : friends.length > 0 ? (
             <div className="space-y-3">
-              {friends.map((friend: any) => (
-                <div key={friend._id} className="bg-bg-surface rounded-[16px] border border-border-subtle p-4 shadow-card flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-full bg-bg-elevated overflow-hidden">
-                    {friend.friendId?.avatarUrl ? (
-                      <img src={friend.friendId.avatarUrl} className="w-full h-full object-cover" />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center text-ktext-tertiary">
-                        {friend.friendId?.displayName?.[0] ?? '?'}
-                      </div>
-                    )}
+              {friends.map((friend: any) => {
+                // Get the other user (not current user)
+                const otherUser = friend.requesterId?._id === user.id 
+                  ? friend.addresseeId 
+                  : friend.requesterId
+                
+                return (
+                  <div key={friend._id} className="bg-bg-surface rounded-[16px] border border-border-subtle p-4 shadow-card flex items-center gap-3">
+                    <div className="w-12 h-12 rounded-full bg-bg-elevated overflow-hidden">
+                      {otherUser?.avatarUrl ? (
+                        <img src={otherUser.avatarUrl} className="w-full h-full object-cover" />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center text-ktext-tertiary">
+                          {otherUser?.displayName?.[0] ?? otherUser?.username?.[0] ?? '?'}
+                        </div>
+                      )}
+                    </div>
+                    <div className="flex-1">
+                      <p className="font-body font-semibold text-ktext-primary">{otherUser?.displayName || otherUser?.username}</p>
+                      <p className="text-xs text-ktext-tertiary">@{otherUser?.username}</p>
+                    </div>
+                    <Link href={`/user/${otherUser?.username}`} className="px-4 py-2 bg-bg-elevated border border-border-default text-ktext-secondary rounded-full text-sm font-semibold">
+                      View
+                    </Link>
                   </div>
-                  <div className="flex-1">
-                    <p className="font-body font-semibold text-ktext-primary">{friend.friendId?.displayName}</p>
-                    <p className="text-xs text-ktext-tertiary">@{friend.friendId?.username}</p>
-                  </div>
-                  <Link href={`/user/${friend.friendId?.username}`} className="px-4 py-2 bg-bg-elevated border border-border-default text-ktext-secondary rounded-full text-sm font-semibold">
-                    View
-                  </Link>
-                </div>
-              ))}
+                )
+              })}
             </div>
           ) : (
             <EmptyState title="No friends yet" description="Start connecting with other users" />
