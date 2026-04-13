@@ -2,8 +2,9 @@ export const dynamic = "force-dynamic"
 
 import { NextRequest, NextResponse } from 'next/server'
 import { connectDB } from '@/lib/db'
-import { Friendship, User, Notification } from '@/lib/models'
+import { User, Notification } from '@/lib/models'
 import { verifyAccessToken } from '@/lib/auth'
+import { Types } from 'mongoose'
 
 export async function GET(request: NextRequest) {
   try {
@@ -31,21 +32,29 @@ export async function GET(request: NextRequest) {
     const checkUsername = url.searchParams.get('check')
     const requestUsername = url.searchParams.get('request')
     
+    const currentUserId = new Types.ObjectId(payload.userId)
+
     // Check friendship status
     if (checkUsername) {
-      const targetUser = await User.findOne({ username: checkUsername })
+      const targetUser = await User.findOne({ username: checkUsername }).lean()
       if (!targetUser) {
         return NextResponse.json({ success: false, error: 'User not found', code: 404 }, { status: 404 })
       }
-      const friendship = await Friendship.findOne({
-        $or: [
-          { requesterId: payload.userId, addresseeId: targetUser._id },
-          { requesterId: targetUser._id, addresseeId: payload.userId },
-        ],
-      })
+      
+      const targetId = targetUser._id
+      const currentUser = await User.findById(currentUserId).lean()
+      if (!currentUser) {
+        return NextResponse.json({ success: false, error: 'User not found', code: 404 }, { status: 404 })
+      }
+
       let status = 'none'
-      if (friendship?.status === 'accepted') status = 'accepted'
-      else if (friendship?.status === 'pending') status = 'pending'
+      if (currentUser.friends?.some((id: Types.ObjectId) => id.equals(targetId))) {
+        status = 'accepted'
+      } else if (currentUser.pendingRequests?.some((id: Types.ObjectId) => id.equals(targetId))) {
+        status = 'pending'
+      } else if (currentUser.sentRequests?.some((id: Types.ObjectId) => id.equals(targetId))) {
+        status = 'sent'
+      }
       return NextResponse.json({ success: true, data: { status } }, { status: 200 })
     }
     
@@ -58,55 +67,65 @@ export async function GET(request: NextRequest) {
       if (targetUser._id.toString() === payload.userId) {
         return NextResponse.json({ success: false, error: 'Cannot add yourself', code: 400 }, { status: 400 })
       }
-      const existing = await Friendship.findOne({
-        $or: [
-          { requesterId: payload.userId, addresseeId: targetUser._id },
-          { requesterId: targetUser._id, addresseeId: payload.userId },
-        ],
-      })
-      if (existing) {
-        return NextResponse.json({ success: false, error: existing.status === 'accepted' ? 'Already friends' : 'Request pending', code: 409 }, { status: 409 })
+
+      const currentUser = await User.findById(currentUserId)
+      if (!currentUser) {
+        return NextResponse.json({ success: false, error: 'User not found', code: 404 }, { status: 404 })
       }
-      const friendship = new Friendship({ requesterId: payload.userId, addresseeId: targetUser._id, status: 'pending' })
-      await friendship.save()
+
+      // Check existing relationship
+      const isFriend = currentUser.friends?.some((id: Types.ObjectId) => id.equals(targetUser._id))
+      const hasPending = currentUser.pendingRequests?.some((id: Types.ObjectId) => id.equals(targetUser._id))
+      const hasSent = currentUser.sentRequests?.some((id: Types.ObjectId) => id.equals(targetUser._id))
+
+      if (isFriend) {
+        return NextResponse.json({ success: false, error: 'Already friends', code: 409 }, { status: 409 })
+      }
+      if (hasPending || hasSent) {
+        return NextResponse.json({ success: false, error: 'Request pending', code: 409 }, { status: 409 })
+      }
+
+      // Add to both users' arrays
+      await Promise.all([
+        User.updateOne(
+          { _id: currentUserId },
+          { $addToSet: { sentRequests: targetUser._id } }
+        ),
+        User.updateOne(
+          { _id: targetUser._id },
+          { $addToSet: { pendingRequests: currentUserId } }
+        ),
+      ])
+
+      await Notification.create({
+        userId: targetUser._id,
+        type: 'friend_request',
+        fromUserId: currentUserId,
+      })
+
       return NextResponse.json({ success: true, data: { status: 'pending' } }, { status: 201 })
     }
     
+    // Get list of friends
     const page = Math.max(1, parseInt(url.searchParams.get('page') || '1'))
     const limit = 50
     const skip = (page - 1) * limit
 
-    const [friendships, total] = await Promise.all([
-      Friendship.find({
-        $or: [
-          // New format
-          { requesterId: payload.userId, addresseeId: payload.userId, status: 'accepted' },
-          // Old format (for backwards compatibility)
-          { userId: payload.userId, status: 'accepted' },
-          { friendId: payload.userId, status: 'accepted' },
-        ],
+    const currentUser = await User.findById(currentUserId)
+      .populate({
+        path: 'friends',
+        select: 'username displayName avatarUrl bio',
+        options: { skip, limit },
       })
-        .populate('requesterId', '-passwordHash')
-        .populate('addresseeId', '-passwordHash')
-        .populate('userId', '-passwordHash')
-        .populate('friendId', '-passwordHash')
-        .sort({ createdAt: -1 })
-        .skip(skip)
-        .limit(limit)
-        .lean(),
-      Friendship.countDocuments({
-        $or: [
-          { requesterId: payload.userId, addresseeId: payload.userId, status: 'accepted' },
-          { userId: payload.userId, status: 'accepted' },
-          { friendId: payload.userId, status: 'accepted' },
-        ],
-      }),
-    ])
+      .lean()
+
+    const friends = currentUser?.friends ?? []
+    const total = currentUser?.friends?.length ?? 0
 
     return NextResponse.json(
       {
         success: true,
-        data: friendships,
+        data: friends,
         meta: {
           page,
           total,
@@ -149,22 +168,30 @@ export async function POST(request: NextRequest) {
     const url = new URL(request.url)
     const checkUsername = url.searchParams.get('check')
     const requestUsername = url.searchParams.get('request')
+    
+    const currentUserId = new Types.ObjectId(payload.userId)
 
     // Check friendship status
     if (checkUsername) {
-      const targetUser = await User.findOne({ username: checkUsername })
+      const targetUser = await User.findOne({ username: checkUsername }).lean()
       if (!targetUser) {
         return NextResponse.json({ success: false, error: 'User not found', code: 404 }, { status: 404 })
       }
-      const friendship = await Friendship.findOne({
-        $or: [
-          { requesterId: payload.userId, addresseeId: targetUser._id },
-          { requesterId: targetUser._id, addresseeId: payload.userId },
-        ],
-      })
+      
+      const targetId = targetUser._id
+      const currentUser = await User.findById(currentUserId).lean()
+      if (!currentUser) {
+        return NextResponse.json({ success: false, error: 'User not found', code: 404 }, { status: 404 })
+      }
+
       let status = 'none'
-      if (friendship?.status === 'accepted') status = 'accepted'
-      else if (friendship?.status === 'pending') status = 'pending'
+      if (currentUser.friends?.some((id: Types.ObjectId) => id.equals(targetId))) {
+        status = 'accepted'
+      } else if (currentUser.pendingRequests?.some((id: Types.ObjectId) => id.equals(targetId))) {
+        status = 'pending'
+      } else if (currentUser.sentRequests?.some((id: Types.ObjectId) => id.equals(targetId))) {
+        status = 'sent'
+      }
       return NextResponse.json({ success: true, data: { status } }, { status: 200 })
     }
     
@@ -177,30 +204,45 @@ export async function POST(request: NextRequest) {
       if (targetUser._id.toString() === payload.userId) {
         return NextResponse.json({ success: false, error: 'Cannot add yourself', code: 400 }, { status: 400 })
       }
-      const existing = await Friendship.findOne({
-        $or: [
-          { requesterId: payload.userId, addresseeId: targetUser._id },
-          { requesterId: targetUser._id, addresseeId: payload.userId },
-        ],
-      })
-      if (existing) {
-        return NextResponse.json({ success: false, error: existing.status === 'accepted' ? 'Already friends' : 'Request pending', code: 409 }, { status: 409 })
+
+      const currentUser = await User.findById(currentUserId)
+      if (!currentUser) {
+        return NextResponse.json({ success: false, error: 'User not found', code: 404 }, { status: 404 })
       }
-      
-      // Create friend request and notification
-      const friendship = new Friendship({ requesterId: payload.userId, addresseeId: targetUser._id, status: 'pending' })
-      await friendship.save()
+
+      // Check existing relationship
+      const isFriend = currentUser.friends?.some((id: Types.ObjectId) => id.equals(targetUser._id))
+      const hasPending = currentUser.pendingRequests?.some((id: Types.ObjectId) => id.equals(targetUser._id))
+      const hasSent = currentUser.sentRequests?.some((id: Types.ObjectId) => id.equals(targetUser._id))
+
+      if (isFriend) {
+        return NextResponse.json({ success: false, error: 'Already friends', code: 409 }, { status: 409 })
+      }
+      if (hasPending || hasSent) {
+        return NextResponse.json({ success: false, error: 'Request pending', code: 409 }, { status: 409 })
+      }
+
+      // Add to both users' arrays
+      await Promise.all([
+        User.updateOne(
+          { _id: currentUserId },
+          { $addToSet: { sentRequests: targetUser._id } }
+        ),
+        User.updateOne(
+          { _id: targetUser._id },
+          { $addToSet: { pendingRequests: currentUserId } }
+        ),
+      ])
 
       await Notification.create({
         userId: targetUser._id,
         type: 'friend_request',
-        fromUserId: payload.userId,
+        fromUserId: currentUserId,
       })
 
       return NextResponse.json({ success: true, data: { status: 'pending' } }, { status: 201 })
     }
     
-    // No valid action
     return NextResponse.json({ success: false, error: 'Missing check or request parameter', code: 400 }, { status: 400 })
   } catch (error) {
     console.error('Send friend request error:', error)

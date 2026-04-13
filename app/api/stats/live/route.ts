@@ -2,7 +2,7 @@ export const dynamic = "force-dynamic"
 
 import { NextRequest, NextResponse } from 'next/server'
 import { connectDB } from '@/lib/db'
-import { User, ThemeCache, Friendship, Rating } from '@/lib/models'
+import { User, ThemeCache, Rating } from '@/lib/models'
 
 export async function GET(request: NextRequest) {
   try {

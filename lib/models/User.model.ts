@@ -12,8 +12,15 @@ const userSchema = new mongoose.Schema(
     totalFollowers: { type: Number, default: 0 },
     totalFollowing: { type: Number, default: 0 },
     isPublic: { type: Boolean, default: true },
+    friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+    pendingRequests: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+    sentRequests: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   },
   { timestamps: true }
 )
+
+userSchema.index({ friends: 1 })
+userSchema.index({ pendingRequests: 1 })
+userSchema.index({ sentRequests: 1 })
 
 export default mongoose.models.User || mongoose.model('User', userSchema)

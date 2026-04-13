@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { Search, UserPlus, UserCheck, Loader2 } from 'lucide-react'
+import { Search, Loader2 } from 'lucide-react'
 import { useFriends, useFriendRequests, useSendFriendRequest, useRespondToFriendRequest } from '@/lib/api/friends'
 import { useAuth } from '@/providers/AuthProvider'
 import { useSearchUsers } from '@/lib/api/users'
@@ -27,7 +27,7 @@ export default function FriendsPage() {
   const requests = (requestsData?.data ?? []) as any[]
   const searchResults = (searchData?.data ?? []) as any[]
 
-  const existingFriendIds = new Set(friends.map((f: any) => f.friendId?._id))
+  const existingFriendIds = new Set(friends.map((f: any) => f._id))
   
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
@@ -130,9 +130,13 @@ export default function FriendsPage() {
                         <p className="font-body font-semibold text-ktext-primary">{u.displayName}</p>
                         <p className="text-xs text-ktext-tertiary">@{u.username}</p>
                       </div>
-                      <Link href={`/user/${u.username}`} className="px-4 py-2 bg-bg-elevated border border-border-default text-ktext-secondary rounded-full text-sm font-semibold">
-                        View
-                      </Link>
+                      <button
+                        onClick={() => sendRequest.mutate(u.username)}
+                        disabled={sendRequest.isPending}
+                        className="px-4 py-2 bg-accent text-white rounded-full text-sm font-semibold disabled:opacity-50"
+                      >
+                        {sendRequest.isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Add'}
+                      </button>
                     </div>
                   ))}
               </div>
@@ -151,46 +155,26 @@ export default function FriendsPage() {
             <LoadingSkeleton count={5} />
           ) : friends.length > 0 ? (
             <div className="space-y-3">
-              {friends.map((friend: any) => {
-                // Get the other user - support both old and new format
-                let otherUser = null
-                
-                // New format: requesterId/addresseeId
-                if (friend.requesterId?._id === user.id) {
-                  otherUser = friend.addresseeId
-                } else if (friend.addresseeId?._id === user.id) {
-                  otherUser = friend.requesterId
-                }
-                // Old format: userId/friendId
-                else if (friend.userId?._id === user.id) {
-                  otherUser = friend.friendId
-                } else if (friend.friendId?._id === user.id) {
-                  otherUser = friend.userId
-                }
-                
-                if (!otherUser) return null
-                
-                return (
-                  <div key={friend._id} className="bg-bg-surface rounded-[16px] border border-border-subtle p-4 shadow-card flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-full bg-bg-elevated overflow-hidden">
-                      {otherUser?.avatarUrl ? (
-                        <img src={otherUser.avatarUrl} className="w-full h-full object-cover" />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center text-ktext-tertiary">
-                          {otherUser?.displayName?.[0] ?? otherUser?.username?.[0] ?? '?'}
-                        </div>
-                      )}
-                    </div>
-                    <div className="flex-1">
-                      <p className="font-body font-semibold text-ktext-primary">{otherUser?.displayName || otherUser?.username}</p>
-                      <p className="text-xs text-ktext-tertiary">@{otherUser?.username}</p>
-                    </div>
-                    <Link href={`/user/${otherUser?.username}`} className="px-4 py-2 bg-bg-elevated border border-border-default text-ktext-secondary rounded-full text-sm font-semibold">
-                      View
-                    </Link>
+              {friends.map((friend: any) => (
+                <div key={friend._id} className="bg-bg-surface rounded-[16px] border border-border-subtle p-4 shadow-card flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-full bg-bg-elevated overflow-hidden">
+                    {friend.avatarUrl ? (
+                      <img src={friend.avatarUrl} className="w-full h-full object-cover" />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center text-ktext-tertiary">
+                        {friend.displayName?.[0] ?? friend.username?.[0] ?? '?'}
+                      </div>
+                    )}
                   </div>
-                )
-              })}
+                  <div className="flex-1">
+                    <p className="font-body font-semibold text-ktext-primary">{friend.displayName || friend.username}</p>
+                    <p className="text-xs text-ktext-tertiary">@{friend.username}</p>
+                  </div>
+                  <Link href={`/user/${friend.username}`} className="px-4 py-2 bg-bg-elevated border border-border-default text-ktext-secondary rounded-full text-sm font-semibold">
+                    View
+                  </Link>
+                </div>
+              ))}
             </div>
           ) : (
             <EmptyState title="No friends yet" description="Start connecting with other users" />
@@ -205,28 +189,30 @@ export default function FriendsPage() {
               {requests.map((req: any) => (
                 <div key={req._id} className="bg-bg-surface rounded-[16px] border border-border-subtle p-4 shadow-card flex items-center gap-3">
                   <div className="w-12 h-12 rounded-full bg-bg-elevated overflow-hidden">
-                    {req.requesterId?.avatarUrl ? (
-                      <img src={req.requesterId.avatarUrl} className="w-full h-full object-cover" />
+                    {req.avatarUrl ? (
+                      <img src={req.avatarUrl} className="w-full h-full object-cover" />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center text-ktext-tertiary">
-                        {req.requesterId?.displayName?.[0] ?? '?'}
+                        {req.displayName?.[0] ?? '?'}
                       </div>
                     )}
                   </div>
                   <div className="flex-1">
-                    <p className="font-body font-semibold text-ktext-primary">{req.requesterId?.displayName}</p>
-                    <p className="text-xs text-ktext-tertiary">@{req.requesterId?.username}</p>
+                    <p className="font-body font-semibold text-ktext-primary">{req.displayName}</p>
+                    <p className="text-xs text-ktext-tertiary">@{req.username}</p>
                   </div>
                   <div className="flex gap-2">
                     <button
                       onClick={() => respondRequest.mutate({ id: req._id, action: 'accept' })}
-                      className="px-4 py-2 bg-accent text-white rounded-full text-sm font-semibold"
+                      disabled={respondRequest.isPending}
+                      className="px-4 py-2 bg-accent text-white rounded-full text-sm font-semibold disabled:opacity-50"
                     >
                       Accept
                     </button>
                     <button
                       onClick={() => respondRequest.mutate({ id: req._id, action: 'reject' })}
-                      className="px-4 py-2 bg-bg-elevated border border-border-default text-ktext-secondary rounded-full text-sm font-semibold"
+                      disabled={respondRequest.isPending}
+                      className="px-4 py-2 bg-bg-elevated border border-border-default text-ktext-secondary rounded-full text-sm font-semibold disabled:opacity-50"
                     >
                       Decline
                     </button>

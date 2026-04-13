@@ -2,13 +2,10 @@ export const dynamic = "force-dynamic"
 
 import { NextRequest, NextResponse } from 'next/server'
 import { connectDB } from '@/lib/db'
-import { Friendship, Notification } from '@/lib/models'
+import { User, Notification } from '@/lib/models'
 import { verifyAccessToken } from '@/lib/auth'
+import { Types } from 'mongoose'
 import { z } from 'zod'
-
-const actionSchema = z.object({
-  action: z.enum(['accept', 'reject']),
-})
 
 export async function GET(request: NextRequest) {
   try {
@@ -37,21 +34,18 @@ export async function GET(request: NextRequest) {
     const limit = 50
     const skip = (page - 1) * limit
 
-    const [requests, total] = await Promise.all([
-      Friendship.find({
-        addresseeId: payload.userId,
-        status: 'pending',
+    const currentUserId = new Types.ObjectId(payload.userId)
+
+    const currentUser = await User.findById(currentUserId)
+      .populate({
+        path: 'pendingRequests',
+        select: 'username displayName avatarUrl bio',
+        options: { skip, limit },
       })
-        .populate('requesterId', '-passwordHash')
-        .sort({ createdAt: -1 })
-        .skip(skip)
-        .limit(limit)
-        .lean(),
-      Friendship.countDocuments({
-        addresseeId: payload.userId,
-        status: 'pending',
-      }),
-    ])
+      .lean()
+
+    const requests = currentUser?.pendingRequests ?? []
+    const total = currentUser?.pendingRequests?.length ?? 0
 
     return NextResponse.json(
       {
@@ -97,40 +91,66 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json()
-    const { action } = actionSchema.parse(body)
-    const friendshipId = new URL(request.url).searchParams.get('id')
+    const { action, requestId } = z.object({
+      action: z.enum(['accept', 'reject']),
+      requestId: z.string(),
+    }).parse(body)
 
-    const friendship = await Friendship.findById(friendshipId)
+    const currentUserId = new Types.ObjectId(payload.userId)
+    const requesterId = new Types.ObjectId(requestId)
 
-    if (!friendship) {
+    // Verify the request is in current user's pendingRequests
+    const currentUser = await User.findById(currentUserId).lean()
+    if (!currentUser) {
+      return NextResponse.json({ success: false, error: 'User not found', code: 404 }, { status: 404 })
+    }
+
+    const hasPending = currentUser.pendingRequests?.some((uid: Types.ObjectId) => uid.equals(requesterId))
+    if (!hasPending) {
       return NextResponse.json(
-        { success: false, error: 'Friendship not found', code: 404 },
+        { success: false, error: 'No pending request from this user', code: 404 },
         { status: 404 }
       )
     }
 
-    if (friendship.addresseeId.toString() !== payload.userId) {
-      return NextResponse.json(
-        { success: false, error: 'Unauthorized', code: 401 },
-        { status: 401 }
-      )
-    }
-
     if (action === 'accept') {
-      friendship.status = 'accepted'
-      await friendship.save()
+      await Promise.all([
+        User.updateOne(
+          { _id: currentUserId },
+          {
+            $pull: { pendingRequests: requesterId },
+            $addToSet: { friends: requesterId },
+          }
+        ),
+        User.updateOne(
+          { _id: requesterId },
+          {
+            $pull: { sentRequests: currentUserId },
+            $addToSet: { friends: currentUserId },
+          }
+        ),
+      ])
 
       await Notification.create({
-        userId: friendship.requesterId,
+        userId: requesterId,
         type: 'friend_accepted',
-        fromUserId: payload.userId,
+        fromUserId: currentUserId,
       })
     } else {
-      await Friendship.deleteOne({ _id: friendshipId })
+      await Promise.all([
+        User.updateOne(
+          { _id: currentUserId },
+          { $pull: { pendingRequests: requesterId } }
+        ),
+        User.updateOne(
+          { _id: requesterId },
+          { $pull: { sentRequests: currentUserId } }
+        ),
+      ])
     }
 
     return NextResponse.json(
-      { success: true, data: friendship.toObject() },
+      { success: true, data: { status: action === 'accept' ? 'accepted' : 'rejected' } },
       { status: 200 }
     )
   } catch (error) {

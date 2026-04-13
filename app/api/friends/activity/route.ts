@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { connectDB } from '@/lib/db'
-import { User, Friendship, Rating, ThemeCache } from '@/lib/models'
+import { User, Rating, ThemeCache } from '@/lib/models'
 import { verifyAccessToken } from '@/lib/auth'
 import { Types } from 'mongoose'
 
@@ -30,18 +30,8 @@ export async function GET(request: NextRequest) {
 
     const userId = new Types.ObjectId(payload.userId)
 
-    const friendships = await Friendship.find({
-      $or: [
-        { requesterId: userId, status: 'accepted' },
-        { addresseeId: userId, status: 'accepted' },
-      ],
-    }).lean()
-
-    const friendIds = friendships.map((f) =>
-      f.requesterId.equals(userId) ? f.addresseeId : f.requesterId
-    )
-
-    if (friendIds.length === 0) {
+    const currentUser = await User.findById(userId).select('friends').lean()
+    if (!currentUser || !currentUser.friends || currentUser.friends.length === 0) {
       return NextResponse.json(
         { success: true, data: [], meta: { page: 1, total: 0, hasMore: false } },
         { status: 200 }
@@ -49,7 +39,7 @@ export async function GET(request: NextRequest) {
     }
 
     const activities = await Rating.find({
-      userId: { $in: friendIds },
+      userId: { $in: currentUser.friends },
     })
       .sort({ createdAt: -1 })
       .limit(10)

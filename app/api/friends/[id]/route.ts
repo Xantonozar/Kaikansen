@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { connectDB } from '@/lib/db'
-import { User, Friendship, Notification } from '@/lib/models'
+import { User, Notification } from '@/lib/models'
 import { verifyAccessToken } from '@/lib/auth'
 import { Types } from 'mongoose'
 import { z } from 'zod'
@@ -30,49 +30,81 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
     }
 
     const { id } = await params
+    const currentUserId = new Types.ObjectId(payload.userId)
 
-    const friendship = await Friendship.findById(id).lean()
+    const body = await request.json()
+    const { action } = z.object({ action: z.enum(['accept', 'reject']) }).parse(body)
 
-    if (!friendship) {
+    const requesterId = new Types.ObjectId(id)
+    
+    // Verify the request is in current user's pendingRequests
+    const currentUser = await User.findById(currentUserId).lean()
+    if (!currentUser) {
+      return NextResponse.json({ success: false, error: 'User not found', code: 404 }, { status: 404 })
+    }
+
+    const hasPending = currentUser.pendingRequests?.some((uid: Types.ObjectId) => uid.equals(requesterId))
+    if (!hasPending) {
       return NextResponse.json(
-        { success: false, error: 'Friendship not found', code: 404 },
+        { success: false, error: 'No pending request from this user', code: 404 },
         { status: 404 }
       )
     }
 
-    const userId = new Types.ObjectId(payload.userId)
-    const isAddressee = friendship.addresseeId.equals(userId)
+    if (action === 'accept') {
+      // Move from pendingRequests -> friends for both users
+      // Also remove from requester's sentRequests
+      await Promise.all([
+        User.updateOne(
+          { _id: currentUserId },
+          {
+            $pull: { pendingRequests: requesterId },
+            $addToSet: { friends: requesterId },
+          }
+        ),
+        User.updateOne(
+          { _id: requesterId },
+          {
+            $pull: { sentRequests: currentUserId },
+            $addToSet: { friends: currentUserId },
+          }
+        ),
+      ])
 
-    if (!isAddressee) {
+      await Notification.create({
+        userId: requesterId,
+        type: 'friend_accepted',
+        fromUserId: currentUserId,
+      })
+
       return NextResponse.json(
-        { success: false, error: 'Not authorized to accept this request', code: 403 },
-        { status: 403 }
+        { success: true, data: { status: 'accepted' } },
+        { status: 200 }
+      )
+    } else {
+      // Reject - just remove from pendingRequests
+      await User.updateOne(
+        { _id: currentUserId },
+        { $pull: { pendingRequests: requesterId } }
+      )
+      await User.updateOne(
+        { _id: requesterId },
+        { $pull: { sentRequests: currentUserId } }
+      )
+
+      return NextResponse.json(
+        { success: true, data: { status: 'rejected' } },
+        { status: 200 }
       )
     }
-
-    if (friendship.status !== 'pending') {
+  } catch (error) {
+    if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { success: false, error: 'Friendship already processed', code: 400 },
+        { success: false, error: 'Invalid input', code: 400 },
         { status: 400 }
       )
     }
-
-    await Friendship.findByIdAndUpdate(id, { status: 'accepted' })
-
-    await Notification.create({
-      recipientId: friendship.requesterId,
-      actorId: userId,
-      type: 'friend_accepted',
-      entityId: id,
-      read: false,
-    })
-
-    return NextResponse.json(
-      { success: true, data: { status: 'accepted' } },
-      { status: 200 }
-    )
-  } catch (error) {
-    console.error('Accept friendship error:', error)
+    console.error('Friend request error:', error)
     return NextResponse.json(
       { success: false, error: 'Internal server error', code: 500 },
       { status: 500 }
@@ -103,28 +135,32 @@ export async function DELETE(request: NextRequest, { params }: { params: Promise
     }
 
     const { id } = await params
-    const userId = new Types.ObjectId(payload.userId)
+    const currentUserId = new Types.ObjectId(payload.userId)
+    const targetId = new Types.ObjectId(id)
 
-    const friendship = await Friendship.findById(id).lean()
-
-    if (!friendship) {
-      return NextResponse.json(
-        { success: false, error: 'Friendship not found', code: 404 },
-        { status: 404 }
-      )
-    }
-
-    const isParticipant =
-      friendship.requesterId.equals(userId) || friendship.addresseeId.equals(userId)
-
-    if (!isParticipant) {
-      return NextResponse.json(
-        { success: false, error: 'Not authorized', code: 403 },
-        { status: 403 }
-      )
-    }
-
-    await Friendship.findByIdAndDelete(id)
+    // Remove from all relationship arrays for both users
+    await Promise.all([
+      User.updateOne(
+        { _id: currentUserId },
+        {
+          $pull: {
+            friends: targetId,
+            pendingRequests: targetId,
+            sentRequests: targetId,
+          },
+        }
+      ),
+      User.updateOne(
+        { _id: targetId },
+        {
+          $pull: {
+            friends: currentUserId,
+            pendingRequests: currentUserId,
+            sentRequests: currentUserId,
+          },
+        }
+      ),
+    ])
 
     return NextResponse.json(
       { success: true, data: { status: 'deleted' } },

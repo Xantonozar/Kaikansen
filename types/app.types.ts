@@ -48,6 +48,9 @@ export interface User {
   bio?: string
   isPublic: boolean
   createdAt: string
+  friends?: string[]
+  pendingRequests?: string[]
+  sentRequests?: string[]
 }
 
 export interface Rating {
