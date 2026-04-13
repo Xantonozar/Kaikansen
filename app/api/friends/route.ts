@@ -108,9 +108,11 @@ export async function GET(request: NextRequest) {
     
     // Get list of friends
     const currentUser = await User.findById(currentUserId)
+      .select('friends')
       .populate('friends', 'username displayName avatarUrl bio')
       .lean()
 
+    console.log('friends user:', currentUser)
     const friends = currentUser?.friends ?? []
     const total = friends.length
 

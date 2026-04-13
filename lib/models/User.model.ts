@@ -12,9 +12,9 @@ const userSchema = new mongoose.Schema(
     totalFollowers: { type: Number, default: 0 },
     totalFollowing: { type: Number, default: 0 },
     isPublic: { type: Boolean, default: true },
-    friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User', default: [] }],
-    pendingRequests: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User', default: [] }],
-    sentRequests: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User', default: [] }],
+    friends: { type: [mongoose.Schema.Types.ObjectId], ref: 'User', default: () => [] },
+    pendingRequests: { type: [mongoose.Schema.Types.ObjectId], ref: 'User', default: () => [] },
+    sentRequests: { type: [mongoose.Schema.Types.ObjectId], ref: 'User', default: () => [] },
   },
   { timestamps: true }
 )
