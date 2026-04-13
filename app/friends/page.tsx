@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { Search, Loader2 } from 'lucide-react'
-import { useFriends, useFriendRequests, useSendFriendRequest, useRespondToFriendRequest } from '@/lib/api/friends'
+import { useFriends, useFriendRequests, useSendFriendRequest, useRespondToFriendRequest, useUnfriend } from '@/lib/api/friends'
 import { useAuth } from '@/providers/AuthProvider'
 import { useSearchUsers } from '@/lib/api/users'
 import { AppHeader } from '@/app/components/layout/AppHeader'
@@ -22,6 +22,7 @@ export default function FriendsPage() {
   
   const sendRequest = useSendFriendRequest()
   const respondRequest = useRespondToFriendRequest()
+  const unfriend = useUnfriend()
 
   const friends = (friendsData?.data ?? []) as any[]
   const requests = (requestsData?.data ?? []) as any[]
@@ -170,6 +171,13 @@ export default function FriendsPage() {
                     <p className="font-body font-semibold text-ktext-primary">{friend.displayName || friend.username}</p>
                     <p className="text-xs text-ktext-tertiary">@{friend.username}</p>
                   </div>
+                  <button
+                    onClick={() => unfriend.mutate(friend._id)}
+                    disabled={unfriend.isPending}
+                    className="px-3 py-1.5 text-xs text-ktext-tertiary hover:text-error"
+                  >
+                    {unfriend.isPending ? 'Removing...' : 'Remove'}
+                  </button>
                   <Link href={`/user/${friend.username}`} className="px-4 py-2 bg-bg-elevated border border-border-default text-ktext-secondary rounded-full text-sm font-semibold">
                     View
                   </Link>

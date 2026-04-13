@@ -70,3 +70,14 @@ export function useRespondToFriendRequest() {
     },
   })
 }
+
+export function useUnfriend() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (friendId: string) =>
+      fetchWithAuth(`/api/friends/${friendId}`, { method: 'DELETE' }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['friends'] })
+    },
+  })
+}
