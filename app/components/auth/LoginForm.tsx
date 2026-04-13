@@ -1,13 +1,15 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { Mail, Lock, Eye, EyeOff, ArrowRight } from 'lucide-react'
 import { setAccessToken } from '@/lib/auth-client'
+import { useAuth } from '@/providers/AuthProvider'
 
 export function LoginForm() {
   const router = useRouter()
+  const { setUser } = useAuth()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
@@ -34,6 +36,17 @@ export function LoginForm() {
 
       const data = await response.json()
       setAccessToken(data.data.accessToken)
+      
+      // Set user immediately after login
+      if (data.data.user) {
+        setUser({
+          id: data.data.user._id,
+          username: data.data.user.username,
+          displayName: data.data.user.username,
+          avatarUrl: null,
+        })
+      }
+      
       router.push('/')
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred')
