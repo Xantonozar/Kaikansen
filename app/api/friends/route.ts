@@ -107,30 +107,18 @@ export async function GET(request: NextRequest) {
     }
     
     // Get list of friends
-    const page = Math.max(1, parseInt(url.searchParams.get('page') || '1'))
-    const limit = 50
-    const skip = (page - 1) * limit
-
     const currentUser = await User.findById(currentUserId)
-      .populate({
-        path: 'friends',
-        select: 'username displayName avatarUrl bio',
-        options: { skip, limit },
-      })
+      .populate('friends', 'username displayName avatarUrl bio')
       .lean()
 
     const friends = currentUser?.friends ?? []
-    const total = currentUser?.friends?.length ?? 0
+    const total = friends.length
 
     return NextResponse.json(
       {
         success: true,
         data: friends,
-        meta: {
-          page,
-          total,
-          hasMore: skip + limit < total,
-        },
+        meta: { total },
       },
       { status: 200 }
     )
