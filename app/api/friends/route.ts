@@ -176,8 +176,17 @@ export async function POST(request: NextRequest) {
       if (existing) {
         return NextResponse.json({ success: false, error: existing.status === 'accepted' ? 'Already friends' : 'Request pending', code: 409 }, { status: 409 })
       }
+      
+      // Create friend request and notification
       const friendship = new Friendship({ requesterId: payload.userId, addresseeId: targetUser._id, status: 'pending' })
       await friendship.save()
+
+      await Notification.create({
+        userId: targetUser._id,
+        type: 'friend_request',
+        fromUserId: payload.userId,
+      })
+
       return NextResponse.json({ success: true, data: { status: 'pending' } }, { status: 201 })
     }
     
