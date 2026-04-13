@@ -36,26 +36,23 @@ export async function GET(request: NextRequest) {
 
     const currentUserId = new Types.ObjectId(payload.userId)
 
-    const currentUser = await User.findById(currentUserId)
-      .populate({
-        path: 'pendingRequests',
-        select: 'username displayName avatarUrl bio',
-        options: { skip, limit },
-      })
-      .lean()
+    const user = await User.findById(currentUserId).lean()
+    if (!user) {
+      return NextResponse.json({ success: true, data: [], meta: { total: 0 } }, { status: 200 })
+    }
 
-    const requests = currentUser?.pendingRequests ?? []
-    const total = currentUser?.pendingRequests?.length ?? 0
+    const requestIds = user.pendingRequests || []
+    const requests = await User.find({
+      _id: { $in: requestIds },
+    }).select('username displayName avatarUrl bio').lean()
+
+    const total = requests.length
 
     return NextResponse.json(
       {
         success: true,
         data: requests,
-        meta: {
-          page,
-          total,
-          hasMore: skip + limit < total,
-        },
+        meta: { total },
       },
       { status: 200 }
     )
