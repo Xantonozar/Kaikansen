@@ -23,8 +23,17 @@ export function useFriendStatus(username: string) {
 export function useSendFriendRequest() {
   const queryClient = useQueryClient()
   return useMutation({
-    mutationFn: (username: string) =>
-      fetchWithAuth(`/api/friends?request=${username}`, { method: 'POST' }),
+    mutationFn: async (username: string) => {
+      try {
+        return await fetchWithAuth(`/api/friends?request=${username}`, { method: 'POST' })
+      } catch (error: any) {
+        const msg = error?.message || ''
+        if (msg.includes('pending') || msg.includes('friends')) {
+          return { success: true, data: { status: 'pending' } }
+        }
+        throw error
+      }
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['friends'] })
       queryClient.invalidateQueries({ queryKey: ['friends', 'status'] })
