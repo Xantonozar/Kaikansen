@@ -78,18 +78,28 @@ export async function GET(request: NextRequest) {
 
     const [friendships, total] = await Promise.all([
       Friendship.find({
-        $or: [{ requesterId: payload.userId }, { addresseeId: payload.userId }],
-        status: 'accepted',
+        $or: [
+          // New format
+          { requesterId: payload.userId, addresseeId: payload.userId, status: 'accepted' },
+          // Old format (for backwards compatibility)
+          { userId: payload.userId, status: 'accepted' },
+          { friendId: payload.userId, status: 'accepted' },
+        ],
       })
         .populate('requesterId', '-passwordHash')
         .populate('addresseeId', '-passwordHash')
+        .populate('userId', '-passwordHash')
+        .populate('friendId', '-passwordHash')
         .sort({ createdAt: -1 })
         .skip(skip)
         .limit(limit)
         .lean(),
       Friendship.countDocuments({
-        $or: [{ requesterId: payload.userId }, { addresseeId: payload.userId }],
-        status: 'accepted',
+        $or: [
+          { requesterId: payload.userId, addresseeId: payload.userId, status: 'accepted' },
+          { userId: payload.userId, status: 'accepted' },
+          { friendId: payload.userId, status: 'accepted' },
+        ],
       }),
     ])
 

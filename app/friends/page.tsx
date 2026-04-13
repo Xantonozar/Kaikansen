@@ -152,10 +152,23 @@ export default function FriendsPage() {
           ) : friends.length > 0 ? (
             <div className="space-y-3">
               {friends.map((friend: any) => {
-                // Get the other user (not current user)
-                const otherUser = friend.requesterId?._id === user.id 
-                  ? friend.addresseeId 
-                  : friend.requesterId
+                // Get the other user - support both old and new format
+                let otherUser = null
+                
+                // New format: requesterId/addresseeId
+                if (friend.requesterId?._id === user.id) {
+                  otherUser = friend.addresseeId
+                } else if (friend.addresseeId?._id === user.id) {
+                  otherUser = friend.requesterId
+                }
+                // Old format: userId/friendId
+                else if (friend.userId?._id === user.id) {
+                  otherUser = friend.friendId
+                } else if (friend.friendId?._id === user.id) {
+                  otherUser = friend.userId
+                }
+                
+                if (!otherUser) return null
                 
                 return (
                   <div key={friend._id} className="bg-bg-surface rounded-[16px] border border-border-subtle p-4 shadow-card flex items-center gap-3">
