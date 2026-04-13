@@ -2,7 +2,14 @@
 
 import { TokenPayload } from './auth'
 
+const TOKEN_KEY = 'kaikansen_access_token'
+
 let _accessToken: string | null = null
+
+// Initialize token from localStorage on load
+if (typeof window !== 'undefined') {
+  _accessToken = localStorage.getItem(TOKEN_KEY)
+}
 
 export function getAccessToken(): string | null {
   return _accessToken
@@ -10,6 +17,13 @@ export function getAccessToken(): string | null {
 
 export function setAccessToken(token: string | null): void {
   _accessToken = token
+  if (typeof window !== 'undefined') {
+    if (token) {
+      localStorage.setItem(TOKEN_KEY, token)
+    } else {
+      localStorage.removeItem(TOKEN_KEY)
+    }
+  }
 }
 
 export async function refreshAccessToken(): Promise<string | null> {

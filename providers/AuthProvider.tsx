@@ -1,7 +1,7 @@
 'use client'
 
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react'
-import { refreshAccessToken, setAccessToken, logout as clientLogout } from '@/lib/auth-client'
+import { refreshAccessToken, setAccessToken, logout as clientLogout, getAccessToken } from '@/lib/auth-client'
 
 interface AuthUser {
   id: string
@@ -24,21 +24,34 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    refreshAccessToken()
-      .then((token) => {
-        if (!token) {
-          setIsLoading(false)
-          return
-        }
-        return fetch('/api/users/me', {
-          headers: { Authorization: `Bearer ${token}` },
-        }).then((r) => r.json())
+    const token = getAccessToken()
+    if (token) {
+      fetch('/api/users/me', {
+        headers: { Authorization: `Bearer ${token}` },
       })
-      .then((data) => {
-        if (data?.data) setUser(data.data)
-      })
-      .catch(() => {})
-      .finally(() => setIsLoading(false))
+        .then((r) => r.json())
+        .then((data) => {
+          if (data?.data) setUser(data.data)
+        })
+        .catch(() => {})
+        .finally(() => setIsLoading(false))
+    } else {
+      refreshAccessToken()
+        .then((token) => {
+          if (!token) {
+            setIsLoading(false)
+            return
+          }
+          return fetch('/api/users/me', {
+            headers: { Authorization: `Bearer ${token}` },
+          }).then((r) => r.json())
+        })
+        .then((data) => {
+          if (data?.data) setUser(data.data)
+        })
+        .catch(() => {})
+        .finally(() => setIsLoading(false))
+    }
   }, [])
 
   const logout = async () => {
