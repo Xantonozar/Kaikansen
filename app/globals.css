@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@import "vidstack/styles/community-skin/video.css";
+@import "vidstack/styles/community-skin/audio.css";
 
 :root {
   --bg-base: #E8F4F7;
