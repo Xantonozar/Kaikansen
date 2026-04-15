@@ -14,7 +14,7 @@
   "dependencies": {
     "@tanstack/react-query": "^5.97.0",
     "@tanstack/react-query-devtools": "^5.97.0",
-    "@vidstack/react": "^1.12.13",
+    "@vidstack/react": "^0.6.15",
     "bcryptjs": "^3.0.3",
     "clsx": "^2.1.1",
     "jsonwebtoken": "^9.0.3",
@@ -26,7 +26,7 @@
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "tailwind-merge": "^3.5.0",
-    "vidstack": "^1.12.13",
+    "vidstack": "^0.6.15",
     "zod": "^4.3.6"
   },
   "devDependencies": {
