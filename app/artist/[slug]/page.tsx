@@ -78,64 +78,68 @@ export default function ArtistPage() {
       <main className="max-w-2xl mx-auto">
         {/* Hero banner with artist info */}
         {artist.coverImage && (
-          <div className="relative h-48 w-full">
+          <div className="relative h-40 w-full overflow-hidden">
             <img
               src={artist.coverImage}
               alt={artist.name}
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-bg-base via-bg-base/80 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-bg-base via-bg-base/90 to-transparent" />
           </div>
         )}
 
         {/* Artist Info Card */}
-        <div className="px-4 -mt-12 relative z-10 mb-4">
-          <div className="bg-bg-surface rounded-[20px] border border-border-subtle p-4 shadow-card">
+        <div className="px-4 -mt-10 relative z-10 mb-4">
+          <div className="bg-bg-surface rounded-[24px] border border-border-subtle p-5 shadow-lg">
             <h1 className="text-2xl font-display font-bold text-ktext-primary">
               {artist.name}
             </h1>
-            <div className="flex flex-wrap items-center gap-3 mt-2 text-sm">
+            <div className="flex flex-wrap items-center gap-2 mt-3">
               {artist.totalThemes && (
-                <span className="px-2 py-1 bg-accent-container text-accent rounded-full font-medium">
-                  {artist.totalThemes} themes
+                <span className="flex items-center gap-1.5 px-3 py-1.5 bg-accent-container text-accent rounded-full text-sm font-semibold">
+                  <span className="text-base">🎵</span> {artist.totalThemes} themes
                 </span>
               )}
               {openings.length > 0 && (
-                <span className="px-2 py-1 bg-accent/10 text-accent rounded-full font-medium">
+                <span className="px-3 py-1.5 bg-accent/15 text-accent rounded-full text-sm font-semibold">
                   {openings.length} OP
                 </span>
               )}
               {endings.length > 0 && (
-                <span className="px-2 py-1 bg-accent-ed/10 text-accent-ed rounded-full font-medium">
+                <span className="px-3 py-1.5 bg-accent-ed/15 text-accent-ed rounded-full text-sm font-semibold">
                   {endings.length} ED
                 </span>
               )}
             </div>
             {artist.genres && artist.genres.length > 0 && (
-              <p className="text-xs text-ktext-tertiary mt-2">{artist.genres.join(', ')}</p>
+              <div className="flex flex-wrap gap-2 mt-3">
+                {artist.genres.map((genre: string) => (
+                  <span key={genre} className="text-xs px-2 py-1 bg-bg-elevated text-ktext-tertiary rounded-full">
+                    {genre}
+                  </span>
+                ))}
+              </div>
             )}
             {artist.description && (
-              <p className="text-sm text-ktext-secondary mt-3">{artist.description}</p>
+              <p className="text-sm text-ktext-secondary mt-3 leading-relaxed">{artist.description}</p>
             )}
           </div>
         </div>
 
         <div className="p-4 space-y-6">
-          {/* Themes with Toggle */}
+          {/* Themes with Toggle - Home page style */}
           {(openings.length > 0 || endings.length > 0) && (
             <section>
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-display font-bold text-ktext-primary">
-                  🎵 Themes
-                </h2>
+              <div className="flex items-center justify-between mb-3">
+                <h2 className="text-lg font-display font-bold text-ktext-primary">🎵 Themes</h2>
                 <div className="flex gap-1 p-1 bg-bg-elevated rounded-full">
                   {(['OP', 'ED'] as const).map((t) => (
                     <button
                       key={t}
                       onClick={() => setTypeFilter(typeFilter === t ? null : t)}
-                      className={`h-7 px-3 rounded-full text-xs font-body font-bold transition-colors duration-150
+                      className={`h-7 px-3 rounded-full text-xs font-body font-bold transition-colors duration-150 interactive
                         ${typeFilter === t
-                          ? t === 'OP' ? 'bg-accent text-white' : 'bg-accent-ed text-white'
+                          ? 'bg-accent text-white'
                           : 'text-ktext-secondary hover:text-ktext-primary'
                         }`}
                     >
