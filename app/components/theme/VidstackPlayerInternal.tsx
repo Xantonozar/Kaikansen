@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useState, useEffect } from 'react'
+import { useCallback, useState, useEffect, useRef } from 'react'
 import { 
   MediaPlayer, 
   MediaPoster,
@@ -27,11 +27,23 @@ interface VidstackPlayerProps {
 }
 
 export function VidstackPlayerInternal({ source, poster, mode, onEnded }: VidstackPlayerProps) {
-  const [isLive, setIsLive] = useState(false)
+  const playerRef = useRef<any>(null)
 
   const handleEnded = useCallback(() => {
     if (onEnded) onEnded()
   }, [onEnded])
+
+  const handlePlay = useCallback(() => {
+    if (playerRef.current) {
+      playerRef.current.play()
+    }
+  }, [])
+
+  const handlePause = useCallback(() => {
+    if (playerRef.current) {
+      playerRef.current.pause()
+    }
+  }, [])
 
   if (mode === 'listen') {
     return (
@@ -41,6 +53,7 @@ export function VidstackPlayerInternal({ source, poster, mode, onEnded }: Vidsta
         )}
         <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40">
           <MediaPlayer
+            ref={playerRef}
             src={source?.url}
             logLevel="warn"
             onEnded={handleEnded}
@@ -58,6 +71,7 @@ export function VidstackPlayerInternal({ source, poster, mode, onEnded }: Vidsta
   return (
     <div className="relative w-full aspect-video rounded-[20px] overflow-hidden bg-black">
       <MediaPlayer
+        ref={playerRef}
         src={source?.url}
         poster={poster || undefined}
         logLevel="warn"
