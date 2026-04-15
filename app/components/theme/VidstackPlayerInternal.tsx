@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useState, useEffect, useRef } from 'react'
+import { useCallback, useState, useRef } from 'react'
 import { 
   MediaPlayer, 
   MediaPoster,
@@ -9,8 +9,7 @@ import {
   MediaFullscreenButton,
   MediaTimeSlider,
   MediaVolumeSlider,
-  MediaBufferingIndicator,
-  MediaCommunitySkin
+  MediaBufferingIndicator
 } from '@vidstack/react'
 
 interface VideoSource {
@@ -27,41 +26,31 @@ interface VidstackPlayerProps {
 }
 
 export function VidstackPlayerInternal({ source, poster, mode, onEnded }: VidstackPlayerProps) {
-  const playerRef = useRef<any>(null)
-
   const handleEnded = useCallback(() => {
     if (onEnded) onEnded()
   }, [onEnded])
 
-  const handlePlay = useCallback(() => {
-    if (playerRef.current) {
-      playerRef.current.play()
-    }
-  }, [])
-
-  const handlePause = useCallback(() => {
-    if (playerRef.current) {
-      playerRef.current.pause()
-    }
-  }, [])
-
   if (mode === 'listen') {
     return (
-      <div className="relative w-full aspect-video rounded-[20px] overflow-hidden bg-black">
+      <div className="relative w-full aspect-square rounded-[20px] overflow-hidden bg-black">
         {poster && (
           <img src={poster} alt="Album cover" className="absolute inset-0 w-full h-full object-cover" />
         )}
         <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40">
           <MediaPlayer
-            ref={playerRef}
             src={source?.url}
             logLevel="warn"
             onEnded={handleEnded}
             preload="auto"
             playsInline
-            controls
           >
-            <MediaCommunitySkin />
+            <MediaBufferingIndicator 
+              className="absolute inset-0 flex items-center justify-center"
+            />
+            <MediaPlayButton className="absolute inset-0 flex items-center justify-center" />
+            <MediaMuteButton className="absolute bottom-2 right-2 z-10" />
+            <MediaVolumeSlider className="absolute bottom-2 right-10 z-10" />
+            <MediaFullscreenButton className="absolute bottom-2 left-2 z-10" />
           </MediaPlayer>
         </div>
       </div>
@@ -71,22 +60,22 @@ export function VidstackPlayerInternal({ source, poster, mode, onEnded }: Vidsta
   return (
     <div className="relative w-full aspect-video rounded-[20px] overflow-hidden bg-black">
       <MediaPlayer
-        ref={playerRef}
         src={source?.url}
         poster={poster || undefined}
         logLevel="warn"
         onEnded={handleEnded}
         preload="auto"
         playsInline
-        controls
       >
         <MediaPoster />
-        <MediaCommunitySkin />
-        
         <MediaBufferingIndicator 
-          stallClass="absolute inset-0 flex items-center justify-center bg-black/30"
-          waitingClass="absolute inset-0 flex items-center justify-center"
+          className="absolute inset-0 flex items-center justify-center"
         />
+        <MediaPlayButton className="absolute inset-0 flex items-center justify-center" />
+        <MediaMuteButton className="absolute bottom-2 right-2 z-10" />
+        <MediaFullscreenButton className="absolute bottom-2 left-2 z-10" />
+        <MediaTimeSlider className="absolute bottom-10 left-2 right-2 z-10" />
+        <MediaVolumeSlider className="absolute bottom-2 right-10 z-10" />
       </MediaPlayer>
     </div>
   )
