@@ -25,7 +25,7 @@ export function VidstackPlayerInternal({ source, poster, mode, onEnded }: Vidsta
   const [showControls, setShowControls] = useState(true)
   const [currentTime, setCurrentTime] = useState(0)
   const [duration, setDuration] = useState(0)
-  const hideControlsTimeout = useRef<NodeJS.Timeout>()
+  const hideControlsTimeout = useRef<NodeJS.Timeout | null>(null)
 
   const handleEnded = useCallback(() => {
     if (onEnded) onEnded()
