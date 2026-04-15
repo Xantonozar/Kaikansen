@@ -1,33 +1,51 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useParams } from 'next/navigation'
-import Link from 'next/link'
 import { AppHeader } from '@/app/components/layout/AppHeader'
 import { ThemeFeaturedCard } from '@/app/components/theme/ThemeFeaturedCard'
 import { EmptyState } from '@/app/components/shared/EmptyState'
 import { LoadingSkeleton } from '@/app/components/shared/LoadingSkeleton'
-import { useArtist } from '@/lib/api/artist'
-import { useArtistThemes } from '@/lib/api/themes'
+import { useArtist, useArtistThemes } from '@/lib/api/artist'
 
 export default function ArtistPage() {
   const params = useParams()
   const slug = params.slug as string
-  const [page, setPage] = useState(1)
+  const [typeFilter, setTypeFilter] = useState<'OP' | 'ED' | null>(null)
+  const loadMoreRef = useRef<HTMLDivElement>(null)
 
   const { data: artistData, isLoading: artistLoading } = useArtist(slug)
-  const { data: themesData, isLoading: themesLoading } = useArtistThemes(slug, page)
-  const artist = artistData?.data as any
-  const themes = (themesData?.data ?? []) as any[]
+  const { 
+    data: themesData, 
+    isLoading: themesLoading, 
+    fetchNextPage, 
+    hasNextPage,
+    isFetchingNextPage 
+  } = useArtistThemes(slug)
   
-  const openings = themes.filter((t: any) => t.type === 'OP')
-  const endings = themes.filter((t: any) => t.type === 'ED')
-  const hasMore = themesData?.meta?.hasMore ?? false
+  const artist = artistData?.data as any
+  const allThemes = (themesData?.pages?.flatMap((page: any) => page.data || []) ?? []) as any[]
+  const hasMorePage = themesData?.pageParams?.length ?? 0
+  
+  const filteredThemes = typeFilter 
+    ? allThemes.filter((t: any) => t.type === typeFilter)
+    : allThemes
+
+  const openings = allThemes.filter((t: any) => t.type === 'OP')
+  const endings = allThemes.filter((t: any) => t.type === 'ED')
   const isLoading = artistLoading || themesLoading
 
-  const handleLoadMore = () => {
-    setPage((p) => p + 1)
-  }
+  useEffect(() => {
+    if (!loadMoreRef.current || !hasNextPage || isFetchingNextPage) return
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) fetchNextPage()
+      },
+      { threshold: 0.1 }
+    )
+    observer.observe(loadMoreRef.current)
+    return () => observer.disconnect()
+  }, [hasNextPage, isFetchingNextPage, fetchNextPage])
 
   if (isLoading) {
     return (
@@ -88,59 +106,58 @@ export default function ArtistPage() {
           )}
         </div>
 
-        <div className="p-4 space-y-8">
-          {/* OPENINGS section */}
-          {openings.length > 0 && (
+        <div className="p-4 space-y-6">
+          {/* Themes with Toggle */}
+          {(openings.length > 0 || endings.length > 0) && (
             <section>
-              <div className="flex items-center justify-between mb-3">
-                <h2 className="text-xl font-display font-bold text-ktext-primary">
-                  OPENINGS <span className="text-ktext-tertiary text-base">({openings.length})</span>
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-lg font-display font-bold text-ktext-primary">
+                  🎵 Themes
                 </h2>
+                <div className="flex gap-1 p-1 bg-bg-elevated rounded-full">
+                  {(['OP', 'ED'] as const).map((t) => (
+                    <button
+                      key={t}
+                      onClick={() => setTypeFilter(typeFilter === t ? null : t)}
+                      className={`h-7 px-3 rounded-full text-xs font-body font-bold transition-colors duration-150
+                        ${typeFilter === t
+                          ? t === 'OP' ? 'bg-accent text-white' : 'bg-accent-ed text-white'
+                          : 'text-ktext-secondary hover:text-ktext-primary'
+                        }`}
+                    >
+                      {t}
+                    </button>
+                  ))}
+                </div>
               </div>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-                {openings.map((theme: any) => (
+              
+              <div className="flex gap-3 overflow-x-auto scrollbar-hide -mx-4 px-4 pb-2">
+                {filteredThemes.map((theme: any) => (
                   <ThemeFeaturedCard key={theme.slug} theme={theme} />
                 ))}
               </div>
+              
+              {filteredThemes.length === 0 && (
+                <p className="text-center text-ktext-tertiary py-8">
+                  No {typeFilter} themes found
+                </p>
+              )}
             </section>
-          )}
-
-          {/* ENDINGS section */}
-          {endings.length > 0 && (
-            <section>
-              <div className="flex items-center justify-between mb-3">
-                <h2 className="text-xl font-display font-bold text-ktext-primary">
-                  ENDINGS <span className="text-ktext-tertiary text-base">({endings.length})</span>
-                </h2>
-              </div>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-                {endings.map((theme: any) => (
-                  <ThemeFeaturedCard key={theme.slug} theme={theme} />
-                ))}
-              </div>
-            </section>
-          )}
-
-          {/* Load More */}
-          {hasMore && (
-            <div className="flex justify-center pt-2">
-              <button
-                onClick={handleLoadMore}
-                disabled={themesLoading}
-                className="px-6 py-2 bg-bg-surface border border-border-subtle rounded-full text-sm font-semibold text-ktext-secondary hover:text-ktext-primary hover:border-accent transition-colors disabled:opacity-50"
-              >
-                {themesLoading ? 'Loading...' : 'Load More'}
-              </button>
-            </div>
           )}
 
           {/* No themes */}
-          {themes.length === 0 && (
+          {allThemes.length === 0 && !themesLoading && (
             <EmptyState
               title="No themes"
               description="This artist hasn't sung any themes yet."
             />
           )}
+
+          <div ref={loadMoreRef} className="py-4 text-center">
+            {isFetchingNextPage && (
+              <p className="text-sm text-ktext-tertiary">Loading more...</p>
+            )}
+          </div>
         </div>
       </main>
     </>
