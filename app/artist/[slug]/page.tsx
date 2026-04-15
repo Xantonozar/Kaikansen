@@ -75,35 +75,49 @@ export default function ArtistPage() {
   return (
     <>
       <AppHeader />
-      <main className="max-w-4xl mx-auto">
-        {/* Hero banner */}
+      <main className="max-w-2xl mx-auto">
+        {/* Hero banner with artist info */}
         {artist.coverImage && (
-          <div className="relative h-56 w-full">
+          <div className="relative h-48 w-full">
             <img
               src={artist.coverImage}
               alt={artist.name}
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-bg-base via-bg-base/50 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-bg-base via-bg-base/80 to-transparent" />
           </div>
         )}
 
-        {/* Artist name + stats */}
-        <div className="px-4 -mt-8 relative z-10">
-          <h1 className="text-3xl font-display font-bold text-ktext-primary">
-            {artist.name}
-          </h1>
-          <div className="flex items-center gap-4 mt-2 text-sm text-ktext-secondary">
-            {artist.totalThemes && (
-              <span>{artist.totalThemes} themes</span>
-            )}
+        {/* Artist Info Card */}
+        <div className="px-4 -mt-12 relative z-10 mb-4">
+          <div className="bg-bg-surface rounded-[20px] border border-border-subtle p-4 shadow-card">
+            <h1 className="text-2xl font-display font-bold text-ktext-primary">
+              {artist.name}
+            </h1>
+            <div className="flex flex-wrap items-center gap-3 mt-2 text-sm">
+              {artist.totalThemes && (
+                <span className="px-2 py-1 bg-accent-container text-accent rounded-full font-medium">
+                  {artist.totalThemes} themes
+                </span>
+              )}
+              {openings.length > 0 && (
+                <span className="px-2 py-1 bg-accent/10 text-accent rounded-full font-medium">
+                  {openings.length} OP
+                </span>
+              )}
+              {endings.length > 0 && (
+                <span className="px-2 py-1 bg-accent-ed/10 text-accent-ed rounded-full font-medium">
+                  {endings.length} ED
+                </span>
+              )}
+            </div>
             {artist.genres && artist.genres.length > 0 && (
-              <span className="text-ktext-tertiary">{artist.genres.join(', ')}</span>
+              <p className="text-xs text-ktext-tertiary mt-2">{artist.genres.join(', ')}</p>
+            )}
+            {artist.description && (
+              <p className="text-sm text-ktext-secondary mt-3">{artist.description}</p>
             )}
           </div>
-          {artist.description && (
-            <p className="text-ktext-secondary mt-3 text-sm">{artist.description}</p>
-          )}
         </div>
 
         <div className="p-4 space-y-6">
