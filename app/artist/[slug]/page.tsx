@@ -75,21 +75,9 @@ export default function ArtistPage() {
   return (
     <>
       <AppHeader />
-      <main className="max-w-2xl mx-auto">
-        {/* Hero banner with artist info */}
-        {artist.coverImage && (
-          <div className="relative h-40 w-full overflow-hidden">
-            <img
-              src={artist.coverImage}
-              alt={artist.name}
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-bg-base via-bg-base/90 to-transparent" />
-          </div>
-        )}
-
-        {/* Artist Info Card */}
-        <div className="px-4 -mt-10 relative z-10 mb-4">
+      <main className="max-w-2xl mx-auto pt-2">
+        {/* Artist Info Card - below header */}
+        <div className="px-4 mb-4">
           <div className="bg-bg-surface rounded-[24px] border border-border-subtle p-5 shadow-lg">
             <h1 className="text-2xl font-display font-bold text-ktext-primary">
               {artist.name}
