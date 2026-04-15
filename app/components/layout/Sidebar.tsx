@@ -36,15 +36,15 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
 
       {/* Sidebar Panel */}
       <div className={cn(
-        "fixed top-0 left-0 bottom-0 w-80 bg-bg-surface border-r border-border-subtle z-50 transform transition-transform duration-300 ease-out",
+        "fixed top-0 left-0 bottom-0 w-72 sm:w-80 bg-bg-surface border-r border-border-subtle z-50 transform transition-transform duration-300 ease-out shadow-2xl",
         isOpen ? "translate-x-0" : "-translate-x-full",
         "md:hidden"
       )}>
         {/* Header with close button */}
         <div className="flex items-center justify-between p-4 border-b border-border-subtle">
           <Link href="/" className="flex items-center gap-3" onClick={onClose}>
-            <div className="w-10 h-10 rounded-xl bg-accent-container flex items-center justify-center">
-              <span className="text-accent text-xl">≋</span>
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-accent to-accent/70 flex items-center justify-center shadow-lg shadow-accent/25">
+              <span className="text-white text-xl drop-shadow-sm">≋</span>
             </div>
             <div>
               <p className="font-display font-bold text-lg text-ktext-primary">Kaikansen</p>
