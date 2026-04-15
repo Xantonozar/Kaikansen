@@ -46,6 +46,7 @@ export function VidstackPlayerInternal({ source, poster, mode, onEnded }: Vidsta
             onEnded={handleEnded}
             preload="auto"
             playsInline
+            controls
           >
             <MediaCommunitySkin />
           </MediaPlayer>
