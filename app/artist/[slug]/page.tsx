@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { useParams } from 'next/navigation'
 import { AppHeader } from '@/app/components/layout/AppHeader'
-import { ThemeFeaturedCard } from '@/app/components/theme/ThemeFeaturedCard'
+import { ThemeListRow } from '@/app/components/theme/ThemeListRow'
 import { EmptyState } from '@/app/components/shared/EmptyState'
 import { LoadingSkeleton } from '@/app/components/shared/LoadingSkeleton'
 import { useArtist, useArtistThemes } from '@/lib/api/artist'
@@ -131,9 +131,9 @@ export default function ArtistPage() {
                 </div>
               </div>
               
-              <div className="flex gap-3 overflow-x-auto scrollbar-hide -mx-4 px-4 pb-2">
+              <div className="space-y-2">
                 {filteredThemes.map((theme: any) => (
-                  <ThemeFeaturedCard key={theme.slug} theme={theme} />
+                  <ThemeListRow key={theme.slug} theme={theme} />
                 ))}
               </div>
               
