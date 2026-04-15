@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import { AppHeader } from '@/app/components/layout/AppHeader'
@@ -7,17 +8,26 @@ import { ThemeFeaturedCard } from '@/app/components/theme/ThemeFeaturedCard'
 import { EmptyState } from '@/app/components/shared/EmptyState'
 import { LoadingSkeleton } from '@/app/components/shared/LoadingSkeleton'
 import { useArtist } from '@/lib/api/artist'
+import { useArtistThemes } from '@/lib/api/themes'
 
 export default function ArtistPage() {
   const params = useParams()
   const slug = params.slug as string
+  const [page, setPage] = useState(1)
 
-  const { data, isLoading } = useArtist(slug)
-  const artist = data?.data as any
-  const themes = artist?.themes ?? []
+  const { data: artistData, isLoading: artistLoading } = useArtist(slug)
+  const { data: themesData, isLoading: themesLoading } = useArtistThemes(slug, page)
+  const artist = artistData?.data as any
+  const themes = (themesData?.data ?? []) as any[]
   
   const openings = themes.filter((t: any) => t.type === 'OP')
   const endings = themes.filter((t: any) => t.type === 'ED')
+  const hasMore = themesData?.meta?.hasMore ?? false
+  const isLoading = artistLoading || themesLoading
+
+  const handleLoadMore = () => {
+    setPage((p) => p + 1)
+  }
 
   if (isLoading) {
     return (
@@ -30,7 +40,7 @@ export default function ArtistPage() {
     )
   }
 
-  if (!artist) {
+  if (!artist || !slug) {
     return (
       <>
         <AppHeader />
@@ -78,14 +88,16 @@ export default function ArtistPage() {
           )}
         </div>
 
-        <div className="p-4 space-y-6">
+        <div className="p-4 space-y-8">
           {/* OPENINGS section */}
           {openings.length > 0 && (
             <section>
-              <h2 className="text-xl font-display font-bold text-ktext-primary mb-3">
-                OPENINGS
-              </h2>
-              <div className="flex gap-3 overflow-x-auto scrollbar-hide -mx-4 px-4 pb-2">
+              <div className="flex items-center justify-between mb-3">
+                <h2 className="text-xl font-display font-bold text-ktext-primary">
+                  OPENINGS <span className="text-ktext-tertiary text-base">({openings.length})</span>
+                </h2>
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
                 {openings.map((theme: any) => (
                   <ThemeFeaturedCard key={theme.slug} theme={theme} />
                 ))}
@@ -96,15 +108,30 @@ export default function ArtistPage() {
           {/* ENDINGS section */}
           {endings.length > 0 && (
             <section>
-              <h2 className="text-xl font-display font-bold text-ktext-primary mb-3">
-                ENDINGS
-              </h2>
-              <div className="flex gap-3 overflow-x-auto scrollbar-hide -mx-4 px-4 pb-2">
+              <div className="flex items-center justify-between mb-3">
+                <h2 className="text-xl font-display font-bold text-ktext-primary">
+                  ENDINGS <span className="text-ktext-tertiary text-base">({endings.length})</span>
+                </h2>
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
                 {endings.map((theme: any) => (
                   <ThemeFeaturedCard key={theme.slug} theme={theme} />
                 ))}
               </div>
             </section>
+          )}
+
+          {/* Load More */}
+          {hasMore && (
+            <div className="flex justify-center pt-2">
+              <button
+                onClick={handleLoadMore}
+                disabled={themesLoading}
+                className="px-6 py-2 bg-bg-surface border border-border-subtle rounded-full text-sm font-semibold text-ktext-secondary hover:text-ktext-primary hover:border-accent transition-colors disabled:opacity-50"
+              >
+                {themesLoading ? 'Loading...' : 'Load More'}
+              </button>
+            </div>
           )}
 
           {/* No themes */}

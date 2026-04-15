@@ -43,10 +43,13 @@ export function useAnimeThemes(anilistId: number) {
   })
 }
 
-export function useArtistThemes(slug: string) {
+export function useArtistThemes(slug: string, page = 1) {
+  const params = new URLSearchParams()
+  params.set('page', page.toString())
+  
   return useQuery({
-    queryKey: queryKeys.themes.byArtist(slug),
-    queryFn: () => fetchWithAuth(`/api/artist/${slug}`),
+    queryKey: queryKeys.themes.byArtist(slug, page),
+    queryFn: () => fetchWithAuth(`/api/artist/${slug}/themes?${params.toString()}`),
     enabled: !!slug,
   })
 }

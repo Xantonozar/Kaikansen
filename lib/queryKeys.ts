@@ -3,7 +3,7 @@ export const queryKeys = {
     popular: (type?: string) => ['themes', 'popular', type] as const,
     seasonal: (season: string, year: number, type?: string) => ['themes', 'seasonal', season, year, type] as const,
     bySlug: (slug: string) => ['themes', slug] as const,
-    byArtist: (slug: string) => ['themes', 'artist', slug] as const,
+    byArtist: (slug: string, page = 1) => ['themes', 'artist', slug, page] as const,
   },
   search: {
     results: (q: string, by?: string, type?: string) => ['search', q, by, type] as const,
