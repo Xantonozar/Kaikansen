@@ -10,13 +10,14 @@ interface VideoSource {
 }
 
 interface VidstackPlayerProps {
-  source: VideoSource
+  source?: VideoSource
+  audioUrl?: string | null
   poster?: string | null
   mode: 'watch' | 'listen'
   onEnded?: () => void
 }
 
-export function VidstackPlayerInternal({ source, poster, mode, onEnded }: VidstackPlayerProps) {
+export function VidstackPlayerInternal({ source, audioUrl, poster, mode, onEnded }: VidstackPlayerProps) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const [isPlaying, setIsPlaying] = useState(false)
@@ -125,7 +126,7 @@ export function VidstackPlayerInternal({ source, poster, mode, onEnded }: Vidsta
         )}
         <video
           ref={videoRef}
-          src={source?.url}
+          src={audioUrl || source?.url}
           className="absolute inset-0 w-full h-full object-cover"
           onPlay={() => setIsPlaying(true)}
           onPause={() => setIsPlaying(false)}

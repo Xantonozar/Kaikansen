@@ -59,6 +59,7 @@ export function VideoPlayer({ videoSources, audioUrl, poster, mode, onEnded }: V
     }>
       <LazyVidstackPlayer 
         source={currentSource}
+        audioUrl={audioUrl}
         poster={poster}
         mode={mode}
         onEnded={onEnded}
