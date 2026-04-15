@@ -47,10 +47,10 @@ export function VidstackPlayerInternal({ source, poster, mode, onEnded }: Vidsta
             <MediaBufferingIndicator 
               className="absolute inset-0 flex items-center justify-center"
             />
-            <MediaPlayButton className="absolute inset-0 flex items-center justify-center" />
-            <MediaMuteButton className="absolute bottom-2 right-2 z-10" />
-            <MediaVolumeSlider className="absolute bottom-2 right-10 z-10" />
-            <MediaFullscreenButton className="absolute bottom-2 left-2 z-10" />
+            <MediaPlayButton className="vidstack-play-button" />
+            <MediaMuteButton className="vidstack-control-button" />
+            <MediaVolumeSlider className="vidstack-slider" />
+            <MediaFullscreenButton className="vidstack-control-button" />
           </MediaPlayer>
         </div>
       </div>
@@ -71,11 +71,11 @@ export function VidstackPlayerInternal({ source, poster, mode, onEnded }: Vidsta
         <MediaBufferingIndicator 
           className="absolute inset-0 flex items-center justify-center"
         />
-        <MediaPlayButton className="absolute inset-0 flex items-center justify-center" />
-        <MediaMuteButton className="absolute bottom-2 right-2 z-10" />
-        <MediaFullscreenButton className="absolute bottom-2 left-2 z-10" />
-        <MediaTimeSlider className="absolute bottom-10 left-2 right-2 z-10" />
-        <MediaVolumeSlider className="absolute bottom-2 right-10 z-10" />
+        <MediaPlayButton className="vidstack-play-button" />
+        <MediaMuteButton className="vidstack-control-button" />
+        <MediaFullscreenButton className="vidstack-control-button" />
+        <MediaTimeSlider className="vidstack-slider" />
+        <MediaVolumeSlider className="vidstack-slider" />
       </MediaPlayer>
     </div>
   )
