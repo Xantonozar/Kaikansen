@@ -120,7 +120,7 @@ export function VidstackPlayerInternal({ source, audioUrl, poster, mode, onEnded
 
   if (mode === 'listen') {
     return (
-      <div className="relative w-full aspect-square rounded-[20px] overflow-hidden bg-black">
+      <div className="relative w-full aspect-square rounded-[20px] overflow-hidden bg-black cursor-pointer" onClick={togglePlay}>
         {poster && (
           <img src={poster} alt="Album cover" className="absolute inset-0 w-full h-full object-cover" />
         )}
@@ -137,7 +137,6 @@ export function VidstackPlayerInternal({ source, audioUrl, poster, mode, onEnded
         />
         <div 
           className={`absolute inset-0 flex items-center justify-center bg-black/40 transition-opacity duration-300 ${showControls ? 'opacity-100' : 'opacity-0'}`}
-          onClick={togglePlay}
         >
           {!isPlaying && (
             <div className="w-16 h-16 rounded-full bg-black/60 flex items-center justify-center">
@@ -145,14 +144,14 @@ export function VidstackPlayerInternal({ source, audioUrl, poster, mode, onEnded
             </div>
           )}
         </div>
-        <div className={`absolute bottom-4 left-4 right-4 flex items-center gap-3 transition-opacity duration-300 ${showControls ? 'opacity-100' : 'opacity-0'}`}>
+        <div className={`absolute bottom-4 left-4 right-4 flex items-center gap-3 transition-opacity duration-300 ${showControls ? 'opacity-100' : 'opacity-0'} pointer-events-auto`} onClick={(e) => e.stopPropagation()}>
           <button onClick={togglePlay} className="w-10 h-10 rounded-full bg-black/60 flex items-center justify-center hover:bg-black/80">
             {isPlaying ? <Pause className="w-5 h-5 text-white" fill="white" /> : <Play className="w-5 h-5 text-white" fill="white" />}
           </button>
           <button onClick={toggleMute} className="w-10 h-10 rounded-full bg-black/60 flex items-center justify-center hover:bg-black/80">
             {isMuted ? <VolumeX className="w-5 h-5 text-white" /> : <Volume2 className="w-5 h-5 text-white" />}
           </button>
-          <div className="flex-1 h-1 bg-white/30 rounded-full overflow-hidden cursor-pointer" onClick={handleSeek}>
+          <div className="flex-1 h-1 bg-white/30 rounded-full overflow-hidden cursor-pointer" onClick={(e) => { e.stopPropagation(); handleSeek(e); }}>
             <div className="h-full bg-red-500" style={{ width: `${(currentTime / duration) * 100}%` }} />
           </div>
           <span className="text-white text-sm">{formatTime(currentTime)}/{formatTime(duration)}</span>
@@ -167,9 +166,10 @@ export function VidstackPlayerInternal({ source, audioUrl, poster, mode, onEnded
   return (
     <div 
       ref={containerRef}
-      className="relative w-full aspect-video rounded-[20px] overflow-hidden bg-black group"
+      className="relative w-full aspect-video rounded-[20px] overflow-hidden bg-black group cursor-pointer"
       onMouseMove={handleMouseMove}
       onMouseLeave={() => isPlaying && setShowControls(false)}
+      onClick={togglePlay}
     >
       <video
         ref={videoRef}
@@ -181,7 +181,6 @@ export function VidstackPlayerInternal({ source, audioUrl, poster, mode, onEnded
         onEnded={handleEnded}
         onTimeUpdate={handleTimeUpdate}
         onLoadedMetadata={handleLoadedMetadata}
-        onClick={togglePlay}
         playsInline
       />
       
@@ -193,7 +192,7 @@ export function VidstackPlayerInternal({ source, audioUrl, poster, mode, onEnded
         )}
       </div>
 
-      <div className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent pt-10 pb-3 px-4 transition-opacity duration-300 ${showControls ? 'opacity-100' : 'opacity-0'}`}>
+      <div className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent pt-10 pb-3 px-4 transition-opacity duration-300 ${showControls ? 'opacity-100' : 'opacity-0'} pointer-events-auto`}>
         <div className="relative h-1 bg-white/30 rounded-full cursor-pointer mb-2 group-hover:h-2" onClick={handleSeek}>
           <div className="absolute h-full bg-red-500 rounded-full" style={{ width: `${duration ? (currentTime / duration) * 100 : 0}%` }} />
           <div className="absolute top-1/2 -translate-y-1/2 w-3 h-3 bg-red-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" style={{ left: `${duration ? (currentTime / duration) * 100 : 0}%` }} />
