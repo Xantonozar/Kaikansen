@@ -51,33 +51,27 @@ export default function AnimePage() {
   const params = useParams()
   const anilistId = parseInt(params.anilistId as string)
 
-  const { data, isLoading } = useAnimeThemes(anilistId)
-  const anime = data?.data as any
-  const themes = anime?.themes ?? []
+  const { data, isLoading, error } = useAnimeThemes(anilistId)
+  const animeData = data?.data as any
+  const anime = animeData?.anime
+  const themes = animeData?.themes ?? []
   
   const openings = themes.filter((t: any) => t.type === 'OP')
   const endings = themes.filter((t: any) => t.type === 'ED')
 
-  if (isLoading) {
+  if (isLoading || !anime || error) {
     return (
       <>
         <AppHeader />
         <main className="p-4">
-          <LoadingSkeleton count={12} />
-        </main>
-      </>
-    )
-  }
-
-  if (!anime) {
-    return (
-      <>
-        <AppHeader />
-        <main className="p-4">
-          <EmptyState
-            title="Anime not found"
-            description="This anime doesn't exist or has no themes."
-          />
+          {isLoading ? (
+            <LoadingSkeleton count={12} />
+          ) : (
+            <EmptyState
+              title="Anime not found"
+              description="This anime doesn't exist or has no themes."
+            />
+          )}
         </main>
       </>
     )
