@@ -2,7 +2,7 @@
 
 import { useParams } from 'next/navigation'
 import { useState } from 'react'
-import { Star, ChevronDown, ChevronUp, Play } from 'lucide-react'
+import { Star, ChevronDown, ChevronUp, ListMusic } from 'lucide-react'
 import { AppHeader } from '@/app/components/layout/AppHeader'
 import { ThemeListRow } from '@/app/components/theme/ThemeListRow'
 import { EmptyState } from '@/app/components/shared/EmptyState'
@@ -21,23 +21,29 @@ function ToggleSection({ title, themes, defaultOpen = true }: ToggleSectionProps
   if (themes.length === 0) return null
 
   return (
-    <section className="border-t border-border-default pt-4 mt-4">
+    <section className="border-t border-border-subtle">
       <button 
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between py-2"
+        className="w-full flex items-center justify-between py-3 group"
       >
-        <h2 className="text-lg font-display font-bold text-ktext-primary">
-          {title} ({themes.length})
-        </h2>
+        <div className="flex items-center gap-2">
+          <ListMusic className="w-4 h-4 text-accent" />
+          <h2 className="text-base font-display font-semibold text-ktext-primary">
+            {title}
+          </h2>
+          <span className="text-xs font-mono text-ktext-tertiary bg-bg-elevated px-2 py-0.5 rounded-full">
+            {themes.length}
+          </span>
+        </div>
         {isOpen ? (
-          <ChevronUp className="w-5 h-5 text-ktext-secondary" />
+          <ChevronUp className="w-5 h-5 text-ktext-secondary group-hover:text-accent transition-colors" />
         ) : (
-          <ChevronDown className="w-5 h-5 text-ktext-secondary" />
+          <ChevronDown className="w-5 h-5 text-ktext-secondary group-hover:text-accent transition-colors" />
         )}
       </button>
       
       {isOpen && (
-        <div className="space-y-2 mt-3">
+        <div className="space-y-1 pb-3">
           {themes.map((theme: any) => (
             <ThemeListRow key={theme.slug} theme={theme} />
           ))}
@@ -65,7 +71,7 @@ export default function AnimePage() {
         <AppHeader />
         <main className="p-4">
           {isLoading ? (
-            <LoadingSkeleton count={12} />
+            <LoadingSkeleton count={8} />
           ) : (
             <EmptyState
               title="Anime not found"
@@ -80,93 +86,63 @@ export default function AnimePage() {
   return (
     <>
       <AppHeader />
-      <main className="max-w-4xl mx-auto">
-        {/* Hero Banner Image */}
-        <div className="relative h-64 w-full">
-          <img
-            src={anime.bannerImage || anime.animeGrillImage || '/placeholder.svg'}
-            alt={`${anime.titleRomaji} banner`}
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-bg-base via-transparent to-transparent" />
-        </div>
-
-        {/* Cover Image + Title Section */}
-        <div className="px-4 -mt-16 relative z-10">
+      <main className="max-w-2xl mx-auto px-4 py-6">
+        {/* Header Card */}
+        <div className="bg-bg-surface rounded-2xl border border-border-subtle p-5 shadow-card">
           <div className="flex gap-4">
-            {/* Cover Image */}
-            <div className="flex-shrink-0 w-28 h-40 rounded-lg overflow-hidden shadow-modal mt-2">
+            {/* Cover */}
+            <div className="flex-shrink-0 w-24 h-34 rounded-xl overflow-hidden shadow-card-hover">
               <img
                 src={anime.coverImage || anime.animeGrillImage || '/placeholder.svg'}
-                alt={`${anime.titleRomaji} cover`}
+                alt={anime.titleRomaji}
                 className="w-full h-full object-cover"
               />
             </div>
             
-            {/* Title + Meta */}
-            <div className="flex-1 min-w-0 pt-12">
-              <h1 className="text-2xl font-display font-bold text-ktext-primary truncate">
+            {/* Info */}
+            <div className="flex-1 min-w-0">
+              <h1 className="text-xl font-display font-bold text-ktext-primary leading-tight">
                 {anime.titleRomaji}
               </h1>
               {anime.titleEnglish && anime.titleEnglish !== anime.titleRomaji && (
-                <p className="text-sm text-ktext-secondary truncate mt-1">
+                <p className="text-sm text-ktext-secondary mt-1 line-clamp-2">
                   {anime.titleEnglish}
                 </p>
               )}
-              <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-3 text-sm text-ktext-secondary">
-                {anime.averageScore && (
-                  <div className="flex items-center gap-1">
-                    <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
-                    <span className="font-semibold">{anime.averageScore}</span>
-                  </div>
-                )}
-                {anime.totalEpisodes && (
-                  <span>{anime.totalEpisodes} episodes</span>
-                )}
-                {anime.status && (
-                  <span>{anime.status}</span>
-                )}
+              
+              <div className="flex items-center gap-3 mt-3 text-xs text-ktext-tertiary">
                 {anime.format && (
-                  <span>{anime.format}</span>
+                  <span className="bg-bg-elevated px-2 py-1 rounded-md">
+                    {anime.format}
+                  </span>
                 )}
+                <span className="bg-bg-elevated px-2 py-1 rounded-md">
+                  {themes.length} themes
+                </span>
               </div>
               
-              {/* Genre tags */}
-              {anime.genres && anime.genres.length > 0 && (
-                <div className="flex flex-wrap gap-1.5 mt-3">
-                  {anime.genres.map((genre: string) => (
-                    <span key={genre} className="text-[10px] font-mono font-semibold px-2 py-1 rounded-full bg-accent/20 text-accent">
-                      {genre}
-                    </span>
-                  ))}
-                </div>
+              {/* Synopsis Preview */}
+              {anime.synopsis && (
+                <p className="text-xs text-ktext-secondary mt-3 line-clamp-3 leading-relaxed">
+                  {anime.synopsis}
+                </p>
               )}
             </div>
           </div>
         </div>
 
-        {/* Synopsis */}
-        {anime.synopsis && (
-          <div className="px-4 mt-6">
-            <h3 className="text-sm font-semibold text-ktext-secondary uppercase tracking-wider mb-2">
-              Synopsis
-            </h3>
-            <p className="text-sm text-ktext-primary leading-relaxed whitespace-pre-wrap">
-              {anime.synopsis}
-            </p>
-          </div>
-        )}
-
-        {/* Openings & Endings */}
-        <div className="px-4 mt-6 pb-8">
+        {/* Themes Sections */}
+        <div className="bg-bg-surface rounded-2xl border border-border-subtle p-2 mt-4 shadow-card">
           <ToggleSection title="Openings" themes={openings} defaultOpen={true} />
           <ToggleSection title="Endings" themes={endings} defaultOpen={false} />
           
           {themes.length === 0 && (
-            <EmptyState
-              title="No themes"
-              description="This anime has no opening or ending themes."
-            />
+            <div className="p-8">
+              <EmptyState
+                title="No themes"
+                description="This anime has no opening or ending themes."
+              />
+            </div>
           )}
         </div>
       </main>
