@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { connectDB } from '@/lib/db'
-import { AnimeCache, ThemeCache } from '@/lib/models'
+import { ThemeCache } from '@/lib/models'
 
 export const dynamic = 'force-dynamic'
 
@@ -20,18 +20,32 @@ export async function GET(
       )
     }
 
-    const anime = await AnimeCache.findOne({ anilistId }).lean()
+    // Find all themes for this anime
+    const themes = await ThemeCache.find({ anilistId })
+      .sort({ type: 1, sequence: 1 })
+      .lean()
 
-    if (!anime) {
+    if (themes.length === 0) {
       return NextResponse.json(
         { success: false, error: 'Anime not found', code: 404 },
         { status: 404 }
       )
     }
 
-    const themes = await ThemeCache.find({ anilistId })
-      .sort({ type: 1, sequence: 1 })
-      .lean()
+    // Build anime data from first theme
+    const firstTheme = themes[0]
+    
+    const anime = {
+      anilistId: firstTheme.anilistId,
+      titleRomaji: firstTheme.animeTitle,
+      titleEnglish: firstTheme.animeTitleEnglish,
+      coverImage: firstTheme.animeCoverImage || firstTheme.animeGrillImage,
+      bannerImage: firstTheme.animeBannerImage,
+      animeGrillImage: firstTheme.animeGrillImage,
+      synopsis: firstTheme.animeSynopsis,
+      format: firstTheme.animeMediaFormat,
+      totalEpisodes: themes.length,
+    }
 
     const openings = themes.filter((t) => t.type === 'OP')
     const endings = themes.filter((t) => t.type === 'ED')
