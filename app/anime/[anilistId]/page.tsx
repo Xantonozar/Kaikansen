@@ -2,7 +2,7 @@
 
 import { useParams } from 'next/navigation'
 import { useState } from 'react'
-import { Star, ChevronDown, ChevronUp, ListMusic } from 'lucide-react'
+import { ChevronDown, ChevronUp, ListMusic } from 'lucide-react'
 import { AppHeader } from '@/app/components/layout/AppHeader'
 import { ThemeListRow } from '@/app/components/theme/ThemeListRow'
 import { EmptyState } from '@/app/components/shared/EmptyState'
@@ -86,12 +86,12 @@ export default function AnimePage() {
   return (
     <>
       <AppHeader />
-      <main className="max-w-2xl mx-auto px-4 py-6">
+      <main className="max-w-2xl mx-auto px-3 py-4 sm:px-4 sm:py-6">
         {/* Header Card */}
-        <div className="bg-bg-surface rounded-2xl border border-border-subtle p-5 shadow-card">
-          <div className="flex gap-4">
-            {/* Cover */}
-            <div className="flex-shrink-0 w-24 h-34 rounded-xl overflow-hidden shadow-card-hover">
+        <div className="bg-bg-surface rounded-2xl border border-border-subtle p-4 sm:p-5 shadow-card">
+          <div className="flex gap-3 sm:gap-4">
+            {/* Cover - smaller on mobile */}
+            <div className="flex-shrink-0 w-20 h-28 sm:w-24 sm:h-34 rounded-lg sm:rounded-xl overflow-hidden shadow-card-hover">
               <img
                 src={anime.coverImage || anime.animeGrillImage || '/placeholder.svg'}
                 alt={anime.titleRomaji}
@@ -101,7 +101,7 @@ export default function AnimePage() {
             
             {/* Info */}
             <div className="flex-1 min-w-0">
-              <h1 className="text-xl font-display font-bold text-ktext-primary leading-tight">
+              <h1 className="text-lg sm:text-xl font-display font-bold text-ktext-primary leading-tight">
                 {anime.titleRomaji}
               </h1>
               {anime.titleEnglish && anime.titleEnglish !== anime.titleRomaji && (
@@ -110,34 +110,41 @@ export default function AnimePage() {
                 </p>
               )}
               
-              <div className="flex items-center gap-3 mt-3 text-xs text-ktext-tertiary">
+              <div className="flex flex-wrap items-center gap-2 mt-2 sm:mt-3 text-xs text-ktext-tertiary">
                 {anime.format && (
-                  <span className="bg-bg-elevated px-2 py-1 rounded-md">
+                  <span className="bg-bg-elevated px-2 py-0.5 sm:py-1 rounded-md">
                     {anime.format}
                   </span>
                 )}
-                <span className="bg-bg-elevated px-2 py-1 rounded-md">
+                <span className="bg-bg-elevated px-2 py-0.5 sm:py-1 rounded-md">
                   {themes.length} themes
                 </span>
               </div>
               
-              {/* Synopsis Preview */}
+              {/* Synopsis Preview - hidden on very small screens */}
               {anime.synopsis && (
-                <p className="text-xs text-ktext-secondary mt-3 line-clamp-3 leading-relaxed">
+                <p className="text-xs text-ktext-secondary mt-2 sm:mt-3 line-clamp-2 sm:line-clamp-3 leading-relaxed hidden xs:block">
                   {anime.synopsis}
                 </p>
               )}
             </div>
           </div>
+          
+          {/* Synopsis below on mobile when cover is beside */}
+          {anime.synopsis && (
+            <p className="text-xs text-ktext-secondary mt-3 sm:mt-0 line-clamp-2 sm:line-clamp-3 leading-relaxed">
+              {anime.synopsis}
+            </p>
+          )}
         </div>
 
         {/* Themes Sections */}
-        <div className="bg-bg-surface rounded-2xl border border-border-subtle p-2 mt-4 shadow-card">
+        <div className="bg-bg-surface rounded-2xl border border-border-subtle p-2 mt-3 sm:mt-4 shadow-card">
           <ToggleSection title="Openings" themes={openings} defaultOpen={true} />
           <ToggleSection title="Endings" themes={endings} defaultOpen={false} />
           
           {themes.length === 0 && (
-            <div className="p-8">
+            <div className="p-6 sm:p-8">
               <EmptyState
                 title="No themes"
                 description="This anime has no opening or ending themes."
